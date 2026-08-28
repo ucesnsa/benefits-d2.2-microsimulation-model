@@ -1,0 +1,6327 @@
+{
+ "meta": {
+  "country": "IT",
+  "year": 2023,
+  "eps_grid": [
+   0.0,
+   0.5,
+   1.0,
+   1.5,
+   2.0
+  ],
+  "baseline_net_income_bn": 865.7434,
+  "n_units_working_age_sample": 20941,
+  "n_units": 31790,
+  "population_basis": {
+   "scope": "all_households",
+   "includes": "Every household in the EU-SILC sample. No age filter is applied.",
+   "excludes": "Nothing.",
+   "units_k": 26206.558,
+   "population_k": 58664.506,
+   "summary": "All households, with no age filter."
+  },
+  "min_income_lever": "base-amount scaling",
+  "note": "IT Analyst response surface. Single-reform magnitude grids; one lever per point; baseline is the zero point of each dial. WEVM and decile contributions in EUR MILLIONS, equivalised, median-anchored, AROP-floored. Native 2023 income reference year (EU-SILC 2024 wave); nominal EUR, no uprating, no PPP (downstream). Real-build logic per country (ES yem/yse; IT +yseev; EL +yemre/ysere); unemployment flips nested for monotonicity.",
+  "units": {
+   "wevm": "EUR millions, welfare-weighted, versus baseline",
+   "fiscal": "EUR millions versus baseline; net_exchequer_cost_m = benefit - tax - sic - sic_employer, positive is a cost to the exchequer",
+   "poverty": "levels, not deltas: headcounts of people in thousands, poverty gaps in EUR millions, anchored_bhc_threshold_cur in EUR of equivalised annual income, with population_k and units_k as the denominators a rate needs"
+,
+   "winlose": "the weighted count of households with a gain, and with a loss, each over the weighted count of all households, times 100. Shares of households, not of people, unlike every poverty headcount in the same object, which counts people. Both rows are labelled with this base on the tool face."
+  },
+  "poverty_basis": "Two thresholds, both emitted at every point. RELATIVE (relative_*): 60% of that point's own weighted median equivalised (OECD-modified) household disposable income, the published AROP convention and the same line the social weight uses as its floor; it moves with the reform, so a reform that lowers the median lowers the line and can cut the measured count without raising anyone's income. ANCHORED (anchored_*): the same 60%-of-median line computed once at the zero-magnitude baseline point and held fixed across every point of every dial, emitted as anchored_bhc_threshold_cur so it is auditable; internally defined, needing no external source, and the right comparison of a reform against its own baseline. ANCHORED IS NOT ABSOLUTE: the absolute_* fields mean a fixed EXTERNAL base year and stay null because no sourced one exists for ES, IT or EL. The AHC fields are null throughout because the EUROMOD per-unit layer carries no housing-cost concept. All other field names follow the UK surface exactly.",
+  "rebuild": "Built on EUROMOD v3.8.6, on a COMPLETED input conversion. Every input variable a live 2023 policy reads, for which the EUROMOD input data codebook publishes a recipe and whose sources the public EU-SILC user database carries, is populated from that recipe: Spain carries 68 populated input columns, Greece 55, Italy 44. The consequential ones are Spain's pension and unemployment decompositions and its rent, mortgage and private-pension deductions; Greece's property tax, which is the ENFIA the model reads and passes through; and Italy's contract class, without which no employer contribution fires at all. A surface is a function of its inputs, so reproducing a stored surface is not the test; the test is agreement with each country's own published EUROMOD baseline, recorded in europe/docs/BASELINE_VALIDATION.md. Conventions this surface holds: the stable sort in build_grid.point_from_pu and in wevm._weighted_median / wevm.wevm_by_decile, the two-sided pit_give grid, and the fiscal and poverty objects emitted in the same pass, fiscal by the method of re_emit.py. Poverty carries both a relative (moving) and an anchored (held at baseline) threshold; see poverty_basis."
+ },
+ "dials": {
+  "gdp_shock": {
+   "label": "GDP / market-income shock",
+   "lever": "income_scale: input transform",
+   "unit": "% change",
+   "baseline_magnitude": 0,
+   "magnitudes": [
+    0,
+    -1,
+    -2,
+    -3,
+    -4,
+    -5,
+    -6,
+    -7,
+    -8,
+    -9,
+    -10
+   ],
+   "points": [
+    {
+     "wevm": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "deciles": [
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 0.0,
+     "magnitude": 0,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 0.0,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 0.0,
+      "net_exchequer_cost_m": 0.0
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10200.944,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10200.944,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25273.485,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -4295.373,
+      -3642.591,
+      -3286.378,
+      -3123.765,
+      -3105.672
+     ],
+     "deciles": [
+      [
+       -55.561,
+       -121.87,
+       -201.622,
+       -278.262,
+       -312.147,
+       -388.657,
+       -444.66,
+       -544.929,
+       -700.667,
+       -1246.997
+      ],
+      [
+       -71.729,
+       -157.319,
+       -245.728,
+       -310.942,
+       -323.15,
+       -374.756,
+       -402.864,
+       -462.587,
+       -546.796,
+       -746.721
+      ],
+      [
+       -92.601,
+       -203.079,
+       -299.745,
+       -347.637,
+       -334.681,
+       -361.484,
+       -365.121,
+       -392.833,
+       -427.101,
+       -462.096
+      ],
+      [
+       -119.548,
+       -262.15,
+       -365.96,
+       -388.86,
+       -346.767,
+       -348.811,
+       -331.025,
+       -333.723,
+       -333.905,
+       -293.017
+      ],
+      [
+       -154.335,
+       -338.404,
+       -447.198,
+       -435.193,
+       -359.439,
+       -336.707,
+       -300.215,
+       -283.612,
+       -261.278,
+       -189.291
+      ]
+     ],
+     "winners_pct": 1.7,
+     "losers_pct": 67.0,
+     "magnitude": -1,
+     "fiscal": {
+      "income_tax_delta_m": -2900.98,
+      "benefit_delta_m": 105.147,
+      "sic_delta_m": -1008.538,
+      "sic_employer_delta_m": -1648.586,
+      "net_income_delta_m": -4295.373,
+      "net_exchequer_cost_m": 5663.251
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10184.248,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10326.563,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25120.019,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -8566.237,
+      -7272.487,
+      -6570.353,
+      -6254.81,
+      -6228.493
+     ],
+     "deciles": [
+      [
+       -113.33,
+       -254.942,
+       -401.397,
+       -546.377,
+       -633.451,
+       -772.809,
+       -904.856,
+       -1081.312,
+       -1373.258,
+       -2484.503
+      ],
+      [
+       -146.309,
+       -329.101,
+       -488.935,
+       -610.642,
+       -655.786,
+       -745.98,
+       -819.293,
+       -917.938,
+       -1071.483,
+       -1487.02
+      ],
+      [
+       -188.884,
+       -424.832,
+       -596.092,
+       -682.819,
+       -679.192,
+       -720.345,
+       -742.067,
+       -779.536,
+       -836.776,
+       -919.809
+      ],
+      [
+       -243.848,
+       -548.409,
+       -727.383,
+       -763.921,
+       -703.727,
+       -695.847,
+       -672.344,
+       -662.247,
+       -654.068,
+       -583.016
+      ],
+      [
+       -314.807,
+       -707.933,
+       -888.387,
+       -855.098,
+       -729.453,
+       -672.429,
+       -609.374,
+       -562.813,
+       -511.71,
+       -376.489
+      ]
+     ],
+     "winners_pct": 2.0,
+     "losers_pct": 66.8,
+     "magnitude": -2,
+     "fiscal": {
+      "income_tax_delta_m": -5793.76,
+      "benefit_delta_m": 216.371,
+      "sic_delta_m": -2043.707,
+      "sic_employer_delta_m": -3297.781,
+      "net_income_delta_m": -8566.237,
+      "net_exchequer_cost_m": 11351.619
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9944.924,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10423.994,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24923.288,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -12911.678,
+      -10957.417,
+      -9893.102,
+      -9410.615,
+      -9363.451
+     ],
+     "deciles": [
+      [
+       -169.988,
+       -380.888,
+       -605.269,
+       -804.149,
+       -952.05,
+       -1180.588,
+       -1363.502,
+       -1624.561,
+       -2093.133,
+       -3737.55
+      ],
+      [
+       -219.453,
+       -491.682,
+       -737.485,
+       -898.825,
+       -985.441,
+       -1139.832,
+       -1234.003,
+       -1379.072,
+       -1633.28,
+       -2238.342
+      ],
+      [
+       -283.313,
+       -634.705,
+       -899.372,
+       -1005.168,
+       -1020.429,
+       -1100.888,
+       -1117.17,
+       -1171.114,
+       -1275.596,
+       -1385.346
+      ],
+      [
+       -365.756,
+       -819.331,
+       -1097.766,
+       -1124.674,
+       -1057.102,
+       -1063.666,
+       -1011.731,
+       -994.883,
+       -997.132,
+       -878.574
+      ],
+      [
+       -472.189,
+       -1057.662,
+       -1341.111,
+       -1259.037,
+       -1095.552,
+       -1028.082,
+       -916.543,
+       -845.484,
+       -780.148,
+       -567.641
+      ]
+     ],
+     "winners_pct": 1.7,
+     "losers_pct": 67.0,
+     "magnitude": -3,
+     "fiscal": {
+      "income_tax_delta_m": -8731.957,
+      "benefit_delta_m": 319.535,
+      "sic_delta_m": -2966.942,
+      "sic_employer_delta_m": -4946.314,
+      "net_income_delta_m": -12911.678,
+      "net_exchequer_cost_m": 16964.748
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9959.396,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10530.702,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24768.118,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -17228.556,
+      -14623.209,
+      -13202.839,
+      -12557.264,
+      -12491.405
+     ],
+     "deciles": [
+      [
+       -226.839,
+       -505.804,
+       -806.958,
+       -1071.806,
+       -1270.175,
+       -1576.814,
+       -1826.051,
+       -2172.825,
+       -2791.657,
+       -4979.627
+      ],
+      [
+       -292.848,
+       -652.934,
+       -982.996,
+       -1197.944,
+       -1314.636,
+       -1522.612,
+       -1652.748,
+       -1844.751,
+       -2178.489,
+       -2983.249
+      ],
+      [
+       -378.065,
+       -842.863,
+       -1198.487,
+       -1339.624,
+       -1361.223,
+       -1470.817,
+       -1496.381,
+       -1566.793,
+       -1701.518,
+       -1847.068
+      ],
+      [
+       -488.08,
+       -1088.038,
+       -1462.504,
+       -1498.839,
+       -1410.052,
+       -1421.31,
+       -1355.25,
+       -1331.208,
+       -1330.158,
+       -1171.825
+      ],
+      [
+       -630.108,
+       -1404.532,
+       -1786.261,
+       -1677.847,
+       -1461.244,
+       -1373.977,
+       -1227.831,
+       -1131.464,
+       -1040.767,
+       -757.374
+      ]
+     ],
+     "winners_pct": 1.5,
+     "losers_pct": 67.2,
+     "magnitude": -4,
+     "fiscal": {
+      "income_tax_delta_m": -11639.566,
+      "benefit_delta_m": 438.228,
+      "sic_delta_m": -3933.8,
+      "sic_employer_delta_m": -6595.282,
+      "net_income_delta_m": -17228.556,
+      "net_exchequer_cost_m": 22606.876
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9893.299,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10813.057,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24579.158,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -21559.045,
+      -18293.132,
+      -16506.964,
+      -15687.464,
+      -15590.18
+     ],
+     "deciles": [
+      [
+       -281.189,
+       -614.635,
+       -1012.184,
+       -1339.883,
+       -1588.483,
+       -1982.343,
+       -2295.84,
+       -2718.579,
+       -3508.926,
+       -6216.983
+      ],
+      [
+       -363.013,
+       -793.415,
+       -1232.823,
+       -1497.323,
+       -1643.974,
+       -1914.072,
+       -2078.046,
+       -2308.218,
+       -2738.207,
+       -3724.04
+      ],
+      [
+       -468.648,
+       -1024.198,
+       -1502.877,
+       -1674.133,
+       -1702.116,
+       -1848.83,
+       -1881.526,
+       -1960.526,
+       -2138.68,
+       -2305.429
+      ],
+      [
+       -605.022,
+       -1322.108,
+       -1833.706,
+       -1872.796,
+       -1763.05,
+       -1786.468,
+       -1704.148,
+       -1665.823,
+       -1671.903,
+       -1462.44
+      ],
+      [
+       -781.08,
+       -1706.673,
+       -2239.344,
+       -2096.124,
+       -1826.93,
+       -1726.842,
+       -1543.996,
+       -1415.942,
+       -1308.157,
+       -945.092
+      ]
+     ],
+     "winners_pct": 0.8,
+     "losers_pct": 67.9,
+     "magnitude": -5,
+     "fiscal": {
+      "income_tax_delta_m": -14539.456,
+      "benefit_delta_m": 561.779,
+      "sic_delta_m": -4889.908,
+      "sic_employer_delta_m": -8248.141,
+      "net_income_delta_m": -21559.045,
+      "net_exchequer_cost_m": 28239.284
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9876.408,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10882.783,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24349.595,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -25864.873,
+      -21945.643,
+      -19801.788,
+      -18817.881,
+      -18700.679
+     ],
+     "deciles": [
+      [
+       -336.788,
+       -740.322,
+       -1209.637,
+       -1609.248,
+       -1899.27,
+       -2384.472,
+       -2756.704,
+       -3251.956,
+       -4215.814,
+       -7460.663
+      ],
+      [
+       -434.792,
+       -955.662,
+       -1473.326,
+       -1798.413,
+       -1965.702,
+       -2302.408,
+       -2495.177,
+       -2760.972,
+       -3289.389,
+       -4469.803
+      ],
+      [
+       -561.314,
+       -1233.64,
+       -1796.082,
+       -2010.86,
+       -2035.309,
+       -2223.98,
+       -2259.202,
+       -2344.989,
+       -2568.829,
+       -2767.583
+      ],
+      [
+       -724.653,
+       -1592.474,
+       -2191.486,
+       -2249.575,
+       -2108.263,
+       -2149.008,
+       -2046.217,
+       -1992.421,
+       -2007.889,
+       -1755.894
+      ],
+      [
+       -935.523,
+       -2055.685,
+       -2676.322,
+       -2517.936,
+       -2184.748,
+       -2077.323,
+       -1853.92,
+       -1693.489,
+       -1570.821,
+       -1134.912
+      ]
+     ],
+     "winners_pct": 0.8,
+     "losers_pct": 67.9,
+     "magnitude": -6,
+     "fiscal": {
+      "income_tax_delta_m": -17436.437,
+      "benefit_delta_m": 688.735,
+      "sic_delta_m": -5870.179,
+      "sic_employer_delta_m": -9906.204,
+      "net_income_delta_m": -25864.873,
+      "net_exchequer_cost_m": 33901.555
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9852.998,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 11042.708,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24171.653,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -30217.885,
+      -25642.952,
+      -23139.748,
+      -21990.008,
+      -21851.356
+     ],
+     "deciles": [
+      [
+       -390.531,
+       -862.395,
+       -1409.358,
+       -1885.103,
+       -2226.236,
+       -2810.961,
+       -3220.61,
+       -3772.144,
+       -4932.136,
+       -8708.411
+      ],
+      [
+       -504.173,
+       -1113.248,
+       -1716.748,
+       -2106.687,
+       -2304.057,
+       -2714.321,
+       -2915.168,
+       -3202.54,
+       -3848.358,
+       -5217.652
+      ],
+      [
+       -650.885,
+       -1437.069,
+       -2093.021,
+       -2355.544,
+       -2385.597,
+       -2621.961,
+       -2639.566,
+       -2719.956,
+       -3005.398,
+       -3230.753
+      ],
+      [
+       -840.289,
+       -1855.083,
+       -2554.021,
+       -2635.171,
+       -2471.057,
+       -2533.669,
+       -2390.808,
+       -2310.947,
+       -2349.161,
+       -2049.801
+      ],
+      [
+       -1084.809,
+       -2394.69,
+       -3119.324,
+       -2949.528,
+       -2560.652,
+       -2449.247,
+       -2166.21,
+       -1964.168,
+       -1837.831,
+       -1324.898
+      ]
+     ],
+     "winners_pct": 0.8,
+     "losers_pct": 67.9,
+     "magnitude": -7,
+     "fiscal": {
+      "income_tax_delta_m": -20275.138,
+      "benefit_delta_m": 809.362,
+      "sic_delta_m": -6867.877,
+      "sic_employer_delta_m": -11563.903,
+      "net_income_delta_m": -30217.885,
+      "net_exchequer_cost_m": 39516.28
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9825.817,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 11151.326,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 23961.524,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -34577.964,
+      -29347.582,
+      -26484.646,
+      -25168.774,
+      -25008.959
+     ],
+     "deciles": [
+      [
+       -446.368,
+       -987.562,
+       -1613.486,
+       -2147.801,
+       -2552.837,
+       -3221.968,
+       -3696.954,
+       -4311.461,
+       -5658.304,
+       -9941.223
+      ],
+      [
+       -576.259,
+       -1274.827,
+       -1965.472,
+       -2399.953,
+       -2642.074,
+       -3111.307,
+       -3346.168,
+       -3660.571,
+       -4415.081,
+       -5955.869
+      ],
+      [
+       -743.947,
+       -1645.653,
+       -2396.345,
+       -2683.112,
+       -2735.577,
+       -3005.546,
+       -3029.666,
+       -3109.097,
+       -3448.076,
+       -3687.627
+      ],
+      [
+       -960.431,
+       -2124.346,
+       -2924.252,
+       -3001.249,
+       -2833.578,
+       -2904.441,
+       -2744.005,
+       -2641.683,
+       -2695.249,
+       -2339.539
+      ],
+      [
+       -1239.911,
+       -2742.284,
+       -3571.615,
+       -3358.864,
+       -2936.323,
+       -2807.766,
+       -2486.098,
+       -2245.368,
+       -2108.642,
+       -1512.088
+      ]
+     ],
+     "winners_pct": 0.8,
+     "losers_pct": 67.9,
+     "magnitude": -8,
+     "fiscal": {
+      "income_tax_delta_m": -23166.265,
+      "benefit_delta_m": 929.444,
+      "sic_delta_m": -7806.627,
+      "sic_employer_delta_m": -13220.006,
+      "net_income_delta_m": -34577.964,
+      "net_exchequer_cost_m": 45122.342
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9750.587,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 11240.084,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 23771.696,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -38970.652,
+      -33083.261,
+      -29861.487,
+      -28382.596,
+      -28207.012
+     ],
+     "deciles": [
+      [
+       -503.591,
+       -1122.464,
+       -1818.256,
+       -2410.055,
+       -2878.094,
+       -3634.99,
+       -4168.91,
+       -4874.133,
+       -6378.003,
+       -11182.157
+      ],
+      [
+       -650.134,
+       -1448.97,
+       -2214.936,
+       -2693.057,
+       -2978.592,
+       -3510.145,
+       -3773.189,
+       -4138.378,
+       -4976.663,
+       -6699.198
+      ],
+      [
+       -839.319,
+       -1870.451,
+       -2700.529,
+       -3010.862,
+       -3083.892,
+       -3390.827,
+       -3416.157,
+       -3514.988,
+       -3886.667,
+       -4147.796
+      ],
+      [
+       -1083.556,
+       -2414.534,
+       -3295.491,
+       -3367.931,
+       -3194.252,
+       -3276.763,
+       -3093.928,
+       -2986.607,
+       -3038.087,
+       -2631.448
+      ],
+      [
+       -1398.865,
+       -3116.882,
+       -4025.099,
+       -3769.312,
+       -3309.949,
+       -3167.694,
+       -2803.018,
+       -2538.591,
+       -2376.865,
+       -1700.738
+      ]
+     ],
+     "winners_pct": 0.8,
+     "losers_pct": 68.0,
+     "magnitude": -9,
+     "fiscal": {
+      "income_tax_delta_m": -26023.593,
+      "benefit_delta_m": 1051.602,
+      "sic_delta_m": -8744.49,
+      "sic_employer_delta_m": -14874.266,
+      "net_income_delta_m": -38970.652,
+      "net_exchequer_cost_m": 50693.951
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9764.958,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 11372.813,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 23629.667,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -43338.155,
+      -36797.38,
+      -33218.45,
+      -31576.574,
+      -31383.639
+     ],
+     "deciles": [
+      [
+       -559.891,
+       -1246.045,
+       -2030.066,
+       -2675.752,
+       -3203.231,
+       -4041.048,
+       -4651.249,
+       -5424.42,
+       -7090.389,
+       -12416.065
+      ],
+      [
+       -722.816,
+       -1608.494,
+       -2473.213,
+       -2990.008,
+       -3315.04,
+       -3902.035,
+       -4209.735,
+       -4605.77,
+       -5532.466,
+       -7437.804
+      ],
+      [
+       -933.151,
+       -2076.372,
+       -3015.746,
+       -3342.919,
+       -3432.187,
+       -3769.181,
+       -3811.389,
+       -3912.12,
+       -4320.693,
+       -4604.692
+      ],
+      [
+       -1204.693,
+       -2680.347,
+       -3680.539,
+       -3739.441,
+       -3554.963,
+       -3642.181,
+       -3451.878,
+       -3324.168,
+       -3377.321,
+       -2921.044
+      ],
+      [
+       -1555.252,
+       -3460.007,
+       -4495.863,
+       -4185.183,
+       -3683.673,
+       -3520.748,
+       -3127.311,
+       -2825.623,
+       -2642.246,
+       -1887.734
+      ]
+     ],
+     "winners_pct": 0.8,
+     "losers_pct": 68.0,
+     "magnitude": -10,
+     "fiscal": {
+      "income_tax_delta_m": -28884.848,
+      "benefit_delta_m": 1190.202,
+      "sic_delta_m": -9687.17,
+      "sic_employer_delta_m": -16527.69,
+      "net_income_delta_m": -43338.155,
+      "net_exchequer_cost_m": 56289.91
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9706.559,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 11435.098,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 23424.28,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    }
+   ]
+  },
+  "pit_give": {
+   "label": "IRPEF first-bracket rate change",
+   "lever": "rate_delta: $tintsna_rate1",
+   "unit": "pp change",
+   "baseline_magnitude": 0,
+   "magnitudes": [
+    -5,
+    -4.5,
+    -4,
+    -3.5,
+    -3,
+    -2.5,
+    -2,
+    -1.5,
+    -1,
+    -0.5,
+    0,
+    0.5,
+    1,
+    1.5,
+    2,
+    2.5,
+    3,
+    3.5,
+    4,
+    4.5,
+    5
+   ],
+   "points": [
+    {
+     "wevm": [
+      24783.598,
+      23014.703,
+      22292.349,
+      22430.404,
+      23354.308
+     ],
+     "deciles": [
+      [
+       432.046,
+       1185.364,
+       1869.588,
+       2239.072,
+       2476.195,
+       2849.155,
+       3087.264,
+       3325.954,
+       3702.078,
+       3616.883
+      ],
+      [
+       557.768,
+       1530.167,
+       2279.851,
+       2502.174,
+       2564.678,
+       2752.807,
+       2795.143,
+       2824.838,
+       2893.026,
+       2314.25
+      ],
+      [
+       720.076,
+       1975.267,
+       2782.435,
+       2797.612,
+       2657.444,
+       2660.706,
+       2531.503,
+       2400.106,
+       2262.826,
+       1504.374
+      ],
+      [
+       929.614,
+       2549.839,
+       3398.624,
+       3129.517,
+       2754.729,
+       2572.644,
+       2293.491,
+       2039.984,
+       1771.492,
+       990.47
+      ],
+      [
+       1200.127,
+       3291.546,
+       4154.716,
+       3502.573,
+       2856.781,
+       2488.422,
+       2078.547,
+       1734.53,
+       1388.076,
+       658.988
+      ]
+     ],
+     "winners_pct": 88.3,
+     "losers_pct": 0.7,
+     "magnitude": -5,
+     "fiscal": {
+      "income_tax_delta_m": -25447.224,
+      "benefit_delta_m": -663.626,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 24783.598,
+      "net_exchequer_cost_m": 24783.598
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10253.907,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9385.158,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 26708.172,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      22313.563,
+      20722.123,
+      20073.124,
+      20199.083,
+      21032.978
+     ],
+     "deciles": [
+      [
+       389.999,
+       1072.307,
+       1680.8,
+       2014.077,
+       2231.459,
+       2561.575,
+       2780.73,
+       2993.777,
+       3332.69,
+       3256.147
+      ],
+      [
+       503.487,
+       1384.222,
+       2049.335,
+       2250.817,
+       2311.204,
+       2474.972,
+       2517.615,
+       2542.702,
+       2604.342,
+       2083.427
+      ],
+      [
+       649.999,
+       1786.869,
+       2500.733,
+       2516.663,
+       2394.808,
+       2392.188,
+       2280.154,
+       2160.384,
+       2037.01,
+       1354.317
+      ],
+      [
+       839.145,
+       2306.64,
+       3054.081,
+       2815.34,
+       2482.486,
+       2313.034,
+       2065.775,
+       1836.224,
+       1594.694,
+       891.664
+      ],
+      [
+       1083.332,
+       2977.604,
+       3732.961,
+       3151.064,
+       2574.459,
+       2237.333,
+       1872.175,
+       1561.275,
+       1249.533,
+       593.243
+      ]
+     ],
+     "winners_pct": 88.3,
+     "losers_pct": 0.7,
+     "magnitude": -4.5,
+     "fiscal": {
+      "income_tax_delta_m": -22920.838,
+      "benefit_delta_m": -607.275,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 22313.563,
+      "net_exchequer_cost_m": 22313.563
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10244.981,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9447.368,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 26538.998,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      19829.771,
+      18413.669,
+      17835.143,
+      17945.207,
+      18684.178
+     ],
+     "deciles": [
+      [
+       347.743,
+       950.799,
+       1492.841,
+       1783.807,
+       1987.78,
+       2277.994,
+       2469.877,
+       2660.489,
+       2963.454,
+       2894.985
+      ],
+      [
+       448.935,
+       1227.37,
+       1820.064,
+       1993.569,
+       2058.844,
+       2200.951,
+       2236.209,
+       2259.618,
+       2315.784,
+       1852.327
+      ],
+      [
+       579.572,
+       1584.39,
+       2220.841,
+       2229.134,
+       2133.35,
+       2127.306,
+       2025.321,
+       1919.853,
+       1811.299,
+       1204.078
+      ],
+      [
+       748.224,
+       2045.261,
+       2712.111,
+       2493.806,
+       2211.486,
+       2056.891,
+       1834.932,
+       1631.776,
+       1417.984,
+       792.737
+      ],
+      [
+       965.953,
+       2640.192,
+       3314.802,
+       2791.326,
+       2293.453,
+       1989.549,
+       1662.993,
+       1387.432,
+       1111.064,
+       527.415
+      ]
+     ],
+     "winners_pct": 88.1,
+     "losers_pct": 0.7,
+     "magnitude": -4,
+     "fiscal": {
+      "income_tax_delta_m": -20387.027,
+      "benefit_delta_m": -557.257,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 19829.771,
+      "net_exchequer_cost_m": 19829.77
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10246.217,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9540.694,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 26362.39,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      17358.172,
+      16121.008,
+      15617.429,
+      15717.249,
+      16368.483
+     ],
+     "deciles": [
+      [
+       305.852,
+       839.271,
+       1303.891,
+       1561.068,
+       1740.068,
+       1993.593,
+       2158.175,
+       2328.714,
+       2594.317,
+       2533.223
+      ],
+      [
+       394.853,
+       1083.398,
+       1589.639,
+       1744.723,
+       1802.241,
+       1926.168,
+       1953.965,
+       1977.834,
+       2027.317,
+       1620.869
+      ],
+      [
+       509.753,
+       1398.538,
+       1939.611,
+       1950.981,
+       1867.424,
+       1861.716,
+       1769.666,
+       1680.441,
+       1585.668,
+       1053.629
+      ],
+      [
+       658.088,
+       1805.347,
+       2368.597,
+       2182.739,
+       1935.783,
+       1800.091,
+       1603.283,
+       1428.288,
+       1241.344,
+       693.689
+      ],
+      [
+       849.588,
+       2330.489,
+       2894.868,
+       2443.275,
+       2007.492,
+       1741.154,
+       1453.026,
+       1214.416,
+       972.654,
+       461.519
+      ]
+     ],
+     "winners_pct": 88.3,
+     "losers_pct": 0.7,
+     "magnitude": -3.5,
+     "fiscal": {
+      "income_tax_delta_m": -17854.845,
+      "benefit_delta_m": -496.673,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 17358.172,
+      "net_exchequer_cost_m": 17358.172
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10247.372,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9651.304,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 26215.738,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      14866.026,
+      13804.378,
+      13371.238,
+      13454.939,
+      14010.827
+     ],
+     "deciles": [
+      [
+       263.462,
+       714.724,
+       1119.825,
+       1329.949,
+       1493.01,
+       1707.632,
+       1845.121,
+       1996.841,
+       2224.106,
+       2171.355
+      ],
+      [
+       340.129,
+       922.621,
+       1365.239,
+       1486.409,
+       1546.331,
+       1649.871,
+       1670.461,
+       1695.96,
+       1738.036,
+       1389.323
+      ],
+      [
+       439.104,
+       1190.99,
+       1665.813,
+       1662.13,
+       1602.233,
+       1594.657,
+       1512.835,
+       1440.944,
+       1359.421,
+       903.112
+      ],
+      [
+       566.881,
+       1537.423,
+       2034.247,
+       1859.58,
+       1660.857,
+       1541.865,
+       1370.538,
+       1224.724,
+       1064.236,
+       594.589
+      ],
+      [
+       731.84,
+       1984.626,
+       2486.235,
+       2081.554,
+       1722.353,
+       1491.377,
+       1242.037,
+       1041.329,
+       833.889,
+       395.587
+      ]
+     ],
+     "winners_pct": 88.1,
+     "losers_pct": 0.8,
+     "magnitude": -3,
+     "fiscal": {
+      "income_tax_delta_m": -15302.268,
+      "benefit_delta_m": -436.241,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 14866.026,
+      "net_exchequer_cost_m": 14866.027
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10224.224,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9677.681,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 26048.607,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      12391.068,
+      11508.388,
+      11150.227,
+      11223.751,
+      11692.053
+     ],
+     "deciles": [
+      [
+       220.216,
+       607.224,
+       929.655,
+       1101.731,
+       1245.674,
+       1423.537,
+       1537.696,
+       1661.984,
+       1853.329,
+       1810.022
+      ],
+      [
+       284.298,
+       783.851,
+       1133.31,
+       1231.333,
+       1290.128,
+       1375.37,
+       1392.106,
+       1411.577,
+       1448.282,
+       1158.132
+      ],
+      [
+       367.027,
+       1011.855,
+       1382.724,
+       1376.891,
+       1336.734,
+       1329.327,
+       1260.717,
+       1199.34,
+       1132.78,
+       752.831
+      ],
+      [
+       473.83,
+       1306.18,
+       1688.431,
+       1540.452,
+       1385.608,
+       1285.305,
+       1142.108,
+       1019.387,
+       886.803,
+       495.647
+      ],
+      [
+       611.712,
+       1686.118,
+       2063.445,
+       1724.332,
+       1436.877,
+       1243.203,
+       1034.999,
+       866.752,
+       694.856,
+       329.759
+      ]
+     ],
+     "winners_pct": 88.0,
+     "losers_pct": 0.8,
+     "magnitude": -2.5,
+     "fiscal": {
+      "income_tax_delta_m": -12757.372,
+      "benefit_delta_m": -366.304,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 12391.068,
+      "net_exchequer_cost_m": 12391.068
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10222.511,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9741.624,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25960.26,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      9921.116,
+      9219.139,
+      8937.995,
+      9003.746,
+      9387.294
+     ],
+     "deciles": [
+      [
+       177.444,
+       494.48,
+       750.83,
+       876.2,
+       994.859,
+       1138.023,
+       1229.436,
+       1328.926,
+       1482.407,
+       1448.513
+      ],
+      [
+       229.079,
+       638.31,
+       915.462,
+       979.345,
+       1030.414,
+       1099.54,
+       1113.014,
+       1128.703,
+       1158.438,
+       926.834
+      ],
+      [
+       295.739,
+       823.978,
+       1117.114,
+       1095.199,
+       1067.692,
+       1062.753,
+       1007.95,
+       959.0,
+       906.087,
+       602.482
+      ],
+      [
+       381.798,
+       1063.652,
+       1364.315,
+       1225.393,
+       1106.786,
+       1027.58,
+       913.106,
+       815.111,
+       709.343,
+       396.662
+      ],
+      [
+       492.899,
+       1373.041,
+       1667.603,
+       1371.773,
+       1147.798,
+       993.941,
+       827.46,
+       693.065,
+       555.812,
+       263.903
+      ]
+     ],
+     "winners_pct": 87.9,
+     "losers_pct": 0.7,
+     "magnitude": -2,
+     "fiscal": {
+      "income_tax_delta_m": -10209.844,
+      "benefit_delta_m": -288.727,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 9921.116,
+      "net_exchequer_cost_m": 9921.117
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10222.458,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9786.99,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25829.378,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      7433.013,
+      6905.197,
+      6693.036,
+      6741.026,
+      7027.307
+     ],
+     "deciles": [
+      [
+       131.546,
+       372.195,
+       564.186,
+       647.445,
+       747.39,
+       852.276,
+       921.345,
+       996.788,
+       1112.846,
+       1086.997
+      ],
+      [
+       169.825,
+       480.454,
+       687.877,
+       723.705,
+       774.055,
+       823.447,
+       834.063,
+       846.607,
+       869.642,
+       695.522
+      ],
+      [
+       219.243,
+       620.203,
+       839.38,
+       809.371,
+       802.011,
+       795.889,
+       755.299,
+       719.318,
+       680.201,
+       452.12
+      ],
+      [
+       283.041,
+       800.601,
+       1025.101,
+       905.652,
+       831.329,
+       769.54,
+       684.199,
+       611.391,
+       532.505,
+       297.666
+      ],
+      [
+       365.404,
+       1033.472,
+       1252.955,
+       1013.917,
+       862.084,
+       744.341,
+       619.997,
+       519.848,
+       417.249,
+       198.04
+      ]
+     ],
+     "winners_pct": 88.0,
+     "losers_pct": 0.7,
+     "magnitude": -1.5,
+     "fiscal": {
+      "income_tax_delta_m": -7657.4,
+      "benefit_delta_m": -224.387,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 7433.013,
+      "net_exchequer_cost_m": 7433.013
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10206.942,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9873.454,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25684.042,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      4952.609,
+      4600.187,
+      4458.406,
+      4490.265,
+      4681.218
+     ],
+     "deciles": [
+      [
+       87.07,
+       251.476,
+       374.988,
+       425.897,
+       498.586,
+       568.81,
+       612.611,
+       664.605,
+       743.176,
+       725.389
+      ],
+      [
+       112.406,
+       324.625,
+       457.096,
+       476.188,
+       516.357,
+       549.561,
+       554.535,
+       564.471,
+       580.756,
+       464.191
+      ],
+      [
+       145.116,
+       419.051,
+       557.644,
+       532.699,
+       534.988,
+       531.161,
+       502.131,
+       479.601,
+       454.242,
+       301.772
+      ],
+      [
+       187.344,
+       540.943,
+       680.877,
+       596.234,
+       554.527,
+       513.569,
+       454.828,
+       407.64,
+       355.606,
+       198.696
+      ],
+      [
+       241.86,
+       698.292,
+       832.038,
+       667.7,
+       575.021,
+       496.745,
+       412.118,
+       346.604,
+       278.635,
+       132.203
+      ]
+     ],
+     "winners_pct": 87.9,
+     "losers_pct": 0.6,
+     "magnitude": -1,
+     "fiscal": {
+      "income_tax_delta_m": -5112.831,
+      "benefit_delta_m": -160.223,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 4952.609,
+      "net_exchequer_cost_m": 4952.608
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10184.881,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9990.242,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25512.33,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      2464.579,
+      2286.593,
+      2213.672,
+      2227.279,
+      2320.084
+     ],
+     "deciles": [
+      [
+       43.46,
+       123.628,
+       188.955,
+       200.837,
+       247.858,
+       284.564,
+       308.314,
+       332.733,
+       371.977,
+       362.254
+      ],
+      [
+       56.106,
+       159.589,
+       230.342,
+       224.674,
+       256.737,
+       274.932,
+       279.135,
+       282.599,
+       290.67,
+       231.807
+      ],
+      [
+       72.433,
+       206.01,
+       281.031,
+       251.479,
+       266.047,
+       265.726,
+       252.801,
+       240.108,
+       227.34,
+       150.698
+      ],
+      [
+       93.51,
+       265.934,
+       343.164,
+       281.638,
+       275.811,
+       256.924,
+       229.027,
+       204.08,
+       177.967,
+       99.225
+      ],
+      [
+       120.721,
+       343.288,
+       419.388,
+       315.585,
+       286.053,
+       248.506,
+       207.559,
+       173.521,
+       139.441,
+       66.022
+      ]
+     ],
+     "winners_pct": 88.0,
+     "losers_pct": 0.6,
+     "magnitude": -0.5,
+     "fiscal": {
+      "income_tax_delta_m": -2555.155,
+      "benefit_delta_m": -90.576,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 2464.579,
+      "net_exchequer_cost_m": 2464.579
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10182.923,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10068.634,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25388.178,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "deciles": [
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 0.0,
+     "magnitude": 0,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 0.0,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 0.0,
+      "net_exchequer_cost_m": 0.0
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10200.944,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10200.944,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25273.485,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -2491.491,
+      -2316.724,
+      -2247.464,
+      -2265.252,
+      -2362.849
+     ],
+     "deciles": [
+      [
+       -44.147,
+       -120.927,
+       -194.78,
+       -222.818,
+       -248.074,
+       -285.546,
+       -308.522,
+       -332.865,
+       -371.519,
+       -362.293
+      ],
+      [
+       -56.993,
+       -156.101,
+       -237.663,
+       -248.978,
+       -256.934,
+       -275.861,
+       -279.325,
+       -282.714,
+       -290.33,
+       -231.826
+      ],
+      [
+       -73.578,
+       -201.508,
+       -290.23,
+       -278.35,
+       -266.221,
+       -266.603,
+       -252.975,
+       -240.207,
+       -227.088,
+       -150.705
+      ],
+      [
+       -94.988,
+       -260.122,
+       -354.725,
+       -311.345,
+       -275.96,
+       -257.752,
+       -229.186,
+       -204.166,
+       -177.781,
+       -99.226
+      ],
+      [
+       -122.63,
+       -335.785,
+       -433.918,
+       -348.43,
+       -286.175,
+       -249.289,
+       -207.704,
+       -173.596,
+       -139.304,
+       -66.019
+      ]
+     ],
+     "winners_pct": 0.6,
+     "losers_pct": 88.0,
+     "magnitude": 0.5,
+     "fiscal": {
+      "income_tax_delta_m": 2560.673,
+      "benefit_delta_m": 69.181,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": -2491.491,
+      "net_exchequer_cost_m": -2491.492
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10192.626,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10294.447,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25140.452,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -4965.107,
+      -4610.726,
+      -4466.176,
+      -4494.116,
+      -4679.57
+     ],
+     "deciles": [
+      [
+       -84.692,
+       -241.25,
+       -376.15,
+       -446.671,
+       -496.092,
+       -569.287,
+       -617.135,
+       -665.71,
+       -742.281,
+       -725.84
+      ],
+      [
+       -109.336,
+       -311.422,
+       -458.31,
+       -499.153,
+       -513.821,
+       -550.0,
+       -558.734,
+       -565.417,
+       -580.065,
+       -464.466
+      ],
+      [
+       -141.153,
+       -402.006,
+       -558.865,
+       -558.088,
+       -532.408,
+       -531.565,
+       -506.027,
+       -480.41,
+       -453.708,
+       -301.945
+      ],
+      [
+       -182.227,
+       -518.938,
+       -682.031,
+       -624.3,
+       -551.898,
+       -513.94,
+       -458.445,
+       -408.333,
+       -355.194,
+       -198.809
+      ],
+      [
+       -235.254,
+       -669.882,
+       -833.014,
+       -698.725,
+       -572.343,
+       -497.084,
+       -415.475,
+       -347.197,
+       -278.317,
+       -132.28
+      ]
+     ],
+     "winners_pct": 0.6,
+     "losers_pct": 88.1,
+     "magnitude": 1,
+     "fiscal": {
+      "income_tax_delta_m": 5119.995,
+      "benefit_delta_m": 154.888,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": -4965.107,
+      "net_exchequer_cost_m": -4965.107
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10190.234,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10405.685,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24987.808,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -7450.649,
+      -6920.88,
+      -6706.443,
+      -6751.469,
+      -7033.701
+     ],
+     "deciles": [
+      [
+       -130.902,
+       -363.413,
+       -565.264,
+       -669.362,
+       -744.22,
+       -850.538,
+       -926.59,
+       -998.346,
+       -1113.226,
+       -1088.788
+      ],
+      [
+       -168.993,
+       -469.12,
+       -688.863,
+       -747.984,
+       -770.82,
+       -821.626,
+       -838.902,
+       -847.943,
+       -869.95,
+       -696.68
+      ],
+      [
+       -218.169,
+       -605.575,
+       -840.166,
+       -836.268,
+       -798.707,
+       -793.99,
+       -759.763,
+       -720.463,
+       -680.451,
+       -452.892
+      ],
+      [
+       -281.656,
+       -781.72,
+       -1025.535,
+       -935.45,
+       -827.95,
+       -767.569,
+       -688.319,
+       -612.372,
+       -532.706,
+       -298.192
+      ],
+      [
+       -363.616,
+       -1009.102,
+       -1252.822,
+       -1046.929,
+       -858.625,
+       -742.302,
+       -623.8,
+       -520.689,
+       -417.412,
+       -198.403
+      ]
+     ],
+     "winners_pct": 0.7,
+     "losers_pct": 88.1,
+     "magnitude": 1.5,
+     "fiscal": {
+      "income_tax_delta_m": 7682.401,
+      "benefit_delta_m": 231.752,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": -7450.649,
+      "net_exchequer_cost_m": -7450.649
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10025.252,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10504.314,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24916.533,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -9941.589,
+      -9235.685,
+      -8950.473,
+      -9011.538,
+      -9389.305
+     ],
+     "deciles": [
+      [
+       -181.904,
+       -480.667,
+       -752.185,
+       -892.263,
+       -992.314,
+       -1135.813,
+       -1239.714,
+       -1330.987,
+       -1484.083,
+       -1451.661
+      ],
+      [
+       -234.837,
+       -620.48,
+       -916.682,
+       -997.072,
+       -1027.814,
+       -1097.246,
+       -1122.458,
+       -1130.472,
+       -1159.759,
+       -928.865
+      ],
+      [
+       -303.173,
+       -800.96,
+       -1118.062,
+       -1114.762,
+       -1065.033,
+       -1060.383,
+       -1016.629,
+       -960.518,
+       -907.129,
+       -603.824
+      ],
+      [
+       -391.395,
+       -1033.938,
+       -1364.794,
+       -1246.981,
+       -1104.063,
+       -1025.138,
+       -921.085,
+       -816.414,
+       -710.165,
+       -397.566
+      ],
+      [
+       -505.289,
+       -1334.682,
+       -1667.34,
+       -1395.594,
+       -1145.005,
+       -991.433,
+       -834.796,
+       -694.183,
+       -556.461,
+       -264.521
+      ]
+     ],
+     "winners_pct": 0.7,
+     "losers_pct": 88.2,
+     "magnitude": 2,
+     "fiscal": {
+      "income_tax_delta_m": 10249.889,
+      "benefit_delta_m": 308.3,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": -9941.589,
+      "net_exchequer_cost_m": -9941.589
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10026.169,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10584.47,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24786.755,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -12412.239,
+      -11525.421,
+      -11163.239,
+      -11232.299,
+      -11695.167
+     ],
+     "deciles": [
+      [
+       -229.307,
+       -585.922,
+       -937.828,
+       -1115.558,
+       -1239.717,
+       -1420.672,
+       -1549.892,
+       -1663.745,
+       -1854.926,
+       -1814.672
+      ],
+      [
+       -296.034,
+       -756.349,
+       -1142.824,
+       -1246.6,
+       -1284.081,
+       -1372.451,
+       -1403.298,
+       -1413.101,
+       -1449.559,
+       -1161.123
+      ],
+      [
+       -382.179,
+       -976.348,
+       -1393.765,
+       -1393.747,
+       -1330.591,
+       -1326.359,
+       -1270.992,
+       -1200.657,
+       -1133.802,
+       -754.798
+      ],
+      [
+       -493.391,
+       -1260.338,
+       -1701.2,
+       -1559.06,
+       -1379.366,
+       -1282.29,
+       -1151.543,
+       -1020.526,
+       -887.62,
+       -496.965
+      ],
+      [
+       -636.965,
+       -1626.934,
+       -2078.154,
+       -1744.871,
+       -1430.531,
+       -1240.147,
+       -1043.666,
+       -867.737,
+       -695.509,
+       -330.654
+      ]
+     ],
+     "winners_pct": 0.9,
+     "losers_pct": 88.3,
+     "magnitude": 2.5,
+     "fiscal": {
+      "income_tax_delta_m": 12814.722,
+      "benefit_delta_m": 402.483,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": -12412.239,
+      "net_exchequer_cost_m": -12412.239
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9937.999,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10645.379,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24667.895,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -14901.613,
+      -13839.101,
+      -13406.543,
+      -13491.998,
+      -14050.704
+     ],
+     "deciles": [
+      [
+       -276.157,
+       -706.468,
+       -1124.686,
+       -1340.66,
+       -1489.012,
+       -1706.201,
+       -1858.3,
+       -1996.534,
+       -2226.179,
+       -2177.416
+      ],
+      [
+       -356.518,
+       -911.958,
+       -1370.631,
+       -1498.157,
+       -1542.293,
+       -1648.324,
+       -1682.565,
+       -1695.754,
+       -1739.673,
+       -1393.226
+      ],
+      [
+       -460.262,
+       -1177.221,
+       -1671.727,
+       -1675.012,
+       -1598.153,
+       -1593.002,
+       -1523.956,
+       -1440.816,
+       -1360.714,
+       -905.68
+      ],
+      [
+       -594.196,
+       -1519.64,
+       -2040.641,
+       -1873.702,
+       -1656.733,
+       -1540.109,
+       -1380.758,
+       -1224.654,
+       -1065.259,
+       -596.308
+      ],
+      [
+       -767.104,
+       -1961.66,
+       -2493.019,
+       -2097.03,
+       -1718.182,
+       -1489.526,
+       -1251.431,
+       -1041.303,
+       -834.697,
+       -396.752
+      ]
+     ],
+     "winners_pct": 0.8,
+     "losers_pct": 88.4,
+     "magnitude": 3,
+     "fiscal": {
+      "income_tax_delta_m": 15384.05,
+      "benefit_delta_m": 482.438,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": -14901.613,
+      "net_exchequer_cost_m": -14901.612
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9945.698,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10725.524,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24529.944,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -17385.885,
+      -16147.889,
+      -15645.201,
+      -15747.331,
+      -16402.197
+     ],
+     "deciles": [
+      [
+       -321.467,
+       -828.236,
+       -1313.659,
+       -1564.867,
+       -1737.213,
+       -1985.449,
+       -2168.6,
+       -2329.019,
+       -2597.125,
+       -2540.251
+      ],
+      [
+       -415.012,
+       -1069.146,
+       -1600.959,
+       -1748.69,
+       -1799.38,
+       -1918.091,
+       -1963.524,
+       -1978.149,
+       -2029.55,
+       -1625.389
+      ],
+      [
+       -535.778,
+       -1380.13,
+       -1952.69,
+       -1955.107,
+       -1864.555,
+       -1853.709,
+       -1778.433,
+       -1680.755,
+       -1587.443,
+       -1056.601
+      ],
+      [
+       -691.686,
+       -1781.57,
+       -2383.657,
+       -2187.006,
+       -1932.904,
+       -1792.156,
+       -1611.326,
+       -1428.594,
+       -1242.755,
+       -695.676
+      ],
+      [
+       -892.963,
+       -2299.778,
+       -2912.143,
+       -2447.661,
+       -2004.601,
+       -1733.293,
+       -1460.407,
+       -1214.709,
+       -973.776,
+       -462.867
+      ]
+     ],
+     "winners_pct": 0.9,
+     "losers_pct": 88.4,
+     "magnitude": 3.5,
+     "fiscal": {
+      "income_tax_delta_m": 17952.006,
+      "benefit_delta_m": 566.121,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": -17385.885,
+      "net_exchequer_cost_m": -17385.885
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9956.428,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 11040.438,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24415.57,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -19873.59,
+      -18458.303,
+      -17883.247,
+      -17999.237,
+      -18746.673
+     ],
+     "deciles": [
+      [
+       -362.634,
+       -947.808,
+       -1502.401,
+       -1790.626,
+       -1987.719,
+       -2270.065,
+       -2478.582,
+       -2661.672,
+       -2968.947,
+       -2903.137
+      ],
+      [
+       -468.158,
+       -1223.499,
+       -1831.066,
+       -2001.035,
+       -2058.874,
+       -2193.071,
+       -2244.197,
+       -2260.686,
+       -2320.138,
+       -1857.58
+      ],
+      [
+       -604.39,
+       -1579.379,
+       -2233.462,
+       -2237.312,
+       -2133.472,
+       -2119.478,
+       -2032.652,
+       -1920.814,
+       -1814.751,
+       -1207.538
+      ],
+      [
+       -780.264,
+       -2038.776,
+       -2726.534,
+       -2502.768,
+       -2211.702,
+       -2049.117,
+       -1841.661,
+       -1632.638,
+       -1420.723,
+       -795.054
+      ],
+      [
+       -1007.316,
+       -2631.799,
+       -3331.211,
+       -2801.152,
+       -2293.765,
+       -1981.831,
+       -1669.171,
+       -1388.203,
+       -1113.237,
+       -528.988
+      ]
+     ],
+     "winners_pct": 1.0,
+     "losers_pct": 88.6,
+     "magnitude": 4,
+     "fiscal": {
+      "income_tax_delta_m": 20523.808,
+      "benefit_delta_m": 650.218,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": -19873.59,
+      "net_exchequer_cost_m": -19873.59
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9970.224,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 11083.507,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24338.031,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -22364.728,
+      -20773.395,
+      -20127.587,
+      -20259.503,
+      -21102.148
+     ],
+     "deciles": [
+      [
+       -408.988,
+       -1065.821,
+       -1693.852,
+       -2015.621,
+       -2236.181,
+       -2554.214,
+       -2789.367,
+       -2994.297,
+       -3340.097,
+       -3266.289
+      ],
+      [
+       -528.002,
+       -1375.839,
+       -2064.349,
+       -2252.452,
+       -2316.256,
+       -2467.583,
+       -2525.592,
+       -2543.2,
+       -2610.181,
+       -2089.943
+      ],
+      [
+       -681.647,
+       -1776.032,
+       -2517.95,
+       -2518.398,
+       -2400.206,
+       -2384.778,
+       -2287.521,
+       -2160.854,
+       -2041.615,
+       -1358.585
+      ],
+      [
+       -880.003,
+       -2292.631,
+       -3073.751,
+       -2817.186,
+       -2488.245,
+       -2305.61,
+       -2072.581,
+       -1836.664,
+       -1598.33,
+       -894.502
+      ],
+      [
+       -1136.078,
+       -2959.495,
+       -3755.338,
+       -3153.036,
+       -2580.596,
+       -2229.901,
+       -1878.462,
+       -1561.683,
+       -1252.405,
+       -595.153
+      ]
+     ],
+     "winners_pct": 1.0,
+     "losers_pct": 88.7,
+     "magnitude": 4.5,
+     "fiscal": {
+      "income_tax_delta_m": 23097.995,
+      "benefit_delta_m": 733.267,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": -22364.728,
+      "net_exchequer_cost_m": -22364.728
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9960.31,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 11162.51,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24214.479,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -24847.527,
+      -23078.999,
+      -22361.044,
+      -22507.238,
+      -23443.178
+     ],
+     "deciles": [
+      [
+       -457.596,
+       -1185.752,
+       -1872.916,
+       -2240.788,
+       -2486.343,
+       -2837.237,
+       -3099.59,
+       -3326.633,
+       -3711.438,
+       -3629.233
+      ],
+      [
+       -590.754,
+       -1530.654,
+       -2282.589,
+       -2504.068,
+       -2575.413,
+       -2741.015,
+       -2806.491,
+       -2825.469,
+       -2900.373,
+       -2322.172
+      ],
+      [
+       -762.66,
+       -1975.88,
+       -2784.167,
+       -2799.716,
+       -2668.795,
+       -2649.042,
+       -2541.952,
+       -2400.689,
+       -2268.596,
+       -1509.547
+      ],
+      [
+       -984.59,
+       -2550.61,
+       -3398.774,
+       -3131.872,
+       -2766.726,
+       -2561.11,
+       -2303.115,
+       -2040.517,
+       -1776.028,
+       -993.896
+      ],
+      [
+       -1271.101,
+       -3292.513,
+       -4152.504,
+       -3505.227,
+       -2869.455,
+       -2477.02,
+       -2087.413,
+       -1735.017,
+       -1391.644,
+       -661.284
+      ]
+     ],
+     "winners_pct": 0.9,
+     "losers_pct": 88.8,
+     "magnitude": 5,
+     "fiscal": {
+      "income_tax_delta_m": 25674.286,
+      "benefit_delta_m": 826.759,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": -24847.527,
+      "net_exchequer_cost_m": -24847.527
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9844.286,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 11257.074,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24117.377,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    }
+   ]
+  },
+  "child_benefit_up": {
+   "label": "Assegno Unico Universale (bau_it)",
+   "lever": "param_mutate_scale: bau_it",
+   "unit": "% change",
+   "baseline_magnitude": 0,
+   "magnitudes": [
+    0,
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    35,
+    40,
+    45,
+    50
+   ],
+   "points": [
+    {
+     "wevm": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "deciles": [
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 0.0,
+     "magnitude": 0,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 0.0,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 0.0,
+      "net_exchequer_cost_m": 0.0
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10200.944,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10200.944,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25273.485,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      608.433,
+      708.042,
+      833.238,
+      990.629,
+      1188.646
+     ],
+     "deciles": [
+      [
+       71.702,
+       122.0,
+       131.985,
+       121.151,
+       82.105,
+       54.46,
+       22.333,
+       1.513,
+       0.777,
+       0.406
+      ],
+      [
+       92.567,
+       157.49,
+       161.75,
+       135.537,
+       85.291,
+       52.802,
+       20.411,
+       1.292,
+       0.623,
+       0.279
+      ],
+      [
+       119.503,
+       203.305,
+       198.413,
+       151.713,
+       88.638,
+       51.213,
+       18.66,
+       1.103,
+       0.5,
+       0.192
+      ],
+      [
+       154.278,
+       262.447,
+       243.611,
+       169.911,
+       92.156,
+       49.689,
+       17.063,
+       0.942,
+       0.401,
+       0.132
+      ],
+      [
+       199.172,
+       338.794,
+       299.383,
+       190.394,
+       95.853,
+       48.227,
+       15.607,
+       0.804,
+       0.322,
+       0.091
+      ]
+     ],
+     "winners_pct": 12.0,
+     "losers_pct": 0.0,
+     "magnitude": 5,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 608.433,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 608.433,
+      "net_exchequer_cost_m": 608.433
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9994.253,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9993.191,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25116.002,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      1217.038,
+      1416.296,
+      1666.739,
+      1981.583,
+      2377.7
+     ],
+     "deciles": [
+      [
+       143.47,
+       244.033,
+       264.002,
+       242.327,
+       164.222,
+       108.926,
+       44.667,
+       3.025,
+       1.554,
+       0.812
+      ],
+      [
+       185.219,
+       315.024,
+       323.539,
+       271.102,
+       170.593,
+       105.611,
+       40.823,
+       2.582,
+       1.246,
+       0.558
+      ],
+      [
+       239.117,
+       406.665,
+       396.873,
+       303.457,
+       177.288,
+       102.432,
+       37.32,
+       2.205,
+       0.999,
+       0.383
+      ],
+      [
+       308.699,
+       524.966,
+       487.281,
+       339.857,
+       184.323,
+       99.384,
+       34.126,
+       1.883,
+       0.802,
+       0.264
+      ],
+      [
+       398.529,
+       677.681,
+       598.838,
+       380.826,
+       191.719,
+       96.459,
+       31.215,
+       1.608,
+       0.643,
+       0.181
+      ]
+     ],
+     "winners_pct": 12.1,
+     "losers_pct": 0.0,
+     "magnitude": 10,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 1217.038,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 1217.038,
+      "net_exchequer_cost_m": 1217.038
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9981.005,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9962.524,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25046.332,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      1825.534,
+      2124.42,
+      2500.081,
+      2972.346,
+      3566.518
+     ],
+     "deciles": [
+      [
+       215.231,
+       366.033,
+       395.988,
+       363.48,
+       246.33,
+       163.386,
+       66.999,
+       4.537,
+       2.331,
+       1.218
+      ],
+      [
+       277.862,
+       472.514,
+       485.29,
+       406.641,
+       255.887,
+       158.413,
+       61.234,
+       3.873,
+       1.869,
+       0.836
+      ],
+      [
+       358.719,
+       609.97,
+       595.286,
+       455.173,
+       265.929,
+       153.645,
+       55.979,
+       3.307,
+       1.499,
+       0.575
+      ],
+      [
+       463.104,
+       787.413,
+       730.893,
+       509.77,
+       276.482,
+       149.073,
+       51.189,
+       2.824,
+       1.202,
+       0.395
+      ],
+      [
+       597.864,
+       1016.476,
+       898.222,
+       571.223,
+       287.576,
+       144.686,
+       46.822,
+       2.412,
+       0.965,
+       0.272
+      ]
+     ],
+     "winners_pct": 12.1,
+     "losers_pct": 0.0,
+     "magnitude": 15,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 1825.534,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 1825.534,
+      "net_exchequer_cost_m": 1825.534
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9927.314,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9879.293,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24940.424,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      2434.152,
+      2832.688,
+      3333.599,
+      3963.323,
+      4755.598
+     ],
+     "deciles": [
+      [
+       287.008,
+       488.067,
+       528.005,
+       484.655,
+       328.446,
+       217.853,
+       89.333,
+       6.05,
+       3.109,
+       1.624
+      ],
+      [
+       370.526,
+       630.048,
+       647.08,
+       542.205,
+       341.19,
+       211.222,
+       81.645,
+       5.165,
+       2.492,
+       1.115
+      ],
+      [
+       478.347,
+       813.332,
+       793.747,
+       606.916,
+       354.579,
+       204.865,
+       74.639,
+       4.41,
+       1.998,
+       0.766
+      ],
+      [
+       617.544,
+       1049.933,
+       974.563,
+       679.716,
+       368.65,
+       198.768,
+       68.253,
+       3.766,
+       1.603,
+       0.527
+      ],
+      [
+       797.245,
+       1355.364,
+       1197.677,
+       761.655,
+       383.442,
+       192.918,
+       62.43,
+       3.216,
+       1.287,
+       0.363
+      ]
+     ],
+     "winners_pct": 12.1,
+     "losers_pct": 0.0,
+     "magnitude": 20,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 2434.152,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 2434.152,
+      "net_exchequer_cost_m": 2434.152
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9839.276,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9762.911,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24826.029,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      3042.644,
+      3540.807,
+      4166.936,
+      4954.078,
+      5944.408
+     ],
+     "deciles": [
+      [
+       358.769,
+       610.067,
+       659.991,
+       605.806,
+       410.552,
+       272.313,
+       111.666,
+       7.563,
+       3.886,
+       2.031
+      ],
+      [
+       463.169,
+       787.538,
+       808.83,
+       677.742,
+       426.481,
+       264.025,
+       102.057,
+       6.456,
+       3.115,
+       1.394
+      ],
+      [
+       597.948,
+       1016.636,
+       992.16,
+       758.629,
+       443.217,
+       256.078,
+       93.299,
+       5.512,
+       2.498,
+       0.958
+      ],
+      [
+       771.948,
+       1312.38,
+       1218.174,
+       849.627,
+       460.806,
+       248.457,
+       85.316,
+       4.707,
+       2.004,
+       0.659
+      ],
+      [
+       996.581,
+       1694.158,
+       1497.06,
+       952.049,
+       479.296,
+       241.145,
+       78.037,
+       4.02,
+       1.609,
+       0.454
+      ]
+     ],
+     "winners_pct": 12.1,
+     "losers_pct": 0.0,
+     "magnitude": 25,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 3042.644,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 3042.644,
+      "net_exchequer_cost_m": 3042.644
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9770.47,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9695.672,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24733.383,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      3650.689,
+      4248.41,
+      4999.673,
+      5944.127,
+      7132.377
+     ],
+     "deciles": [
+      [
+       430.479,
+       731.989,
+       791.885,
+       726.868,
+       492.591,
+       326.726,
+       133.977,
+       9.075,
+       4.663,
+       2.437
+      ],
+      [
+       555.745,
+       944.927,
+       970.469,
+       813.179,
+       511.703,
+       316.782,
+       122.447,
+       7.747,
+       3.738,
+       1.673
+      ],
+      [
+       717.464,
+       1219.811,
+       1190.436,
+       910.231,
+       531.783,
+       307.247,
+       111.94,
+       6.614,
+       2.997,
+       1.149
+      ],
+      [
+       926.242,
+       1574.659,
+       1461.618,
+       1019.413,
+       552.887,
+       298.103,
+       102.362,
+       5.648,
+       2.405,
+       0.791
+      ],
+      [
+       1195.774,
+       2032.735,
+       1796.236,
+       1142.303,
+       575.072,
+       289.33,
+       93.628,
+       4.824,
+       1.93,
+       0.544
+      ]
+     ],
+     "winners_pct": 12.1,
+     "losers_pct": 0.0,
+     "magnitude": 30,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 3650.689,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 3650.689,
+      "net_exchequer_cost_m": 3650.689
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9750.33,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9642.604,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24678.757,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      4259.181,
+      4956.528,
+      5833.009,
+      6934.882,
+      8321.187
+     ],
+     "deciles": [
+      [
+       502.239,
+       853.989,
+       923.87,
+       848.019,
+       574.696,
+       381.186,
+       156.31,
+       10.588,
+       5.441,
+       2.843
+      ],
+      [
+       648.388,
+       1102.417,
+       1132.219,
+       948.716,
+       596.994,
+       369.584,
+       142.858,
+       9.038,
+       4.361,
+       1.952
+      ],
+      [
+       837.065,
+       1423.115,
+       1388.848,
+       1061.944,
+       620.421,
+       358.46,
+       130.6,
+       7.717,
+       3.497,
+       1.341
+      ],
+      [
+       1080.647,
+       1837.106,
+       1705.228,
+       1189.324,
+       645.043,
+       347.792,
+       119.425,
+       6.59,
+       2.806,
+       0.923
+      ],
+      [
+       1395.109,
+       2371.529,
+       2095.619,
+       1332.697,
+       670.925,
+       337.557,
+       109.236,
+       5.628,
+       2.252,
+       0.635
+      ]
+     ],
+     "winners_pct": 12.1,
+     "losers_pct": 0.0,
+     "magnitude": 35,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 4259.181,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 4259.181,
+      "net_exchequer_cost_m": 4259.181
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9718.553,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9575.699,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24603.219,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      4867.794,
+      5664.793,
+      6666.524,
+      7925.855,
+      9510.264
+     ],
+     "deciles": [
+      [
+       574.016,
+       976.022,
+       1055.887,
+       969.194,
+       656.812,
+       435.652,
+       178.644,
+       12.099,
+       6.218,
+       3.249
+      ],
+      [
+       741.052,
+       1259.951,
+       1294.008,
+       1084.281,
+       682.296,
+       422.393,
+       163.27,
+       10.329,
+       4.983,
+       2.23
+      ],
+      [
+       956.694,
+       1626.476,
+       1587.308,
+       1213.687,
+       709.071,
+       409.679,
+       149.26,
+       8.819,
+       3.996,
+       1.532
+      ],
+      [
+       1235.086,
+       2099.626,
+       1948.898,
+       1359.269,
+       737.21,
+       397.486,
+       136.489,
+       7.531,
+       3.206,
+       1.054
+      ],
+      [
+       1594.49,
+       2710.416,
+       2395.074,
+       1523.129,
+       766.791,
+       385.789,
+       124.843,
+       6.432,
+       2.574,
+       0.726
+      ]
+     ],
+     "winners_pct": 12.1,
+     "losers_pct": 0.0,
+     "magnitude": 40,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 4867.794,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 4867.794,
+      "net_exchequer_cost_m": 4867.794
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9669.987,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9447.391,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24503.473,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      5476.282,
+      6372.908,
+      7499.856,
+      8916.607,
+      10699.07
+     ],
+     "deciles": [
+      [
+       645.777,
+       1098.022,
+       1187.872,
+       1090.345,
+       738.917,
+       490.112,
+       200.976,
+       13.611,
+       6.994,
+       3.655
+      ],
+      [
+       833.694,
+       1417.441,
+       1455.758,
+       1219.818,
+       767.587,
+       475.195,
+       183.681,
+       11.619,
+       5.606,
+       2.509
+      ],
+      [
+       1076.295,
+       1829.78,
+       1785.721,
+       1365.401,
+       797.709,
+       460.892,
+       167.919,
+       9.921,
+       4.496,
+       1.724
+      ],
+      [
+       1389.491,
+       2362.072,
+       2192.509,
+       1529.18,
+       829.365,
+       447.175,
+       153.551,
+       8.472,
+       3.607,
+       1.186
+      ],
+      [
+       1793.825,
+       3049.209,
+       2694.456,
+       1713.523,
+       862.644,
+       434.016,
+       140.45,
+       7.236,
+       2.895,
+       0.816
+      ]
+     ],
+     "winners_pct": 12.1,
+     "losers_pct": 0.0,
+     "magnitude": 45,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 5476.282,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 5476.282,
+      "net_exchequer_cost_m": 5476.282
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9536.845,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9370.52,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24428.087,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      6084.9,
+      7081.177,
+      8333.375,
+      9907.584,
+      11888.151
+     ],
+     "deciles": [
+      [
+       717.554,
+       1220.056,
+       1319.89,
+       1211.521,
+       821.034,
+       544.578,
+       223.31,
+       15.124,
+       7.772,
+       4.061
+      ],
+      [
+       926.358,
+       1574.975,
+       1617.548,
+       1355.382,
+       852.889,
+       528.003,
+       204.093,
+       12.911,
+       6.229,
+       2.788
+      ],
+      [
+       1195.923,
+       2033.142,
+       1984.181,
+       1517.144,
+       886.359,
+       512.111,
+       186.58,
+       11.023,
+       4.995,
+       1.916
+      ],
+      [
+       1543.93,
+       2624.592,
+       2436.179,
+       1699.126,
+       921.534,
+       496.87,
+       170.615,
+       9.413,
+       4.008,
+       1.318
+      ],
+      [
+       1993.206,
+       3388.098,
+       2993.912,
+       1903.955,
+       958.511,
+       482.248,
+       156.058,
+       8.04,
+       3.217,
+       0.907
+      ]
+     ],
+     "winners_pct": 12.1,
+     "losers_pct": 0.0,
+     "magnitude": 50,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 6084.9,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 6084.9,
+      "net_exchequer_cost_m": 6084.9
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9511.219,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9352.313,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24367.84,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    }
+   ]
+  },
+  "min_income_up": {
+   "label": "Assegno di Inclusione (bsa_Amount1)",
+   "lever": "const_scale: $bsa_Amount1",
+   "unit": "% change",
+   "baseline_magnitude": 0,
+   "magnitudes": [
+    0,
+    5,
+    10,
+    15,
+    20,
+    25,
+    30,
+    35,
+    40,
+    45,
+    50
+   ],
+   "points": [
+    {
+     "wevm": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "deciles": [
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 0.0,
+     "magnitude": 0,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 0.0,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 0.0,
+      "net_exchequer_cost_m": 0.0
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10200.944,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10200.944,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25273.485,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      467.044,
+      593.95,
+      757.007,
+      966.591,
+      1236.07
+     ],
+     "deciles": [
+      [
+       302.775,
+       100.499,
+       31.991,
+       19.436,
+       6.791,
+       4.412,
+       0.911,
+       0.0,
+       0.228,
+       0.0
+      ],
+      [
+       390.881,
+       129.737,
+       39.279,
+       21.672,
+       7.086,
+       4.291,
+       0.819,
+       0.0,
+       0.185,
+       0.0
+      ],
+      [
+       504.625,
+       167.481,
+       48.271,
+       24.176,
+       7.395,
+       4.173,
+       0.736,
+       0.0,
+       0.15,
+       0.0
+      ],
+      [
+       651.468,
+       216.206,
+       59.375,
+       26.98,
+       7.72,
+       4.059,
+       0.661,
+       0.0,
+       0.122,
+       0.0
+      ],
+      [
+       841.041,
+       279.106,
+       73.099,
+       30.123,
+       8.06,
+       3.948,
+       0.594,
+       0.0,
+       0.099,
+       0.0
+      ]
+     ],
+     "winners_pct": 5.8,
+     "losers_pct": 0.0,
+     "magnitude": 5,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 467.044,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 467.044,
+      "net_exchequer_cost_m": 467.044
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10175.658,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10175.658,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24876.063,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      941.343,
+      1197.286,
+      1526.142,
+      1948.838,
+      2492.347
+     ],
+     "deciles": [
+      [
+       605.919,
+       207.718,
+       64.066,
+       39.092,
+       13.583,
+       8.811,
+       1.727,
+       0.0,
+       0.426,
+       0.0
+      ],
+      [
+       782.239,
+       268.149,
+       78.675,
+       43.585,
+       14.172,
+       8.569,
+       1.551,
+       0.0,
+       0.346,
+       0.0
+      ],
+      [
+       1009.866,
+       346.161,
+       96.703,
+       48.614,
+       14.791,
+       8.334,
+       1.392,
+       0.0,
+       0.28,
+       0.0
+      ],
+      [
+       1303.731,
+       446.869,
+       118.968,
+       54.248,
+       15.44,
+       8.106,
+       1.25,
+       0.0,
+       0.227,
+       0.0
+      ],
+      [
+       1683.109,
+       576.876,
+       146.49,
+       60.56,
+       16.12,
+       7.885,
+       1.122,
+       0.0,
+       0.184,
+       0.0
+      ]
+     ],
+     "winners_pct": 6.0,
+     "losers_pct": 0.0,
+     "magnitude": 10,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 941.343,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 941.343,
+      "net_exchequer_cost_m": 941.343
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10145.104,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10145.104,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24476.338,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      1422.256,
+      1809.384,
+      2306.813,
+      2946.211,
+      3768.391
+     ],
+     "deciles": [
+      [
+       922.744,
+       309.142,
+       95.306,
+       58.611,
+       20.356,
+       13.127,
+       2.544,
+       0.0,
+       0.426,
+       0.0
+      ],
+      [
+       1191.258,
+       399.079,
+       117.067,
+       65.347,
+       21.24,
+       12.765,
+       2.283,
+       0.0,
+       0.346,
+       0.0
+      ],
+      [
+       1537.907,
+       515.182,
+       143.927,
+       72.889,
+       22.166,
+       12.414,
+       2.048,
+       0.0,
+       0.28,
+       0.0
+      ],
+      [
+       1985.429,
+       665.063,
+       177.107,
+       81.336,
+       23.138,
+       12.073,
+       1.838,
+       0.0,
+       0.227,
+       0.0
+      ],
+      [
+       2563.178,
+       858.548,
+       218.132,
+       90.801,
+       24.158,
+       11.741,
+       1.65,
+       0.0,
+       0.184,
+       0.0
+      ]
+     ],
+     "winners_pct": 6.1,
+     "losers_pct": 0.0,
+     "magnitude": 15,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 1422.256,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 1422.256,
+      "net_exchequer_cost_m": 1422.256
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10116.866,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10115.928,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 24075.13,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      1886.276,
+      2400.336,
+      3060.902,
+      3910.046,
+      5001.992
+     ],
+     "deciles": [
+      [
+       1228.489,
+       409.255,
+       124.999,
+       75.754,
+       26.618,
+       17.374,
+       3.36,
+       0.0,
+       0.426,
+       0.0
+      ],
+      [
+       1585.973,
+       528.318,
+       153.506,
+       84.501,
+       27.782,
+       16.895,
+       3.015,
+       0.0,
+       0.346,
+       0.0
+      ],
+      [
+       2047.482,
+       682.02,
+       188.684,
+       94.297,
+       29.004,
+       16.429,
+       2.705,
+       0.0,
+       0.28,
+       0.0
+      ],
+      [
+       2643.288,
+       880.439,
+       232.13,
+       105.274,
+       30.286,
+       15.976,
+       2.427,
+       0.0,
+       0.227,
+       0.0
+      ],
+      [
+       3412.47,
+       1136.582,
+       285.832,
+       117.579,
+       31.63,
+       15.537,
+       2.177,
+       0.0,
+       0.184,
+       0.0
+      ]
+     ],
+     "winners_pct": 6.2,
+     "losers_pct": 0.1,
+     "magnitude": 20,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 1886.276,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 1886.276,
+      "net_exchequer_cost_m": 1886.276
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10065.866,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10064.804,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 23696.584,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      2335.947,
+      2973.223,
+      3792.118,
+      4844.795,
+      6198.482
+     ],
+     "deciles": [
+      [
+       1530.391,
+       500.779,
+       154.355,
+       92.149,
+       32.751,
+       21.604,
+       3.491,
+       0.0,
+       0.426,
+       0.0
+      ],
+      [
+       1975.727,
+       646.473,
+       189.512,
+       102.832,
+       34.194,
+       21.007,
+       3.132,
+       0.0,
+       0.346,
+       0.0
+      ],
+      [
+       2550.652,
+       834.555,
+       232.884,
+       114.8,
+       35.708,
+       20.428,
+       2.81,
+       0.0,
+       0.28,
+       0.0
+      ],
+      [
+       3292.878,
+       1077.357,
+       286.435,
+       128.216,
+       37.296,
+       19.864,
+       2.521,
+       0.0,
+       0.227,
+       0.0
+      ],
+      [
+       4251.087,
+       1390.799,
+       352.61,
+       143.259,
+       38.963,
+       19.317,
+       2.262,
+       0.0,
+       0.184,
+       0.0
+      ]
+     ],
+     "winners_pct": 6.4,
+     "losers_pct": 0.0,
+     "magnitude": 25,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 2335.947,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 2335.947,
+      "net_exchequer_cost_m": 2335.947
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10042.567,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10041.505,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 23325.654,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      2755.065,
+      3507.035,
+      4473.265,
+      5715.295,
+      7312.431
+     ],
+     "deciles": [
+      [
+       1817.748,
+       577.311,
+       184.314,
+       107.981,
+       37.96,
+       25.834,
+       3.491,
+       0.0,
+       0.426,
+       0.0
+      ],
+      [
+       2346.703,
+       745.275,
+       226.28,
+       120.53,
+       39.649,
+       25.12,
+       3.132,
+       0.0,
+       0.346,
+       0.0
+      ],
+      [
+       3029.58,
+       962.108,
+       278.046,
+       134.594,
+       41.421,
+       24.427,
+       2.81,
+       0.0,
+       0.28,
+       0.0
+      ],
+      [
+       3911.171,
+       1242.026,
+       341.954,
+       150.362,
+       43.281,
+       23.753,
+       2.521,
+       0.0,
+       0.227,
+       0.0
+      ],
+      [
+       5049.3,
+       1603.385,
+       420.92,
+       168.047,
+       45.234,
+       23.098,
+       2.262,
+       0.0,
+       0.184,
+       0.0
+      ]
+     ],
+     "winners_pct": 6.6,
+     "losers_pct": 0.0,
+     "magnitude": 30,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 2755.065,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 2755.065,
+      "net_exchequer_cost_m": 2755.065
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10025.66,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10024.598,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 22983.815,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      3157.915,
+      4020.44,
+      5128.754,
+      6553.46,
+      8385.548
+     ],
+     "deciles": [
+      [
+       2099.493,
+       649.453,
+       209.51,
+       122.38,
+       43.097,
+       30.065,
+       3.491,
+       0.0,
+       0.426,
+       0.0
+      ],
+      [
+       2710.433,
+       838.411,
+       257.2,
+       136.658,
+       45.027,
+       29.233,
+       3.132,
+       0.0,
+       0.346,
+       0.0
+      ],
+      [
+       3499.154,
+       1082.345,
+       316.022,
+       152.664,
+       47.054,
+       28.425,
+       2.81,
+       0.0,
+       0.28,
+       0.0
+      ],
+      [
+       4517.389,
+       1397.251,
+       388.634,
+       170.615,
+       49.182,
+       27.641,
+       2.521,
+       0.0,
+       0.227,
+       0.0
+      ],
+      [
+       5831.924,
+       1803.779,
+       478.346,
+       190.758,
+       51.416,
+       26.878,
+       2.262,
+       0.0,
+       0.184,
+       0.0
+      ]
+     ],
+     "winners_pct": 6.7,
+     "losers_pct": 0.0,
+     "magnitude": 35,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 3157.915,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 3157.915,
+      "net_exchequer_cost_m": 3157.915
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9998.922,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9996.849,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 22661.211,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      3558.439,
+      4531.427,
+      5781.78,
+      7389.191,
+      9456.364
+     ],
+     "deciles": [
+      [
+       2382.511,
+       722.185,
+       232.294,
+       135.584,
+       47.654,
+       34.295,
+       3.491,
+       0.0,
+       0.426,
+       0.0
+      ],
+      [
+       3075.809,
+       932.306,
+       285.235,
+       151.457,
+       49.798,
+       33.346,
+       3.132,
+       0.0,
+       0.346,
+       0.0
+      ],
+      [
+       3970.852,
+       1203.563,
+       350.544,
+       169.259,
+       52.049,
+       32.424,
+       2.81,
+       0.0,
+       0.28,
+       0.0
+      ],
+      [
+       5126.348,
+       1553.742,
+       431.179,
+       189.232,
+       54.413,
+       31.529,
+       2.521,
+       0.0,
+       0.227,
+       0.0
+      ],
+      [
+       6618.086,
+       2005.808,
+       530.819,
+       211.652,
+       56.895,
+       30.659,
+       2.262,
+       0.0,
+       0.184,
+       0.0
+      ]
+     ],
+     "winners_pct": 6.9,
+     "losers_pct": 0.0,
+     "magnitude": 40,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 3558.439,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 3558.439,
+      "net_exchequer_cost_m": 3558.439
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9982.44,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9979.302,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 22337.043,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      3954.504,
+      5036.584,
+      6427.18,
+      8214.945,
+      10514.134
+     ],
+     "deciles": [
+      [
+       2658.67,
+       795.199,
+       257.378,
+       148.917,
+       51.898,
+       38.525,
+       3.491,
+       0.0,
+       0.426,
+       0.0
+      ],
+      [
+       3432.328,
+       1026.567,
+       316.11,
+       166.411,
+       54.233,
+       37.459,
+       3.132,
+       0.0,
+       0.346,
+       0.0
+      ],
+      [
+       4431.116,
+       1325.251,
+       388.579,
+       186.036,
+       56.684,
+       36.423,
+       2.81,
+       0.0,
+       0.28,
+       0.0
+      ],
+      [
+       5720.546,
+       1710.84,
+       478.071,
+       208.064,
+       59.258,
+       35.417,
+       2.521,
+       0.0,
+       0.227,
+       0.0
+      ],
+      [
+       7385.194,
+       2208.618,
+       588.678,
+       232.797,
+       61.961,
+       34.439,
+       2.262,
+       0.0,
+       0.184,
+       0.0
+      ]
+     ],
+     "winners_pct": 7.0,
+     "losers_pct": 0.0,
+     "magnitude": 45,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 3954.504,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 3954.504,
+      "net_exchequer_cost_m": 3954.504
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9958.364,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9955.225,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 22013.684,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      4356.95,
+      5549.998,
+      7083.263,
+      9054.517,
+      11589.772
+     ],
+     "deciles": [
+      [
+       2934.693,
+       874.914,
+       282.409,
+       162.03,
+       56.232,
+       42.755,
+       3.491,
+       0.0,
+       0.426,
+       0.0
+      ],
+      [
+       3788.672,
+       1129.473,
+       346.916,
+       181.13,
+       58.758,
+       41.572,
+       3.132,
+       0.0,
+       0.346,
+       0.0
+      ],
+      [
+       4891.154,
+       1458.096,
+       426.525,
+       202.565,
+       61.41,
+       40.422,
+       2.81,
+       0.0,
+       0.28,
+       0.0
+      ],
+      [
+       6314.453,
+       1882.334,
+       524.85,
+       226.632,
+       64.195,
+       39.305,
+       2.521,
+       0.0,
+       0.227,
+       0.0
+      ],
+      [
+       8151.924,
+       2430.006,
+       646.392,
+       253.664,
+       67.12,
+       38.22,
+       2.262,
+       0.0,
+       0.184,
+       0.0
+      ]
+     ],
+     "winners_pct": 7.1,
+     "losers_pct": 0.1,
+     "magnitude": 50,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 4356.95,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 4356.95,
+      "net_exchequer_cost_m": 4356.95
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9898.88,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 9891.807,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 21696.367,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    }
+   ]
+  },
+  "unemployment_shock": {
+   "label": "Unemployment shock",
+   "lever": "unemployment: input transform",
+   "unit": "pp",
+   "baseline_magnitude": 0,
+   "magnitudes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "points": [
+    {
+     "wevm": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "deciles": [
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 0.0,
+     "magnitude": 0,
+     "fiscal": {
+      "income_tax_delta_m": 0.0,
+      "benefit_delta_m": 0.0,
+      "sic_delta_m": 0.0,
+      "sic_employer_delta_m": 0.0,
+      "net_income_delta_m": 0.0,
+      "net_exchequer_cost_m": 0.0
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10200.944,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10200.944,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25273.485,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -7038.477,
+      -5440.586,
+      -4576.97,
+      -4127.41,
+      -3941.172
+     ],
+     "deciles": [
+      [
+       -12.493,
+       -189.391,
+       -246.353,
+       -326.728,
+       -325.133,
+       -202.05,
+       -782.79,
+       -716.641,
+       -1597.419,
+       -2639.478
+      ],
+      [
+       -16.128,
+       -244.503,
+       -301.917,
+       -360.387,
+       -336.004,
+       -195.297,
+       -705.359,
+       -610.481,
+       -1254.204,
+       -1416.306
+      ],
+      [
+       -20.821,
+       -315.652,
+       -370.183,
+       -397.663,
+       -347.37,
+       -188.846,
+       -635.726,
+       -520.21,
+       -985.477,
+       -795.022
+      ],
+      [
+       -26.88,
+       -407.505,
+       -454.092,
+       -438.962,
+       -359.256,
+       -182.683,
+       -573.094,
+       -443.426,
+       -774.901,
+       -466.611
+      ],
+      [
+       -34.702,
+       -526.086,
+       -557.274,
+       -484.745,
+       -371.69,
+       -176.794,
+       -516.747,
+       -378.091,
+       -609.761,
+       -285.282
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 1.1,
+     "magnitude": 1,
+     "fiscal": {
+      "income_tax_delta_m": -3013.532,
+      "benefit_delta_m": 441.136,
+      "sic_delta_m": -939.242,
+      "sic_employer_delta_m": -2342.583,
+      "net_income_delta_m": -7038.477,
+      "net_exchequer_cost_m": 6736.493
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 9913.21,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10409.641,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 25508.65,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -11942.578,
+      -9633.151,
+      -8349.033,
+      -7674.604,
+      -7409.959
+     ],
+     "deciles": [
+      [
+       -77.524,
+       -246.44,
+       -459.773,
+       -746.193,
+       -676.959,
+       -675.527,
+       -1144.402,
+       -1210.534,
+       -2943.656,
+       -3761.57
+      ],
+      [
+       -100.083,
+       -318.153,
+       -559.678,
+       -831.604,
+       -698.203,
+       -651.43,
+       -1031.749,
+       -1028.369,
+       -2318.165,
+       -2095.718
+      ],
+      [
+       -129.206,
+       -410.734,
+       -681.6,
+       -927.182,
+       -720.305,
+       -628.383,
+       -930.427,
+       -873.852,
+       -1826.961,
+       -1220.383
+      ],
+      [
+       -166.804,
+       -530.255,
+       -830.457,
+       -1034.184,
+       -743.305,
+       -606.339,
+       -839.274,
+       -742.752,
+       -1440.912,
+       -740.323
+      ],
+      [
+       -215.343,
+       -684.557,
+       -1012.283,
+       -1154.028,
+       -767.246,
+       -585.249,
+       -757.249,
+       -631.49,
+       -1137.269,
+       -465.245
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 2.0,
+     "magnitude": 2,
+     "fiscal": {
+      "income_tax_delta_m": -4849.241,
+      "benefit_delta_m": 1047.887,
+      "sic_delta_m": -1688.756,
+      "sic_employer_delta_m": -4192.222,
+      "net_income_delta_m": -11942.578,
+      "net_exchequer_cost_m": 11778.106
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10094.769,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10716.507,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 26136.635,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -16853.886,
+      -13719.845,
+      -11917.166,
+      -10933.649,
+      -10515.38
+     ],
+     "deciles": [
+      [
+       -110.589,
+       -350.576,
+       -618.19,
+       -924.74,
+       -1223.982,
+       -940.125,
+       -1570.709,
+       -2031.908,
+       -3762.231,
+       -5320.836
+      ],
+      [
+       -142.77,
+       -452.571,
+       -750.946,
+       -1029.538,
+       -1261.4,
+       -906.983,
+       -1416.484,
+       -1716.694,
+       -2956.107,
+       -3086.352
+      ],
+      [
+       -184.315,
+       -584.241,
+       -912.692,
+       -1146.684,
+       -1300.31,
+       -875.263,
+       -1277.767,
+       -1450.876,
+       -2324.648,
+       -1860.371
+      ],
+      [
+       -237.95,
+       -754.219,
+       -1109.867,
+       -1277.689,
+       -1340.779,
+       -844.899,
+       -1152.965,
+       -1226.638,
+       -1829.579,
+       -1159.065
+      ],
+      [
+       -307.192,
+       -973.649,
+       -1350.363,
+       -1424.258,
+       -1382.879,
+       -815.827,
+       -1040.652,
+       -1037.414,
+       -1441.106,
+       -742.038
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 2.8,
+     "magnitude": 3,
+     "fiscal": {
+      "income_tax_delta_m": -6595.412,
+      "benefit_delta_m": 1365.298,
+      "sic_delta_m": -2545.793,
+      "sic_employer_delta_m": -5685.828,
+      "net_income_delta_m": -16853.886,
+      "net_exchequer_cost_m": 16192.331
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10222.458,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 10943.728,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 26484.344,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -21402.325,
+      -17745.682,
+      -15600.462,
+      -14414.99,
+      -13911.27
+     ],
+     "deciles": [
+      [
+       -127.84,
+       -413.853,
+       -929.958,
+       -1197.895,
+       -1545.648,
+       -1500.306,
+       -2030.678,
+       -2951.745,
+       -4632.901,
+       -6071.501
+      ],
+      [
+       -165.041,
+       -534.262,
+       -1123.192,
+       -1336.916,
+       -1592.818,
+       -1443.405,
+       -1832.438,
+       -2497.903,
+       -3634.79,
+       -3584.918
+      ],
+      [
+       -213.067,
+       -689.704,
+       -1357.285,
+       -1492.777,
+       -1641.92,
+       -1389.052,
+       -1654.021,
+       -2114.577,
+       -2854.134,
+       -2193.926
+      ],
+      [
+       -275.069,
+       -890.371,
+       -1641.032,
+       -1667.606,
+       -1693.05,
+       -1337.126,
+       -1493.401,
+       -1790.697,
+       -2243.024,
+       -1383.615
+      ],
+      [
+       -355.112,
+       -1149.421,
+       -1985.157,
+       -1863.808,
+       -1746.304,
+       -1287.511,
+       -1348.764,
+       -1516.951,
+       -1764.223,
+       -894.018
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 3.7,
+     "magnitude": 4,
+     "fiscal": {
+      "income_tax_delta_m": -8014.532,
+      "benefit_delta_m": 1777.507,
+      "sic_delta_m": -3307.966,
+      "sic_employer_delta_m": -7108.076,
+      "net_income_delta_m": -21402.325,
+      "net_exchequer_cost_m": 20208.081
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10307.36,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 11168.815,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 26774.284,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -26218.438,
+      -21668.594,
+      -18937.302,
+      -17375.576,
+      -16645.081
+     ],
+     "deciles": [
+      [
+       -135.885,
+       -454.863,
+       -1019.432,
+       -1466.286,
+       -1946.963,
+       -1719.923,
+       -2696.04,
+       -3414.092,
+       -5379.729,
+       -7985.225
+      ],
+      [
+       -175.426,
+       -587.206,
+       -1230.984,
+       -1637.798,
+       -2008.593,
+       -1655.86,
+       -2434.699,
+       -2891.752,
+       -4215.802,
+       -4830.475
+      ],
+      [
+       -226.474,
+       -758.054,
+       -1487.232,
+       -1830.183,
+       -2072.826,
+       -1594.63,
+       -2199.355,
+       -2450.194,
+       -3306.499,
+       -3011.855
+      ],
+      [
+       -292.377,
+       -978.61,
+       -1797.796,
+       -2046.08,
+       -2139.788,
+       -1536.098,
+       -1987.363,
+       -2076.793,
+       -2595.499,
+       -1925.171
+      ],
+      [
+       -377.457,
+       -1263.337,
+       -2174.404,
+       -2288.473,
+       -2209.614,
+       -1480.138,
+       -1796.351,
+       -1760.917,
+       -2039.075,
+       -1255.315
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 4.5,
+     "magnitude": 5,
+     "fiscal": {
+      "income_tax_delta_m": -9771.361,
+      "benefit_delta_m": 2066.943,
+      "sic_delta_m": -4074.45,
+      "sic_employer_delta_m": -8745.892,
+      "net_income_delta_m": -26218.438,
+      "net_exchequer_cost_m": 24658.646
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10311.833,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 11400.013,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 27028.976,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -30659.871,
+      -25442.644,
+      -22277.605,
+      -20442.558,
+      -19557.659
+     ],
+     "deciles": [
+      [
+       -162.42,
+       -539.565,
+       -1079.656,
+       -1644.045,
+       -2336.22,
+       -2323.556,
+       -3394.871,
+       -4055.883,
+       -6223.77,
+       -8899.885
+      ],
+      [
+       -209.683,
+       -696.52,
+       -1305.19,
+       -1836.807,
+       -2411.07,
+       -2236.787,
+       -3063.321,
+       -3434.073,
+       -4867.707,
+       -5381.485
+      ],
+      [
+       -270.699,
+       -899.132,
+       -1578.738,
+       -2053.061,
+       -2489.102,
+       -2153.94,
+       -2765.014,
+       -2908.593,
+       -3810.452,
+       -3348.875
+      ],
+      [
+       -349.471,
+       -1160.681,
+       -1910.72,
+       -2295.776,
+       -2570.469,
+       -2074.823,
+       -2496.538,
+       -2464.366,
+       -2985.425,
+       -2134.288
+      ],
+      [
+       -451.166,
+       -1498.313,
+       -2313.866,
+       -2568.312,
+       -2655.337,
+       -1999.251,
+       -2254.839,
+       -2088.7,
+       -2341.045,
+       -1386.831
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 5.4,
+     "magnitude": 6,
+     "fiscal": {
+      "income_tax_delta_m": -11220.251,
+      "benefit_delta_m": 2470.649,
+      "sic_delta_m": -4687.315,
+      "sic_employer_delta_m": -10442.62,
+      "net_income_delta_m": -30659.871,
+      "net_exchequer_cost_m": 28820.835
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10418.382,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 11647.441,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 27412.978,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -36749.429,
+      -30211.554,
+      -26241.248,
+      -23936.514,
+      -22813.117
+     ],
+     "deciles": [
+      [
+       -184.128,
+       -656.568,
+       -1184.58,
+       -2011.207,
+       -2696.918,
+       -2653.093,
+       -3776.222,
+       -4401.802,
+       -7507.73,
+       -11677.18
+      ],
+      [
+       -237.708,
+       -847.57,
+       -1435.519,
+       -2243.001,
+       -2785.025,
+       -2554.552,
+       -3409.121,
+       -3728.895,
+       -5880.023,
+       -7090.14
+      ],
+      [
+       -306.879,
+       -1094.137,
+       -1740.769,
+       -2502.642,
+       -2877.042,
+       -2460.495,
+       -3078.666,
+       -3159.94,
+       -4609.037,
+       -4411.642
+      ],
+      [
+       -396.18,
+       -1412.432,
+       -2112.346,
+       -2793.611,
+       -2973.168,
+       -2370.7,
+       -2781.109,
+       -2678.714,
+       -3615.751,
+       -2802.504
+      ],
+      [
+       -511.466,
+       -1823.322,
+       -2564.984,
+       -3119.844,
+       -3073.616,
+       -2284.958,
+       -2513.096,
+       -2271.549,
+       -2838.832,
+       -1811.451
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 6.2,
+     "magnitude": 7,
+     "fiscal": {
+      "income_tax_delta_m": -13655.115,
+      "benefit_delta_m": 2892.973,
+      "sic_delta_m": -5635.411,
+      "sic_employer_delta_m": -12957.391,
+      "net_income_delta_m": -36749.429,
+      "net_exchequer_cost_m": 35140.89
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10553.136,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 11918.96,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 27739.015,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -41824.337,
+      -34532.195,
+      -30091.296,
+      -27518.361,
+      -26283.459
+     ],
+     "deciles": [
+      [
+       -198.566,
+       -856.063,
+       -1312.404,
+       -2196.767,
+       -2995.221,
+       -3239.803,
+       -4501.527,
+       -5380.322,
+       -8110.345,
+       -13033.321
+      ],
+      [
+       -256.348,
+       -1105.104,
+       -1594.348,
+       -2446.46,
+       -3093.255,
+       -3118.126,
+       -4068.981,
+       -4566.684,
+       -6350.655,
+       -7932.235
+      ],
+      [
+       -330.943,
+       -1426.595,
+       -1938.204,
+       -2725.815,
+       -3195.664,
+       -3001.988,
+       -3679.188,
+       -3877.415,
+       -4977.058,
+       -4938.427
+      ],
+      [
+       -427.246,
+       -1841.613,
+       -2357.87,
+       -3038.507,
+       -3302.672,
+       -2891.115,
+       -3327.812,
+       -3293.299,
+       -3903.891,
+       -3134.334
+      ],
+      [
+       -551.572,
+       -2377.367,
+       -2870.429,
+       -3388.69,
+       -3414.514,
+       -2785.25,
+       -3010.97,
+       -2798.122,
+       -3064.708,
+       -2021.837
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 7.2,
+     "magnitude": 8,
+     "fiscal": {
+      "income_tax_delta_m": -15199.202,
+      "benefit_delta_m": 3302.585,
+      "sic_delta_m": -6420.124,
+      "sic_employer_delta_m": -14613.48,
+      "net_income_delta_m": -41824.337,
+      "net_exchequer_cost_m": 39535.391
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10607.664,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 12138.931,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 27699.487,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -46919.189,
+      -38803.569,
+      -33959.676,
+      -31235.585,
+      -30027.594
+     ],
+     "deciles": [
+      [
+       -210.638,
+       -1065.766,
+       -1580.579,
+       -2565.835,
+       -3368.389,
+       -3668.831,
+       -5140.282,
+       -5939.832,
+       -8711.51,
+       -14667.526
+      ],
+      [
+       -271.933,
+       -1375.83,
+       -1921.466,
+       -2858.503,
+       -3477.351,
+       -3533.127,
+       -4650.55,
+       -5038.838,
+       -6817.054,
+       -8858.918
+      ],
+      [
+       -351.064,
+       -1776.101,
+       -2337.64,
+       -3185.916,
+       -3591.194,
+       -3403.598,
+       -4208.821,
+       -4275.979,
+       -5339.096,
+       -5490.267
+      ],
+      [
+       -453.221,
+       -2292.823,
+       -2846.124,
+       -3552.362,
+       -3710.169,
+       -3279.939,
+       -3810.265,
+       -3629.853,
+       -4185.07,
+       -3475.757
+      ],
+      [
+       -585.106,
+       -2959.876,
+       -3467.88,
+       -3962.677,
+       -3834.543,
+       -3161.862,
+       -3450.552,
+       -3082.406,
+       -3283.205,
+       -2239.488
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 8.1,
+     "magnitude": 9,
+     "fiscal": {
+      "income_tax_delta_m": -17072.755,
+      "benefit_delta_m": 3793.493,
+      "sic_delta_m": -7186.475,
+      "sic_employer_delta_m": -16483.546,
+      "net_income_delta_m": -46919.189,
+      "net_exchequer_cost_m": 44536.269
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 10796.953,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 12477.891,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 28260.197,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    },
+    {
+     "wevm": [
+      -51930.619,
+      -43148.452,
+      -37884.25,
+      -34918.592,
+      -33610.82
+     ],
+     "deciles": [
+      [
+       -225.617,
+       -1218.157,
+       -1799.62,
+       -2736.355,
+       -3727.256,
+       -4127.818,
+       -5929.03,
+       -6990.441,
+       -9449.222,
+       -15727.105
+      ],
+      [
+       -291.27,
+       -1572.503,
+       -2188.298,
+       -3049.742,
+       -3848.392,
+       -3974.283,
+       -5358.881,
+       -5943.707,
+       -7399.883,
+       -9521.493
+      ],
+      [
+       -376.028,
+       -2029.923,
+       -2662.929,
+       -3400.423,
+       -3974.997,
+       -3827.729,
+       -4845.187,
+       -5055.585,
+       -5799.934,
+       -5911.517
+      ],
+      [
+       -485.45,
+       -2620.401,
+       -3242.971,
+       -3793.001,
+       -4107.352,
+       -3687.812,
+       -4382.205,
+       -4301.755,
+       -4549.744,
+       -3747.902
+      ],
+      [
+       -626.713,
+       -3382.642,
+       -3952.388,
+       -4232.668,
+       -4245.759,
+       -3554.207,
+       -3964.794,
+       -3661.669,
+       -3572.008,
+       -2417.972
+      ]
+     ],
+     "winners_pct": 0.0,
+     "losers_pct": 8.9,
+     "magnitude": 10,
+     "fiscal": {
+      "income_tax_delta_m": -18755.477,
+      "benefit_delta_m": 4192.823,
+      "sic_delta_m": -7916.11,
+      "sic_employer_delta_m": -18357.255,
+      "net_income_delta_m": -51930.619,
+      "net_exchequer_cost_m": 49221.665
+     },
+     "poverty": {
+      "relative_bhc_headcount_k": 11018.639,
+      "relative_ahc_headcount_k": null,
+      "absolute_bhc_headcount_k": null,
+      "absolute_ahc_headcount_k": null,
+      "anchored_bhc_headcount_k": 12840.471,
+      "anchored_ahc_headcount_k": null,
+      "anchored_bhc_threshold_cur": 11250.751,
+      "poverty_gap_bhc_m": 28616.63,
+      "poverty_gap_ahc_m": null,
+      "population_k": 58664.506,
+      "units_k": 26206.558
+     }
+    }
+   ]
+  }
+ }
+}

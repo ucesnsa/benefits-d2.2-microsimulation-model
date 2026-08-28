@@ -1,0 +1,230 @@
+{
+ "ES": {
+  "system": "ES_2023",
+  "dataset": "ES_2024_b1_2015_03_e2",
+  "policy": "bsa00_es",
+  "instrument": "bsa00_s",
+  "BTA": "on",
+  "BCA": "on",
+  "constants": {
+   "$bsa00_takeup_ratio": "0.234",
+   "$bsa00_BTA_rate": "0.44",
+   "$bsa00_targetBCA_amt": "$extstat_amount_bsa00_s * 1000000/12",
+   "$bsa00_BCA_rate": "$sum_i_bsa00_bca_take / $sum_i_bsa00_elig",
+   "$bsa00_rate": "min($bsa00_BCA_rate,$bsa00_BTA_rate)",
+   "$bsa00_target_count": "$sum_i_bsa00_elig * $bsa00_rate"
+  },
+  "external_statistic": {
+   "reference": "bsa00_s",
+   "category": "ils_benmt",
+   "description": "National minimum income (Ingreso Minimo Vital)",
+   "source": "Ministry of Inclusion, Social Security and Migration",
+   "comment": "Social Security Budget (Liquidaciones) .The amount includes benefits for family protection",
+   "years": {
+    "2010": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2011": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2012": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2013": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2014": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2015": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2016": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2017": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2019": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2020": {
+     "amount_eur_m": "518.0",
+     "count_k": "160.0"
+    },
+    "2021": {
+     "amount_eur_m": "1600",
+     "count_k": "284"
+    },
+    "2022": {
+     "amount_eur_m": "1919",
+     "count_k": "343"
+    },
+    "2023": {
+     "amount_eur_m": "2504",
+     "count_k": "392"
+    },
+    "2024": {
+     "amount_eur_m": "2840",
+     "count_k": null
+    },
+    "2025": {
+     "amount_eur_m": null,
+     "count_k": null
+    }
+   },
+   "year": "2023",
+   "amount_eur_m": "2504",
+   "count_k": "392"
+  },
+  "modelled_outlay_eur_m": 2479.3,
+  "target_binds": false
+ },
+ "IT": {
+  "system": "IT_2023",
+  "dataset": "IT_2024_a1_2015_03_e2",
+  "policy": "bsamm_it",
+  "instrument": "bsamm_s",
+  "BTA": "off",
+  "BCA": "off",
+  "constants": {
+   "$bsamm_BTA_rate": "1",
+   "$bsamm_targetBCA_amt": "$extstat_amount_bsamm_s * 1000000/12",
+   "$bsamm_BCA_rate": "$sum_i_bsamm_bca_take / $sum_i_bsamm_elig",
+   "$bsamm_rate": "min($bsamm_BCA_rate,$bsamm_BTA_rate)",
+   "$bsamm_target_count": "$sum_i_bsamm_elig * $bsamm_rate"
+  },
+  "external_statistic": {
+   "reference": "bsamm_s",
+   "category": "ils_benmt",
+   "description": "REI",
+   "source": "",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2019": {
+     "amount_eur_m": "3901",
+     "count_k": null
+    },
+    "2020": {
+     "amount_eur_m": "7143",
+     "count_k": null
+    },
+    "2021": {
+     "amount_eur_m": "8827",
+     "count_k": null
+    },
+    "2022": {
+     "amount_eur_m": "8030",
+     "count_k": null
+    },
+    "2023": {
+     "amount_eur_m": "6653",
+     "count_k": null
+    },
+    "2024": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2025": {
+     "amount_eur_m": null,
+     "count_k": null
+    }
+   },
+   "year": "2023",
+   "amount_eur_m": "6653",
+   "count_k": null
+  },
+  "modelled_outlay_eur_m": 8853.8,
+  "target_binds": false
+ },
+ "EL": {
+  "system": "EL_2023",
+  "dataset": "EL_2024_c1_2015_03_e2",
+  "policy": "bsa00_el",
+  "instrument": "bsa00_s",
+  "BTA": "on",
+  "BCA": "on",
+  "constants": {
+   "$bsa00_BTA_rate": "1",
+   "$bsa00_targetBCA_amt": "$extstat_amount_bsa00_s * 1000000/12",
+   "$bsa00_BCA_rate": "$sum_i_bsa00_bca_take / $sum_i_bsa00_elig",
+   "$bsa00_rate": "min($bsa00_BCA_rate,$bsa00_BTA_rate)",
+   "$bsa00_target_count": "$sum_i_bsa00_elig * $bsa00_rate"
+  },
+  "external_statistic": {
+   "reference": "bsa00_s",
+   "category": "ils_benmt",
+   "description": "GMI",
+   "source": "GAO",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_eur_m": null,
+     "count_k": null
+    },
+    "2017": {
+     "amount_eur_m": "595",
+     "count_k": null
+    },
+    "2018": {
+     "amount_eur_m": "590",
+     "count_k": null
+    },
+    "2019": {
+     "amount_eur_m": "665",
+     "count_k": "266"
+    },
+    "2020": {
+     "amount_eur_m": "674",
+     "count_k": "221"
+    },
+    "2021": {
+     "amount_eur_m": "654",
+     "count_k": "276"
+    },
+    "2022": {
+     "amount_eur_m": "575",
+     "count_k": "241"
+    },
+    "2023": {
+     "amount_eur_m": "520",
+     "count_k": "218"
+    },
+    "2024": {
+     "amount_eur_m": "510",
+     "count_k": null
+    },
+    "2025": {
+     "amount_eur_m": "500",
+     "count_k": null
+    }
+   },
+   "year": "2023",
+   "amount_eur_m": "520",
+   "count_k": "218"
+  },
+  "modelled_outlay_eur_m": 495.7,
+  "target_binds": false
+ }
+}

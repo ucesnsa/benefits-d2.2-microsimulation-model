@@ -1,0 +1,129 @@
+{"_PROVENANCE_NOTE":"SYNTHETIC pipeline-validation floor (2,397-household bundled training data; six-scenario sign-check). NOT the provenance of the committed dial surfaces, which are built on the REAL EU-SILC data -- see europe/<Country>/outputs/surface_provenance.json and dial_grid.json (n_units 29,781/10,445/31,790 real households).",
+  "EL": {
+    "country": "EL",
+    "system": "EL_2024",
+    "engine": "C:\\Program Files\\EUROMOD\\Executable\\EM_Executable.dll",
+    "baseline_shape": [
+      7482,
+      644
+    ],
+    "n_households": 2397,
+    "layer_path": "outputs\\EL\\per_unit_export.parquet",
+    "layer_rows": 14382,
+    "scenarios": {
+      "min_income_up": {
+        "type": "const_scale",
+        "note": "Greek social assistance (KEA) adult and child guaranteed-minimum amounts, +25%.",
+        "overwrites": {
+          "$bsa00_adult_amt|": "135#m",
+          "$bsa00_child_amt|": "67.5#m"
+        },
+        "skipped": [],
+        "weighted_dispy_delta_eur_yr": 387369303.0,
+        "sign": "+",
+        "expected_sign": "+",
+        "sign_match": true,
+        "households_changed": 294,
+        "wevm": {
+          "wevm_eps_0": 387369303.0,
+          "wevm_eps_0.5": 499956796.0,
+          "wevm_eps_1": 645273302.0,
+          "wevm_eps_1.5": 832834502.0,
+          "wevm_eps_2": 1074923015.0
+        },
+        "winners_pop": 494419.0,
+        "losers_pop": 0.0,
+        "units_floored": 395
+      },
+      "child_benefit_up": {
+        "type": "const_scale",
+        "note": "Greek child benefit (A21) tier amounts, +25%.",
+        "overwrites": {
+          "$bch_amt1|": "87.5#m",
+          "$bch_amt2|": "175#m"
+        },
+        "skipped": [],
+        "weighted_dispy_delta_eur_yr": 394750279.0,
+        "sign": "+",
+        "expected_sign": "+",
+        "sign_match": true,
+        "households_changed": 798,
+        "wevm": {
+          "wevm_eps_0": 394750279.0,
+          "wevm_eps_0.5": 447275910.0,
+          "wevm_eps_1": 516035671.0,
+          "wevm_eps_1.5": 605027383.0,
+          "wevm_eps_2": 719418344.0
+        },
+        "winners_pop": 1360862.0,
+        "losers_pop": 35922.0,
+        "units_floored": 395
+      },
+      "pit_give": {
+        "type": "rate_delta",
+        "note": "Substitution: a uniform tax-free-allowance constant is not exposed; -2pp on the first income-tax bracket rate instead.",
+        "overwrites": {
+          "$tin00_rate1|": "0.07"
+        },
+        "skipped": [],
+        "weighted_dispy_delta_eur_yr": 707482865.0,
+        "sign": "+",
+        "expected_sign": "+",
+        "sign_match": true,
+        "households_changed": 1864,
+        "wevm": {
+          "wevm_eps_0": 707482865.0,
+          "wevm_eps_0.5": 605657444.0,
+          "wevm_eps_1": 530896927.0,
+          "wevm_eps_1.5": 477106946.0,
+          "wevm_eps_2": 440032741.0
+        },
+        "winners_pop": 2758864.0,
+        "losers_pop": 0.0,
+        "units_floored": 395
+      },
+      "gdp_shock": {
+        "type": "income_scale",
+        "note": "-3% to employment and self-employment market income.",
+        "weighted_dispy_delta_eur_yr": -876024436.0,
+        "sign": "-",
+        "expected_sign": "-",
+        "sign_match": true,
+        "households_changed": 2156,
+        "wevm": {
+          "wevm_eps_0": -876024436.0,
+          "wevm_eps_0.5": -760547018.0,
+          "wevm_eps_1": -682539603.0,
+          "wevm_eps_1.5": -634817859.0,
+          "wevm_eps_2": -613023063.0
+        },
+        "winners_pop": 80086.0,
+        "losers_pop": 2420504.0,
+        "units_floored": 395
+      },
+      "unemployment_shock": {
+        "type": "unemployment",
+        "note": "+3pp unemployment rate: employed (les 2,3) flipped to unemployed (les 5), earnings zeroed, benefits recompute.",
+        "labour_force": 3466,
+        "flipped": 104,
+        "unemployed_before": 58,
+        "unemployed_after": 162,
+        "weighted_dispy_delta_eur_yr": -1078826865.0,
+        "sign": "-",
+        "expected_sign": "-",
+        "sign_match": true,
+        "households_changed": 84,
+        "wevm": {
+          "wevm_eps_0": -1078826865.0,
+          "wevm_eps_0.5": -916413359.0,
+          "wevm_eps_1": -802950957.0,
+          "wevm_eps_1.5": -727275325.0,
+          "wevm_eps_2": -682136485.0
+        },
+        "winners_pop": 396.0,
+        "losers_pop": 82731.0,
+        "units_floored": 395
+      }
+    }
+  }
+}

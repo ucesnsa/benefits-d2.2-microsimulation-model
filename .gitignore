@@ -1,0 +1,57 @@
+# BENEFITS D2.2 — Microsimulation. Single root ignore.
+# NO MICRODATA IN THIS TREE. Real FRS (PolicyEngine) and EU-SILC (EUROMOD)
+# microdata are licensed and live OUTSIDE this repo, in the sibling ../LOCAL_ONLY.
+# This file is the backstop for any microdata a later local run regenerates in-tree.
+
+# ── Microdata and tabular data formats (regenerated locally; never committed) ──
+*.parquet
+*.csv
+*.dta
+*.sav
+
+# ── Keep the synthetic CI fixture and the aggregate WEVM tables (data-free) ──
+!uk/model/demo/per_unit_export.parquet
+!uk/docs/wevm_deciles_2023_24.csv
+!uk/docs/wevm_headline_2023_24.csv
+!uk/docs/wevm_takeup_sensitivity_eps1.csv
+
+# ── Licensed raw survey inputs and intermediates (belt-and-braces) ─────────
+**/FRS_data/**
+**/UDB_*
+**/inputs/**
+**/processed/**
+
+# ── Engine binaries and non-redistributed software ────────────────────────
+**/EM_Executable*
+*.dll
+
+# ── Retired artefacts, kept on disk and out of the repository ─────────────
+# Superseded tools and workbooks are moved here rather than deleted. This rule
+# lived only in .git/info/exclude, which is local to one clone and does not
+# travel: a fresh clone would have started tracking every retired file. Moved
+# here on 2026-08-01 so the rule is part of the repository it protects.
+_superseded/
+
+# ── Engine run logs (regenerated on every run; the evidence copy lives in docs) ──
+europe/logs/
+
+# ── Suite counts, written by check_browser.py on a clean four-tool run ────────
+# Read by the export stamper from the working tree so the published README cannot
+# misstate how many assertions ran. A per-run measurement, not evidence: regenerate
+# it by running the suite rather than carrying it.
+.suite_counts.json
+
+# ── Environments and caches ───────────────────────────────────────────────
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# ── Operating-system cruft ────────────────────────────────────────────────
+.DS_Store
+._*
+Thumbs.db
+
+# ── Generated audit table (audit_provider_params.py output) ──────────────
+PROVIDER_PARAM_AUDIT.md

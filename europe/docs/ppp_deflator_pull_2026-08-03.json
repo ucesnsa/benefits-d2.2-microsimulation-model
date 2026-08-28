@@ -1,0 +1,114 @@
+{
+ "what": "Source pull of the PPP factors and GDP deflators used by the provider layer.",
+ "why": "The factors were documented but never recomputed and never saved as a pull artefact. This file is that artefact.",
+ "extracted_utc": "2026-08-03T21:04:34+00:00",
+ "queries": {
+  "eurostat_deflator": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nama_10_gdp?format=JSON&lang=EN&na_item=B1GQ&unit=PD15_NAC&geo=ES&geo=IT&geo=EL&time=2023&time=2024",
+  "eurostat_ppp": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_ppp_ind?format=JSON&lang=EN&na_item=PPP_EU27_2020&ppp_cat=E011&time=2024&geo=ES&geo=IT&geo=EL&geo=UK",
+  "oecd_ppp": "https://sdmx.oecd.org/public/rest/data/OECD.SDD.NAD,DSD_NAMAIN10@DF_TABLE4,2.0/all?startPeriod=2024&endPeriod=2024&format=jsondata&dimensionAtObservation=AllDimensions"
+ },
+ "source_last_updated": {
+  "eurostat_nama_10_gdp": "2026-07-30T11:00:00+0200",
+  "eurostat_prc_ppp_ind": "2025-07-10T11:00:00+0200"
+ },
+ "tolerance": 0.0001,
+ "all_reproduce": true,
+ "comparisons": [
+  {
+   "factor": "deflator EL",
+   "computed": 1.032086,
+   "recorded": 1.0321,
+   "abs_diff": 1.43e-05,
+   "within_tolerance": true
+  },
+  {
+   "factor": "deflator ES",
+   "computed": 1.028926,
+   "recorded": 1.0289,
+   "abs_diff": 2.589e-05,
+   "within_tolerance": true
+  },
+  {
+   "factor": "deflator IT",
+   "computed": 1.01969,
+   "recorded": 1.0197,
+   "abs_diff": 1.041e-05,
+   "within_tolerance": true
+  },
+  {
+   "factor": "PPP ES->EL (euro area)",
+   "computed": 0.945687,
+   "recorded": 0.945687,
+   "abs_diff": 3.7e-07,
+   "within_tolerance": true
+  },
+  {
+   "factor": "PPP IT->EL (euro area)",
+   "computed": 0.88146,
+   "recorded": 0.88146,
+   "abs_diff": 4.1e-07,
+   "within_tolerance": true
+  },
+  {
+   "factor": "PPP IT->ES (euro area)",
+   "computed": 0.932084,
+   "recorded": 0.932084,
+   "abs_diff": 3.6e-07,
+   "within_tolerance": true
+  },
+  {
+   "factor": "PPP UK->ES (OECD fallback)",
+   "computed": 0.861941,
+   "recorded": 0.861941,
+   "abs_diff": 3.9e-07,
+   "within_tolerance": true
+  },
+  {
+   "factor": "PPP UK->EL (OECD fallback)",
+   "computed": 0.816996,
+   "recorded": 0.816996,
+   "abs_diff": 5e-08,
+   "within_tolerance": true
+  },
+  {
+   "factor": "PPP UK->IT (OECD fallback)",
+   "computed": 0.91566,
+   "recorded": 0.91566,
+   "abs_diff": 3e-07,
+   "within_tolerance": true
+  }
+ ],
+ "raw": {
+  "deflator_observations": {
+   "EL:2023": 113.789,
+   "EL:2024": 117.44,
+   "ES:2023": 120.342,
+   "ES:2024": 123.823,
+   "IT:2023": 117.778,
+   "IT:2024": 120.097
+  },
+  "eurostat_ppp_observations": {
+   "EL": 0.859557,
+   "ES": 0.908923,
+   "IT": 0.975151,
+   "UK": 1.05586
+  },
+  "oecd_ppp_observations": {
+   "GBR": 0.682739,
+   "ESP": 0.588481,
+   "ITA": 0.625157,
+   "GRC": 0.557795
+  },
+  "uk_in_eurostat_ppp": {
+   "present": true,
+   "value_2024": 1.05586,
+   "eurostat_native_uk_crossing": {
+    "ES": 0.860837,
+    "IT": 0.923561,
+    "EL": 0.814082
+   },
+   "note": "PROVIDER_TOOLREADY_2024.md justifies the OECD fallback by the UK's absence from this series. The UK is present. The recorded OECD factors still reproduce; only the stated reason is wrong."
+  }
+ },
+ "reverify": "py -3 europe/model/pull_ppp_deflators.py --check"
+}

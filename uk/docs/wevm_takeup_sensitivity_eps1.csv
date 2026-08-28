@@ -1,0 +1,16 @@
+scenario,takeup_0_55_eps1_m,takeup_0_731_eps1_m,rank_055,rank_0731
+raise_personal_allowance,9275.1,9177.6,1,1
+gdp_minus_3_plus_uc_boost,3184.1,5644.8,4,2
+uc_taper_45,4151.3,5585.3,3,3
+gdp_minus_3_plus_tax_cut,5414.4,5526.4,2,4
+uc_standard_up_10,2664.1,3527.9,5,5
+cb_remove_hicbc,1347.2,1340.4,6,6
+uc_work_allowance_up_20,934.7,1268.4,8,7
+cb_increase_10pct,1051.8,1026.6,7,8
+gdp_minus_1,-1260.8,-1192.8,9,9
+uc_standard_down_10,-2596.5,-3446.1,10,10
+gdp_minus_3,-3780.4,-3572.2,12,11
+uc_taper_65,-2948.2,-3962.2,11,12
+gdp_minus_5,-6445.4,-6110.4,13,13
+shock_3pp,-9489.7,-8978.9,14,14
+shock_5pp,-15636.1,-14770.1,15,15

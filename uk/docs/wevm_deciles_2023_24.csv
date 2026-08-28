@@ -1,0 +1,24 @@
+# Mean equivalent variation per benefit unit, GBP per year, FRS 2023-24.
+# Each cell is the weighted mean EV of the benefit units in that decile under that
+# scenario. These are per-unit means, not the GBP-million decile contributions.
+# Basis: epsilon = 0, so the Atkinson social weight is 1 throughout and no
+# distributional weighting is applied. This file carries the epsilon = 0 slice only.
+# Deciles: equal-weight deciles of equivalised baseline net income (OECD-modified
+# scale), working-age benefit units (at least one adult aged 18-64), decile 1 lowest.
+# To reach the GBP-million headline, multiply a column sum by the number of units in
+# one decile and divide by 1e6. That count is meta.population_basis.units_k, which is in thousands, x 1000 / 10 in
+# uk/outputs/dial_grid.json (21,443,494 / 10 = 2,144,349), so the factor is 2.1443494.
+# Cells are rounded to 0.1, which leaves a residual of up to 0.1 per cent against the
+# eps0 column of wevm_headline_2023_24.csv. The exact zero-residual decomposition is
+# the GBP-million one the surface carries, at every epsilon, in uk/outputs/dial_grid.json.
+decile,cb_increase_10pct,cb_remove_hicbc,gdp_minus_1,gdp_minus_3,gdp_minus_3_plus_tax_cut,gdp_minus_3_plus_uc_boost,gdp_minus_5,raise_personal_allowance,shock_3pp,shock_5pp,uc_standard_down_10,uc_standard_up_10,uc_taper_45,uc_taper_65,uc_work_allowance_up_20
+1,22.9,0.0,-0.7,-0.7,-0.7,594.5,-1.0,0.0,-1.0,-3.0,-184.8,188.3,31.3,-22.1,2.7
+2,45.0,0.0,-9.2,-17.3,39.6,615.3,-33.0,56.9,-56.6,-129.5,-227.5,231.5,99.7,-79.2,29.0
+3,67.9,0.0,-60.6,-87.8,139.2,469.9,-135.4,229.8,-207.1,-301.9,-243.9,240.7,332.2,-264.8,118.4
+4,64.5,14.7,-84.5,-282.9,93.4,205.1,-429.0,383.9,-569.4,-824.9,-189.6,202.3,506.2,-341.3,133.4
+5,63.2,33.3,-36.8,-159.9,325.6,202.3,-251.5,490.1,-359.8,-768.1,-145.3,152.0,475.9,-329.7,91.8
+6,56.4,74.3,-66.4,-179.6,444.4,39.9,-259.9,628.5,-493.8,-701.1,-86.0,90.1,390.8,-286.4,56.5
+7,39.8,127.7,-64.3,-193.3,572.0,-85.8,-521.5,769.2,-821.2,-1263.6,-40.6,43.1,229.0,-149.8,24.1
+8,28.6,208.6,-175.0,-487.9,407.2,-425.4,-719.1,904.3,-1040.1,-1398.3,-20.9,21.5,152.1,-83.5,10.9
+9,6.5,302.5,-75.7,-215.9,881.8,-195.1,-454.7,1101.4,-710.8,-1667.9,-8.2,8.7,88.8,-45.1,3.4
+10,0.3,287.0,-136.5,-643.1,512.4,-639.0,-1342.4,1163.2,-1761.9,-2819.1,-1.6,1.5,19.5,-17.1,0.0

@@ -1,0 +1,29 @@
+# BENEFITS D2.2 — Microsimulation. Repo-local attributes.
+
+# ── Notebook hygiene (unrelated to LFS) ────────────────────────────────────
+*.ipynb filter=nbstripout
+*.zpln  filter=nbstripout
+*.ipynb diff=ipynb
+
+# ── Data & binary artefacts: normal git blobs, NOT Git LFS ─────────────────
+# Explicit, self-contained rules that OVERRIDE any machine-global config
+# (e.g. ~/.gitattributes_global) which would otherwise route these through
+# Git LFS. This keeps the repo portable: a plain `git clone` or
+# `actions/checkout` (lfs: false) gets real file content, not LFS pointers.
+#   -filter -diff -merge  disables the lfs clean/smudge/diff/merge drivers
+#   -text                 disables EOL conversion (binary formats)
+*.parquet -filter -diff -merge -text
+*.xlsx    -filter -diff -merge -text
+*.pdf     -filter -diff -merge -text
+*.png     -filter -diff -merge -text
+*.jpg     -filter -diff -merge -text
+*.docx    -filter -diff -merge -text
+*.zip     -filter -diff -merge -text
+*.svg     -filter -diff -merge
+*.csv     -filter -diff -merge
+
+# Aggregate surfaces: preserve exact bytes (no EOL conversion)
+*.json -text
+
+# Shell scripts: always LF, so they run on macOS and Linux
+*.sh text eol=lf

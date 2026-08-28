@@ -1,0 +1,98 @@
+{
+  "country": "ES",
+  "surface": "europe/Spain/outputs/dial_grid.json",
+  "n_points": 65,
+  "nonfiscal_sha256": "d798695effa2ab8924e069bfbd7993d73e0047ffda0bfbc4c16540fafdd65883",
+  "fiscal_fields": [
+    "benefit_delta_m",
+    "income_tax_delta_m",
+    "net_exchequer_cost_m",
+    "net_income_delta_m",
+    "sic_delta_m",
+    "sic_employer_delta_m"
+  ],
+  "fiscal_shape_uniform": true,
+  "fiscal_shape_problems": [],
+  "fiscal_fields_present": true,
+  "missing_fiscal_points": [],
+  "exchequer_identity": {
+    "formula": "net_exchequer_cost_m = benefit_delta_m - income_tax_delta_m - sic_delta_m - sic_employer_delta_m",
+    "max_abs_residual": 0.0,
+    "worst_point": [
+      "gdp_shock",
+      -6
+    ],
+    "tolerance": 0.01,
+    "holds": true
+  },
+  "three_checks": {
+    "min_income_zero_tax_and_sic": true,
+    "pit_sic_zero": true,
+    "downturn_and_unemployment_sic_negative": true,
+    "benefit_only_zero_income_tax": true
+  },
+  "employer_contributions": {
+    "identically_zero_at_every_point": false,
+    "gated_as_known": false,
+    "passes": true,
+    "min": -16686.161,
+    "max": 0.0,
+    "note": "Employer contributions respond, as they must."
+  },
+  "min_income_lever": "income-floor top-up (recipients; eligibility held)",
+  "min_income_analytic": true,
+  "min_income_linearity": {
+    "checked": true,
+    "implied_baseline_outlay_m_per_point": [
+      [
+        5,
+        2479.26
+      ],
+      [
+        10,
+        2479.25
+      ],
+      [
+        15,
+        2479.253
+      ],
+      [
+        20,
+        2479.25
+      ],
+      [
+        25,
+        2479.252
+      ],
+      [
+        30,
+        2479.25
+      ],
+      [
+        35,
+        2479.251
+      ],
+      [
+        40,
+        2479.25
+      ],
+      [
+        45,
+        2479.251
+      ],
+      [
+        50,
+        2479.25
+      ]
+    ],
+    "constant_within_tol": true
+  },
+  "validate_grid": {
+    "exit_code": 0,
+    "status": "PASS",
+    "log": "europe/Spain/outputs/reemit_validate_grid.log"
+  },
+  "all_checks_pass": true,
+  "verified_utc": "2026-08-25T21:46:40Z",
+  "note": "Folder-reproducible proof. The fiscal values themselves are regenerated only by `produce` mode with the matched EUROMOD v3.8.6 engine + the gated UDB; this verify pass proves internal consistency + non-fiscal preservation from the committed surface alone."
+}

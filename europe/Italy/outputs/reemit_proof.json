@@ -1,0 +1,57 @@
+{
+  "country": "IT",
+  "surface": "europe/Italy/outputs/dial_grid.json",
+  "n_points": 65,
+  "nonfiscal_sha256": "c4e774a020080bf8f36e51d1c1956033504ffa51355f83eddcb6e6ba90b23683",
+  "fiscal_fields": [
+    "benefit_delta_m",
+    "income_tax_delta_m",
+    "net_exchequer_cost_m",
+    "net_income_delta_m",
+    "sic_delta_m",
+    "sic_employer_delta_m"
+  ],
+  "fiscal_shape_uniform": true,
+  "fiscal_shape_problems": [],
+  "fiscal_fields_present": true,
+  "missing_fiscal_points": [],
+  "exchequer_identity": {
+    "formula": "net_exchequer_cost_m = benefit_delta_m - income_tax_delta_m - sic_delta_m - sic_employer_delta_m",
+    "max_abs_residual": 0.0,
+    "worst_point": [
+      "gdp_shock",
+      -8
+    ],
+    "tolerance": 0.01,
+    "holds": true
+  },
+  "three_checks": {
+    "min_income_zero_tax_and_sic": true,
+    "pit_sic_zero": true,
+    "downturn_and_unemployment_sic_negative": true,
+    "benefit_only_zero_income_tax": true
+  },
+  "employer_contributions": {
+    "identically_zero_at_every_point": false,
+    "gated_as_known": false,
+    "passes": true,
+    "min": -18357.255,
+    "max": 0.0,
+    "note": "Employer contributions respond, as they must."
+  },
+  "min_income_lever": "base-amount scaling",
+  "min_income_analytic": false,
+  "min_income_linearity": {
+    "checked": false,
+    "implied_baseline_outlay_m_per_point": [],
+    "constant_within_tol": null
+  },
+  "validate_grid": {
+    "exit_code": 0,
+    "status": "PASS",
+    "log": "europe/Italy/outputs/reemit_validate_grid.log"
+  },
+  "all_checks_pass": true,
+  "verified_utc": "2026-08-25T21:46:40Z",
+  "note": "Folder-reproducible proof. The fiscal values themselves are regenerated only by `produce` mode with the matched EUROMOD v3.8.6 engine + the gated UDB; this verify pass proves internal consistency + non-fiscal preservation from the committed surface alone."
+}

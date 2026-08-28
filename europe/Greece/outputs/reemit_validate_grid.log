@@ -1,0 +1,36 @@
+Validating dial surface: europe/Greece/outputs/dial_grid.json
+
+[WARN] 1. Structure
+       country=EL  year=2023  baseline[baseline_net_income_bn]=92.2762  units[n_units_working_age_sample]=6546  takeup[None]=None
+       eps_grid=[0.0, 0.5, 1.0, 1.5, 2.0]
+       dials=['gdp_shock', 'pit_give', 'child_benefit_up', 'min_income_up', 'unemployment_shock']
+       deciles per point = 10
+       warn: meta: no take-up key (any of ('uc_takeup_rate', 'takeup_rate', 'takeup')); acceptable if the country has no take-up concept
+       warn: dial 'pit_give': 21 points (the UK design is 11)
+       warn: toggles: none present (acceptable only if this country defines no binary toggle)
+[PASS] 2. Epsilon dimension
+       full epsilon vector (length 5) stored and consistent at every point: [0.0, 0.5, 1.0, 1.5, 2.0]
+[PASS] 3. Baseline anchor
+       gdp_shock: PASS zero point m=0 is 0 at every epsilon
+       pit_give: PASS zero point m=0 is 0 at every epsilon
+       child_benefit_up: PASS zero point m=0 is 0 at every epsilon
+       min_income_up: PASS zero point m=0 is 0 at every epsilon
+       unemployment_shock: PASS zero point m=0 is 0 at every epsilon
+[PASS] 4. Monotonicity
+       gdp_shock: PASS increasing; range -3,958.7 -> 0.0 at eps=1.0
+       pit_give: PASS decreasing; range 1,788.5 -> -2,403.4 at eps=1.0
+       child_benefit_up: PASS increasing; range 0.0 -> 441.7 at eps=1.0
+       min_income_up: PASS increasing; range 0.0 -> 389.5 at eps=1.0
+       unemployment_shock: PASS decreasing; range 0.0 -> -5,005.8 at eps=1.0
+[PASS] 5. Decile sum consistency
+       deciles sum to the headline everywhere; max |diff| = 0.003000 (tol 0.01)
+       worst case: dial 'min_income_up' m=35 at eps=1.5 (sum 344.1170 vs wevm 344.1140)
+[PASS] 6. Epsilon response
+       epsilon is wired in (WEVM responds to epsilon). Per-dial gradients for eyeballing:
+       gdp_shock (m=-10): WEVM eps[0.0]=-5,036.1 -> eps[2.0]=-3,840.4  (gradient +1,195.6, rises with epsilon)
+       pit_give (m=-5): WEVM eps[0.0]=2,142.2 -> eps[2.0]=1,701.3  (gradient -440.9, falls with epsilon)
+       child_benefit_up (m=50): WEVM eps[0.0]=323.5 -> eps[2.0]=630.7  (gradient +307.2, rises with epsilon)
+       min_income_up (m=50): WEVM eps[0.0]=247.9 -> eps[2.0]=622.6  (gradient +374.7, rises with epsilon)
+       unemployment_shock (m=10): WEVM eps[0.0]=-6,298.8 -> eps[2.0]=-4,866.0  (gradient +1,432.8, rises with epsilon)
+
+OVERALL: PASS   (5 pass, 1 warn, 0 fail)
