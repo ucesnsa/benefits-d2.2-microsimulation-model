@@ -1,6 +1,6 @@
 # UK tool — quick-start guide
 
-*A plain-language card for anyone who just wants to use the tool and read the answer. (For the fuller analyst/methodology walk-through, see [the UK user guide](../../Documents/USER_GUIDE_UK_D2_2.pdf).)*
+*A plain-language card for anyone who just wants to use the tool and read the answer. (For the fuller analyst/methodology walk-through, see [the UK user guide](../../Documents/USER_GUIDE_UK_D2_2.docx).)*
 
 **What it is.** A one-page interactive tool for the UK: move a reform or a shock and instantly see **how much better or worse off households are**, **what it costs the public purse**, and **who gains and loses**. It reads pre-computed results (Family Resources Survey 2023-24) — it does **not** run a live model — and shows money in **2024 pounds**. Open `uk/tools/dial_tool_uk.html` in any web browser; nothing to install.
 

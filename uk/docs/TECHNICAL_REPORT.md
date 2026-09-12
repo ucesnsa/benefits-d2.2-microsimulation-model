@@ -3,7 +3,7 @@
 **Building Economic, Needs-Based and Environmental evaluation Frameworks for Inclusive Transformation of Social services in Europe (BENEFITS)**
 Horizon Europe grant agreement no. 101179032 · Work Package 2 · Deliverable D2.2
 
-This report documents the methodology of the D2.2 Microsimulation Valuation Tool — the beta of the BENEFITS Holistic Valuation Framework — and grounds every methodological decision in its justification and source. It is the reference document for the model, the welfare layer, and the provider valuation that the tool implements. The companion user guide (`Documents/USER_GUIDE_UK_D2_2.pdf`) covers operation; `METHODS.md` summarises reproduction; this report is the substantive defence of the numbers.
+This report documents the methodology of the D2.2 Microsimulation Valuation Tool — the beta of the BENEFITS Holistic Valuation Framework — and grounds every methodological decision in its justification and source. It is the reference document for the model, the welfare layer, and the provider valuation that the tool implements. The companion user guide (`Documents/USER_GUIDE_UK_D2_2.docx`) covers operation; `METHODS.md` summarises reproduction; this report is the substantive defence of the numbers.
 
 ---
 

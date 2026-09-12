@@ -43,7 +43,7 @@ needs neither: the surface is the aggregate result.
 
 ## Where to go next
 
-* **Method** — [`../../Documents/BENEFITS___D2_2_Tech_Report.pdf`](../../Documents/BENEFITS___D2_2_Tech_Report.pdf),
+* **Method** — [`../../Documents/BENEFITS_D2.2_Microsimulation_Tech_Report.docx`](../../Documents/BENEFITS_D2.2_Microsimulation_Tech_Report.docx),
   the D2.2 technical report, which covers all four country tools.
 * **A walkthrough** — [`../docs/QUICKSTART.md`](../docs/QUICKSTART.md), a plain-language card
   for reading the tool tab by tab.

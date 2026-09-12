@@ -83,8 +83,8 @@ additive and the tools never display them as such.
 * **No microdata.** The FRS and EU-SILC are licensed and held outside this repository. See
   *Data policy* below.
 * **No engines.** PolicyEngine and EUROMOD are open source but are not redistributed here.
-* **The D2.2 technical report and the four country user guides are in `Documents/`**, as PDF
-  and as LaTeX source.
+* **The D2.2 technical report and the four country user guides are in `Documents/`**, as Word
+  documents.
 
 ---
 
@@ -142,7 +142,7 @@ requires none of the above.
 uk/            the UK tool, its surface, its model code and its own documentation
 europe/        Spain, Italy and Greece: tools, surfaces, model code, and the shared tool
                machinery (template.html + one country_<cc>.json per country)
-Documents/     the technical report and the four country user guides, PDF and source
+Documents/     the technical report and the four country user guides, as Word documents
 assets/        the EU emblem and project logos, with their usage rules
 *.py           the verification suite, run from the repository root
 ```
@@ -158,11 +158,11 @@ template by comparing a masked-block hash across them.
 
 | document | covers | where it goes | status |
 |---|---|---|---|
-| **D2.2 technical report** | all four tools | `Documents/BENEFITS___D2_2_Tech_Report.pdf` | present |
-| **D2.2 user guide, United Kingdom** | the UK tool | `Documents/USER_GUIDE_UK_D2_2.pdf` | present |
-| **D2.2 user guide, Spain** | the Spain tool | `Documents/USER_GUIDE_SPAIN_D2_2.pdf` | present |
-| **D2.2 user guide, Italy** | the Italy tool | `Documents/USER_GUIDE_ITALY_D2_2.pdf` | present |
-| **D2.2 user guide, Greece** | the Greece tool | `Documents/USER_GUIDE_Greece_D2_2.pdf` | present |
+| **D2.2 technical report** | all four tools | `Documents/BENEFITS_D2.2_Microsimulation_Tech_Report.docx` | present |
+| **D2.2 user guide, United Kingdom** | the UK tool | `Documents/USER_GUIDE_UK_D2_2.docx` | present |
+| **D2.2 user guide, Spain** | the Spain tool | `Documents/USER_GUIDE_SPAIN_D2_2.docx` | present |
+| **D2.2 user guide, Italy** | the Italy tool | `Documents/USER_GUIDE_ITALY_D2_2.docx` | present |
+| **D2.2 user guide, Greece** | the Greece tool | `Documents/USER_GUIDE_GREECE_D2_2.docx` | present |
 | UK edition technical report | the UK tool only | `uk/docs/TECHNICAL_REPORT.md` | present |
 | UK methods | the UK tool only | `uk/docs/METHODS.md` | present |
 | Quick starts | one per EU tool | `europe/{Spain,Italy,Greece}/docs/QUICKSTART.md` | present |

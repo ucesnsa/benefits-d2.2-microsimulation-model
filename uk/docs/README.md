@@ -10,19 +10,19 @@ Three CSVs, all FRS 2023-24 and all working-age benefit units:
 - [`wevm_deciles_2023_24.csv`](wevm_deciles_2023_24.csv) — **mean equivalent variation per benefit unit, in GBP per year**, by decile of equivalised baseline net income, at **epsilon = 0 only**. Per-unit means, so a column does not sum to the headline: multiply the sum by the units in one decile and divide by 1e6. The file's own header states this and carries that unit count, derived from the surface so it moves with it. The exact zero-residual decomposition in GBP millions, at every epsilon, is the one the surface carries in [`../outputs/dial_grid.json`](../outputs/dial_grid.json).
 - [`wevm_takeup_sensitivity_eps1.csv`](wevm_takeup_sensitivity_eps1.csv) — the same headline at epsilon = 1 under the two UC take-up rates, the PolicyEngine default 0.55 and the calibrated 0.731, with each scenario's rank under both.
 
-**`TECHNICAL_REPORT.md` here is the UK-tool report.** It covers this tool only. The programme-level D2.2 technical report, which covers all four tools, is the PDF at [`../../Documents/BENEFITS___D2_2_Tech_Report.pdf`](../../Documents/BENEFITS___D2_2_Tech_Report.pdf). The two share a name at different levels; this one is UK-specific.
+**`TECHNICAL_REPORT.md` here is the UK-tool report.** It covers this tool only. The programme-level D2.2 technical report, which covers all four tools, is the Word document at [`../../Documents/BENEFITS_D2.2_Microsimulation_Tech_Report.docx`](../../Documents/BENEFITS_D2.2_Microsimulation_Tech_Report.docx). The two share a name at different levels; this one is UK-specific.
 
 Repository guide: [../../README.md](../../README.md).
 
 ## What is current
 
-The current UK user guide is the PDF at [`../../Documents/USER_GUIDE_UK_D2_2.pdf`](../../Documents/USER_GUIDE_UK_D2_2.pdf).
+The current UK user guide is the Word document at [`../../Documents/USER_GUIDE_UK_D2_2.docx`](../../Documents/USER_GUIDE_UK_D2_2.docx).
 
 `METHODS.md` and `QUICKSTART.md` are current.
 
 ## PDFs: not current, and how to rebuild them
 
-`USER_GUIDE.pdf`, `METHODS.pdf` and `TECHNICAL_REPORT.pdf`, and the three `.tex` files they render, do not ship with this repository: they sit in the local-only `_superseded/` archive, which is untracked, and their prose does not match the Markdown in this directory. The Markdown is the source. The current documents are that Markdown and the PDFs in [`../../Documents/`](../../Documents/).
+`USER_GUIDE.pdf`, `METHODS.pdf` and `TECHNICAL_REPORT.pdf`, and the three `.tex` files they render, do not ship with this repository: they sit in the local-only `_superseded/` archive, which is untracked, and their prose does not match the Markdown in this directory. The Markdown is the source. The current documents are that Markdown and the Word documents in [`../../Documents/`](../../Documents/).
 
 The build chain is **Markdown → pandoc → LaTeX → pdflatex → PDF**.
 
