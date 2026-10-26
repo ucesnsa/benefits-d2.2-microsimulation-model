@@ -1,0 +1,783 @@
+{
+ "code": "LU",
+ "name": "Luxembourg",
+ "lang": "en",
+ "locale": "en-GB",
+ "currency": {
+  "symbol": "€",
+  "code": "EUR"
+ },
+ "title": "BENEFITS provider tool: Luxembourg",
+ "deflator": 1,
+ "income_basis": "derived",
+ "income_year": "2024",
+ "wave_label": "No microsimulation for this country: extra income estimated from national minimum-income outlays (EUROMOD external statistics and named national sources) and Eurostat income deciles",
+ "wellby_spine": {
+  "value": 20508,
+  "label": "EUR 20,508 (HM Treasury's GBP 13,000 per WELLBY at 2019 prices, applied as GBP 16,300 at 2024 prices, converted at household-consumption PPP)",
+  "provenance": "borrowed_adjusted",
+  "provenance_note": "HM Treasury (2021) Wellbeing Guidance for Appraisal, GBP 13,000 per WELLBY at 2019 prices (low 10,000, high 16,000), applied as GBP 16,300 (12,540 / 20,064) at 2024 prices by HM Treasury's own uprating method, converted at EUR 1.2581 per GBP (Eurostat prc_ppp_ind, E011 household final consumption, 2024). A transfer, flagged as such."
+ },
+ "labels": {
+  "mi_10": "Minimum income (REVIS) +10%, estimated",
+  "mi_25": "Minimum income (REVIS) +25%, estimated",
+  "mi_50": "Minimum income (REVIS) +50%, estimated"
+ },
+ "profiles": {
+  "Lowest incomes (deciles 1-3)": [
+   0,
+   1,
+   2
+  ],
+  "Low-to-middle (deciles 4-6)": [
+   3,
+   4,
+   5
+  ],
+  "Broad mix (all deciles)": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "provider_default": "Employment support",
+ "reference_default": "mi_25",
+ "unit_noun": "households",
+ "unit_noun_singular": "household",
+ "capacity_caveat": "The capacity and shock model is INDICATIVE: demand elasticities and staff ratios are mostly UK register values, and the share of households losing an earner is the UK model's own share applied to Luxembourg's working-age households. It is not calibrated to Luxembourg.",
+ "analyst_price_base": "2024 prices",
+ "provenance": "No microsimulation for Luxembourg: the income effect is estimated from the national minimum-income outlay and Eurostat income deciles, and household counts, price levels and labour costs are Eurostat database tables (nama_10_gdp, prc_ppp_ind, lc_lci_lev, lfst_hhnhtych, demo_pjan, ilc_di01, ilc_lvps02), retrieved September 2026. Provider values are per person served, in EUR at 2024 prices. Every value carries its source and a grade in its own note; a value borrowed from another country is marked.",
+ "data": {
+  "services": [
+   {
+    "name": "Employment support",
+    "elastLow": 0.8,
+    "elastCentral": 1.0,
+    "elastHigh": 1.2,
+    "unitCost": 2315,
+    "staffRatio": 120,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "elastCentral": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "elastHigh": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 2,315, converted from the UK tool's unit cost for Jobcentre Plus work coaching, GBP 1,200 per participant, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Luxembourg EUR 58.30 an hour; UK GBP 30.2165), ratio 1.929409. No verified Luxembourg figure for this unit was found. CONVERSION: GBP 1200 x 1.92940943. PRICE BASE: 2024-equivalent. Unit: one participant in an employment-support episode."
+    },
+    "flag": "Unit: one participant in an employment-support episode. Outcome value: borrowed from another country without adjustment. +0.46 WELLBY for a move from unemployment into work (Clark et al. 2018, the Britain fixed-effects coefficient HM Treasury's guidance uses), valued at the WELLBY value for Luxembourg, then staged as in the UK tool: effect 0.11 / 0.30 / 0.46 x attribution 0.20 / 0.22 / 0.27. European trial evidence (Card, Kluve and Weber 2018) puts job-search assistance impacts at 1 to 2 percentage points, which suggests the staged central may be high. ORIGIN 16300 FACTOR 0.5787401739; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0.5787401739 AND 0.5787401739; STAGE EFFECT 0.11 0.3 0.46 ATTRIBUTION 0.2 0.22 0.27; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Minimum income (REVIS) casework",
+    "elastLow": 0.3,
+    "elastCentral": 0.55,
+    "elastHigh": 1.0,
+    "unitCost": 772,
+    "staffRatio": 200,
+    "provenance": {
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "elastCentral": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "elastHigh": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 772, converted from the UK tool's unit cost for benefit claim support, GBP 400 per claim, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Luxembourg EUR 58.30 an hour; UK GBP 30.2165), ratio 1.929409. No verified Luxembourg figure for this unit was found. CONVERSION: GBP 400 x 1.92940943. PRICE BASE: 2024-equivalent. Unit: one claim supported."
+    },
+    "flag": "Unit: one claim supported. Outcome value: borrowed from another country with a stated adjustment. Income effect: the extra-income figure. Health-service use avoided: Liverpool Citizens Advice on Prescription (SSM Population Health 2025), an instrumental-variable study on linked NHS records: GBP 91 per person a year (95% CI 44 to 107) at 2023 prices, an impact, so attribution 1.0. The saving is per household member; the central counts the client only, the high counts every member (20,773 members of 8,205 client households). Uprated to 2024-25 on ONS L8GG and converted at household-consumption PPP (Eurostat, 2024). The advice covered benefits, debt and housing together. ORIGIN 91 FACTOR 1.3075151222; BAND ORIGIN 44 AND 230.3891529555; BAND FACTOR 1.3075151222 AND 1.3075151222; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Food aid / food banks",
+    "elastLow": 0.1,
+    "elastCentral": 0.25,
+    "elastHigh": 0.5,
+    "unitCost": 289,
+    "staffRatio": 250,
+    "provenance": {
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "elastCentral": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "elastHigh": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 289, converted from the UK tool's unit cost for food banks, GBP 150 per recipient, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Luxembourg EUR 58.30 an hour; UK GBP 30.2165), ratio 1.929409. No verified Luxembourg figure for this unit was found. CONVERSION: GBP 150 x 1.92940943. PRICE BASE: 2024-equivalent. Unit: one recipient for a year."
+    },
+    "flag": "Unit: one recipient for a year. Outcome value: an assumption. Excluded for every country: no robust per-person effect exists. Randomised evidence shows small effects on food insecurity (for example Briefel et al., -2.8 points) and none on wellbeing; the Greek DIATROFI school-meal trial is a different service. The tool shows the income effect only, as a floor."
+   },
+   {
+    "name": "Debt advice",
+    "elastLow": 0.5,
+    "elastCentral": 0.8,
+    "elastHigh": 1.2,
+    "unitCost": 965,
+    "staffRatio": 100,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "elastCentral": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "elastHigh": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 965, converted from the UK tool's unit cost for debt advice, GBP 500 per case, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Luxembourg EUR 58.30 an hour; UK GBP 30.2165), ratio 1.929409. No verified Luxembourg figure for this unit was found. CONVERSION: GBP 500 x 1.92940943. PRICE BASE: 2024-equivalent. Unit: one advice case."
+    },
+    "flag": "Unit: one advice case. Outcome value: borrowed from another country without adjustment. Being in arrears lowers life satisfaction by 0.355 points (FCA / Simetrica-Jacobs 2020, individual fixed effects). Central: advice moves 10 percentage points more clients out of unmanageable debt than no advice (Money Advice Service / YouGov 2012: 25% against 15%), an impact, so attribution 1.0: 0.355 x 0.10 WELLBY. Low: zero, because the only randomised trial (Pleasence and Balmer 2007) cannot rule it out. High: the UK tool's high. ORIGIN 16300 FACTOR 0.4466364385; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 0.6290654064; STAGE EFFECT 0 0.1 0.63 ATTRIBUTION 1 1 0.5; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Talking therapies",
+    "elastLow": 0.3,
+    "elastCentral": 0.6,
+    "elastHigh": 0.9,
+    "unitCost": 1105,
+    "staffRatio": 50,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "national_source"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "elastCentral": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "elastHigh": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 1,105: EUR 162.92 (session tariff x 7), Caisse nationale de santé (CNS) (2026), Nomenclature des actes et services des psychothérapeutes, tarifs au 01.06.2026; brought from 2026 (taken at 2025 prices, the last published deflator year) to 2024 on Luxembourg's GDP deflator (Eurostat nama_10_gdp). CONVERSION: EUR 1140.44 x 0.96882323. PRICE BASE: 2024-equivalent. Unit: one course of treatment."
+    },
+    "flag": "Unit: one course of treatment. Outcome value: borrowed from another country without adjustment. Central: 0.06 QALY per patient from adding transdiagnostic group CBT to usual primary care in Spain (the PsicAP randomised trial; abstract), converted at HM Treasury's 7 WELLBYs per QALY = 0.42 WELLBY, an impact, so attribution 1.0. Low: zero (German and Swedish trials found no QALY difference). High: the UK tool's high for NHS Talking Therapies (1.5 x 0.6 x 0.61 WELLBY). Nordic studies find no net saving from reduced sick leave, so no cost-avoided value is added. ORIGIN 16300 FACTOR 0.5284149414; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 1.8871962192; STAGE EFFECT 0 1 0.6 ATTRIBUTION 1 1 0.61; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Housing / homelessness",
+    "elastLow": 0.3,
+    "elastCentral": 0.5,
+    "elastHigh": 0.8,
+    "unitCost": 16329,
+    "staffRatio": 30,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "elastCentral": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "elastHigh": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 16,329, converted from Greater Manchester Combined Authority (Research Team), citing MHCLG 2024 (2025), Unit Cost Database v3.0 (November 2025), GBP 7,737 at 2022 prices, uprated to GBP 8,463 on ONS L8GG. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Luxembourg EUR 58.30 an hour; UK GBP 30.2165), ratio 1.929409. No verified Luxembourg figure for this unit was found. CONVERSION: GBP 8463.031253 x 1.92940943. PRICE BASE: 2024-equivalent. Unit: one homeless person supported for a year."
+    },
+    "flag": "Unit: one homeless person supported for a year. Outcome value: borrowed from another country with a stated adjustment. A year of homelessness costs the public EUR 33,955 per person (the UK tool's GBP 26,988 (Crisis 2015, a derived 12-month rough-sleeper vignette, uprated) converted at household-consumption PPP (Eurostat, 2024); no Luxembourg cost of homelessness was found). Share avoided by a year of housing support: central 0.407 (Spain, Hábitat randomised trial: EUR 470.97 of EUR 1,157.84 a month), high 0.438 (France, Un chez-soi d'abord randomised trial, on a consistent cost basis), both impacts, so attribution 1.0; low 0.112, the UK tool's central (0.20 x 0.562), whose effect share is an assumption. ORIGIN 33954.8118150134 FACTOR 1; BAND ORIGIN 33954.8118150134 AND 33954.8118150134; BAND FACTOR 1 AND 1; STAGE EFFECT 0.112 0.407 0.438 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Children's social care",
+    "elastLow": 0.15,
+    "elastCentral": 0.3,
+    "elastHigh": 0.5,
+    "unitCost": 21156,
+    "staffRatio": 15,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "elastCentral": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "elastHigh": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 21,156, converted from Home Office (2021) GBP 8,640 per child in need per year at 2018/19 prices, uprated to GBP 10,965 (the UK tool's figure). Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Luxembourg EUR 58.30 an hour; UK GBP 30.2165), ratio 1.929409. No verified Luxembourg figure for this unit was found. CONVERSION: GBP 10965 x 1.92940943. PRICE BASE: 2024-equivalent. Unit: one child supported at home for a year."
+    },
+    "flag": "Unit: one child supported at home for a year. Outcome value: borrowed from another country with a stated adjustment. A year of out-of-home care costs EUR 183,846 per child (GMCA (2025), Unit Cost Database v3.0 (November 2025), GBP 91,687 per looked-after child a year at 2023 prices, uprated to GBP 95,286 and converted on labour cost in health and social work (ratio 1.9294); no verified Luxembourg figure was found). Reduction in the chance of a residential placement: central 0.056 (Italy, P.I.P.P.I. against a comparison group, residential placements only: 6.4% against 0.8%), high 0.119 (the same, counting day foster care too), low zero (Al et al. 2012 meta-analysis: intensive family preservation generally does not prevent placement). One year of placement avoided is counted, which is conservative. The sensitivity row is the UK tool's route: the lifetime cost of a maltreatment case (Bocconi 2013, Italy) x 0.086. ORIGIN 183845.5325712782 FACTOR 1; BAND ORIGIN 183845.5325712782 AND 183845.5325712782; BAND FACTOR 1 AND 1; STAGE EFFECT 0 0.056 0.119 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Domestic abuse / GBV",
+    "elastLow": 0.2,
+    "elastCentral": 0.4,
+    "elastHigh": 0.6,
+    "unitCost": 4824,
+    "staffRatio": 25,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 4,824, converted from the UK tool's unit cost for domestic abuse services, GBP 2,500 per case, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Luxembourg EUR 58.30 an hour; UK GBP 30.2165), ratio 1.929409. No verified Luxembourg figure for this unit was found. CONVERSION: GBP 2500 x 1.92940943. PRICE BASE: 2024-equivalent. Unit: one victim supported."
+    },
+    "flag": "Unit: one victim supported. Outcome value: borrowed from another country with a stated adjustment. Tangible cost of intimate-partner violence per victim a year: EUR 3,401 (the mean of the Spanish and Italian national figures (tangible costs per victim of partner violence, from victim surveys), each uprated to 2024 and converted at household-consumption PPP; the EIGE per-country table is not used because it scales the UK cost by population). Effect and attribution as in the UK tool (0.24 x 0.5417: advocacy reduces physical abuse, odds ratio 0.43, Ramsay et al. 2009). Pain and suffering are shown as a sensitivity, not added, as settled decision 8 does for Spain. ORIGIN 3400.9044176807 FACTOR 1; BAND ORIGIN 3400.9044176807 AND 3400.9044176807; BAND FACTOR 1 AND 1; STAGE EFFECT 0.24 0.24 0.24 ATTRIBUTION 0.5416667 0.5416667 0.5416667; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Drug & alcohol treatment",
+    "elastLow": 0.15,
+    "elastCentral": 0.3,
+    "elastHigh": 0.5,
+    "unitCost": 8659,
+    "staffRatio": 30,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 8,659, converted from National Audit Office (2010) GBP 3,000 per person in effective drug treatment at 2008-09 prices, uprated to GBP 4,488 (the UK tool's figure). Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Luxembourg EUR 58.30 an hour; UK GBP 30.2165), ratio 1.929409. No verified Luxembourg figure for this unit was found. CONVERSION: GBP 4488 x 1.92940943. PRICE BASE: 2024-equivalent. Unit: one client for a treatment year."
+    },
+    "flag": "Unit: one client for a treatment year. Outcome value: borrowed from another country without adjustment. Value of a statistical life for Luxembourg: EUR 19,224,187 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 0.266 (UNODC (2025), World Drug Report 2025, Statistical Annex 5.1: Treatment by primary drug of use: 82 / 308 = 0.266. It counts people starting treatment in the year, so it understates the opioid share of a year's caseload: a lower bound). Non-opioid clients carry no averted-death value in these figures. ORIGIN 19224187.3123773597 FACTOR 0.0057057; BAND ORIGIN 16020156.0936478004 AND 22428218.5311069228; BAND FACTOR 0.001729 AND 0.0065968; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "GP consultation",
+    "elastLow": 0.2,
+    "elastCentral": 0.25,
+    "elastHigh": 0.3,
+    "unitCost": 59,
+    "staffRatio": 300,
+    "provenance": {
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "national_source"
+    },
+    "provenance_note": {
+     "elastLow": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "elastCentral": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "elastHigh": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 59: EUR 61.00 (national tariff per consultation), Caisse nationale de santé (CNS) (2026), Version coordonnée au 01.01.2026 de la nomenclature des actes et services des médecins; brought from 2025 to 2024 on Luxembourg's GDP deflator (Eurostat nama_10_gdp). CONVERSION: EUR 61.0 x 0.96882323. PRICE BASE: 2024-equivalent. Unit: one consultation."
+    },
+    "flag": "Unit: one consultation. Outcome value: an assumption. Valued only at its cost: no defensible value per additional consultation was found (searched, none found)."
+   },
+   {
+    "name": "Opioid substitution treatment (OST)",
+    "elastLow": 0.15,
+    "elastCentral": 0.3,
+    "elastHigh": 0.5,
+    "unitCost": 4501,
+    "staffRatio": 30,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 4,501 per patient-year, the Spanish national figure of EUR 2,100 (a Spanish national figure: methadone at EUR 4 a day excluding medication, a 2004 observation, annualised on 365 days and uprated by 1.438347 to EUR 5.75 a day, EUR 2,098.75 a year, recorded as EUR 2,100 (the D2.2 Spain tool's figure; PROVIDER_TOOLREADY_2024.md, drug and alcohol table)) scaled by the ratio of labour costs in health and social work, Luxembourg to Spain, 2.143382 (Eurostat lc_lci_lev, NACE Q, 2023), as the D2.2 Italy and Greece tools do. CONVERSION: EUR 2100.0 x 2.14338235. PRICE BASE: 2024-equivalent. Unit: one patient for a year."
+    },
+    "flag": "Unit: one patient for a year. Outcome value: borrowed from another country without adjustment. Value of a statistical life for Luxembourg: EUR 19,224,187 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 1.000 (every OST patient is an opioid client). Non-opioid clients carry no averted-death value in these figures. ORIGIN 19224187.3123773597 FACTOR 0.02145; BAND ORIGIN 16020156.0936478004 AND 22428218.5311069228; BAND FACTOR 0.0065 AND 0.0248; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   }
+  ],
+  "outcomes": {
+   "Employment support": {
+    "wbL": 159.66,
+    "wbC": 622.61,
+    "wbH": 1442.19,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Move into employment (wellbeing)",
+      "method": "WELLBY",
+      "conf": "MODERATE",
+      "valC": 622.61
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "+0.46 WELLBY for a move from unemployment into work (Clark et al. 2018, the Britain fixed-effects coefficient HM Treasury's guidance uses), valued at the WELLBY value for Luxembourg, then staged as in the UK tool: effect 0.11 / 0.30 / 0.46 x attribution 0.20 / 0.22 / 0.27. European trial evidence (Card, Kluve and Weber 2018) puts job-search assistance impacts at 1 to 2 percentage points, which suggests the staged central may be high. ORIGIN 16300 FACTOR 0.5787401739; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0.5787401739 AND 0.5787401739; STAGE EFFECT 0.11 0.3 0.46 ATTRIBUTION 0.2 0.22 0.27; PRICE BASE: 2024-equivalent."
+   },
+   "Minimum income (REVIS) casework": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 57.53,
+    "convC": 118.98,
+    "convH": 301.24,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Income effect",
+      "method": "ENGINE",
+      "conf": "WEAK",
+      "valC": 0
+     },
+     {
+      "outcome": "Health-service use avoided",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 118.98
+     }
+    ],
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "Income effect: the extra-income figure. Health-service use avoided: Liverpool Citizens Advice on Prescription (SSM Population Health 2025), an instrumental-variable study on linked NHS records: GBP 91 per person a year (95% CI 44 to 107) at 2023 prices, an impact, so attribution 1.0. The saving is per household member; the central counts the client only, the high counts every member (20,773 members of 8,205 client households). Uprated to 2024-25 on ONS L8GG and converted at household-consumption PPP (Eurostat, 2024). The advice covered benefits, debt and housing together. ORIGIN 91 FACTOR 1.3075151222; BAND ORIGIN 44 AND 230.3891529555; BAND FACTOR 1.3075151222 AND 1.3075151222; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "Food aid / food banks": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Food aid",
+      "method": "UNEVIDENCED-EXCLUDED",
+      "conf": "-",
+      "valC": 0
+     }
+    ],
+    "provenance": "assumption",
+    "provenance_note": "Excluded for every country: no robust per-person effect exists. Randomised evidence shows small effects on food insecurity (for example Briefel et al., -2.8 points) and none on wellbeing; the Greek DIATROFI school-meal trial is a different service. The tool shows the income effect only, as a floor."
+   },
+   "Debt advice": {
+    "wbL": 0,
+    "wbC": 728.02,
+    "wbH": 3975.79,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Debt advice (wellbeing)",
+      "method": "WELLBY",
+      "conf": "WEAK",
+      "valC": 728.02
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Being in arrears lowers life satisfaction by 0.355 points (FCA / Simetrica-Jacobs 2020, individual fixed effects). Central: advice moves 10 percentage points more clients out of unmanageable debt than no advice (Money Advice Service / YouGov 2012: 25% against 15%), an impact, so attribution 1.0: 0.355 x 0.10 WELLBY. Low: zero, because the only randomised trial (Pleasence and Balmer 2007) cannot rule it out. High: the UK tool's high. ORIGIN 16300 FACTOR 0.4466364385; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 0.6290654064; STAGE EFFECT 0 0.1 0.63 ATTRIBUTION 1 1 0.5; PRICE BASE: 2024-equivalent."
+   },
+   "Talking therapies": {
+    "wbL": 0,
+    "wbC": 8613.16,
+    "wbH": 13858.48,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Recovery from depression or anxiety (wellbeing)",
+      "method": "WELLBY",
+      "conf": "MODERATE",
+      "valC": 8613.16
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Central: 0.06 QALY per patient from adding transdiagnostic group CBT to usual primary care in Spain (the PsicAP randomised trial; abstract), converted at HM Treasury's 7 WELLBYs per QALY = 0.42 WELLBY, an impact, so attribution 1.0. Low: zero (German and Swedish trials found no QALY difference). High: the UK tool's high for NHS Talking Therapies (1.5 x 0.6 x 0.61 WELLBY). Nordic studies find no net saving from reduced sick leave, so no cost-avoided value is added. ORIGIN 16300 FACTOR 0.5284149414; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 1.8871962192; STAGE EFFECT 0 1 0.6 ATTRIBUTION 1 1 0.61; PRICE BASE: 2024-equivalent."
+   },
+   "Housing / homelessness": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 3802.94,
+    "convC": 13819.61,
+    "convH": 14872.21,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Public cost of homelessness avoided",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 13819.61
+     }
+    ],
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "A year of homelessness costs the public EUR 33,955 per person (the UK tool's GBP 26,988 (Crisis 2015, a derived 12-month rough-sleeper vignette, uprated) converted at household-consumption PPP (Eurostat, 2024); no Luxembourg cost of homelessness was found). Share avoided by a year of housing support: central 0.407 (Spain, Hábitat randomised trial: EUR 470.97 of EUR 1,157.84 a month), high 0.438 (France, Un chez-soi d'abord randomised trial, on a consistent cost basis), both impacts, so attribution 1.0; low 0.112, the UK tool's central (0.20 x 0.562), whose effect share is an assumption. ORIGIN 33954.8118150134 FACTOR 1; BAND ORIGIN 33954.8118150134 AND 33954.8118150134; BAND FACTOR 1 AND 1; STAGE EFFECT 0.112 0.407 0.438 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "Children's social care": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 0.0,
+    "convC": 10295.35,
+    "convH": 21877.62,
+    "sensC": 13082.05,
+    "rows": [
+     {
+      "outcome": "Out-of-home placement avoided",
+      "method": "CONVENTIONAL",
+      "conf": "WEAK",
+      "valC": 10295.35
+     },
+     {
+      "outcome": "Lifetime cost of maltreatment averted (not added)",
+      "method": "SENSITIVITY",
+      "conf": "WEAK",
+      "valC": 13082.05
+     }
+    ],
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "A year of out-of-home care costs EUR 183,846 per child (GMCA (2025), Unit Cost Database v3.0 (November 2025), GBP 91,687 per looked-after child a year at 2023 prices, uprated to GBP 95,286 and converted on labour cost in health and social work (ratio 1.9294); no verified Luxembourg figure was found). Reduction in the chance of a residential placement: central 0.056 (Italy, P.I.P.P.I. against a comparison group, residential placements only: 6.4% against 0.8%), high 0.119 (the same, counting day foster care too), low zero (Al et al. 2012 meta-analysis: intensive family preservation generally does not prevent placement). One year of placement avoided is counted, which is conservative. The sensitivity row is the UK tool's route: the lifetime cost of a maltreatment case (Bocconi 2013, Italy) x 0.086. ORIGIN 183845.5325712782 FACTOR 1; BAND ORIGIN 183845.5325712782 AND 183845.5325712782; BAND FACTOR 1 AND 1; STAGE EFFECT 0 0.056 0.119 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "Domestic abuse / GBV": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 442.12,
+    "convC": 442.12,
+    "convH": 442.12,
+    "sensC": 2248.35,
+    "rows": [
+     {
+      "outcome": "Abuse reduced (tangible costs avoided)",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 442.12
+     },
+     {
+      "outcome": "Including pain and suffering (not added)",
+      "method": "SENSITIVITY",
+      "conf": "WEAK",
+      "valC": 2248.35
+     }
+    ],
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "Tangible cost of intimate-partner violence per victim a year: EUR 3,401 (the mean of the Spanish and Italian national figures (tangible costs per victim of partner violence, from victim surveys), each uprated to 2024 and converted at household-consumption PPP; the EIGE per-country table is not used because it scales the UK cost by population). Effect and attribution as in the UK tool (0.24 x 0.5417: advocacy reduces physical abuse, odds ratio 0.43, Ramsay et al. 2009). Pain and suffering are shown as a sensitivity, not added, as settled decision 8 does for Spain. ORIGIN 3400.9044176807 FACTOR 1; BAND ORIGIN 3400.9044176807 AND 3400.9044176807; BAND FACTOR 1 AND 1; STAGE EFFECT 0.24 0.24 0.24 ATTRIBUTION 0.5416667 0.5416667 0.5416667; PRICE BASE: 2024-equivalent."
+   },
+   "Drug & alcohol treatment": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 27698.85,
+    "convC": 109687.45,
+    "convH": 147954.47,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Deaths averted (opioid clients)",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 109687.45
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Value of a statistical life for Luxembourg: EUR 19,224,187 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 0.266 (UNODC (2025), World Drug Report 2025, Statistical Annex 5.1: Treatment by primary drug of use: 82 / 308 = 0.266. It counts people starting treatment in the year, so it understates the opioid share of a year's caseload: a lower bound). Non-opioid clients carry no averted-death value in these figures. ORIGIN 19224187.3123773597 FACTOR 0.0057057; BAND ORIGIN 16020156.0936478004 AND 22428218.5311069228; BAND FACTOR 0.001729 AND 0.0065968; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "GP consultation": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "GP consultation",
+      "method": "COST-INPUT",
+      "conf": "COST-INPUT",
+      "valC": 0
+     }
+    ],
+    "provenance": "assumption",
+    "provenance_note": "Valued only at its cost: no defensible value per additional consultation was found (searched, none found)."
+   },
+   "Opioid substitution treatment (OST)": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 104131.01,
+    "convC": 412358.82,
+    "convH": 556219.82,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Deaths averted (opioid clients)",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 412358.82
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Value of a statistical life for Luxembourg: EUR 19,224,187 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 1.000 (every OST patient is an opioid client). Non-opioid clients carry no averted-death value in these figures. ORIGIN 19224187.3123773597 FACTOR 0.02145; BAND ORIGIN 16020156.0936478004 AND 22428218.5311069228; BAND FACTOR 0.0065 AND 0.0248; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   }
+  },
+  "deciles": {
+   "mi_10": [
+    [
+     12.9036,
+     3.7524,
+     1.4461,
+     1.0601,
+     0.8062,
+     0.1526,
+     0.044,
+     0.037,
+     0.003,
+     0.0
+    ],
+    [
+     16.6584,
+     4.7701,
+     1.6985,
+     1.1656,
+     0.8318,
+     0.1471,
+     0.0395,
+     0.0307,
+     0.0023,
+     0.0
+    ],
+    [
+     21.5059,
+     6.0661,
+     1.9958,
+     1.2822,
+     0.8585,
+     0.1418,
+     0.0355,
+     0.0256,
+     0.0017,
+     0.0
+    ],
+    [
+     27.7641,
+     7.7171,
+     2.3459,
+     1.4108,
+     0.8864,
+     0.1368,
+     0.0319,
+     0.0213,
+     0.0013,
+     0.0
+    ],
+    [
+     35.8432,
+     9.8211,
+     2.7586,
+     1.5529,
+     0.9154,
+     0.132,
+     0.0287,
+     0.0177,
+     0.001,
+     0.0
+    ]
+   ],
+   "mi_25": [
+    [
+     32.4522,
+     9.2753,
+     3.5819,
+     2.615,
+     2.0089,
+     0.3797,
+     0.1043,
+     0.0922,
+     0.0031,
+     0.0
+    ],
+    [
+     41.8956,
+     11.7909,
+     4.2071,
+     2.8754,
+     2.0726,
+     0.3659,
+     0.0937,
+     0.0767,
+     0.0023,
+     0.0
+    ],
+    [
+     54.087,
+     14.9945,
+     4.9433,
+     3.1629,
+     2.1391,
+     0.3528,
+     0.0842,
+     0.0639,
+     0.0017,
+     0.0
+    ],
+    [
+     69.826,
+     19.0756,
+     5.8106,
+     3.4802,
+     2.2085,
+     0.3403,
+     0.0757,
+     0.0532,
+     0.0013,
+     0.0
+    ],
+    [
+     90.145,
+     24.2763,
+     6.8327,
+     3.8308,
+     2.2809,
+     0.3284,
+     0.068,
+     0.0443,
+     0.001,
+     0.0
+    ]
+   ],
+   "mi_50": [
+    [
+     65.5248,
+     18.0936,
+     7.1211,
+     5.154,
+     3.9802,
+     0.7783,
+     0.185,
+     0.1845,
+     0.0033,
+     0.0
+    ],
+    [
+     84.5921,
+     23.0008,
+     8.3641,
+     5.6673,
+     4.1065,
+     0.7502,
+     0.1662,
+     0.1535,
+     0.0025,
+     0.0
+    ],
+    [
+     109.2079,
+     29.2501,
+     9.8278,
+     6.2339,
+     4.2383,
+     0.7233,
+     0.1494,
+     0.1277,
+     0.0019,
+     0.0
+    ],
+    [
+     140.9868,
+     37.2112,
+     11.5521,
+     6.8594,
+     4.3757,
+     0.6977,
+     0.1343,
+     0.1064,
+     0.0014,
+     0.0
+    ],
+    [
+     182.0132,
+     47.3564,
+     13.5842,
+     7.5503,
+     4.5192,
+     0.6733,
+     0.1208,
+     0.0886,
+     0.0011,
+     0.0
+    ]
+   ]
+  },
+  "sc15": [
+   "mi_10",
+   "mi_25",
+   "mi_50"
+  ],
+  "epsGrid": [
+   0,
+   0.5,
+   1,
+   1.5,
+   2
+  ],
+  "bu": 0.2795,
+  "shockInterp": {
+   "du3": 3,
+   "du5": 5,
+   "aff3": 4.8,
+   "aff5": 8.0,
+   "provenance": {
+    "du3": "borrowed_adjusted",
+    "du5": "borrowed_adjusted",
+    "aff3": "borrowed_adjusted",
+    "aff5": "borrowed_adjusted"
+   },
+   "provenance_note": {
+    "du3": "The shock sizes are the UK model's computed points (3 and 5 percentage points); there is no model for Luxembourg.",
+    "du5": "The shock sizes are the UK model's computed points (3 and 5 percentage points); there is no model for Luxembourg.",
+    "aff3": "The UK's modelled share of working-age units whose employment income falls at 3pp (2.176418%), applied to Luxembourg's working-age households: 284 thousand households x 0.7712 working-age share (EU-SILC ilc_lvps02, 2024: households other than one adult aged 65+ or two adults with one aged 65+, a lower bound) = 4.8 thousand.",
+    "aff5": "The same at 5pp (3.649125%): 8.0 thousand."
+   }
+  },
+  "scenarios": []
+ },
+ "grid": {
+  "meta": {
+   "eps_grid": [
+    0,
+    0.5,
+    1,
+    1.5,
+    2
+   ],
+   "population_basis": {
+    "scope": "all_households",
+    "includes": "Every private household (Eurostat).",
+    "excludes": "Nothing.",
+    "units_k": 279.5,
+    "population_k": 660.809,
+    "summary": "All private households (Eurostat labour force survey household count) and the resident population on 1 January (Eurostat demo_pjan), the population the estimated extra income is spread over."
+   }
+  },
+  "dials": {}
+ }
+}

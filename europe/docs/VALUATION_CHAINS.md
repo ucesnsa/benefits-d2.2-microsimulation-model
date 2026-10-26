@@ -6,11 +6,7 @@ Every value on the Provider tab of every tool is
 
     raw x effect share x attribution
 
-and every value whose note carries an ORIGIN clause has all three printed below
-beside the value it produces. Two chains are therefore not shown: the Spanish and
-Italian drug and alcohol treatment values, whose notes give their origin and factor
-in prose rather than in an ORIGIN clause. Both are documented in
-[`PROVIDER_TOOLREADY_2024.md`](PROVIDER_TOOLREADY_2024.md).
+and every one of the three factors is printed below beside the value it produces.
 The chain is read out of each parameter's own note and recomputed here, with the
 same code `audit_provider_params.py` runs at check 7.10d, so this document cannot
 disagree with the tools without that check failing first.
@@ -53,68 +49,101 @@ source exists the value is declared an assumption and its note says so.
 
 | service | point | raw (origin) | x factor | x effect | x attribution | = shipped (EUR) | reproduces |
 |---|---|---:|---:|---:|---:|---:|---|
-| Employment support | wbL | 12540.0 | 0.39649286 | 0.11 | 0.2 | 109 | yes |
-| Employment support | wbC | 16300.0 | 0.39649286 | 0.3 | 0.22 | 427 | yes |
-| Employment support | wbH | 20064.0 | 0.39649286 | 0.46 | 0.27 | 988 | yes |
-| Debt advice | wbL | 3762.0 | 0.861941 | 0.0 | 1.0 | 0 | yes |
-| Debt advice | wbC | 6520.0 | 0.861941 | 0.0 | 1.0 | 0 | yes |
-| Debt advice | wbH | 10032.0 | 0.861941 | 0.63 | 0.5 | 2724 | yes |
-| Housing / homelessness | convL | 20112.525 | 0.861941 | 0.1 | 0.5 | 867 | yes |
-| Housing / homelessness | convC | 26988.3 | 0.861941 | 0.2 | 0.562 | 2615 | yes |
-| Housing / homelessness | convH | 46929.225 | 0.861941 | 0.35 | 0.575 | 8141 | yes |
-| Children's social care | convL | 111665.0 | 0.932084 | 0.0 | 1.0 | 0 | yes |
-| Children's social care | convC | 111665.0 | 0.932084 | 0.086 | 1.0 | 8951 | yes |
-| Children's social care | convH | 111665.0 | 0.932084 | 0.086 | 1.0 | 8951 | yes |
-| Domestic abuse / GBV | convL | 2305.5 | 1.0 | 0.24 | 0.5416667 | 299.71 | yes |
-| Domestic abuse / GBV | convC | 2305.5 | 1.0 | 0.24 | 0.5416667 | 299.71 | yes |
-| Domestic abuse / GBV | convH | 2305.5 | 1.0 | 0.24 | 0.5416667 | 299.71 | yes |
+| Employment support | wbL | 12540.0 | 0.39649286 | 0.11 | 0.2 | 109.38 | yes |
+| Employment support | wbC | 16300.0 | 0.39649286 | 0.3 | 0.22 | 426.55 | yes |
+| Employment support | wbH | 20064.0 | 0.39649286 | 0.46 | 0.27 | 988.04 | yes |
+| Minimum income (IMV) casework | convL | 44.0 | 0.8957740169 | 1.0 | 1.0 | 39.41 | yes |
+| Minimum income (IMV) casework | convC | 91.0 | 0.8957740169 | 1.0 | 1.0 | 81.52 | yes |
+| Minimum income (IMV) casework | convH | 230.3891529555 | 0.8957740169 | 1.0 | 1.0 | 206.38 | yes |
+| Debt advice | wbL | 12540.0 | 0.0 | 0.0 | 1.0 | 0 | yes |
+| Debt advice | wbC | 16300.0 | 0.305989055 | 0.1 | 1.0 | 498.76 | yes |
+| Debt advice | wbH | 20064.0 | 0.4309705 | 0.63 | 0.5 | 2723.8 | yes |
+| Talking therapies | wbL | 12540.0 | 0.0 | 0.0 | 1.0 | 0 | yes |
+| Talking therapies | wbC | 16300.0 | 0.36201522 | 1.0 | 1.0 | 5900.85 | yes |
+| Talking therapies | wbH | 20064.0 | 1.2929115 | 0.6 | 0.61 | 9494.4 | yes |
+| Housing / homelessness | convL | 16754.7133007915 | 1.0 | 0.112 | 1.0 | 1876.53 | yes |
+| Housing / homelessness | convC | 16754.7133007915 | 1.0 | 0.407 | 1.0 | 6819.17 | yes |
+| Housing / homelessness | convH | 16754.7133007915 | 1.0 | 0.438 | 1.0 | 7338.56 | yes |
+| Children's social care | convL | 48936.8090894864 | 1.0 | 0.0 | 1.0 | 0 | yes |
+| Children's social care | convC | 48936.8090894864 | 1.0 | 0.056 | 1.0 | 2740.46 | yes |
+| Children's social care | convH | 48936.8090894864 | 1.0 | 0.119 | 1.0 | 5823.48 | yes |
+| Domestic abuse / GBV | convL | 2305.5 | 1.0 | 0.24 | 0.5416667 | 299.72 | yes |
+| Domestic abuse / GBV | convC | 2305.5 | 1.0 | 0.24 | 0.5416667 | 299.72 | yes |
+| Domestic abuse / GBV | convH | 2305.5 | 1.0 | 0.24 | 0.5416667 | 299.72 | yes |
+| Drug & alcohol treatment | convL | 3834120.3298537005 | 0.0012155 | 1.0 | 1.0 | 4660.37 | yes |
+| Drug & alcohol treatment | convC | 4600944.395824441 | 0.00401115 | 1.0 | 1.0 | 18455.08 | yes |
+| Drug & alcohol treatment | convH | 5367768.461795182 | 0.0046376 | 1.0 | 1.0 | 24893.56 | yes |
+| Opioid substitution treatment (OST) | convL | 3834120.3298537005 | 0.0065 | 1.0 | 1.0 | 24921.78 | yes |
+| Opioid substitution treatment (OST) | convC | 4600944.395824441 | 0.02145 | 1.0 | 1.0 | 98690.26 | yes |
+| Opioid substitution treatment (OST) | convH | 5367768.461795182 | 0.0248 | 1.0 | 1.0 | 133120.66 | yes |
 
 ## IT
 
 | service | point | raw (origin) | x factor | x effect | x attribution | = shipped (EUR) | reproduces |
 |---|---|---:|---:|---:|---:|---:|---|
-| Employment support | wbL | 12540.0 | 0.4212036 | 0.11 | 0.2 | 116 | yes |
-| Employment support | wbC | 16300.0 | 0.4212036 | 0.3 | 0.22 | 453 | yes |
-| Employment support | wbH | 20064.0 | 0.4212036 | 0.46 | 0.27 | 1050 | yes |
-| Debt advice | wbL | 3762.0 | 0.91566 | 0.0 | 1.0 | 0 | yes |
-| Debt advice | wbC | 6520.0 | 0.91566 | 0.0 | 1.0 | 0 | yes |
-| Debt advice | wbH | 10032.0 | 0.91566 | 0.63 | 0.5 | 2894 | yes |
-| Housing / homelessness | convL | 20112.525 | 0.91566 | 0.1 | 0.5 | 921 | yes |
-| Housing / homelessness | convC | 26988.3 | 0.91566 | 0.2 | 0.562 | 2778 | yes |
-| Housing / homelessness | convH | 46929.225 | 0.91566 | 0.35 | 0.575 | 8648 | yes |
-| Children's social care | convL | 111665.0 | 1.0 | 0.0 | 1.0 | 0 | yes |
-| Children's social care | convC | 111665.0 | 1.0 | 0.086 | 1.0 | 9603 | yes |
-| Children's social care | convH | 111665.0 | 1.0 | 0.086 | 1.0 | 9603 | yes |
-| Domestic abuse / GBV | convL | 17756.0 | 1.0 | 0.24 | 0.5416667 | 2308.28 | yes |
-| Domestic abuse / GBV | convC | 17756.0 | 1.0 | 0.24 | 0.5416667 | 2308.28 | yes |
-| Domestic abuse / GBV | convH | 17756.0 | 1.0 | 0.24 | 0.5416667 | 2308.28 | yes |
+| Employment support | wbL | 12540.0 | 0.4212036 | 0.11 | 0.2 | 116.2 | yes |
+| Employment support | wbC | 16300.0 | 0.4212036 | 0.3 | 0.22 | 453.13 | yes |
+| Employment support | wbH | 20064.0 | 0.4212036 | 0.46 | 0.27 | 1049.62 | yes |
+| Minimum income (AdI) casework | convL | 44.0 | 0.9516016018 | 1.0 | 1.0 | 41.87 | yes |
+| Minimum income (AdI) casework | convC | 91.0 | 0.9516016018 | 1.0 | 1.0 | 86.6 | yes |
+| Minimum income (AdI) casework | convH | 230.3891529555 | 0.9516016018 | 1.0 | 1.0 | 219.24 | yes |
+| Debt advice | wbL | 12540.0 | 0.0 | 0.0 | 1.0 | 0 | yes |
+| Debt advice | wbC | 16300.0 | 0.3250593 | 0.1 | 1.0 | 529.85 | yes |
+| Debt advice | wbH | 20064.0 | 0.45783 | 0.63 | 0.5 | 2893.56 | yes |
+| Talking therapies | wbL | 12540.0 | 0.0 | 0.0 | 1.0 | 0 | yes |
+| Talking therapies | wbC | 16300.0 | 0.3845772 | 1.0 | 1.0 | 6268.61 | yes |
+| Talking therapies | wbH | 20064.0 | 1.37349 | 0.6 | 0.61 | 10086.12 | yes |
+| Housing / homelessness | convL | 24712.106778 | 1.0 | 0.112 | 1.0 | 2767.76 | yes |
+| Housing / homelessness | convC | 24712.106778 | 1.0 | 0.407 | 1.0 | 10057.83 | yes |
+| Housing / homelessness | convH | 24712.106778 | 1.0 | 0.438 | 1.0 | 10823.9 | yes |
+| Children's social care | convL | 19037.3446639027 | 1.0 | 0.0 | 1.0 | 0 | yes |
+| Children's social care | convC | 19037.3446639027 | 1.0 | 0.056 | 1.0 | 1066.09 | yes |
+| Children's social care | convH | 19037.3446639027 | 1.0 | 0.119 | 1.0 | 2265.44 | yes |
+| Domestic abuse / GBV | convL | 2519.5412312798 | 1.0 | 0.24 | 0.5416667 | 327.54 | yes |
+| Domestic abuse / GBV | convC | 2519.5412312798 | 1.0 | 0.24 | 0.5416667 | 327.54 | yes |
+| Domestic abuse / GBV | convH | 2519.5412312798 | 1.0 | 0.24 | 0.5416667 | 327.54 | yes |
+| Drug & alcohol treatment | convL | 4461371.406155468 | 0.003913 | 1.0 | 1.0 | 17457.35 | yes |
+| Drug & alcohol treatment | convC | 5353645.687386562 | 0.0129129 | 1.0 | 1.0 | 69131.09 | yes |
+| Drug & alcohol treatment | convH | 6245919.968617655 | 0.0149296 | 1.0 | 1.0 | 93249.09 | yes |
+| Opioid substitution treatment (OST) | convL | 4461371.406155468 | 0.0065 | 1.0 | 1.0 | 28998.91 | yes |
+| Opioid substitution treatment (OST) | convC | 5353645.687386562 | 0.02145 | 1.0 | 1.0 | 114835.7 | yes |
+| Opioid substitution treatment (OST) | convH | 6245919.968617655 | 0.0248 | 1.0 | 1.0 | 154898.82 | yes |
 
 ## EL
 
 | service | point | raw (origin) | x factor | x effect | x attribution | = shipped (EUR) | reproduces |
 |---|---|---:|---:|---:|---:|---:|---|
-| Employment support | wbL | 12540.0 | 0.37581816 | 0.11 | 0.2 | 104 | yes |
-| Employment support | wbC | 16300.0 | 0.37581816 | 0.3 | 0.22 | 404 | yes |
-| Employment support | wbH | 20064.0 | 0.37581816 | 0.46 | 0.27 | 937 | yes |
-| Debt advice | wbL | 3762.0 | 0.816996 | 0.0 | 1.0 | 0 | yes |
-| Debt advice | wbC | 6520.0 | 0.816996 | 0.0 | 1.0 | 0 | yes |
-| Debt advice | wbH | 10032.0 | 0.816996 | 0.63 | 0.5 | 2582 | yes |
-| Housing / homelessness | convL | 20112.525 | 0.816996 | 0.1 | 0.5 | 822 | yes |
-| Housing / homelessness | convC | 26988.3 | 0.816996 | 0.2 | 0.562 | 2478 | yes |
-| Housing / homelessness | convH | 46929.225 | 0.816996 | 0.35 | 0.575 | 7716 | yes |
-| Children's social care | convL | 111665.0 | 0.88146 | 0.0 | 1.0 | 0 | yes |
-| Children's social care | convC | 111665.0 | 0.88146 | 0.086 | 1.0 | 8465 | yes |
-| Children's social care | convH | 111665.0 | 0.88146 | 0.086 | 1.0 | 8465 | yes |
-| Domestic abuse / GBV | convL | 15651.0 | 1.0 | 0.24 | 0.5416667 | 2034.63 | yes |
-| Domestic abuse / GBV | convC | 15651.0 | 1.0 | 0.24 | 0.5416667 | 2034.63 | yes |
-| Domestic abuse / GBV | convH | 15651.0 | 1.0 | 0.24 | 0.5416667 | 2034.63 | yes |
-| Drug & alcohol treatment | convL | 1595000.0 | 0.0248 | 1.0 | 1.0 | 39556 | yes |
-| Drug & alcohol treatment | convC | 3190000.0 | 0.0248 | 1.0 | 1.0 | 79112 | yes |
-| Drug & alcohol treatment | convH | 4785000.0 | 0.0248 | 1.0 | 1.0 | 118668 | yes |
+| Employment support | wbL | 12540.0 | 0.37581816 | 0.11 | 0.2 | 103.68 | yes |
+| Employment support | wbC | 16300.0 | 0.37581816 | 0.3 | 0.22 | 404.31 | yes |
+| Employment support | wbH | 20064.0 | 0.37581816 | 0.46 | 0.27 | 936.52 | yes |
+| Minimum income (KEA) casework | convL | 44.0 | 0.8490648301 | 1.0 | 1.0 | 37.36 | yes |
+| Minimum income (KEA) casework | convC | 91.0 | 0.8490648301 | 1.0 | 1.0 | 77.26 | yes |
+| Minimum income (KEA) casework | convH | 230.3891529555 | 0.8490648301 | 1.0 | 1.0 | 195.62 | yes |
+| Debt advice | wbL | 12540.0 | 0.0 | 0.0 | 1.0 | 0 | yes |
+| Debt advice | wbC | 16300.0 | 0.29003358 | 0.1 | 1.0 | 472.75 | yes |
+| Debt advice | wbH | 20064.0 | 0.408498 | 0.63 | 0.5 | 2581.77 | yes |
+| Talking therapies | wbL | 12540.0 | 0.0 | 0.0 | 1.0 | 0 | yes |
+| Talking therapies | wbC | 16300.0 | 0.34313832 | 1.0 | 1.0 | 5593.15 | yes |
+| Talking therapies | wbH | 20064.0 | 1.225494 | 0.6 | 0.61 | 8999.32 | yes |
+| Housing / homelessness | convL | 22049.3331468 | 1.0 | 0.112 | 1.0 | 2469.53 | yes |
+| Housing / homelessness | convC | 22049.3331468 | 1.0 | 0.407 | 1.0 | 8974.08 | yes |
+| Housing / homelessness | convH | 22049.3331468 | 1.0 | 0.438 | 1.0 | 9657.61 | yes |
+| Children's social care | convL | 35318.5242675526 | 1.0 | 0.0 | 1.0 | 0 | yes |
+| Children's social care | convC | 35318.5242675526 | 1.0 | 0.056 | 1.0 | 1977.84 | yes |
+| Children's social care | convH | 35318.5242675526 | 1.0 | 0.119 | 1.0 | 4202.9 | yes |
+| Domestic abuse / GBV | convL | 2200.5790370054 | 1.0 | 0.24 | 0.5416667 | 286.08 | yes |
+| Domestic abuse / GBV | convC | 2200.5790370054 | 1.0 | 0.24 | 0.5416667 | 286.08 | yes |
+| Domestic abuse / GBV | convH | 2200.5790370054 | 1.0 | 0.24 | 0.5416667 | 286.08 | yes |
+| Drug & alcohol treatment | convL | 2605306.887424176 | 0.0053105 | 1.0 | 1.0 | 13835.48 | yes |
+| Drug & alcohol treatment | convC | 3126368.2649090113 | 0.01752465 | 1.0 | 1.0 | 54788.51 | yes |
+| Drug & alcohol treatment | convH | 3647429.6423938465 | 0.0202616 | 1.0 | 1.0 | 73902.76 | yes |
+| Opioid substitution treatment (OST) | convL | 2605306.887424176 | 0.0065 | 1.0 | 1.0 | 16934.49 | yes |
+| Opioid substitution treatment (OST) | convC | 3126368.2649090113 | 0.02145 | 1.0 | 1.0 | 67060.6 | yes |
+| Opioid substitution treatment (OST) | convH | 3647429.6423938465 | 0.0248 | 1.0 | 1.0 | 90456.26 | yes |
 
 ## Result
 
-**69 points recomputed from their own notes, none failing.**
+**102 points recomputed from their own notes, none failing.**
 
 `uk/tools/_superseded/valuation_tool.xlsx` is gitignored, does not travel, and does
 not reproduce the shipped values. This file is the record. The reasoning is

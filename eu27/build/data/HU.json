@@ -1,0 +1,783 @@
+{
+ "code": "HU",
+ "name": "Hungary",
+ "lang": "en",
+ "locale": "en-GB",
+ "currency": {
+  "symbol": "HUF ",
+  "code": "HUF"
+ },
+ "title": "BENEFITS provider tool: Hungary",
+ "deflator": 1,
+ "income_basis": "derived",
+ "income_year": "2024",
+ "wave_label": "No microsimulation for this country: extra income estimated from national minimum-income outlays (EUROMOD external statistics and named national sources) and Eurostat income deciles",
+ "wellby_spine": {
+  "value": 4486660,
+  "label": "HUF 4,486,660 (HM Treasury's GBP 13,000 per WELLBY at 2019 prices, applied as GBP 16,300 at 2024 prices, converted at household-consumption PPP)",
+  "provenance": "borrowed_adjusted",
+  "provenance_note": "HM Treasury (2021) Wellbeing Guidance for Appraisal, GBP 13,000 per WELLBY at 2019 prices (low 10,000, high 16,000), applied as GBP 16,300 (12,540 / 20,064) at 2024 prices by HM Treasury's own uprating method, converted at HUF 275.2552 per GBP (Eurostat prc_ppp_ind, E011 household final consumption, 2024). A transfer, flagged as such."
+ },
+ "labels": {
+  "mi_10": "Minimum income (FHT) +10%, estimated",
+  "mi_25": "Minimum income (FHT) +25%, estimated",
+  "mi_50": "Minimum income (FHT) +50%, estimated"
+ },
+ "profiles": {
+  "Lowest incomes (deciles 1-3)": [
+   0,
+   1,
+   2
+  ],
+  "Low-to-middle (deciles 4-6)": [
+   3,
+   4,
+   5
+  ],
+  "Broad mix (all deciles)": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "provider_default": "Employment support",
+ "reference_default": "mi_25",
+ "unit_noun": "households",
+ "unit_noun_singular": "household",
+ "capacity_caveat": "The capacity and shock model is INDICATIVE: demand elasticities and staff ratios are mostly UK register values, and the share of households losing an earner is the UK model's own share applied to Hungary's working-age households. It is not calibrated to Hungary.",
+ "analyst_price_base": "2024 prices",
+ "provenance": "No microsimulation for Hungary: the income effect is estimated from the national minimum-income outlay and Eurostat income deciles, and household counts, price levels and labour costs are Eurostat database tables (nama_10_gdp, prc_ppp_ind, lc_lci_lev, lfst_hhnhtych, demo_pjan, ilc_di01, ilc_lvps02), retrieved September 2026. Provider values are per person served, in HUF at 2024 prices. Every value carries its source and a grade in its own note; a value borrowed from another country is marked.",
+ "data": {
+  "services": [
+   {
+    "name": "Employment support",
+    "elastLow": 0.8,
+    "elastCentral": 1.0,
+    "elastHigh": 1.2,
+    "unitCost": 166406,
+    "staffRatio": 120,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "elastCentral": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "elastHigh": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "HUF 166,406, converted from the UK tool's unit cost for Jobcentre Plus work coaching, GBP 1,200 per participant, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Hungary EUR 10.60 an hour; UK GBP 30.2165), ratio 138.671918. No verified Hungary figure for this unit was found. CONVERSION: GBP 1200 x 138.67191766. PRICE BASE: 2024-equivalent. Unit: one participant in an employment-support episode."
+    },
+    "flag": "Unit: one participant in an employment-support episode. Outcome value: borrowed from another country without adjustment. +0.46 WELLBY for a move from unemployment into work (Clark et al. 2018, the Britain fixed-effects coefficient HM Treasury's guidance uses), valued at the WELLBY value for Hungary, then staged as in the UK tool: effect 0.11 / 0.30 / 0.46 x attribution 0.20 / 0.22 / 0.27. European trial evidence (Card, Kluve and Weber 2018) puts job-search assistance impacts at 1 to 2 percentage points, which suggests the staged central may be high. ORIGIN 16300 FACTOR 126.6174113992; BAND ORIGIN 12540 AND 20064; BAND FACTOR 126.6174113992 AND 126.6174113992; STAGE EFFECT 0.11 0.3 0.46 ATTRIBUTION 0.2 0.22 0.27; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Minimum income (FHT) casework",
+    "elastLow": 0.3,
+    "elastCentral": 0.55,
+    "elastHigh": 1.0,
+    "unitCost": 55469,
+    "staffRatio": 200,
+    "provenance": {
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "elastCentral": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "elastHigh": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "HUF 55,469, converted from the UK tool's unit cost for benefit claim support, GBP 400 per claim, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Hungary EUR 10.60 an hour; UK GBP 30.2165), ratio 138.671918. No verified Hungary figure for this unit was found. CONVERSION: GBP 400 x 138.67191766. PRICE BASE: 2024-equivalent. Unit: one claim supported."
+    },
+    "flag": "Unit: one claim supported. Outcome value: borrowed from another country with a stated adjustment. Income effect: the extra-income figure. Health-service use avoided: Liverpool Citizens Advice on Prescription (SSM Population Health 2025), an instrumental-variable study on linked NHS records: GBP 91 per person a year (95% CI 44 to 107) at 2023 prices, an impact, so attribution 1.0. The saving is per household member; the central counts the client only, the high counts every member (20,773 members of 8,205 client households). Uprated to 2024-25 on ONS L8GG and converted at household-consumption PPP (Eurostat, 2024). The advice covered benefits, debt and housing together. ORIGIN 91 FACTOR 286.0595956612; BAND ORIGIN 44 AND 230.3891529555; BAND FACTOR 286.0595956612 AND 286.0595956612; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Food aid / food banks",
+    "elastLow": 0.1,
+    "elastCentral": 0.25,
+    "elastHigh": 0.5,
+    "unitCost": 20801,
+    "staffRatio": 250,
+    "provenance": {
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "elastCentral": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "elastHigh": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "HUF 20,801, converted from the UK tool's unit cost for food banks, GBP 150 per recipient, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Hungary EUR 10.60 an hour; UK GBP 30.2165), ratio 138.671918. No verified Hungary figure for this unit was found. CONVERSION: GBP 150 x 138.67191766. PRICE BASE: 2024-equivalent. Unit: one recipient for a year."
+    },
+    "flag": "Unit: one recipient for a year. Outcome value: an assumption. Excluded for every country: no robust per-person effect exists. Randomised evidence shows small effects on food insecurity (for example Briefel et al., -2.8 points) and none on wellbeing; the Greek DIATROFI school-meal trial is a different service. The tool shows the income effect only, as a floor."
+   },
+   {
+    "name": "Debt advice",
+    "elastLow": 0.5,
+    "elastCentral": 0.8,
+    "elastHigh": 1.2,
+    "unitCost": 69336,
+    "staffRatio": 100,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "elastCentral": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "elastHigh": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "HUF 69,336, converted from the UK tool's unit cost for debt advice, GBP 500 per case, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Hungary EUR 10.60 an hour; UK GBP 30.2165), ratio 138.671918. No verified Hungary figure for this unit was found. CONVERSION: GBP 500 x 138.67191766. PRICE BASE: 2024-equivalent. Unit: one advice case."
+    },
+    "flag": "Unit: one advice case. Outcome value: borrowed from another country without adjustment. Being in arrears lowers life satisfaction by 0.355 points (FCA / Simetrica-Jacobs 2020, individual fixed effects). Central: advice moves 10 percentage points more clients out of unmanageable debt than no advice (Money Advice Service / YouGov 2012: 25% against 15%), an impact, so attribution 1.0: 0.355 x 0.10 WELLBY. Low: zero, because the only randomised trial (Pleasence and Balmer 2007) cannot rule it out. High: the UK tool's high. ORIGIN 16300 FACTOR 97.7156109712; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 137.6276210861; STAGE EFFECT 0 0.1 0.63 ATTRIBUTION 1 1 0.5; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Talking therapies",
+    "elastLow": 0.3,
+    "elastCentral": 0.6,
+    "elastHigh": 0.9,
+    "unitCost": 166406,
+    "staffRatio": 50,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "elastCentral": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "elastHigh": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "HUF 166,406, converted from the UK tool's unit cost for NHS Talking Therapies, GBP 1,200 per course, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Hungary EUR 10.60 an hour; UK GBP 30.2165), ratio 138.671918. No verified Hungary figure for this unit was found. CONVERSION: GBP 1200 x 138.67191766. PRICE BASE: 2024-equivalent. Unit: one course of treatment."
+    },
+    "flag": "Unit: one course of treatment. Outcome value: borrowed from another country without adjustment. Central: 0.06 QALY per patient from adding transdiagnostic group CBT to usual primary care in Spain (the PsicAP randomised trial; abstract), converted at HM Treasury's 7 WELLBYs per QALY = 0.42 WELLBY, an impact, so attribution 1.0. Low: zero (German and Swedish trials found no QALY difference). High: the UK tool's high for NHS Talking Therapies (1.5 x 0.6 x 0.61 WELLBY). Nordic studies find no net saving from reduced sick leave, so no cost-avoided value is added. ORIGIN 16300 FACTOR 115.6072017123; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 412.8828632584; STAGE EFFECT 0 1 0.6 ATTRIBUTION 1 1 0.61; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Housing / homelessness",
+    "elastLow": 0.3,
+    "elastCentral": 0.5,
+    "elastHigh": 0.8,
+    "unitCost": 1173585,
+    "staffRatio": 30,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "elastCentral": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "elastHigh": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "HUF 1,173,585, converted from Greater Manchester Combined Authority (Research Team), citing MHCLG 2024 (2025), Unit Cost Database v3.0 (November 2025), GBP 7,737 at 2022 prices, uprated to GBP 8,463 on ONS L8GG. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Hungary EUR 10.60 an hour; UK GBP 30.2165), ratio 138.671918. No verified Hungary figure for this unit was found. CONVERSION: GBP 8463.031253 x 138.67191766. PRICE BASE: 2024-equivalent. Unit: one homeless person supported for a year."
+    },
+    "flag": "Unit: one homeless person supported for a year. Outcome value: borrowed from another country with a stated adjustment. A year of homelessness costs the public HUF 1,034,533 per person (the UK tool's GBP 26,988 (Crisis 2015, uprated) scaled by the cost of the same year of homelessness in Hungary relative to the UK, 0.082, from Pleace et al. (2013), The Costs of Homelessness in Europe, Table 5.2, compared on the 5 cost items both countries priced (shelter, daycentre, psychiatric, prison, custody), at 2024 market exchange rates). Share avoided by a year of housing support: central 0.407 (Spain, Hábitat randomised trial: EUR 470.97 of EUR 1,157.84 a month), high 0.438 (France, Un chez-soi d'abord randomised trial, on a consistent cost basis), both impacts, so attribution 1.0; low 0.112, the UK tool's central (0.20 x 0.562), whose effect share is an assumption. ORIGIN 1034532.7278515479 FACTOR 1; BAND ORIGIN 1034532.7278515479 AND 1034532.7278515479; BAND FACTOR 1 AND 1; STAGE EFFECT 0.112 0.407 0.438 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Children's social care",
+    "elastLow": 0.15,
+    "elastCentral": 0.3,
+    "elastHigh": 0.5,
+    "unitCost": 1520538,
+    "staffRatio": 15,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "elastCentral": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "elastHigh": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "HUF 1,520,538, converted from Home Office (2021) GBP 8,640 per child in need per year at 2018/19 prices, uprated to GBP 10,965 (the UK tool's figure). Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Hungary EUR 10.60 an hour; UK GBP 30.2165), ratio 138.671918. No verified Hungary figure for this unit was found. CONVERSION: GBP 10965 x 138.67191766. PRICE BASE: 2024-equivalent. Unit: one child supported at home for a year."
+    },
+    "flag": "Unit: one child supported at home for a year. Outcome value: a national source. A year of out-of-home care costs HUF 6,869,219 per child (Erdelyi, D. (citing Gyermekut Modszertani Kozpont, Szocialis Portal, KSH, Szent Agota Gyermekvedelmi Szolgaltato) (2025), Gyermekjolet es gyermekvedelem Magyarorszagon (Oeconomus, 06.10.2025), HUF 7,300,000 at 2025 prices, uprated on the GDP deflator.). Reduction in the chance of a residential placement: central 0.056 (Italy, P.I.P.P.I. against a comparison group, residential placements only: 6.4% against 0.8%), high 0.119 (the same, counting day foster care too), low zero (Al et al. 2012 meta-analysis: intensive family preservation generally does not prevent placement). One year of placement avoided is counted, which is conservative. The sensitivity row is the UK tool's route: the lifetime cost of a maltreatment case (Bocconi 2013, Italy) x 0.086. ORIGIN 6869218.9166160701 FACTOR 1; BAND ORIGIN 6869218.9166160701 AND 6869218.9166160701; BAND FACTOR 1 AND 1; STAGE EFFECT 0 0.056 0.119 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Domestic abuse / GBV",
+    "elastLow": 0.2,
+    "elastCentral": 0.4,
+    "elastHigh": 0.6,
+    "unitCost": 346680,
+    "staffRatio": 25,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "HUF 346,680, converted from the UK tool's unit cost for domestic abuse services, GBP 2,500 per case, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Hungary EUR 10.60 an hour; UK GBP 30.2165), ratio 138.671918. No verified Hungary figure for this unit was found. CONVERSION: GBP 2500 x 138.67191766. PRICE BASE: 2024-equivalent. Unit: one victim supported."
+    },
+    "flag": "Unit: one victim supported. Outcome value: borrowed from another country with a stated adjustment. Tangible cost of intimate-partner violence per victim a year: HUF 744,054 (the mean of the Spanish and Italian national figures (tangible costs per victim of partner violence, from victim surveys), each uprated to 2024 and converted at household-consumption PPP; the EIGE per-country table is not used because it scales the UK cost by population). Effect and attribution as in the UK tool (0.24 x 0.5417: advocacy reduces physical abuse, odds ratio 0.43, Ramsay et al. 2009). Pain and suffering are shown as a sensitivity, not added, as settled decision 8 does for Spain. ORIGIN 744053.6068043361 FACTOR 1; BAND ORIGIN 744053.6068043361 AND 744053.6068043361; BAND FACTOR 1 AND 1; STAGE EFFECT 0.24 0.24 0.24 ATTRIBUTION 0.5416667 0.5416667 0.5416667; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Drug & alcohol treatment",
+    "elastLow": 0.15,
+    "elastCentral": 0.3,
+    "elastHigh": 0.5,
+    "unitCost": 284743,
+    "staffRatio": 30,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "national_source"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "HUF 284,743: HUF 302,600.00 (community addiction care support per client-year), Orszaggyules (2024), 2024. evi XC. torveny Magyarorszag 2025. evi kozponti koltsegveteserol, 2. melleklet; brought from 2025 to 2024 on Hungary's GDP deflator (Eurostat nama_10_gdp). CONVERSION: HUF 302600.0 x 0.94098889. PRICE BASE: 2024-equivalent. Unit: one client for a treatment year."
+    },
+    "flag": "Unit: one client for a treatment year. Outcome value: borrowed from another country without adjustment. Value of a statistical life for Hungary: HUF 1,227,041,608 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 0.022 (UNODC (2025), World Drug Report 2025, Statistical Annex 5.1: Treatment by primary drug of use: 96 / 4398 = 0.022. It counts people starting treatment in the year, so it understates the opioid share of a year's caseload: a lower bound). Non-opioid clients carry no averted-death value in these figures. ORIGIN 1227041608.1014437675 FACTOR 0.0004719; BAND ORIGIN 1022534673.4178699255 AND 1431548542.7850179672; BAND FACTOR 0.000143 AND 0.0005456; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "GP consultation",
+    "elastLow": 0.2,
+    "elastCentral": 0.25,
+    "elastHigh": 0.3,
+    "unitCost": 7442,
+    "staffRatio": 300,
+    "provenance": {
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "elastCentral": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "elastHigh": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "HUF 7,442, converted from Jones et al. (2024) Unit Costs of Health and Social Care, GBP 49 per ten-minute surgery consultation at 2022/23 prices, uprated to GBP 53.67 (the UK tool's price). Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Hungary EUR 10.60 an hour; UK GBP 30.2165), ratio 138.671918. No verified Hungary figure for this unit was found. CONVERSION: GBP 53.6695 x 138.67191766. PRICE BASE: 2024-equivalent. Unit: one consultation."
+    },
+    "flag": "Unit: one consultation. Outcome value: an assumption. Valued only at its cost: no defensible value per additional consultation was found (searched, none found)."
+   },
+   {
+    "name": "Opioid substitution treatment (OST)",
+    "elastLow": 0.15,
+    "elastCentral": 0.3,
+    "elastHigh": 0.5,
+    "unitCost": 323507,
+    "staffRatio": 30,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "HUF 323,507 per patient-year, the Spanish national figure of EUR 2,100 (a Spanish national figure: methadone at EUR 4 a day excluding medication, a 2004 observation, annualised on 365 days and uprated by 1.438347 to EUR 5.75 a day, EUR 2,098.75 a year, recorded as EUR 2,100 (the D2.2 Spain tool's figure; PROVIDER_TOOLREADY_2024.md, drug and alcohol table)) scaled by the ratio of labour costs in health and social work, Hungary to Spain, 0.389706 (Eurostat lc_lci_lev, NACE Q, 2023), as the D2.2 Italy and Greece tools do. CONVERSION: EUR 2100.0 x 154.05073529. PRICE BASE: 2024-equivalent. Unit: one patient for a year."
+    },
+    "flag": "Unit: one patient for a year. Outcome value: borrowed from another country without adjustment. Value of a statistical life for Hungary: HUF 1,227,041,608 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 1.000 (every OST patient is an opioid client). Non-opioid clients carry no averted-death value in these figures. ORIGIN 1227041608.1014437675 FACTOR 0.02145; BAND ORIGIN 1022534673.4178699255 AND 1431548542.7850179672; BAND FACTOR 0.0065 AND 0.0248; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   }
+  ],
+  "outcomes": {
+   "Employment support": {
+    "wbL": 34931.21,
+    "wbC": 136215.01,
+    "wbH": 315524.11,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Move into employment (wellbeing)",
+      "method": "WELLBY",
+      "conf": "MODERATE",
+      "valC": 136215.01
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "+0.46 WELLBY for a move from unemployment into work (Clark et al. 2018, the Britain fixed-effects coefficient HM Treasury's guidance uses), valued at the WELLBY value for Hungary, then staged as in the UK tool: effect 0.11 / 0.30 / 0.46 x attribution 0.20 / 0.22 / 0.27. European trial evidence (Card, Kluve and Weber 2018) puts job-search assistance impacts at 1 to 2 percentage points, which suggests the staged central may be high. ORIGIN 16300 FACTOR 126.6174113992; BAND ORIGIN 12540 AND 20064; BAND FACTOR 126.6174113992 AND 126.6174113992; STAGE EFFECT 0.11 0.3 0.46 ATTRIBUTION 0.2 0.22 0.27; PRICE BASE: 2024-equivalent."
+   },
+   "Minimum income (FHT) casework": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 12586.62,
+    "convC": 26031.42,
+    "convH": 65905.03,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Income effect",
+      "method": "ENGINE",
+      "conf": "WEAK",
+      "valC": 0
+     },
+     {
+      "outcome": "Health-service use avoided",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 26031.42
+     }
+    ],
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "Income effect: the extra-income figure. Health-service use avoided: Liverpool Citizens Advice on Prescription (SSM Population Health 2025), an instrumental-variable study on linked NHS records: GBP 91 per person a year (95% CI 44 to 107) at 2023 prices, an impact, so attribution 1.0. The saving is per household member; the central counts the client only, the high counts every member (20,773 members of 8,205 client households). Uprated to 2024-25 on ONS L8GG and converted at household-consumption PPP (Eurostat, 2024). The advice covered benefits, debt and housing together. ORIGIN 91 FACTOR 286.0595956612; BAND ORIGIN 44 AND 230.3891529555; BAND FACTOR 286.0595956612 AND 286.0595956612; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "Food aid / food banks": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Food aid",
+      "method": "UNEVIDENCED-EXCLUDED",
+      "conf": "-",
+      "valC": 0
+     }
+    ],
+    "provenance": "assumption",
+    "provenance_note": "Excluded for every country: no robust per-person effect exists. Randomised evidence shows small effects on food insecurity (for example Briefel et al., -2.8 points) and none on wellbeing; the Greek DIATROFI school-meal trial is a different service. The tool shows the income effect only, as a floor."
+   },
+   "Debt advice": {
+    "wbL": 0,
+    "wbC": 159276.45,
+    "wbH": 869828.59,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Debt advice (wellbeing)",
+      "method": "WELLBY",
+      "conf": "WEAK",
+      "valC": 159276.45
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Being in arrears lowers life satisfaction by 0.355 points (FCA / Simetrica-Jacobs 2020, individual fixed effects). Central: advice moves 10 percentage points more clients out of unmanageable debt than no advice (Money Advice Service / YouGov 2012: 25% against 15%), an impact, so attribution 1.0: 0.355 x 0.10 WELLBY. Low: zero, because the only randomised trial (Pleasence and Balmer 2007) cannot rule it out. High: the UK tool's high. ORIGIN 16300 FACTOR 97.7156109712; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 137.6276210861; STAGE EFFECT 0 0.1 0.63 ATTRIBUTION 1 1 0.5; PRICE BASE: 2024-equivalent."
+   },
+   "Talking therapies": {
+    "wbL": 0,
+    "wbC": 1884397.39,
+    "wbH": 3031973.93,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Recovery from depression or anxiety (wellbeing)",
+      "method": "WELLBY",
+      "conf": "MODERATE",
+      "valC": 1884397.39
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Central: 0.06 QALY per patient from adding transdiagnostic group CBT to usual primary care in Spain (the PsicAP randomised trial; abstract), converted at HM Treasury's 7 WELLBYs per QALY = 0.42 WELLBY, an impact, so attribution 1.0. Low: zero (German and Swedish trials found no QALY difference). High: the UK tool's high for NHS Talking Therapies (1.5 x 0.6 x 0.61 WELLBY). Nordic studies find no net saving from reduced sick leave, so no cost-avoided value is added. ORIGIN 16300 FACTOR 115.6072017123; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 412.8828632584; STAGE EFFECT 0 1 0.6 ATTRIBUTION 1 1 0.61; PRICE BASE: 2024-equivalent."
+   },
+   "Housing / homelessness": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 115867.67,
+    "convC": 421054.82,
+    "convH": 453125.33,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Public cost of homelessness avoided",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 421054.82
+     }
+    ],
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "A year of homelessness costs the public HUF 1,034,533 per person (the UK tool's GBP 26,988 (Crisis 2015, uprated) scaled by the cost of the same year of homelessness in Hungary relative to the UK, 0.082, from Pleace et al. (2013), The Costs of Homelessness in Europe, Table 5.2, compared on the 5 cost items both countries priced (shelter, daycentre, psychiatric, prison, custody), at 2024 market exchange rates). Share avoided by a year of housing support: central 0.407 (Spain, Hábitat randomised trial: EUR 470.97 of EUR 1,157.84 a month), high 0.438 (France, Un chez-soi d'abord randomised trial, on a consistent cost basis), both impacts, so attribution 1.0; low 0.112, the UK tool's central (0.20 x 0.562), whose effect share is an assumption. ORIGIN 1034532.7278515479 FACTOR 1; BAND ORIGIN 1034532.7278515479 AND 1034532.7278515479; BAND FACTOR 1 AND 1; STAGE EFFECT 0.112 0.407 0.438 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "Children's social care": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 0.0,
+    "convC": 384676.26,
+    "convH": 817437.05,
+    "sensC": 2862105.16,
+    "rows": [
+     {
+      "outcome": "Out-of-home placement avoided",
+      "method": "CONVENTIONAL",
+      "conf": "WEAK",
+      "valC": 384676.26
+     },
+     {
+      "outcome": "Lifetime cost of maltreatment averted (not added)",
+      "method": "SENSITIVITY",
+      "conf": "WEAK",
+      "valC": 2862105.16
+     }
+    ],
+    "provenance": "national_source",
+    "provenance_note": "A year of out-of-home care costs HUF 6,869,219 per child (Erdelyi, D. (citing Gyermekut Modszertani Kozpont, Szocialis Portal, KSH, Szent Agota Gyermekvedelmi Szolgaltato) (2025), Gyermekjolet es gyermekvedelem Magyarorszagon (Oeconomus, 06.10.2025), HUF 7,300,000 at 2025 prices, uprated on the GDP deflator.). Reduction in the chance of a residential placement: central 0.056 (Italy, P.I.P.P.I. against a comparison group, residential placements only: 6.4% against 0.8%), high 0.119 (the same, counting day foster care too), low zero (Al et al. 2012 meta-analysis: intensive family preservation generally does not prevent placement). One year of placement avoided is counted, which is conservative. The sensitivity row is the UK tool's route: the lifetime cost of a maltreatment case (Bocconi 2013, Italy) x 0.086. ORIGIN 6869218.9166160701 FACTOR 1; BAND ORIGIN 6869218.9166160701 AND 6869218.9166160701; BAND FACTOR 1 AND 1; STAGE EFFECT 0 0.056 0.119 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "Domestic abuse / GBV": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 96726.97,
+    "convC": 96726.97,
+    "convH": 96726.97,
+    "sensC": 491896.85,
+    "rows": [
+     {
+      "outcome": "Abuse reduced (tangible costs avoided)",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 96726.97
+     },
+     {
+      "outcome": "Including pain and suffering (not added)",
+      "method": "SENSITIVITY",
+      "conf": "WEAK",
+      "valC": 491896.85
+     }
+    ],
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "Tangible cost of intimate-partner violence per victim a year: HUF 744,054 (the mean of the Spanish and Italian national figures (tangible costs per victim of partner violence, from victim surveys), each uprated to 2024 and converted at household-consumption PPP; the EIGE per-country table is not used because it scales the UK cost by population). Effect and attribution as in the UK tool (0.24 x 0.5417: advocacy reduces physical abuse, odds ratio 0.43, Ramsay et al. 2009). Pain and suffering are shown as a sensitivity, not added, as settled decision 8 does for Spain. ORIGIN 744053.6068043361 FACTOR 1; BAND ORIGIN 744053.6068043361 AND 744053.6068043361; BAND FACTOR 1 AND 1; STAGE EFFECT 0.24 0.24 0.24 ATTRIBUTION 0.5416667 0.5416667 0.5416667; PRICE BASE: 2024-equivalent."
+   },
+   "Drug & alcohol treatment": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 146222.46,
+    "convC": 579040.93,
+    "convH": 781052.88,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Deaths averted (opioid clients)",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 579040.93
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Value of a statistical life for Hungary: HUF 1,227,041,608 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 0.022 (UNODC (2025), World Drug Report 2025, Statistical Annex 5.1: Treatment by primary drug of use: 96 / 4398 = 0.022. It counts people starting treatment in the year, so it understates the opioid share of a year's caseload: a lower bound). Non-opioid clients carry no averted-death value in these figures. ORIGIN 1227041608.1014437675 FACTOR 0.0004719; BAND ORIGIN 1022534673.4178699255 AND 1431548542.7850179672; BAND FACTOR 0.000143 AND 0.0005456; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "GP consultation": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "GP consultation",
+      "method": "COST-INPUT",
+      "conf": "COST-INPUT",
+      "valC": 0
+     }
+    ],
+    "provenance": "assumption",
+    "provenance_note": "Valued only at its cost: no defensible value per additional consultation was found (searched, none found)."
+   },
+   "Opioid substitution treatment (OST)": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 6646475.38,
+    "convC": 26320042.49,
+    "convH": 35502403.86,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Deaths averted (opioid clients)",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 26320042.49
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Value of a statistical life for Hungary: HUF 1,227,041,608 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 1.000 (every OST patient is an opioid client). Non-opioid clients carry no averted-death value in these figures. ORIGIN 1227041608.1014437675 FACTOR 0.02145; BAND ORIGIN 1022534673.4178699255 AND 1431548542.7850179672; BAND FACTOR 0.0065 AND 0.0248; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   }
+  },
+  "deciles": {
+   "mi_10": [
+    [
+     898.4934,
+     261.2816,
+     100.6947,
+     73.8133,
+     56.1403,
+     10.6269,
+     3.0645,
+     2.5732,
+     0.2122,
+     0.0
+    ],
+    [
+     1159.9499,
+     331.1607,
+     115.3298,
+     78.4644,
+     57.1154,
+     10.3488,
+     2.8342,
+     2.2004,
+     0.1628,
+     0.0
+    ],
+    [
+     1497.4889,
+     419.9471,
+     132.1965,
+     83.4285,
+     58.1132,
+     10.0802,
+     2.6217,
+     1.8834,
+     0.125,
+     0.0
+    ],
+    [
+     1933.2499,
+     532.8095,
+     151.6496,
+     88.7278,
+     59.1344,
+     9.8208,
+     2.4257,
+     1.6134,
+     0.0961,
+     0.0
+    ],
+    [
+     2495.8149,
+     676.3415,
+     174.1029,
+     94.3862,
+     60.1796,
+     9.5702,
+     2.2448,
+     1.3834,
+     0.074,
+     0.0
+    ]
+   ],
+   "mi_25": [
+    [
+     2259.6914,
+     645.8515,
+     249.4107,
+     182.0847,
+     139.8792,
+     26.4357,
+     7.2596,
+     6.4234,
+     0.2138,
+     0.0
+    ],
+    [
+     2917.2491,
+     818.5828,
+     285.6605,
+     193.5584,
+     142.3086,
+     25.7437,
+     6.714,
+     5.493,
+     0.164,
+     0.0
+    ],
+    [
+     3766.1524,
+     1038.0505,
+     327.4375,
+     205.804,
+     144.7948,
+     25.0755,
+     6.2107,
+     4.7015,
+     0.1259,
+     0.0
+    ],
+    [
+     4862.0818,
+     1317.0303,
+     375.6211,
+     218.8764,
+     147.3392,
+     24.4302,
+     5.7463,
+     4.0277,
+     0.0968,
+     0.0
+    ],
+    [
+     6276.9206,
+     1671.8215,
+     431.2357,
+     232.8346,
+     149.9434,
+     23.807,
+     5.3179,
+     3.4535,
+     0.0745,
+     0.0
+    ]
+   ],
+   "mi_50": [
+    [
+     4562.5805,
+     1259.8801,
+     495.8553,
+     358.881,
+     277.1458,
+     54.197,
+     12.8842,
+     12.8469,
+     0.2293,
+     0.0
+    ],
+    [
+     5890.2661,
+     1596.8316,
+     567.9238,
+     381.495,
+     281.9592,
+     52.7783,
+     11.9158,
+     10.9859,
+     0.1759,
+     0.0
+    ],
+    [
+     7604.3008,
+     2024.9533,
+     650.981,
+     405.6306,
+     286.8852,
+     51.4084,
+     11.0226,
+     9.403,
+     0.1351,
+     0.0
+    ],
+    [
+     9817.1102,
+     2569.1669,
+     746.7752,
+     431.3957,
+     291.9265,
+     50.0856,
+     10.1985,
+     8.0553,
+     0.1038,
+     0.0
+    ],
+    [
+     12673.8347,
+     3261.2675,
+     857.3431,
+     458.9067,
+     297.0863,
+     48.8079,
+     9.4381,
+     6.907,
+     0.0799,
+     0.0
+    ]
+   ]
+  },
+  "sc15": [
+   "mi_10",
+   "mi_25",
+   "mi_50"
+  ],
+  "epsGrid": [
+   0,
+   0.5,
+   1,
+   1.5,
+   2
+  ],
+  "bu": 4.0435,
+  "shockInterp": {
+   "du3": 3,
+   "du5": 5,
+   "aff3": 60.2,
+   "aff5": 100.9,
+   "provenance": {
+    "du3": "borrowed_adjusted",
+    "du5": "borrowed_adjusted",
+    "aff3": "borrowed_adjusted",
+    "aff5": "borrowed_adjusted"
+   },
+   "provenance_note": {
+    "du3": "The shock sizes are the UK model's computed points (3 and 5 percentage points); there is no model for Hungary.",
+    "du5": "The shock sizes are the UK model's computed points (3 and 5 percentage points); there is no model for Hungary.",
+    "aff3": "The UK's modelled share of working-age units whose employment income falls at 3pp (2.176418%), applied to Hungary's working-age households: 4044 thousand households x 0.6836 working-age share (EU-SILC ilc_lvps02, 2024: households other than one adult aged 65+ or two adults with one aged 65+, a lower bound) = 60.2 thousand.",
+    "aff5": "The same at 5pp (3.649125%): 100.9 thousand."
+   }
+  },
+  "scenarios": []
+ },
+ "grid": {
+  "meta": {
+   "eps_grid": [
+    0,
+    0.5,
+    1,
+    1.5,
+    2
+   ],
+   "population_basis": {
+    "scope": "all_households",
+    "includes": "Every private household (Eurostat).",
+    "excludes": "Nothing.",
+    "units_k": 4043.5,
+    "population_k": 9584.627,
+    "summary": "All private households (Eurostat labour force survey household count) and the resident population on 1 January (Eurostat demo_pjan), the population the estimated extra income is spread over."
+   }
+  },
+  "dials": {}
+ }
+}

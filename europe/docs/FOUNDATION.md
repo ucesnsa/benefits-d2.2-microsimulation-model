@@ -29,6 +29,8 @@ Per country and service: **national** (country-specific figure), **transfer-from
 
 ## 2. Provider layer
 
+**Which values the tools use.** The Spain, Italy, and Greece tools read their provider values from their country blocks (`europe/tool_machinery/country_{es,it,el}.json`), which carry the same evidence as the provider tool for all EU member states. Each value's source and grade are in its own note; [`VALUATION_CHAINS.md`](VALUATION_CHAINS.md) prints how every outcome value is built; and `eu27/build/report/EVIDENCE_TABLES.md` tabulates every unit cost and outcome value by country. This section summarises the evidence and the tool-ready layer the first three EU countries were first built with. Where a figure here and a country block differ, the country block is the one the tool uses.
+
 Two sub-layers, clearly separated. **Native-and-decided** (from `PROVIDER_EVIDENCE_EU.md`; native price years). **Tool-ready** (from `PROVIDER_TOOLREADY_2024.md`; 2024-equivalent, deflator-uprated then one HFCE-PPP step for transfers, single 2024 PPP round).
 
 ### 2a. Native-and-decided layer (native years; committed)

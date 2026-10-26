@@ -548,6 +548,49 @@ def outcome_conversion_rows(cc, name, o):
     return rows, fails
 
 
+# 7.10c's grammar. Every EU unit-cost note ends on the figure it starts from and the one
+# factor that turns it into the tool's value: a labour-cost ratio for a transfer, a
+# deflator ratio for a national figure brought to 2024. Added 2026-09-30, when the notes
+# were rewritten and the earlier prose pattern stopped matching any of them, so every row
+# silently became "national figure, not a conversion" and the check recomputed nothing.
+# A note with no clause is therefore a FAILURE here, never a pass by default.
+CONV_RE = re.compile(r"CONVERSION:\s*([A-Z]{3})\s+%s\s+x\s+%s" % (NUM, NUM))
+UK_TOOL_RE = re.compile(r"the UK tool's (?:unit cost|figure)")
+
+
+def unit_cost_conversion_row(cc, slot, s, uk_services):
+    """7.10c for one EU unit cost: recompute the tool value from the note's CONVERSION clause.
+    Where the note names the UK tool's own figure as the origin, that origin must also equal
+    the UK block's unit cost in the slot it was carried from. Returns (row, n_failing).
+    Module-level so the negative test drives exactly the code the audit runs."""
+    note = (s.get("provenance_note") or {}).get("unitCost", "")
+    got = s.get("unitCost")
+    row = {"cc": cc, "slot": slot, "service": s["name"], "tool value": got}
+    m = CONV_RE.search(note)
+    if not m:
+        row.update({"origin": "-", "factor": "-", "recomputed": "-",
+                    "matches": "**NO CONVERSION CLAUSE - FAIL**"})
+        return row, 1
+    cur, origin, factor = m.group(1), float(m.group(2)), float(m.group(3))
+    rec = origin * factor
+    ok = got is not None and round(rec) == round(got)
+    src_ok = True
+    if cur == "GBP" and UK_TOOL_RE.search(note):
+        src = EU_SOURCE_SLOT[slot] if slot < len(EU_SOURCE_SLOT) else None
+        in_block = uk_services[src]["unitCost"] if src is not None and src < len(uk_services) else None
+        src_ok = in_block is not None and abs(in_block - origin) < 0.5
+    row.update({"origin": "%s %s" % (cur, fmt_origin(origin)), "factor": factor, "recomputed": round(rec, 3),
+                "matches": (True if ok and src_ok else
+                            "**off by %.3f - FAIL**" % (got - rec) if not ok else
+                            "**origin is not the UK block's figure - FAIL**")})
+    return row, 0 if (ok and src_ok) else 1
+
+
+def fmt_origin(v):
+    return ("{:,.0f}".format(v) if v >= 1000 and float(v).is_integer() else "{:,.2f}".format(v) if v >= 1000
+            else ("%g" % v))
+
+
 def outcome_rows_scoped(cc, name, o):
     """outcome_conversion_rows plus the scope rule, in one place.
 
@@ -866,35 +909,24 @@ is also checked against the five permitted classes."""))
                  "total": grand})
     rows.append({"cc": "values outside the five permitted classes", "total": bad or "none"})
 
-    out.append(("7.10c EU unit costs recomputed from the UK source and the stated ratio", [], """\
-Every EU unitCost that is a conversion carries, in its own note, the UK value it was
-converted from and the ratio applied. Recomputed here: tool value against
-UK value x ratio, rounded. A row reading "national figure" is not a conversion and
-has no ratio to check. This is the arithmetic the provider audit did not reach."""))
+    out.append(("7.10c EU unit costs recomputed from the stated origin and factor", [], """\
+Every EU unitCost carries, in its own note, a CONVERSION clause: the figure the note
+starts from and the one factor that turns it into the tool's value, a labour-cost ratio
+for a transfer and a deflator ratio for a national figure brought to 2024. Recomputed
+here: tool value against origin x factor, rounded. Where the origin is the UK tool's own
+figure it must also equal the UK block's unit cost in the slot it was carried from. A
+note with no clause is a failure, not a national figure passed by default."""))
     rows = out[-1][1]
     uk_svc = blocks["UK"]["data"]["services"]
+    uc_fails = 0
     for cc in CCS:
         if cc == "UK":
             continue
         for i, s in enumerate(blocks[cc]["data"]["services"]):
-            note = (s.get("provenance_note") or {}).get("unitCost", "")
-            mr = re.search(r"Ratio applied:\s*([0-9]+\.[0-9]+)", note)
-            mu = re.search(r"converted from the UK value of GBP\s*([0-9.,]+)", note)
-            if not (mr and mu):
-                rows.append({"cc": cc, "slot": i, "service": s["name"],
-                             "tool value": s.get("unitCost"), "UK source": "-", "ratio": "-",
-                             "recomputed": "-", "matches": "national figure, not a conversion"})
-                continue
-            ratio, uk_val = float(mr.group(1)), float(mu.group(1).replace(",", ""))
-            src = EU_SOURCE_SLOT[i] if i < len(EU_SOURCE_SLOT) else None
-            in_block = uk_svc[src]["unitCost"] if src is not None and src < len(uk_svc) else None
-            rec = uk_val * ratio
-            rows.append({
-                "cc": cc, "slot": i, "service": s["name"], "tool value": s.get("unitCost"),
-                "UK source": uk_val, "ratio": ratio, "recomputed": round(rec, 3),
-                "matches": (round(rec) == s.get("unitCost")
-                            and (in_block is None or abs(in_block - uk_val) < 1e-9)),
-            })
+            row, f = unit_cost_conversion_row(cc, i, s, uk_svc)
+            rows.append(row)
+            uc_fails += f
+    rows.append({"cc": "TOTAL", "service": "unit costs failing", "matches": uc_fails or "none"})
 
     out.append(("7.10d data.outcomes recomputed from the stated chain", [], """\
 The same arithmetic as 7.10c, one layer up, and since 2026-08-05 it covers **every

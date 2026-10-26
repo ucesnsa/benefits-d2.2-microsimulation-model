@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BENEFITS Provider Tool · @@COUNTRY_NAME@@</title>
+<style>
+:root{--ink:#1a1a1a;--muted:#4f5663;--line:#d8dee9;--accent:#1d4ed8;--accent-soft:#e3eafb;--bg:#ffffff;
+  --ground:#eef1f6;--panel:#f7f9fc;--ctrl:#fff7d6;--ctrl-line:#e4d49a;--good:#15803d;--good-bg:#e4f4e9;
+  --warn:#a15c07;--warn-bg:#fdf1de;--bad:#b91c1c;--bad-bg:#fbe5e5;--income:#8ea5e0;--avoided:#4a74d9;
+  --wellbeing:#1d4ed8;--band:#cad8f7}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:15.5px/1.55 Arial,Helvetica,sans-serif}
+a{color:var(--accent)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---- header and tabs ---- */
+header.top{background:var(--bg);border-bottom:1px solid var(--line)}
+.topin{max-width:980px;margin-inline:auto;padding:16px 16px 0;display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 24px}
+.brand{padding-bottom:12px}
+.brand .name{font-weight:700;font-size:20px;letter-spacing:.01em}
+.brand .sub{font-size:13.5px;color:var(--muted)}
+.brand .chip{display:inline-block;margin-left:6px;font:700 11px/1 Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 7px;border-radius:999px;background:var(--accent-soft);color:var(--accent);vertical-align:2px}
+nav.tabs{display:flex;gap:4px;margin-left:auto}
+nav.tabs button{padding:10px 18px;border:1px solid var(--line);border-bottom:none;border-radius:7px 7px 0 0;background:var(--panel);
+  cursor:pointer;font-weight:700;color:var(--muted)}
+nav.tabs button[aria-selected="true"]{background:var(--ground);color:var(--ink);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+main{max-width:980px;margin-inline:auto;padding:24px 16px 40px}
+section[hidden]{display:none}
+
+/* ---- shared ---- */
+.card{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:22px 24px}
+.stack{display:grid;gap:18px}
+/* Grid items default to min-width:auto, so a select sizes the whole column to its longest
+   option and pushes the card off a phone screen. Let every grid child shrink. */
+.stack>*,.fields>*,.moregrid>*,.qpair>*,.need>*{min-width:0}
+h1{font-size:28px;line-height:1.2;margin:0 0 10px;text-wrap:balance}
+h2{font-size:21px;line-height:1.25;margin:0 0 8px;text-wrap:balance}
+h3{font-size:16.5px;margin:18px 0 6px}
+p{margin:0 0 10px;max-width:70ch}
+.muted{color:var(--muted)}
+.small{font-size:13.5px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+ul.plain{margin:6px 0 10px;padding-left:20px;max-width:70ch}
+ul.plain li{margin:4px 0}
+
+/* ---- home ---- */
+.hero h1{font-size:30px}
+.hero .lede{font-size:17px;max-width:62ch}
+.qpair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:14px;margin:16px 0 18px}
+.qpair div{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:var(--panel)}
+.qpair b{display:block;font-size:17px;margin-bottom:4px}
+.start{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:8px;padding:12px 20px;font-weight:700;cursor:pointer;font-size:16px}
+.steps{counter-reset:st;list-style:none;padding:0;margin:8px 0 0;display:grid;gap:12px}
+.steps li{counter-increment:st;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start}
+.steps li::before{content:counter(st);width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;
+  display:flex;align-items:center;justify-content:center}
+.need{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr));gap:10px;margin-top:10px}
+.need div{background:var(--ctrl);border:1px solid var(--ctrl-line);border-radius:7px;padding:10px 12px;font-size:14.5px}
+.need b{display:block}
+.defs{display:grid;gap:12px;margin-top:8px}
+.defs div{border-left:3px solid var(--line);padding-left:12px}
+.defs dt,.defs b.t{font-weight:700;display:block}
+.status-key{display:grid;gap:8px;margin:8px 0}
+.status-key div{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.gloss{overflow-x:auto}
+.gloss table{min-width:560px}
+.fmt{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+
+/* ---- tool: inputs ---- */
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr));gap:14px}
+.field label{display:block;font-size:13.5px;color:var(--muted);margin-bottom:5px}
+.field input,.field select{width:100%;max-width:100%;min-width:0;background:var(--ctrl);border:1px solid var(--ctrl-line);border-radius:7px;padding:9px 10px;font-weight:700}
+.field.wide{grid-column:1/-1}
+@media (min-width:720px){.field.svc{grid-column:span 2}}
+details summary{cursor:pointer;color:var(--accent);font-weight:700;width:fit-content}
+details.more{margin-top:16px}
+.moregrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:14px;margin-top:12px;padding:14px;background:var(--panel);
+  border:1px solid var(--line);border-radius:8px}
+.moregrid .hint{font-size:13px;color:var(--muted);margin:5px 0 0}
+.costrow{display:flex;gap:8px;align-items:center}
+.costrow input{flex:1;min-width:0}
+.linkbtn{background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:13.5px;white-space:nowrap}
+
+/* ---- tool: answers ---- */
+.qlabel{font-size:22px;font-weight:700;margin:0 0 4px}
+.verdict{font-size:18px;margin:4px 0 8px;max-width:66ch}
+.verdict strong{font-size:30px;color:var(--accent);letter-spacing:-.01em}
+.range{margin:14px 0 2px}
+.range .over{position:relative;height:26px;font-size:13.5px;font-weight:700;color:var(--accent)}
+.range .over span{position:absolute;bottom:3px;white-space:nowrap;transform:translateX(-50%)}
+.track{position:relative;height:16px;border-radius:8px;background:var(--panel);border:1px solid var(--line)}
+.track .band{position:absolute;top:2px;bottom:2px;border-radius:6px;background:var(--band);min-width:3px}
+.track .even{position:absolute;top:-8px;bottom:-8px;border-left:2px dashed #6b7280}
+.track .dot{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--accent);border:3px solid #fff;
+  transform:translate(-50%,-50%);box-shadow:0 0 0 1px var(--accent)}
+.ticks{position:relative;height:36px;font-size:12px;color:var(--muted)}
+.ticks span{position:absolute;top:7px;transform:translateX(-50%);white-space:nowrap;text-align:center;line-height:1.25}
+.ticks span.first{transform:none}.ticks span.last{transform:translateX(-100%)}
+.ticks em{display:block;font-style:normal;font-weight:700;color:var(--ink)}
+.split{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--panel)}
+.split i{display:block;height:100%}
+.legend{display:grid;gap:6px;margin-top:10px;font-size:14.5px;max-width:640px}
+.legend div{display:flex;gap:10px;align-items:baseline}
+.legend .sw{width:12px;height:12px;border-radius:3px;flex:none;transform:translateY(1px)}
+.legend .amt{margin-left:auto;font-weight:700;white-space:nowrap;text-align:right}
+.legend .tot{border-top:1px solid var(--line);padding-top:6px;font-weight:700}
+.callout{border:1px solid var(--warn);background:var(--warn-bg);border-radius:8px;padding:12px 14px;margin:10px 0}
+.callout p:last-child{margin:0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+td.n,th.n{text-align:right;white-space:nowrap}
+td small{display:block;color:var(--muted);font-size:12.5px}
+.tablewrap{overflow-x:auto;margin-top:8px}
+
+.slider label{display:block;font-size:17px;margin:4px 0 8px}
+.slider output{font-weight:700;color:var(--accent)}
+.slider input{width:100%;accent-color:var(--accent)}
+.slider .scale{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.pill{display:inline-block;font:700 14px/1 Arial,sans-serif;padding:8px 13px;border-radius:999px;border:1px solid currentColor}
+.pill.ok{color:var(--good);background:var(--good-bg)}
+.pill.warn{color:var(--warn);background:var(--warn-bg)}
+.pill.bad{color:var(--bad);background:var(--bad-bg)}
+.statusrow{margin:14px 0 6px}
+.gauge{margin:16px 0 4px;max-width:640px}
+.gauge .bar{position:relative;height:18px;border-radius:9px;overflow:hidden;display:flex;border:1px solid var(--line)}
+.gauge .bar i{display:block;height:100%}
+.gauge .marks{position:relative;height:0}
+.gauge .mk{position:absolute;top:-24px;width:4px;height:30px;background:var(--ink);border-radius:2px;transform:translateX(-50%)}
+.gauge .mk.now{background:#fff;border:2px solid var(--ink);width:10px;height:10px;top:-14px;border-radius:50%}
+.gauge .lab{position:relative;height:40px;font-size:12.5px;color:var(--muted)}
+.gauge .lab span{position:absolute;top:8px;transform:translateX(-50%);white-space:nowrap}
+.gauge .lab span.first{transform:none}.gauge .lab span.last{transform:translateX(-100%)}
+.gkey{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:2px}
+.gkey i{display:inline-block;vertical-align:-2px;margin-right:6px}
+.gkey .k-now{width:10px;height:10px;border:2px solid var(--ink);border-radius:50%;background:#fff}
+.gkey .k-after{width:4px;height:14px;background:var(--ink);border-radius:2px}
+.extrap{color:var(--warn);font-size:14px}
+
+.sure dl{display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:8px 16px;margin:8px 0 0}
+.sure dt{font-weight:700}
+.sure dd{margin:0}
+@media (max-width:560px){.sure dl{grid-template-columns:1fr}.sure dd{margin-bottom:6px}}
+.mark{color:var(--bad);font-weight:700;font-size:11px;margin-left:2px}
+textarea#summary{width:100%;min-height:150px;border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--panel);font-size:14.5px;line-height:1.5;resize:vertical}
+.copyrow{display:flex;gap:12px;align-items:center;margin-top:8px}
+.copybtn{background:var(--bg);border:1px solid var(--accent);color:var(--accent);border-radius:7px;padding:8px 14px;font-weight:700;cursor:pointer}
+
+/* ---- footer ---- */
+footer.foot{background:var(--bg);border-top:1px solid var(--line)}
+.footin{max-width:980px;margin-inline:auto;padding:18px 16px 26px}
+.fbrand{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.fbrand .logo svg{height:50px;width:auto;display:block}
+/* Article 17.2: the emblem is at least as prominent as the project logo beside it. */
+.fbrand img.emblem{height:50px;width:auto;display:block}
+.ftitles .b{font-weight:700;font-size:17px}.ftitles .sub{font-size:13px;color:var(--muted)}
+.fdisc{font-size:12.5px;color:var(--muted);border-left:3px solid #003399;padding-left:10px;margin:14px 0 8px;max-width:none}
+@media print{header.top nav,.start,.copybtn,.linkbtn,details.more summary{display:none}body{background:#fff}.card{border-color:#bbb}}
+@media (max-width:560px){.card{padding:18px 16px}.verdict strong{font-size:26px}h1,.hero h1{font-size:25px}nav.tabs{margin-left:0}}
+@media (prefers-reduced-motion:no-preference){.track .dot,.gauge .mk{transition:left .2s}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topin">
+    <div class="brand">
+      <div class="name">BENEFITS Provider Tool <span class="chip">@@COUNTRY_NAME@@</span></div>
+      <div class="sub">Is my service worth what it costs, and could we cope if unemployment rises? A plain-language edition of the D2.2 Microsimulation Valuation Tool.</div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button role="tab" id="tab-home" aria-controls="home" aria-selected="true">Home</button>
+      <button role="tab" id="tab-tool" aria-controls="tool" aria-selected="false">Your service</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- =============================== HOME =============================== -->
+<section id="home" role="tabpanel" aria-labelledby="tab-home" class="stack">
+
+  <div class="card hero">
+    <p class="eyebrow">For social-service providers in <span data-f="country"></span></p>
+    <h1>Two questions about your service, answered in plain numbers</h1>
+    <p class="lede">You tell the tool what your service does, how many people it helps and what it costs to run. It answers two questions that funders, boards and ministries ask.</p>
+    <div class="qpair">
+      <div><b>1. Is it worth what it costs?</b>How much good your service does in a year, turned into money, compared with what it costs to run. For example: “about <span data-f="cur"></span>1.15 back for every <span data-f="cur"></span>1 spent”.</div>
+      <div><b>2. Could you cope if unemployment rises?</b>If more people lose their jobs, more of them need services like yours. The tool estimates how many more would come to you, and whether your team has room.</div>
+    </div>
+    <button type="button" class="start" id="start">Start with your service</button>
+  </div>
+
+  <div class="card">
+    <h2>What you need to have ready</h2>
+    <p>Five things you already know. Everything else is filled in for you, and you can leave it alone.</p>
+    <div class="need">
+      <div><b>Type of service</b>Pick the closest from a list of <span data-f="nsvc"></span>.</div>
+      <div><b>People you help each year</b>Count individual people, not households or visits.</div>
+      <div><b>Yearly running cost</b>Everything the service costs in a year: staff, rent, materials.</div>
+      <div><b>Staff who work with clients</b>People who work directly with the people you help.</div>
+      <div><b>Clients each takes a year</b>How many people one staff member can help in a year.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>How to use it</h2>
+    <ol class="steps">
+      <li><div>Open <b>Your service</b>, choose your type of service and type in your own numbers. The answers update as you type.</div></li>
+      <li><div>Read the first answer, <b>Is it worth what it costs?</b> It gives a best estimate and a range from low to high.</div></li>
+      <li><div>Move the <b>unemployment slider</b> in the second answer to see how many more people would need you, and whether your team would have room.</div></li>
+      <li><div>At the bottom, copy the <b>summary</b> into a report or funding application. It carries the range, not just the best estimate.</div></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>The first answer: is it worth what it costs?</h2>
+    <p>The tool adds up the good your service does for the people it helps in a year, and puts a money value on it. It then divides that by your yearly running cost. The result reads as “<span data-f="cur"></span>X back for every <span data-f="cur"></span>1 spent”. Above <span data-f="cur"></span>1, the benefit is bigger than the cost. Below <span data-f="cur"></span>1, it is smaller.</p>
+    <h3>Where the benefit comes from</h3>
+    <div class="defs">
+      <div><b class="t">Extra income</b>Money that ends up in the pockets of the people you help. It is worked out with <span data-f="engine"></span>, a model of the tax and benefit system run on <span data-f="survey"></span>. A gain to a poorer household counts for more than the same gain to a richer one (see the settings below).</div>
+      <div><b class="t">Costs avoided</b>Problems your service prevents that would otherwise cost money, such as an eviction or a homeless placement. Each is valued at its published cost.</div>
+      <div><b class="t">Feeling better</b>How much better people’s lives are, measured by how satisfied they say they are with life on a scale from 0 to 10. One point higher, for one person, for one year, is valued at <span data-f="spine"></span>. That value comes from the UK Treasury’s official guidance on valuing wellbeing<span data-f="spineadj"></span>.</div>
+    </div>
+    <h3>Why there is a range</h3>
+    <p>For most services, how much they help comes from published research, often from another country. So each figure has a <b>low</b>, a <b>best estimate</b> and a <b>high</b>. When the research is thin the range is wide. When you report the result, give the range, not just the best estimate. The copyable summary does this for you.</p>
+    <h3>When the tool can count only part of the value</h3>
+    <p>Some things a service achieves have no reliable published figure yet, such as the relief a food bank brings beyond the food itself. The tool does not guess these. It counts them as zero and tells you so. For those services the answer is a <b>floor</b>: the true value is at least this much, not exactly this much. It is not a verdict that the service is not worth it.</p>
+  </div>
+
+  <div class="card">
+    <h2>The second answer: could you cope if unemployment rises?</h2>
+    <p>You choose how much unemployment rises, in percentage points. A rise from 10% to 14% is 4 points. The tool estimates how many more people would lose their main job across <span data-f="country"></span>, and scales that down to the size of your service to estimate how many more would come to you.</p>
+    <p>Your team’s capacity is your staff multiplied by the clients each can take a year. For example, 10 staff taking 50 clients each can help 500 people a year. The tool compares that with the people you help now plus the extra people, and shows how full your team would be:</p>
+    <div class="status-key">
+      <div><span class="pill ok">Room to spare</span><span>under 100% full</span></div>
+      <div><span class="pill warn">Full, no room to spare</span><span>exactly 100% full</span></div>
+      <div><span class="pill warn">Over capacity</span><span>between 100% and 120% full</span></div>
+      <div><span class="pill bad">Well over capacity</span><span>120% full or more</span></div>
+    </div>
+    <p>If you would be over capacity, the tool tells you how many people you could not take, and what it would cost to help them at your cost per person.</p>
+    <p class="muted">The model works out rises of 3 and 5 points directly. Smaller rises are scaled down from 3 points, and rises above 5 points are a straight-line extension, so treat those as a rough guide. <span data-f="capplain"></span></p>
+  </div>
+
+  <div class="card">
+    <h2>The settings you can leave alone</h2>
+    <p>Under <b>More settings</b> there are four things, already filled in. Change them only if you have a reason to.</p>
+    <div class="defs">
+      <div><b class="t">Who you mainly help</b>The poorest 30% of people, the next 30% on low-to-middle incomes, or a mix of everyone. It changes the extra-income and costs-avoided parts of the value, because the same service moves incomes differently for different groups, and gains to poorer people count for more.</div>
+      <div><b class="t">Cost per person helped</b>Used to price any extra people you could not take. We fill in an estimate for each service, most of them borrowed from another country. <b>If you know your own cost per person, type it in: your figure is better than ours.</b> It applies to that service only, and “Use our estimate” puts ours back. For services counted per household, such as food aid or housing, divide your household cost by your average household size first.</div>
+      <div><b class="t">Extra weight for poorer households</b>How much more a <span data-f="cur"></span>1 gain counts when it goes to someone poorer. “None” counts every <span data-f="cur"></span>1 the same. “Standard” is the tool’s usual setting, and the stronger settings count gains to poorer people for more. It affects the extra-income and costs-avoided parts of the value. It does not affect the feeling-better part.</div>
+      <div><b class="t">Income pattern borrowed from</b>To value the extra income your service brings, the tool borrows the way a comparable national policy changes incomes for the same kind of people. By default this is <span data-f="refdefault"></span>. Change it only if another policy on the list is a closer match for what your service does to people’s incomes. The list holds only policies that raise incomes; the full tool also lists shocks, downturns and cuts, which would make a service’s income effect negative.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>How sure are we?</h2>
+    <ul class="plain">
+      <li>These are <b>estimates</b>, built from published research and national survey data, not measurements of your own service.</li>
+      <li><span data-f="costmix"></span></li>
+      <li>The second answer is a national rise in unemployment scaled to the size of your service. It is <b>not a forecast for your area</b>.</li>
+      <li>Everything is <b>per person</b> helped. Costs and outcome values are at <b>2024 prices</b>; extra income is at <span data-f="incomeyear"></span> prices, the year of the model’s income data, exactly as in the full tool.</li>
+      <li>On the Your service page, <b>How sure are we?</b> tells you where each number for your chosen service comes from, and <b>See the full working</b> shows every figure behind the answers.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Reading the numbers</h2>
+    <div class="fmt">
+      <p>This tool writes numbers the English way: a <b>comma separates thousands</b> and a <b>point marks decimals</b>. So <b><span data-f="cur"></span>1,713</b> is one thousand seven hundred and thirteen, and <b><span data-f="cur"></span>1.15</b> is <span data-f="curphrase"></span>.</p>
+      <p class="muted small" data-f="fmtnote"></p>
+    </div>
+  </div>
+
+  <div class="card gloss">
+    <h2>If you talk to an analyst</h2>
+    <p>This tool uses everyday words. The full D2.2 tool and the technical report use technical ones. Here is how they match.</p>
+    <table>
+      <thead><tr><th>In this tool</th><th>In the full tool and the technical report</th></tr></thead>
+      <tbody>
+        <tr><td>Benefit for every <span data-f="cur"></span>1 spent</td><td>Benefit-cost ratio (BCR)</td></tr>
+        <tr><td>Total benefit a year</td><td>Welfare-weighted headline</td></tr>
+        <tr><td>Extra income</td><td>Cash-equivalent floor (weighted); engine income (unweighted)</td></tr>
+        <tr><td>Costs avoided</td><td>Conventional outcomes</td></tr>
+        <tr><td>Feeling better</td><td>WELLBY outcomes, valued on the WELLBY spine</td></tr>
+        <tr><td>Low, best estimate, high</td><td>L / C / H (low / central / high)</td></tr>
+        <tr><td>Extra weight for poorer households</td><td>Inequality aversion, ε (epsilon)</td></tr>
+        <tr><td>Who you mainly help</td><td>Targeting profile (income deciles)</td></tr>
+        <tr><td>Income pattern borrowed from</td><td>Reference reform (value-added proxy)</td></tr>
+        <tr><td>Unemployment rise, in points</td><td>Unemployment shock (pp)</td></tr>
+        <tr><td>Room to spare / over capacity</td><td>RAG status: OK / AT RISK / OVER-CAPACITY</td></tr>
+        <tr><td>Cost per person helped</td><td>Unit cost</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>About this tool</h2>
+    <p>BENEFITS (Building Economic, Needs-Based and Environmental evaluation Frameworks for Inclusive Transformation of Social services in Europe) is a Horizon Europe project coordinated by KMOP, with partners across Europe. Deliverable D2.2 is its Microsimulation Valuation Tool, built for the United Kingdom, Spain, Italy and Greece.</p>
+    <p>This is the <b>@@COUNTRY_NAME@@</b> edition of its provider part, rewritten in plain language. It uses the same data and the same calculation as the full tool, so for the same inputs every figure is the same. It is a single file that runs offline in any web browser, with nothing to install and no login. It holds figures only, no personal data, and what you type stays on your computer.</p>
+  </div>
+</section>
+
+<!-- =============================== TOOL =============================== -->
+<section id="tool" role="tabpanel" aria-labelledby="tab-tool" class="stack" hidden>
+
+  <div class="card">
+    <p class="eyebrow">Your service</p>
+    <div class="fields">
+      <div class="field svc"><label for="f-svc">Type of service</label><select id="f-svc"></select></div>
+      <div class="field"><label for="f-people">People you help each year</label><input id="f-people" type="number" min="0" step="1" inputmode="numeric"></div>
+      <div class="field"><label for="f-cost">Yearly running cost (<span data-f="cur"></span>)</label><input id="f-cost" type="number" min="0" step="1" inputmode="numeric"></div>
+      <div class="field"><label for="f-staff">Staff who work with clients</label><input id="f-staff" type="number" min="0" step="1" inputmode="numeric"></div>
+      <div class="field"><label for="f-casesper">Clients each takes a year</label><input id="f-casesper" type="number" min="0" step="1" inputmode="numeric"></div>
+    </div>
+    <details class="more" id="more">
+      <summary>More settings (already filled in for you)</summary>
+      <div class="moregrid">
+        <div class="field"><label for="f-prof">Who you mainly help</label><select id="f-prof"></select></div>
+        <div class="field"><label for="f-unitcost">Cost per person helped (<span data-f="cur"></span> a year)</label>
+          <div class="costrow"><input id="f-unitcost" type="number" min="0" step="1" inputmode="numeric"><button type="button" class="linkbtn" id="f-costreset">Use our estimate</button></div>
+          <p class="hint" id="f-costhint"></p></div>
+        <div class="field"><label for="f-eps">Extra weight for poorer households</label><select id="f-eps"></select></div>
+        <div class="field"><label for="f-ref">Income pattern borrowed from</label><select id="f-ref"></select>
+          <p class="hint">A national policy whose effect on incomes stands in for your service’s.</p></div>
+      </div>
+    </details>
+  </div>
+
+  <div class="card">
+    <p class="qlabel">Is it worth what it costs?</p>
+    <p class="verdict" id="v-verdict" aria-live="polite"></p>
+    <p id="v-body"></p>
+    <div class="range" id="v-range" role="img">
+      <div class="over" id="v-over"></div>
+      <div class="track" id="v-track"><div class="band" id="v-band"></div><div class="even" id="v-even"></div><div class="dot" id="v-dot"></div></div>
+      <div class="ticks" id="v-ticks"></div>
+    </div>
+    <p class="muted" id="v-rangecap"></p>
+    <div class="callout" id="v-floor" hidden></div>
+    <h3>Where the benefit comes from</h3>
+    <div class="split" id="v-split" role="img"></div>
+    <div class="legend" id="v-legend"></div>
+    <p class="muted small" id="v-excluded"></p>
+    <h3>What the value is based on</h3>
+    <div class="tablewrap"><table id="v-evidence"></table></div>
+  </div>
+
+  <div class="card">
+    <p class="qlabel">Could you cope if unemployment rises?</p>
+    <div class="slider">
+      <label for="f-shock">If unemployment rises by <output id="o-shock" for="f-shock"></output> percentage points</label>
+      <input id="f-shock" type="range" min="0" max="10" step="0.5">
+      <div class="scale" aria-hidden="true"><span>0</span><span>5</span><span>10</span></div>
+    </div>
+    <div class="statusrow"><span class="pill" id="c-pill"></span></div>
+    <p class="verdict" id="c-extra" aria-live="polite"></p>
+    <div class="gauge" id="c-gauge">
+      <div class="bar"><i style="width:66.667%;background:var(--good-bg);border-right:1px solid var(--good)"></i><i style="width:13.333%;background:var(--warn-bg);border-right:1px solid var(--warn)"></i><i style="width:20%;background:var(--bad-bg)"></i></div>
+      <div class="marks"><span class="mk now" id="c-mnow"></span><span class="mk" id="c-mafter"></span></div>
+      <div class="lab"><span class="first" style="left:0">0% full</span><span style="left:66.667%">100%</span><span style="left:80%">120%</span><span class="last" style="left:100%">150%</span></div>
+      <div class="gkey"><span><i class="k-now"></i>Today</span><span><i class="k-after"></i>After the rise</span></div>
+    </div>
+    <p id="c-cap"></p>
+    <p id="c-fix"></p>
+    <p class="extrap" id="c-extrap" hidden></p>
+    <p class="muted small" id="c-caveat"></p>
+  </div>
+
+  <div class="card sure">
+    <p class="qlabel" style="font-size:19px">How sure are we?</p>
+    <dl id="s-list"></dl>
+    <p class="muted small" id="s-note"></p>
+    <details id="working" style="margin-top:12px">
+      <summary>See the full working</summary>
+      <p class="small muted" style="margin-top:10px" data-f="worknote"></p>
+      <div class="tablewrap"><table id="w-value"></table></div>
+      <div class="tablewrap" style="margin-top:14px"><table id="w-cap"></table></div>
+      <p class="small muted" id="w-legend" style="margin-top:10px"></p>
+      <p class="small" id="w-flag"></p>
+    </details>
+  </div>
+
+  <div class="card">
+    <p class="qlabel" style="font-size:19px">Summary you can copy</p>
+    <p class="muted small">For a report or a funding application. It gives the range, not only the best estimate.</p>
+    <textarea id="summary" readonly aria-label="Summary you can copy"></textarea>
+    <div class="copyrow"><button type="button" class="copybtn" id="copy">Copy the summary</button><span class="small muted" id="copied" aria-live="polite"></span></div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="footin">
+    <div class="fbrand">
+      <span class="logo" aria-label="BENEFITS logo">@@LOGO_SVG@@</span>
+      <div class="ftitles"><div class="b">BENEFITS</div><div class="sub">D2.2: Provider tool, plain-language edition</div></div>
+      @@EMBLEM_IMG@@
+    </div>
+    <p class="fdisc">Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Research Executive Agency. Neither the European Union nor the granting authority can be held responsible for them. Project number: 101179032.</p>
+    <p class="small muted" data-f="footnote"></p>
+  </div>
+</footer>
+
+<script>
+/* ======================================================================
+   Data for this country, read from the shipped D2.2 tool at build time.
+   ====================================================================== */
+const D=@@DATA@@;
+
+/* ======================================================================
+   THE CALCULATION. Ported line for line from renderProvider() in the full
+   tool (europe/tool_machinery/template.html). calc() takes the inputs and
+   returns every figure; nothing on the page computes a figure of its own.
+   ====================================================================== */
+const UNITS_M=(D.pb&&D.pb.units_k!=null)?(D.pb.units_k/1000):D.bu;
+const HH_SIZE=(D.pb&&D.pb.population_k!=null&&D.pb.units_k)?(D.pb.population_k/D.pb.units_k):1;
+const GRADE_RANK={national_source:0,national_derived:0,borrowed_adjusted:1,borrowed_unadjusted:2,assumption:2,user_supplied:0};
+function gradeOf(classes){var w=0;for(var i=0;i<classes.length;i++){var c=classes[i];
+  if(c==null)continue;var r=GRADE_RANK[c];if(r==null)r=2;if(r>w)w=r;}
+  return w===0?"":(w===1?"*":"**");}
+function fieldClasses(s,fields){var p=(s&&s.provenance)||{},o=[];
+  for(var i=0;i<fields.length;i++)if(p[fields[i]]!=null)o.push(p[fields[i]]);return o;}
+function outcomeClasses(name){var o=D.outcomes&&D.outcomes[name];var a=[];
+  if(o&&o.provenance)a.push(o.provenance);
+  if(D.spine&&D.spine.provenance)a.push(D.spine.provenance);
+  return a;}
+function shockClasses(){var p=(D.shockInterp&&D.shockInterp.provenance)||{};
+  var o=[];if(p.aff3!=null)o.push(p.aff3);if(p.aff5!=null)o.push(p.aff5);return o;}
+function demandClasses(s){return fieldClasses(s,["elastLow","elastCentral","elastHigh"]).concat(shockClasses());}
+function isOverride(uc,s){var v=(uc&&s)?uc[s.name]:null;return v!=null&&isFinite(v);}
+function unitCostClasses(s,uc){return isOverride(uc,s)?["user_supplied"]:fieldClasses(s,["unitCost"]);}
+function hasUser(classes){for(var i=0;i<classes.length;i++)if(classes[i]==="user_supplied")return true;return false;}
+
+function calc(c){
+  /* c: {sv, people, cost, prof, eps, ref, staff, casesPer, shock, uc}. Strings are read the
+     way the full tool reads its fields: a blank number is 0, and a blank running cost means
+     "not entered" rather than zero. */
+  const s=D.services.find(x=>x.name===c.sv);
+  const people=+c.people||0, cost=(c.cost==null?"":String(c.cost)), prof=c.prof, pe=parseFloat(c.eps), ref=c.ref;
+  const band=D.profiles[prof],k=band.length,ei=D.epsGrid.indexOf(pe);
+  const decW=D.deciles[ref][ei],dec0=D.deciles[ref][0];
+  const bandWt=band.reduce((a,d)=>a+decW[d],0),bandUnwt=band.reduce((a,d)=>a+dec0[d],0);
+  const pbW=bandWt*10/(k*UNITS_M*HH_SIZE),pbU=bandUnwt*10/(k*UNITS_M*HH_SIZE),kappa=pbU!==0?pbW/pbU:1;
+  const o=D.outcomes[s.name]||{convL:0,convC:0,convH:0,wbL:0,wbC:0,wbH:0,sensC:0,rows:[]};
+  const cashfloor=people*pbW,engineInc=people*pbU;
+  const conv=[people*o.convL,people*o.convC,people*o.convH],wbo=[people*o.wbL,people*o.wbC,people*o.wbH];
+  const head=[cashfloor+conv[0]*kappa+wbo[0],cashfloor+conv[1]*kappa+wbo[1],cashfloor+conv[2]*kappa+wbo[2]];
+  const mono=[engineInc+conv[0]+wbo[0],engineInc+conv[1]+wbo[1],engineInc+conv[2]+wbo[2]];
+  const bcrRaw=cost===""?null:head[1]/(+cost);
+  const bcr=(bcrRaw!=null&&isFinite(bcrRaw))?bcrRaw:null,sens=people*o.sensC;
+  /* The full tool shows the ratio at the central estimate only. The low and high ratios here
+     are its low and high headline over the same running cost: shown so the ratio carries its
+     range, and marked as derived in the full working. */
+  const bcrL=bcr==null?null:head[0]/(+cost), bcrH=bcr==null?null:head[2]/(+cost);
+  const raw=+c.shock||0, I=D.shockInterp;
+  const shockVal=(x,v3,v5)=> x<=0?0 : (x<=I.du3 ? v3*(x/I.du3) : v3+(x-I.du3)/(I.du5-I.du3)*(v5-v3));
+  const aff=shockVal(raw,I.aff3,I.aff5);
+  const unitsK=UNITS_M*1000;
+  const affFrac=aff/(unitsK*HH_SIZE);
+  const addL=s.elastLow*people*affFrac, addC=s.elastCentral*people*affFrac, addH=s.elastHigh*people*affFrac;
+  const staffN=+c.staff||0, casesPer=+c.casesPer||0, capacity=staffN*casesPer;
+  const projL=people+addL, projC=people+addC, projH=people+addH;
+  const util=capacity>0?projC/capacity:Infinity;
+  const unmetL=Math.max(0,projL-capacity), unmetC=Math.max(0,projC-capacity), unmetH=Math.max(0,projH-capacity);
+  const addStaff=casesPer>0?Math.ceil(unmetC/casesPer):0;
+  const uOwn=isOverride(c.uc,s), uCost=uOwn?c.uc[s.name]:(s?s.unitCost:0);
+  const addBudget=unmetC*uCost;
+  const rag=util>=1.2?"OVER-CAPACITY":util>=1?"AT RISK":"OK";
+  const budCls=demandClasses(s).concat(unitCostClasses(s,c.uc));
+  return {s,o,people,cost,prof,pe,ref,raw,kappa,pbW,pbU,cashfloor,engineInc,conv,wbo,head,mono,bcr,bcrL,bcrH,sens,
+    aff,addL,addC,addH,staffN,casesPer,capacity,projL,projC,projH,util,unmetL,unmetC,unmetH,addStaff,uCost,uOwn,addBudget,rag,
+    oor:raw>I.du5, gOut:gradeOf(outcomeClasses(s.name)), gHead:gradeOf(outcomeClasses(s.name)),
+    gDem:gradeOf(demandClasses(s)), gBud:gradeOf(budCls), budUser:hasUser(budCls),
+    gCost:gradeOf(unitCostClasses(s,c.uc)), gShock:gradeOf(shockClasses())};
+}
+
+/* ======================================================================
+   PRESENTATION. Every number below comes from calc().
+   ====================================================================== */
+const CUR=D.cur, $=id=>document.getElementById(id);
+const money=v=>(v<0?"−":"")+CUR+Math.abs(Math.round(v)).toLocaleString("en-GB");
+function approx(v){var a=Math.abs(v),r;
+  if(a>=10000)r=Math.round(v/1000)*1000;else if(a>=1000)r=Math.round(v/100)*100;else if(a>=100)r=Math.round(v/10)*10;else r=Math.round(v);
+  return money(r);}
+const ratio=r=>CUR+r.toFixed(2);
+const cnt=v=>Math.round(v).toLocaleString("en-GB");
+const esc=t=>String(t).replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+const PROF_PLAIN={"Lowest incomes (deciles 1-3)":"Lowest incomes (poorest 30%)",
+  "Low-to-middle (deciles 4-6)":"Low-to-middle incomes (next 30%)",
+  "Broad mix (all deciles)":"A mix across all incomes"};
+const PROF_SHORT={"Lowest incomes (deciles 1-3)":"people on the lowest incomes",
+  "Low-to-middle (deciles 4-6)":"people on low-to-middle incomes","Broad mix (all deciles)":"a mix of people across all incomes"};
+const EPS_PLAIN={"0":"None","0.5":"Light","1":"Standard","1.5":"Strong","2":"Very strong"};
+const METHOD_PLAIN={"ENGINE":"Extra income","WELLBY":"Feeling better","CONVENTIONAL":"Cost avoided",
+  "COST-INPUT":"Valued at its running cost","UNEVIDENCED-EXCLUDED":"Not counted: no reliable figure yet","SENSITIVITY":"Alternative estimate, not added in"};
+const CONF_PLAIN={"STRONG":"Strong","MODERATE":"Moderate","WEAK":"Weak","UNEVIDENCED":"None yet"};
+const CONF_RANK={"WEAK":1,"MODERATE":2,"STRONG":3};
+const UC={};   /* your own cost per person, by service; empty means ours */
+const GRADE_PLAIN={"":"a "+D.countryName+" source","*":"a figure borrowed from another country and adjusted to "+D.countryName,
+  "**":"a figure borrowed from another country without adjustment, or an assumption of ours"};
+
+function fill(){ /* country wording on both pages */
+  var nA=0,nD=0,nS=0;
+  D.services.forEach(function(x){var c=(x.provenance||{}).unitCost;
+    if(c==="assumption"||c==="borrowed_unadjusted")nA++;else if(c==="borrowed_adjusted")nD++;else nS++;});
+  var nT=D.services.length, borrowed=nA+nD;
+  var costmix = nS===0
+    ? "None of the "+nT+" services has a published "+D.countryName+" cost per person, so every estimate we fill in is borrowed from another country or is an assumption of ours. <b>Your own cost per person will be better.</b>"
+    : (nS===nT ? "All "+nT+" costs per person we fill in come from "+D.countryName+" sources."
+      : borrowed+" of the "+nT+" costs per person we fill in are borrowed from another country or are assumptions of ours, and "+nS+(nS===1?" comes":" come")+" from a "+D.countryName+" source. <b>Your own cost per person will be better.</b>");
+  var ukShock=(D.shockInterp.provenance||{}).aff3==="national_derived";
+  var capplain = ukShock
+    ? "How demand for each service responds, and how many clients one staff member takes, are assumptions from a register of UK services rather than measured figures."
+    : "How demand for each service responds, and how many households lose an earner, use figures from the UK, applied to "+D.countryName+"’s own households. They are not calibrated to "+D.countryName+".";
+  var F={country:D.countryName,cur:CUR,curphrase:(CUR==="£"?"one pound and fifteen pence":"one euro and fifteen cents"),nsvc:String(nT),
+    engine:D.engine,survey:D.survey,spine:money(D.spine.value),
+    spineadj:(D.code==="GB"?"":", converted to "+D.countryName+"’s price level"),
+    refdefault:(D.labels[D.defaults.rf]||D.defaults.rf),costmix:costmix,capplain:capplain,
+    worknote:D.workNote,fmtnote:D.fmtNote,
+    footnote:"Built on the BENEFITS D2.2 Microsimulation Valuation Tool: "+D.engine+", run on "+D.survey+". Costs and outcome values at 2024 prices; extra income at "+D.incomeYear+" prices. Figures only, no personal data.",incomeyear:D.incomeYear};
+  document.querySelectorAll("[data-f]").forEach(function(el){var v=F[el.getAttribute("data-f")];if(v!=null)el.innerHTML=v;});
+}
+
+function opt(sel,values,labels,val){sel.innerHTML="";values.forEach(function(v,i){var o=document.createElement("option");
+  o.value=v;o.textContent=labels?labels[i]:v;sel.appendChild(o);});sel.value=val;}
+function svcByName(n){return D.services.find(x=>x.name===n);}
+function setCostField(){var s=svcByName($("f-svc").value);if(!s)return;
+  var own=UC[s.name]!=null&&isFinite(UC[s.name]);
+  $("f-unitcost").value=String(own?UC[s.name]:s.unitCost);
+  costHint(s);}
+function costHint(s){var own=UC[s.name]!=null&&isFinite(UC[s.name]);
+  $("f-costhint").innerHTML=own?("Your own figure. Our estimate for this service is "+money(s.unitCost)+".")
+    :("Our estimate for this service. If you know yours, type it in.");
+  $("f-costreset").hidden=!own;}
+
+function readInputs(){return {sv:$("f-svc").value,people:$("f-people").value,cost:$("f-cost").value,prof:$("f-prof").value,
+  eps:$("f-eps").value,ref:$("f-ref").value,staff:$("f-staff").value,casesPer:$("f-casesper").value,shock:$("f-shock").value,uc:UC};}
+
+function niceMax(v){var st=[1.5,2,2.5,3,4,5,6,8,10,15,20,30,40,50,75,100,150,200];for(var i=0;i<st.length;i++)if(v<=st[i])return st[i];
+  return Math.ceil(v/100)*100;}
+
+function render(){
+  const c=readInputs(), r=calc(c), s=r.s, o=r.o;
+  window.__last=r;
+  const hasL=r.head[0], hasC=r.head[1], hasH=r.head[2];
+  const outcomeRows=o.rows||[];
+  const valued=(r.conv[2]>0||r.wbo[2]>0);             // anything beyond income at the high estimate
+  const centralValued=(r.conv[1]>0||r.wbo[1]>0);
+  const excluded=outcomeRows.filter(x=>x.method==="UNEVIDENCED-EXCLUDED").map(x=>x.outcome);
+
+  /* ---------- 1. worth it? ---------- */
+  var verdict="",body="",cap="",floor="";
+  if(r.people<=0){
+    verdict="Type in how many people you help each year to see the answer.";
+  } else if(r.bcr==null){
+    verdict="Your service creates about <strong>"+approx(hasC)+"</strong> of benefit a year.";
+    body="Type in your yearly running cost to see how that compares with what the service costs.";
+  } else if(!valued){
+    verdict="At least <strong>"+ratio(r.bcr)+"</strong> back for every "+CUR+"1 spent, counting extra income only.";
+    body="The tool can count only part of this service’s value: the extra income it brings "+cnt(r.people)+" people a year, about "+approx(hasC)+". Your running cost is "+money(+r.cost)+" a year.";
+  } else if(r.bcrL>=1){
+    verdict="Yes: about <strong>"+ratio(r.bcr)+"</strong> back for every "+CUR+"1 spent.";
+    body="Helping "+cnt(r.people)+" people a year creates around "+approx(hasC)+" of benefit for them and for society. The service costs "+money(+r.cost)+" a year to run. Even the low estimate is above "+CUR+"1.";
+  } else if(r.bcr>=1){
+    verdict="Probably yes: about <strong>"+ratio(r.bcr)+"</strong> back for every "+CUR+"1 spent.";
+    body="Helping "+cnt(r.people)+" people a year creates around "+approx(hasC)+" of benefit for them and for society. The service costs "+money(+r.cost)+" a year to run.";
+  } else if(r.bcrH>=1){
+    verdict="Possibly: the best estimate is <strong>"+ratio(r.bcr)+"</strong> for every "+CUR+"1, but the high estimate is above "+CUR+"1.";
+    body="Helping "+cnt(r.people)+" people a year creates around "+approx(hasC)+" of benefit on the best estimate, against a running cost of "+money(+r.cost)+" a year.";
+  } else {
+    verdict="Not on what the tool can count: about <strong>"+ratio(r.bcr)+"</strong> for every "+CUR+"1 spent.";
+    body="Helping "+cnt(r.people)+" people a year creates around "+approx(hasC)+" of benefit that the tool can put a value on, against a running cost of "+money(+r.cost)+" a year. Even the high estimate is below "+CUR+"1.";
+  }
+  if(r.bcr!=null&&r.people>0){
+    if(!valued) cap="";
+    else if(r.bcrL>=1) cap="The range runs from "+ratio(r.bcrL)+" to "+ratio(r.bcrH)+" for every "+CUR+"1.";
+    else cap="The range runs from "+ratio(r.bcrL)+" to "+ratio(r.bcrH)+" for every "+CUR+"1"
+      +(r.bcr>=1?". At the bottom of that range the service would not cover its cost.":".");
+  } else if(r.people>0&&valued) cap="Total benefit: "+approx(hasL)+" (low) to "+approx(hasH)+" (high) a year.";
+  if(r.people>0&&!valued){
+    floor="<p><b>This is a floor, not a verdict.</b> "+(excluded.length
+      ?"What this service achieves beyond people’s income ("+esc(excluded.join("; ").toLowerCase())+") has no reliable published figure yet, so the tool counts it as zero."
+      :"The tool values this service by the extra income it brings people. Any other good it does has no reliable published figure yet, so it is counted as zero.")
+      +" The true value is at least this much.</p>";
+  } else if(r.people>0&&valued&&!centralValued){
+    floor="<p><b>The best estimate of the wider benefit is close to zero,</b> but the evidence allows up to "+approx(r.conv[2]*r.kappa+r.wbo[2])+" a year on top of the extra income. That is why the range is wide.</p>";
+  }
+  $("v-verdict").innerHTML=verdict; $("v-body").textContent=body; $("v-rangecap").textContent=cap;
+  $("v-floor").innerHTML=floor; $("v-floor").hidden=!floor;
+
+  // range chart
+  var showRange=(r.bcr!=null&&r.people>0);
+  $("v-range").hidden=!showRange;
+  if(showRange){
+    var L=r.bcrL,C=r.bcr,H=r.bcrH, M=niceMax(Math.max(H,1)*1.08), x=v=>Math.max(0,Math.min(100,v/M*100));
+    $("v-band").style.left=x(L)+"%"; $("v-band").style.width=Math.max(0,x(H)-x(L))+"%";
+    $("v-dot").style.left=x(C)+"%"; $("v-even").style.left=x(1)+"%";
+    var lab=(valued?"Best estimate ":"At least ")+ratio(C), lx=Math.max(9,Math.min(91,x(C)));
+    $("v-over").innerHTML='<span style="left:'+lx+'%">'+lab+'</span>';
+    var step=[0.25,0.5,1,2,5,10,20,25,50,100].find(t=>M/t<=6)||M/5, h="";
+    var skip0=(step>1&&x(1)<10);
+    for(var t=0;t<=M+1e-9;t+=step){var cls=t===0?"first":(Math.abs(t-M)<1e-9?"last":"");
+      if(t===0&&skip0)continue;
+      var tl=CUR+(t%1?t.toFixed(2):String(t));
+      h+='<span class="'+cls+'" style="left:'+x(t)+'%">'+(Math.abs(t-1)<1e-9?'<em>'+tl+'</em>breaks even':tl)+'</span>';}
+    if(Math.abs((1/step)-Math.round(1/step))>1e-9||step>1) h+='<span style="left:'+x(1)+'%"><em>'+CUR+'1</em>breaks even</span>';
+    $("v-ticks").innerHTML=h;
+    $("v-range").setAttribute("aria-label","Benefit for every "+CUR+"1 spent: "+(valued?"best estimate "+ratio(C)+", range "+ratio(L)+" to "+ratio(H):"at least "+ratio(C))+". Break-even is "+CUR+"1.");
+  }
+
+  // where the benefit comes from (the three parts of the best-estimate total)
+  var parts=[["Extra income for the people you help",r.cashfloor,"var(--income)",true],
+             ["Costs avoided",r.conv[1]*r.kappa,"var(--avoided)",r.conv[2]>0||outcomeRows.some(x=>x.method==="CONVENTIONAL")],
+             ["Feeling better",r.wbo[1],"var(--wellbeing)",r.wbo[2]>0||outcomeRows.some(x=>x.method==="WELLBY")]];
+  var tot=hasC, sp="", lg="";
+  parts.forEach(function(p){
+    if(tot>0&&p[1]>0)sp+='<i style="width:'+(p[1]/tot*100)+'%;background:'+p[2]+'" title="'+esc(p[0])+'"></i>';
+    if(p[3]){var hi=(p[0]==="Costs avoided")?r.conv[2]*r.kappa:(p[0]==="Feeling better"?r.wbo[2]:null);
+      var amt=approx(p[1])+((hi!=null&&p[1]<=0&&hi>0)?" (up to "+approx(hi)+")":"");
+      lg+='<div><span class="sw" style="background:'+p[2]+'"></span>'+esc(p[0])+'<span class="amt">'+amt+'</span></div>';}
+  });
+  lg+='<div class="tot"><span class="sw" style="background:transparent"></span>Total benefit a year, best estimate<span class="amt">'+approx(tot)+'</span></div>';
+  $("v-split").innerHTML=sp; $("v-legend").innerHTML=lg;
+  var big=parts.filter(p=>p[1]>0).sort((a,b)=>b[1]-a[1])[0];
+  $("v-split").setAttribute("aria-label",parts.filter(p=>p[1]>0).map(p=>p[0]+" "+Math.round(p[1]/tot*100)+"%").join(", "));
+  var confs=outcomeRows.filter(x=>(x.method==="WELLBY"||x.method==="CONVENTIONAL")&&CONF_RANK[x.conf]).map(x=>x.conf);
+  var ex="";
+  if(valued&&confs.length){var u=[...new Set(confs)].sort((a,b)=>CONF_RANK[a]-CONF_RANK[b]);
+    ex=(u.length===1?"The evidence for the wider benefit is "+CONF_PLAIN[u[0]].toLowerCase()+".":"The evidence for the wider benefit ranges from "+CONF_PLAIN[u[0]].toLowerCase()+" to "+CONF_PLAIN[u[u.length-1]].toLowerCase()+".");
+    if(big&&tot>0&&big[1]/tot>=0.6&&big[0]==="Feeling better")ex+=" Most of the value is people feeling better: real, but the hardest part to measure, which is why the range is wide.";}
+  if(valued&&excluded.length)ex+=(ex?" ":"")+"Not counted, because there is no reliable published figure yet: "+esc(excluded.join("; ").toLowerCase())+".";
+  $("v-excluded").innerHTML=ex;
+  var et='<thead><tr><th>What the service achieves</th><th>How it is counted</th><th>Evidence</th><th class="n">Per person, best estimate</th></tr></thead><tbody>';
+  outcomeRows.forEach(function(x){
+    var val=x.method==="ENGINE"?"in extra income":(x.method==="UNEVIDENCED-EXCLUDED"?"not counted":(x.method==="SENSITIVITY"?money(x.valC)+" (not added)":money(x.valC)));
+    et+='<tr><td>'+esc(x.outcome)+'</td><td>'+esc(METHOD_PLAIN[x.method]||x.method)+'</td><td>'+esc(CONF_PLAIN[x.conf]||"–")+'</td><td class="n">'+val+'</td></tr>';});
+  $("v-evidence").innerHTML=et+'</tbody>';
+
+  /* ---------- 2. could you cope? ---------- */
+  $("o-shock").textContent=String(+r.raw);
+  var pill=$("c-pill"), pc, pt;
+  if(r.capacity<=0){pc="";pt="";}
+  else if(r.rag==="OVER-CAPACITY"){pc="bad";pt="Well over capacity";}
+  else if(r.rag==="AT RISK"){ if(r.unmetC>0){pc="warn";pt="Over capacity";} else {pc="warn";pt="Full, no room to spare";} }
+  else {pc="ok";pt="Room to spare";}
+  pill.className="pill "+pc; pill.textContent=pt; pill.hidden=!pt;
+  var ppl=n=>(n===1?"person":"people");
+  var ex2;
+  if(r.people<=0) ex2="Type in how many people you help each year.";
+  else if(r.raw<=0) ex2="With no rise in unemployment, demand stays at <strong>"+cnt(r.people)+"</strong> people a year.";
+  else if(r.addC<0.5) ex2="Fewer than one more person a year would need you.";
+  else { var nC=Math.round(r.addC),nL=Math.round(r.addL),nH=Math.round(r.addH);
+    ex2="About <strong>"+cnt(r.addC)+" more "+ppl(nC)+"</strong> a year would need you"+(nL!==nH?" (between "+cnt(r.addL)+" and "+cnt(r.addH)+")":"")+"."; }
+  $("c-extra").innerHTML=ex2;
+  var g=$("c-gauge");
+  if(r.capacity<=0){
+    g.hidden=true;
+    $("c-cap").textContent="Type in your staff and how many clients each takes a year to check whether your team has room.";
+    $("c-fix").textContent="";
+  } else {
+    g.hidden=false;
+    var gx=v=>Math.max(0,Math.min(100,v/1.5*100)), uNow=r.people/r.capacity;
+    $("c-mnow").style.left=gx(uNow)+"%"; $("c-mafter").style.left=gx(r.util)+"%";
+    var capS="Your team can take "+cnt(r.capacity)+" clients a year ("+cnt(r.staffN)+" staff × "+cnt(r.casesPer)+" each) and helps "+cnt(r.people)+" now";
+    capS+= uNow<1?", "+Math.round(uNow*100)+"% full.":(uNow===1?", so it is already full.":", so it is already over capacity.");
+    if(r.raw>0){
+      if(r.unmetC>0) capS+=" After the rise you would need to serve about "+cnt(r.projC)+" a year: "+(Math.round(r.unmetC)>=1?"about "+cnt(r.unmetC):"slightly")+" more than your team can take.";
+      else if(r.projC<r.capacity) capS+=" After the rise you would need to serve about "+cnt(r.projC)+", which still leaves room for about "+cnt(r.capacity-r.projC)+" more.";
+      else capS+=" After the rise your team would be exactly full.";
+    }
+    $("c-cap").textContent=capS;
+    var fix="";
+    if(r.unmetC>0){
+      fix="Covering that shortfall would cost about "+approx(r.addBudget)+" a year, at "+money(r.uCost)+" per person"+(r.uOwn?" (your figure)":" (our estimate)")+". ";
+      fix+= (r.unmetC<r.casesPer)
+        ? "In staff terms it is less than one extra person’s yearly caseload: about "+cnt(r.unmetC)+" of the "+cnt(r.casesPer)+" clients one staff member takes."
+        : "In staff terms it is about "+cnt(r.addStaff)+" more staff, at "+cnt(r.casesPer)+" clients each.";
+    }
+    $("c-fix").textContent=fix;
+  }
+  $("c-extrap").hidden=!r.oor;
+  $("c-extrap").textContent="Above "+D.shockInterp.du5+" points the model does not work this out directly. These figures extend the trend in a straight line, so treat them as a rough guide.";
+  var ukShock=(D.shockInterp.provenance||{}).aff3==="national_derived";
+  $("c-caveat").textContent="This is a national rise in unemployment scaled to the size of your service, not a forecast for your area. "
+    +(ukShock?"How demand responds and how many clients one staff member takes are assumptions from a register of UK services."
+      :"It uses UK figures for how demand responds and how many households lose an earner, applied to "+D.countryName+"’s own households.");
+
+  /* ---------- how sure ---------- */
+  var gv=r.gHead, sl="";
+  sl+="<dt>How much the service helps</dt><dd>"+(valued?"Based on "+GRADE_PLAIN[gv]+".":"Extra income only, worked out with "+D.engine+". The rest is not counted.")+"</dd>";
+  sl+="<dt>Cost per person</dt><dd>"+(r.uOwn?"Your own figure, "+money(r.uCost)+".":"Our estimate, "+money(r.uCost)+": "+GRADE_PLAIN[r.gCost]+". Your own figure would be better.")+"</dd>";
+  sl+="<dt>Extra demand if unemployment rises</dt><dd>Based on "+GRADE_PLAIN[r.gDem]+".</dd>";
+  $("s-list").innerHTML=sl;
+  $("s-note").textContent="Everything is per person helped. Costs and outcome values are at 2024 prices; extra income is at "+D.incomeYear+" prices.";
+
+  /* ---------- full working: the full tool's own rows ---------- */
+  var mk=gr=>gr?'<span class="mark" title="'+(gr==="**"?"contains an input borrowed without adjustment, or an assumption":"contains an input borrowed from another country with a stated adjustment")+'">'+gr+'</span>':"";
+  var um=r.budUser?'<span class="mark" title="rests on a cost per person you entered">†</span>':"";
+  var b3=a=>money(a[0])+" / "+money(a[1])+" / "+money(a[2]);
+  var w='<thead><tr><th>Full-tool label</th><th class="n">Value</th></tr></thead><tbody>'
+   +'<tr><td>Cash-equivalent floor<small>extra income, weighted for who gets it</small></td><td class="n" data-w="cashfloor">'+money(r.cashfloor)+'</td></tr>'
+   +'<tr><td>Engine income (unweighted)<small>extra income, every '+CUR+'1 counted the same</small></td><td class="n" data-w="engine">'+money(r.engineInc)+'</td></tr>'
+   +'<tr><td>Conventional outcomes L/C/H'+mk(r.gOut)+'<small>costs avoided; low / central / high</small></td><td class="n" data-w="conv">'+b3(r.conv)+'</td></tr>'
+   +'<tr><td>WELLBY outcomes L/C/H'+mk(r.gOut)+'<small>feeling better, on a spine of '+esc(D.spine.label)+'</small></td><td class="n" data-w="wbo">'+b3(r.wbo)+'</td></tr>'
+   +'<tr><td>Monetised total L/C/H'+mk(r.gOut)+'<small>before the extra weight for poorer households</small></td><td class="n" data-w="mono">'+b3(r.mono)+'</td></tr>'
+   +'<tr><td><b>Welfare-weighted headline L/C/H</b>'+mk(r.gHead)+'<small>total benefit a year</small></td><td class="n" data-w="head"><b>'+b3(r.head)+'</b></td></tr>'
+   +'<tr><td><b>Benefit-cost ratio (BCR)</b>'+mk(r.gHead)+'<small>as the full tool shows it, at the central estimate</small></td><td class="n" data-w="bcr">'+(r.bcr==null?"n/a":r.bcr.toFixed(2))+'</td></tr>'
+   +(r.bcr==null?'':'<tr><td>Benefit-cost ratio, low / high<small>derived here: low and high headline over the same running cost</small></td><td class="n" data-w="bcrlh">'+r.bcrL.toFixed(2)+' / '+r.bcrH.toFixed(2)+'</td></tr>')
+   +(r.sens>0?'<tr><td>[sensitivity] not added</td><td class="n" data-w="sens">'+money(r.sens)+'</td></tr>':'')
+   +'</tbody>';
+  $("w-value").innerHTML=w;
+  var oa=r.oor?'<span class="mark" title="extrapolated above the modelled '+D.shockInterp.du5+'pp point">↑</span>':"";
+  var n3=(a,b,c2)=>cnt(a)+" / "+cnt(b)+" / "+cnt(c2);
+  var w2='<thead><tr><th>Full-tool label</th><th class="n">Value</th></tr></thead><tbody>'
+   +'<tr><td>Unemployment shock entered (pp)</td><td class="n" data-w="shock">'+r.raw.toFixed(1)+'</td></tr>'
+   +'<tr><td>'+esc(D.unitNounCap)+' losing an earner, nationally (thousands)'+mk(r.gShock)+'</td><td class="n" data-w="aff">'+r.aff.toLocaleString("en-GB",{minimumFractionDigits:1,maximumFractionDigits:1})+oa+'</td></tr>'
+   +'<tr><td>Extra demand on you (cases/year) low/central/high'+mk(r.gDem)+'</td><td class="n" data-w="add">'+n3(r.addL,r.addC,r.addH)+oa+'</td></tr>'
+   +'<tr><td>Projected total demand (cases/year, central)</td><td class="n" data-w="proj">'+cnt(r.projC)+'</td></tr>'
+   +'<tr><td>Your capacity ('+cnt(r.staffN)+' staff × '+cnt(r.casesPer)+' cases each)</td><td class="n" data-w="capacity">'+cnt(r.capacity)+'</td></tr>'
+   +'<tr><td>Utilisation (central)</td><td class="n" data-w="util">'+(r.capacity>0?(r.util*100).toFixed(1)+"%":"n/a")+'</td></tr>'
+   +'<tr><td>Unmet demand (cases/year) low/central/high'+mk(r.gDem)+'</td><td class="n" data-w="unmet">'+n3(r.unmetL,r.unmetC,r.unmetH)+oa+'</td></tr>'
+   +'<tr><td>Extra caseworkers to close the central gap'+mk(r.gDem)+'</td><td class="n" data-w="staff">'+cnt(r.addStaff)+oa+'</td></tr>'
+   +'<tr><td>Extra running cost to close the central gap'+mk(r.gBud)+um+'<small>priced at '+money(r.uCost)+' per person, '+(r.uOwn?"your figure":"our estimate")+'</small></td><td class="n" data-w="budget">'+money(r.addBudget)+oa+'</td></tr>'
+   +'<tr><td>RAG status</td><td class="n" data-w="rag">'+r.rag+'</td></tr></tbody>';
+  $("w-cap").innerHTML=w2;
+  $("w-legend").innerHTML="Marks, as in the full tool: no mark means national sources only; <b>*</b> means an input was borrowed from another country with a stated adjustment; <b>**</b> means an input was borrowed without adjustment, or is an assumption; <b>†</b> means the figure uses a cost per person you entered; <b>↑</b> means the figure is extended above the modelled "+D.shockInterp.du5+"-point rise.";
+  $("w-flag").innerHTML=s.flag?("<b>Note on this service:</b> "+s.flag):"";
+
+  /* ---------- summary ---------- */
+  var sm="Our "+s.name+" service helps "+cnt(r.people)+" people a year, mainly "+(PROF_SHORT[r.prof]||r.prof.toLowerCase())+". ";
+  sm+="Using the BENEFITS D2.2 provider tool for "+D.countryName+" (Horizon Europe grant agreement 101179032), ";
+  if(!valued) sm+="the tool can count only the extra income the service brings them: about "+approx(hasC)+" a year. What it achieves beyond income has no reliable published figure yet and is counted as zero, so this is a floor, not a full value.";
+  else sm+="the benefit it creates for them and for society is estimated at "+approx(hasC)+" a year, within a range of "+approx(hasL)+" to "+approx(hasH)+".";
+  if(r.bcr!=null) sm+=" Against a yearly running cost of "+money(+r.cost)+", that is "+(valued?"about "+ratio(r.bcr)+" for every "+CUR+"1 spent (range "+ratio(r.bcrL)+" to "+ratio(r.bcrH)+").":"at least "+ratio(r.bcr)+" for every "+CUR+"1 spent.");
+  if(r.raw>0&&r.capacity>0){
+    sm+=" If unemployment rose by "+(+r.raw)+" percentage points, about "+(r.addC<0.5?"less than one":cnt(r.addC))+" more "+ppl(Math.round(r.addC))+" a year would need the service"+(Math.round(r.addL)!==Math.round(r.addH)?" (between "+cnt(r.addL)+" and "+cnt(r.addH)+")":"")+", ";
+    sm+= r.unmetC>0 ? "taking it about "+cnt(r.unmetC)+" people beyond what the team can take, at an extra cost of about "+approx(r.addBudget)+" a year."
+                    : "which the team could take within its current capacity.";
+  }
+  sm+=" Costs and outcome values are at 2024 prices and extra income at "+D.incomeYear+" prices. These are estimates that apply published research to this caseload; the range should be quoted, not the best estimate alone.";
+  $("summary").value=sm;
+}
+
+/* ======================================================================
+   Wiring
+   ====================================================================== */
+function showTab(t){["home","tool"].forEach(function(x){$(x).hidden=(x!==t);$("tab-"+x).setAttribute("aria-selected",String(x===t));});
+  try{history.replaceState(null,"",t==="tool"?"#service":location.pathname);}catch(e){}}
+function init(){
+  fill();
+  opt($("f-svc"),D.services.map(x=>x.name),null,D.defaults.sv);
+  opt($("f-prof"),D.profOptions,D.profOptions.map(p=>PROF_PLAIN[p]||p),D.defaults.pr);
+  opt($("f-eps"),D.epsOptions,D.epsOptions.map(e=>(EPS_PLAIN[e]||e)+" (ε = "+e+")"),D.defaults.ep);
+  opt($("f-ref"),D.sc15Offered,D.sc15Offered.map(k=>D.labels[k]||k),D.defaults.rf);
+  $("f-people").value=D.defaults.pe; $("f-cost").value=D.defaults.co; $("f-staff").value=D.defaults.st;
+  $("f-casesper").value=D.defaults.cp; $("f-shock").value=D.defaults.sh;
+  setCostField();
+  ["f-people","f-cost","f-prof","f-eps","f-ref","f-staff","f-casesper","f-shock"].forEach(function(id){
+    $(id).addEventListener("input",render);$(id).addEventListener("change",render);});
+  $("f-svc").addEventListener("change",function(){setCostField();render();});
+  $("f-unitcost").addEventListener("input",function(){var s=svcByName($("f-svc").value),raw=this.value.trim(),v=parseFloat(raw);
+    if(raw===""||!isFinite(v)||v<0)delete UC[s.name];else UC[s.name]=v;costHint(s);render();});
+  $("f-unitcost").addEventListener("change",setCostField);
+  $("f-costreset").addEventListener("click",function(){var s=svcByName($("f-svc").value);delete UC[s.name];setCostField();render();});
+  $("tab-home").addEventListener("click",function(){showTab("home");});
+  $("tab-tool").addEventListener("click",function(){showTab("tool");});
+  $("start").addEventListener("click",function(){showTab("tool");window.scrollTo(0,0);});
+  $("copy").addEventListener("click",function(){var t=$("summary");
+    var done=function(){$("copied").textContent="Copied.";setTimeout(function(){$("copied").textContent="";},2500);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t.value).then(done,function(){t.select();document.execCommand("copy");done();});}
+    else{t.select();document.execCommand("copy");done();}});
+  if(location.hash==="#service"||location.hash==="#tool")showTab("tool");
+  render();
+}
+window.__calc=calc; window.__D=D;
+init();
+</script>
+</body>
+</html>

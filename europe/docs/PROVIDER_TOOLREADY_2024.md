@@ -2,6 +2,8 @@
 
 BENEFITS Horizon Europe D2.2, grant 101179032, Work Package 2. Computation-and-record layer over the native evidence in `PROVIDER_EVIDENCE_EU.md` and `PROVIDER_DECISIONS.md`. Compiled from series extracted 2026-07-01.
 
+**Which values the tools use.** The Spain, Italy, and Greece tools read their provider values from their country blocks (`europe/tool_machinery/country_{es,it,el}.json`), which carry the same evidence as the provider tool for all EU member states. Each value's source and grade are in its own note; [`VALUATION_CHAINS.md`](VALUATION_CHAINS.md) prints how every outcome value is built; and `eu27/build/report/EVIDENCE_TABLES.md` tabulates every unit cost and outcome value by country. This document sets out the 2024-equivalent method, uprating and then purchasing power parity, which the tools still follow, and the figures the first three EU countries were first built with. Where a figure here and a country block differ, the country block is the one the tool uses.
+
 **All monetary figures here are 2024-equivalent.** This document does not alter any native value; it is the tool-ready layer beside the native layer. No microdata; parameters, series, and citations only.
 
 **Method (applied exactly).** Time-uprating on the GDP deflator of the figure's own country, in its own currency, to a common 2024 base; then, for transferred figures only, exactly one household-final-consumption PPP step at 2024 to the destination. Order: uprate first, then PPP. Native figures used in their own country take no PPP.
@@ -264,7 +266,7 @@ Sordo et al. (2017): out-of-treatment 36.1 vs in-treatment 11.3 per 1,000 person
 
 - **PPP factors used.** UK→ES 0.861941, UK→IT 0.915660, UK→EL 0.816996 (OECD per-USD, EUR/GBP). IT→ES 0.932084, IT→EL 0.881460, ES→EL 0.945687 (Eurostat EUR/PPS). Single 2024 round.
 - **Cross-check (single-round consistency):** euro-area price-level ratios agree across sources within ~1% — IT→ES OECD 0.9413 vs Eurostat 0.9321; ES→EL OECD 0.9479 vs Eurostat 0.9457. Eurostat PLIs (EU27=100): EL 86.0, ES 90.9, IT 97.5.
-- **Fallback flagged:** OECD HFCE PPP for the UK-crossing conversions (spine, homelessness), because they are the ones the shipped spines were built from and they reproduce exactly. Same 2024 round as the Eurostat euro-area PPP.
+- **Fallback flagged:** OECD HFCE PPP for the UK-crossing conversions (spine, homelessness), because the UK is absent from Eurostat `prc_ppp_ind`. Same 2024 round as the Eurostat euro-area PPP.
 - **Provisional data:** Eurostat 2024 deflator and PPP values carry provisional status ("p").
 - **EL GBV native year:** the EIGE Greece €2.4bn is taken at a 2016 basis per the foundation's label; its precise price-base year is not independently pinned (flag).
 - **NOT FOUND:** none. Every series required was retrieved with its identifier.

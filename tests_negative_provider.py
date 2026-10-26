@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Negative tests for the 7.10d valuation-layer reproduction check.
+"""Negative tests for the 7.10c unit-cost and 7.10d valuation-layer reproduction checks.
 
 Same principle as tests_negative_drift.py and tests_negative_browser.py: break
 exactly the thing the check claims to protect, and require the check to FAIL. A
@@ -109,8 +109,11 @@ def m_gbv_factor_dropped(o):
     """Strip the machine-readable clause but leave the prose that names the factor.
     This is the pre-B2 note exactly: readable by a person, unparseable by a check,
     and the condition under which the double application survived."""
-    o["provenance_note"] = o["provenance_note"].replace(
-        "ORIGIN 15651 FACTOR 1.0; BAND ORIGIN 15651 AND 15651; ", "")
+    # 2026-09-30: matched by pattern, not by the literal figures, so the mutation keeps
+    # biting when the reconciled evidence moves the numbers inside the clause.
+    o["provenance_note"] = re.sub(
+        r"ORIGIN [0-9.]+ FACTOR [0-9.]+; BAND ORIGIN [0-9.]+ AND [0-9.]+; (BAND FACTOR [0-9.]+ AND [0-9.]+; )?",
+        "", o["provenance_note"])
     return o
 
 
@@ -118,7 +121,9 @@ def m_children_origin_swapped(o):
     """Point the Greek children's transfer at Spain's factor instead of its own.
     Both are real factors in this tree, which is why a check that only looks for
     'a factor' rather than recomputing would pass this."""
-    o["provenance_note"] = o["provenance_note"].replace("FACTOR 0.881460", "FACTOR 0.932084")
+    # 2026-09-30: the reconciled Greek children's value is a placement cost carried at factor 1
+    # (the conversion is inside the origin), so the wrong factor is now put in its place.
+    o["provenance_note"] = re.sub(r"(ORIGIN [0-9.]+ FACTOR )1;", r"\g<1>0.932084;", o["provenance_note"])
     return o
 
 
@@ -149,9 +154,30 @@ def m_attribution_reinstated_housing(o):
     """The same break in a transferred row, where the multiplier is carried rather than
     native: European housing takes the United Kingdom attribution band unchanged, so a
     change to it must fail there too."""
+    # 2026-09-30: the reconciled housing rows carry the Housing First trials' impact as the
+    # effect and attribution 1 at each point; the break is the same, a carried multiplier moved.
     o["provenance_note"] = o["provenance_note"].replace(
-        "ATTRIBUTION 0.500 0.562 0.575", "ATTRIBUTION 0.4 0.5 0.7")
+        "ATTRIBUTION 1 1 1", "ATTRIBUTION 0.4 0.5 0.7")
     return o
+
+
+# ---- 7.10c, the unit costs ----------------------------------------------------
+# Added 2026-09-30, after 7.10c was found recomputing nothing: its prose pattern matched
+# no note once the notes were rewritten, and every row read as a national figure. A case
+# whose target is ("unitCost", service) mutates that service record and drives
+# unit_cost_conversion_row, the function the audit's 7.10c runs.
+def u_value_moved(s):
+    """The tool value moved and the note left alone: the transcription slip 7.10c exists for."""
+    s["unitCost"] = s["unitCost"] + 20
+    return s
+
+
+def u_clause_stripped(s):
+    """The clause removed, the prose kept. This is the state that let 7.10c pass on
+    nothing, and it has to be a failure, never a national figure by default."""
+    s["provenance_note"]["unitCost"] = re.sub(r"CONVERSION:[^.]*\.[0-9]*\.?\s*", "",
+                                              s["provenance_note"]["unitCost"])
+    return s
 
 
 CASES = [
@@ -175,24 +201,41 @@ CASES = [
      "a declaration added to a band that IS derived, over a wrong value"),
     ("uk", "Children's social care", m_attribution_reinstated,
      "a carried multiplier changed: the double counterfactual put back"),
-    ("es", "Housing / homelessness", m_attribution_reinstated_housing,
+    ("it", "Housing / homelessness", m_attribution_reinstated_housing,
      "a carried multiplier changed in a transferred row"),
+    ("es", ("unitCost", "Talking therapies"), u_value_moved,
+     "a national unit cost moved, its note left alone"),
+    ("el", ("unitCost", "Housing / homelessness"), u_clause_stripped,
+     "a transferred unit cost's CONVERSION clause removed, prose kept"),
 ]
+
+
+def unit_verdict(cc, block, s):
+    uk = load("uk")["data"]["services"]
+    slot = [x["name"] for x in block["data"]["services"]].index(s["name"])
+    row, fails = apap.unit_cost_conversion_row(cc, slot, s, uk)
+    return fails, [row["matches"]]
 
 
 def main():
     allgood = True
-    for cc, name, mutate, why in CASES:
+    for cc, target, mutate, why in CASES:
         block = load(cc)
-        o = outcome(block, name)
-        clean_fails, _ = verdicts(cc, name, o)
+        if isinstance(target, tuple):          # 7.10c: a unit cost
+            name = target[1]
+            s = next(x for x in block["data"]["services"] if x["name"] == name)
+            check = lambda obj: unit_verdict(cc, block, obj)
+        else:                                  # 7.10d: an outcome value
+            name = target
+            s = outcome(block, name)
+            check = lambda obj: verdicts(cc, name, obj)
+        clean_fails, _ = check(s)
         if clean_fails:
             print("[SETUP FAIL] %s %s: unmutated data already fails (%d)"
                   % (cc.upper(), name, clean_fails))
             allgood = False
             continue
-        broken = mutate(copy.deepcopy(o))
-        fails, vs = verdicts(cc, name, broken)
+        fails, vs = check(mutate(copy.deepcopy(s)))
         caught = fails > 0
         allgood &= caught
         print("[%s] %s %-24s %s" % ("CAUGHT" if caught else "MISSED", cc.upper(),
@@ -200,8 +243,8 @@ def main():
         if not caught:
             print("        verdicts: %s" % vs)
     print()
-    print("ALL %d MUTATIONS CAUGHT; 7.10d IS LOAD-BEARING" % len(CASES) if allgood
-          else "SOME MUTATIONS SURVIVED; 7.10d IS NOT LOAD-BEARING")
+    print("ALL %d MUTATIONS CAUGHT; 7.10c AND 7.10d ARE LOAD-BEARING" % len(CASES) if allgood
+          else "SOME MUTATIONS SURVIVED; 7.10c OR 7.10d IS NOT LOAD-BEARING")
     return 0 if allgood else 1
 
 

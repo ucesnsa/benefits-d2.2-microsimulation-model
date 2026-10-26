@@ -10798,5 +10798,7 @@
  "unit_noun_singular": "benefit unit",
  "analyst_price_base": "2023-24 prices",
  "scenario_fiscal_field": "net_exchequer_cost_m",
- "dial_caveats": {}
+ "dial_caveats": {},
+ "provider_income_uprate": 1.039252,
+ "provider_income_uprate_note": "The cash floor and engine income read the FRS 2023-24 surface; the provider panel is priced at 2024-25. They are brought across by the ONS L8GG implied GDP deflator, financial-year means 93.1026 (2023-24) and 96.7571 (2024-25), ratio 1.039252 (September 2026 release)."
 }

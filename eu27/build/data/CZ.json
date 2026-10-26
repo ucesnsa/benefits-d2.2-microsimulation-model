@@ -1,0 +1,783 @@
+{
+ "code": "CZ",
+ "name": "Czechia",
+ "lang": "en",
+ "locale": "en-GB",
+ "currency": {
+  "symbol": "CZK ",
+  "code": "CZK"
+ },
+ "title": "BENEFITS provider tool: Czechia",
+ "deflator": 1,
+ "income_basis": "derived",
+ "income_year": "2024",
+ "wave_label": "No microsimulation for this country: extra income estimated from national minimum-income outlays (EUROMOD external statistics and named national sources) and Eurostat income deciles",
+ "wellby_spine": {
+  "value": 342887,
+  "label": "CZK 342,887 (HM Treasury's GBP 13,000 per WELLBY at 2019 prices, applied as GBP 16,300 at 2024 prices, converted at household-consumption PPP)",
+  "provenance": "borrowed_adjusted",
+  "provenance_note": "HM Treasury (2021) Wellbeing Guidance for Appraisal, GBP 13,000 per WELLBY at 2019 prices (low 10,000, high 16,000), applied as GBP 16,300 (12,540 / 20,064) at 2024 prices by HM Treasury's own uprating method, converted at CZK 21.0360 per GBP (Eurostat prc_ppp_ind, E011 household final consumption, 2024). A transfer, flagged as such."
+ },
+ "labels": {
+  "mi_10": "Minimum income (příspěvek na živobytí) +10%, estimated",
+  "mi_25": "Minimum income (příspěvek na živobytí) +25%, estimated",
+  "mi_50": "Minimum income (příspěvek na živobytí) +50%, estimated"
+ },
+ "profiles": {
+  "Lowest incomes (deciles 1-3)": [
+   0,
+   1,
+   2
+  ],
+  "Low-to-middle (deciles 4-6)": [
+   3,
+   4,
+   5
+  ],
+  "Broad mix (all deciles)": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "provider_default": "Employment support",
+ "reference_default": "mi_25",
+ "unit_noun": "households",
+ "unit_noun_singular": "household",
+ "capacity_caveat": "The capacity and shock model is INDICATIVE: demand elasticities and staff ratios are mostly UK register values, and the share of households losing an earner is the UK model's own share applied to Czechia's working-age households. It is not calibrated to Czechia.",
+ "analyst_price_base": "2024 prices",
+ "provenance": "No microsimulation for Czechia: the income effect is estimated from the national minimum-income outlay and Eurostat income deciles, and household counts, price levels and labour costs are Eurostat database tables (nama_10_gdp, prc_ppp_ind, lc_lci_lev, lfst_hhnhtych, demo_pjan, ilc_di01, ilc_lvps02), retrieved September 2026. Provider values are per person served, in CZK at 2024 prices. Every value carries its source and a grade in its own note; a value borrowed from another country is marked.",
+ "data": {
+  "services": [
+   {
+    "name": "Employment support",
+    "elastLow": 0.8,
+    "elastCentral": 1.0,
+    "elastHigh": 1.2,
+    "unitCost": 19353,
+    "staffRatio": 120,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "elastCentral": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "elastHigh": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "CZK 19,353, converted from the UK tool's unit cost for Jobcentre Plus work coaching, GBP 1,200 per participant, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Czechia EUR 19.40 an hour; UK GBP 30.2165), ratio 16.127877. No verified Czechia figure for this unit was found. CONVERSION: GBP 1200 x 16.12787715. PRICE BASE: 2024-equivalent. Unit: one participant in an employment-support episode."
+    },
+    "flag": "Unit: one participant in an employment-support episode. Outcome value: borrowed from another country without adjustment. +0.46 WELLBY for a move from unemployment into work (Clark et al. 2018, the Britain fixed-effects coefficient HM Treasury's guidance uses), valued at the WELLBY value for Czechia, then staged as in the UK tool: effect 0.11 / 0.30 / 0.46 x attribution 0.20 / 0.22 / 0.27. European trial evidence (Card, Kluve and Weber 2018) puts job-search assistance impacts at 1 to 2 percentage points, which suggests the staged central may be high. ORIGIN 16300 FACTOR 9.6765726517; BAND ORIGIN 12540 AND 20064; BAND FACTOR 9.6765726517 AND 9.6765726517; STAGE EFFECT 0.11 0.3 0.46 ATTRIBUTION 0.2 0.22 0.27; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Minimum income (příspěvek na živobytí) casework",
+    "elastLow": 0.3,
+    "elastCentral": 0.55,
+    "elastHigh": 1.0,
+    "unitCost": 6451,
+    "staffRatio": 200,
+    "provenance": {
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "elastCentral": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "elastHigh": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "CZK 6,451, converted from the UK tool's unit cost for benefit claim support, GBP 400 per claim, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Czechia EUR 19.40 an hour; UK GBP 30.2165), ratio 16.127877. No verified Czechia figure for this unit was found. CONVERSION: GBP 400 x 16.12787715. PRICE BASE: 2024-equivalent. Unit: one claim supported."
+    },
+    "flag": "Unit: one claim supported. Outcome value: borrowed from another country with a stated adjustment. Income effect: the extra-income figure. Health-service use avoided: Liverpool Citizens Advice on Prescription (SSM Population Health 2025), an instrumental-variable study on linked NHS records: GBP 91 per person a year (95% CI 44 to 107) at 2023 prices, an impact, so attribution 1.0. The saving is per household member; the central counts the client only, the high counts every member (20,773 members of 8,205 client households). Uprated to 2024-25 on ONS L8GG and converted at household-consumption PPP (Eurostat, 2024). The advice covered benefits, debt and housing together. ORIGIN 91 FACTOR 21.8617363089; BAND ORIGIN 44 AND 230.3891529555; BAND FACTOR 21.8617363089 AND 21.8617363089; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Food aid / food banks",
+    "elastLow": 0.1,
+    "elastCentral": 0.25,
+    "elastHigh": 0.5,
+    "unitCost": 2419,
+    "staffRatio": 250,
+    "provenance": {
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "elastCentral": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "elastHigh": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "CZK 2,419, converted from the UK tool's unit cost for food banks, GBP 150 per recipient, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Czechia EUR 19.40 an hour; UK GBP 30.2165), ratio 16.127877. No verified Czechia figure for this unit was found. CONVERSION: GBP 150 x 16.12787715. PRICE BASE: 2024-equivalent. Unit: one recipient for a year."
+    },
+    "flag": "Unit: one recipient for a year. Outcome value: an assumption. Excluded for every country: no robust per-person effect exists. Randomised evidence shows small effects on food insecurity (for example Briefel et al., -2.8 points) and none on wellbeing; the Greek DIATROFI school-meal trial is a different service. The tool shows the income effect only, as a floor."
+   },
+   {
+    "name": "Debt advice",
+    "elastLow": 0.5,
+    "elastCentral": 0.8,
+    "elastHigh": 1.2,
+    "unitCost": 8064,
+    "staffRatio": 100,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "elastCentral": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "elastHigh": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "CZK 8,064, converted from the UK tool's unit cost for debt advice, GBP 500 per case, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Czechia EUR 19.40 an hour; UK GBP 30.2165), ratio 16.127877. No verified Czechia figure for this unit was found. CONVERSION: GBP 500 x 16.12787715. PRICE BASE: 2024-equivalent. Unit: one advice case."
+    },
+    "flag": "Unit: one advice case. Outcome value: borrowed from another country without adjustment. Being in arrears lowers life satisfaction by 0.355 points (FCA / Simetrica-Jacobs 2020, individual fixed effects). Central: advice moves 10 percentage points more clients out of unmanageable debt than no advice (Money Advice Service / YouGov 2012: 25% against 15%), an impact, so attribution 1.0: 0.355 x 0.10 WELLBY. Low: zero, because the only randomised trial (Pleasence and Balmer 2007) cannot rule it out. High: the UK tool's high. ORIGIN 16300 FACTOR 7.4677897638; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 10.5180137518; STAGE EFFECT 0 0.1 0.63 ATTRIBUTION 1 1 0.5; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Talking therapies",
+    "elastLow": 0.3,
+    "elastCentral": 0.6,
+    "elastHigh": 0.9,
+    "unitCost": 19353,
+    "staffRatio": 50,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "elastCentral": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "elastHigh": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "CZK 19,353, converted from the UK tool's unit cost for NHS Talking Therapies, GBP 1,200 per course, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Czechia EUR 19.40 an hour; UK GBP 30.2165), ratio 16.127877. No verified Czechia figure for this unit was found. CONVERSION: GBP 1200 x 16.12787715. PRICE BASE: 2024-equivalent. Unit: one course of treatment."
+    },
+    "flag": "Unit: one course of treatment. Outcome value: borrowed from another country without adjustment. Central: 0.06 QALY per patient from adding transdiagnostic group CBT to usual primary care in Spain (the PsicAP randomised trial; abstract), converted at HM Treasury's 7 WELLBYs per QALY = 0.42 WELLBY, an impact, so attribution 1.0. Low: zero (German and Swedish trials found no QALY difference). High: the UK tool's high for NHS Talking Therapies (1.5 x 0.6 x 0.61 WELLBY). Nordic studies find no net saving from reduced sick leave, so no cost-avoided value is added. ORIGIN 16300 FACTOR 8.8351315515; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 31.5540412555; STAGE EFFECT 0 1 0.6 ATTRIBUTION 1 1 0.61; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Housing / homelessness",
+    "elastLow": 0.3,
+    "elastCentral": 0.5,
+    "elastHigh": 0.8,
+    "unitCost": 64716,
+    "staffRatio": 30,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "national_source"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "elastCentral": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "elastHigh": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "CZK 64,716: CZK 45,429.00 (Housing First social work per family-year), Cerna E., Kubala P., Ripka S. (2018), Pilotni testovani rychleho zabydleni rodin s detmi (Rapid Re-Housing): zaverecna evaluacni zprava; brought from 2017 to 2024 on Czechia's GDP deflator (Eurostat nama_10_gdp). CONVERSION: CZK 45429.0 x 1.42454457. PRICE BASE: 2024-equivalent. Unit: one homeless person supported for a year."
+    },
+    "flag": "Unit: one homeless person supported for a year. Outcome value: borrowed from another country with a stated adjustment. A year of homelessness costs the public CZK 196,397 per person (the UK tool's GBP 26,988 (Crisis 2015, uprated) scaled by the cost of the same year of homelessness in Czechia relative to the UK, 0.245, from Pleace et al. (2013), The Costs of Homelessness in Europe, Table 5.2, compared on the 5 cost items both countries priced (shelter, daycentre, hospital, psychiatric, prison), at 2024 market exchange rates). Share avoided by a year of housing support: central 0.407 (Spain, Hábitat randomised trial: EUR 470.97 of EUR 1,157.84 a month), high 0.438 (France, Un chez-soi d'abord randomised trial, on a consistent cost basis), both impacts, so attribution 1.0; low 0.112, the UK tool's central (0.20 x 0.562), whose effect share is an assumption. ORIGIN 196396.7465372379 FACTOR 1; BAND ORIGIN 196396.7465372379 AND 196396.7465372379; BAND FACTOR 1 AND 1; STAGE EFFECT 0.112 0.407 0.438 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Children's social care",
+    "elastLow": 0.15,
+    "elastCentral": 0.3,
+    "elastHigh": 0.5,
+    "unitCost": 176842,
+    "staffRatio": 15,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "elastCentral": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "elastHigh": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "CZK 176,842, converted from Home Office (2021) GBP 8,640 per child in need per year at 2018/19 prices, uprated to GBP 10,965 (the UK tool's figure). Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Czechia EUR 19.40 an hour; UK GBP 30.2165), ratio 16.127877. No verified Czechia figure for this unit was found. CONVERSION: GBP 10965 x 16.12787715. PRICE BASE: 2024-equivalent. Unit: one child supported at home for a year."
+    },
+    "flag": "Unit: one child supported at home for a year. Outcome value: a national source. A year of out-of-home care costs CZK 449,032 per child (Macela, M. (2014), Rozbor nakladu jednotlivych typu sluzeb pece o ohrozene deti, CZK 293,760 at 2013 prices, uprated on the GDP deflator. A state-budget contribution, not the full cost, so a lower bound.). Reduction in the chance of a residential placement: central 0.056 (Italy, P.I.P.P.I. against a comparison group, residential placements only: 6.4% against 0.8%), high 0.119 (the same, counting day foster care too), low zero (Al et al. 2012 meta-analysis: intensive family preservation generally does not prevent placement). One year of placement avoided is counted, which is conservative. The sensitivity row is the UK tool's route: the lifetime cost of a maltreatment case (Bocconi 2013, Italy) x 0.086. ORIGIN 449031.8774759038 FACTOR 1; BAND ORIGIN 449031.8774759038 AND 449031.8774759038; BAND FACTOR 1 AND 1; STAGE EFFECT 0 0.056 0.119 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Domestic abuse / GBV",
+    "elastLow": 0.2,
+    "elastCentral": 0.4,
+    "elastHigh": 0.6,
+    "unitCost": 40320,
+    "staffRatio": 25,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "CZK 40,320, converted from the UK tool's unit cost for domestic abuse services, GBP 2,500 per case, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Czechia EUR 19.40 an hour; UK GBP 30.2165), ratio 16.127877. No verified Czechia figure for this unit was found. CONVERSION: GBP 2500 x 16.12787715. PRICE BASE: 2024-equivalent. Unit: one victim supported."
+    },
+    "flag": "Unit: one victim supported. Outcome value: borrowed from another country with a stated adjustment. Tangible cost of intimate-partner violence per victim a year: CZK 56,863 (the mean of the Spanish and Italian national figures (tangible costs per victim of partner violence, from victim surveys), each uprated to 2024 and converted at household-consumption PPP; the EIGE per-country table is not used because it scales the UK cost by population). Effect and attribution as in the UK tool (0.24 x 0.5417: advocacy reduces physical abuse, odds ratio 0.43, Ramsay et al. 2009). Pain and suffering are shown as a sensitivity, not added, as settled decision 8 does for Spain. ORIGIN 56863.3389627803 FACTOR 1; BAND ORIGIN 56863.3389627803 AND 56863.3389627803; BAND FACTOR 1 AND 1; STAGE EFFECT 0.24 0.24 0.24 ATTRIBUTION 0.5416667 0.5416667 0.5416667; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Drug & alcohol treatment",
+    "elastLow": 0.15,
+    "elastCentral": 0.3,
+    "elastHigh": 0.5,
+    "unitCost": 72382,
+    "staffRatio": 30,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "CZK 72,382, converted from National Audit Office (2010) GBP 3,000 per person in effective drug treatment at 2008-09 prices, uprated to GBP 4,488 (the UK tool's figure). Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Czechia EUR 19.40 an hour; UK GBP 30.2165), ratio 16.127877. No verified Czechia figure for this unit was found. CONVERSION: GBP 4488 x 16.12787715. PRICE BASE: 2024-equivalent. Unit: one client for a treatment year."
+    },
+    "flag": "Unit: one client for a treatment year. Outcome value: borrowed from another country without adjustment. Value of a statistical life for Czechia: CZK 108,568,236 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 0.140 (UNODC (2025), World Drug Report 2025, Statistical Annex 5.1: Treatment by primary drug of use: 2744 / 19591 = 0.14). Non-opioid clients carry no averted-death value in these figures. ORIGIN 108568236.2447141856 FACTOR 0.003003; BAND ORIGIN 90473530.2039285004 AND 126662942.2854998708; BAND FACTOR 0.00091 AND 0.003472; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "GP consultation",
+    "elastLow": 0.2,
+    "elastCentral": 0.25,
+    "elastHigh": 0.3,
+    "unitCost": 866,
+    "staffRatio": 300,
+    "provenance": {
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "elastCentral": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "elastHigh": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "CZK 866, converted from Jones et al. (2024) Unit Costs of Health and Social Care, GBP 49 per ten-minute surgery consultation at 2022/23 prices, uprated to GBP 53.67 (the UK tool's price). Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Czechia EUR 19.40 an hour; UK GBP 30.2165), ratio 16.127877. No verified Czechia figure for this unit was found. CONVERSION: GBP 53.6695 x 16.12787715. PRICE BASE: 2024-equivalent. Unit: one consultation."
+    },
+    "flag": "Unit: one consultation. Outcome value: an assumption. Valued only at its cost: no defensible value per additional consultation was found (searched, none found)."
+   },
+   {
+    "name": "Opioid substitution treatment (OST)",
+    "elastLow": 0.15,
+    "elastCentral": 0.3,
+    "elastHigh": 0.5,
+    "unitCost": 37625,
+    "staffRatio": 30,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "CZK 37,625 per patient-year, the Spanish national figure of EUR 2,100 (a Spanish national figure: methadone at EUR 4 a day excluding medication, a 2004 observation, annualised on 365 days and uprated by 1.438347 to EUR 5.75 a day, EUR 2,098.75 a year, recorded as EUR 2,100 (the D2.2 Spain tool's figure; PROVIDER_TOOLREADY_2024.md, drug and alcohol table)) scaled by the ratio of labour costs in health and social work, Czechia to Spain, 0.713235 (Eurostat lc_lci_lev, NACE Q, 2023), as the D2.2 Italy and Greece tools do. CONVERSION: EUR 2100.0 x 17.91647059. PRICE BASE: 2024-equivalent. Unit: one patient for a year."
+    },
+    "flag": "Unit: one patient for a year. Outcome value: borrowed from another country without adjustment. Value of a statistical life for Czechia: CZK 108,568,236 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 1.000 (every OST patient is an opioid client). Non-opioid clients carry no averted-death value in these figures. ORIGIN 108568236.2447141856 FACTOR 0.02145; BAND ORIGIN 90473530.2039285004 AND 126662942.2854998708; BAND FACTOR 0.0065 AND 0.0248; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   }
+  ],
+  "outcomes": {
+   "Employment support": {
+    "wbL": 2669.57,
+    "wbC": 10410.06,
+    "wbH": 24113.52,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Move into employment (wellbeing)",
+      "method": "WELLBY",
+      "conf": "MODERATE",
+      "valC": 10410.06
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "+0.46 WELLBY for a move from unemployment into work (Clark et al. 2018, the Britain fixed-effects coefficient HM Treasury's guidance uses), valued at the WELLBY value for Czechia, then staged as in the UK tool: effect 0.11 / 0.30 / 0.46 x attribution 0.20 / 0.22 / 0.27. European trial evidence (Card, Kluve and Weber 2018) puts job-search assistance impacts at 1 to 2 percentage points, which suggests the staged central may be high. ORIGIN 16300 FACTOR 9.6765726517; BAND ORIGIN 12540 AND 20064; BAND FACTOR 9.6765726517 AND 9.6765726517; STAGE EFFECT 0.11 0.3 0.46 ATTRIBUTION 0.2 0.22 0.27; PRICE BASE: 2024-equivalent."
+   },
+   "Minimum income (příspěvek na živobytí) casework": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 961.92,
+    "convC": 1989.42,
+    "convH": 5036.71,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Income effect",
+      "method": "ENGINE",
+      "conf": "WEAK",
+      "valC": 0
+     },
+     {
+      "outcome": "Health-service use avoided",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 1989.42
+     }
+    ],
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "Income effect: the extra-income figure. Health-service use avoided: Liverpool Citizens Advice on Prescription (SSM Population Health 2025), an instrumental-variable study on linked NHS records: GBP 91 per person a year (95% CI 44 to 107) at 2023 prices, an impact, so attribution 1.0. The saving is per household member; the central counts the client only, the high counts every member (20,773 members of 8,205 client households). Uprated to 2024-25 on ONS L8GG and converted at household-consumption PPP (Eurostat, 2024). The advice covered benefits, debt and housing together. ORIGIN 91 FACTOR 21.8617363089; BAND ORIGIN 44 AND 230.3891529555; BAND FACTOR 21.8617363089 AND 21.8617363089; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "Food aid / food banks": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Food aid",
+      "method": "UNEVIDENCED-EXCLUDED",
+      "conf": "-",
+      "valC": 0
+     }
+    ],
+    "provenance": "assumption",
+    "provenance_note": "Excluded for every country: no robust per-person effect exists. Randomised evidence shows small effects on food insecurity (for example Briefel et al., -2.8 points) and none on wellbeing; the Greek DIATROFI school-meal trial is a different service. The tool shows the income effect only, as a floor."
+   },
+   "Debt advice": {
+    "wbL": 0,
+    "wbC": 12172.5,
+    "wbH": 66475.53,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Debt advice (wellbeing)",
+      "method": "WELLBY",
+      "conf": "WEAK",
+      "valC": 12172.5
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Being in arrears lowers life satisfaction by 0.355 points (FCA / Simetrica-Jacobs 2020, individual fixed effects). Central: advice moves 10 percentage points more clients out of unmanageable debt than no advice (Money Advice Service / YouGov 2012: 25% against 15%), an impact, so attribution 1.0: 0.355 x 0.10 WELLBY. Low: zero, because the only randomised trial (Pleasence and Balmer 2007) cannot rule it out. High: the UK tool's high. ORIGIN 16300 FACTOR 7.4677897638; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 10.5180137518; STAGE EFFECT 0 0.1 0.63 ATTRIBUTION 1 1 0.5; PRICE BASE: 2024-equivalent."
+   },
+   "Talking therapies": {
+    "wbL": 0,
+    "wbC": 144012.64,
+    "wbH": 231714.7,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Recovery from depression or anxiety (wellbeing)",
+      "method": "WELLBY",
+      "conf": "MODERATE",
+      "valC": 144012.64
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Central: 0.06 QALY per patient from adding transdiagnostic group CBT to usual primary care in Spain (the PsicAP randomised trial; abstract), converted at HM Treasury's 7 WELLBYs per QALY = 0.42 WELLBY, an impact, so attribution 1.0. Low: zero (German and Swedish trials found no QALY difference). High: the UK tool's high for NHS Talking Therapies (1.5 x 0.6 x 0.61 WELLBY). Nordic studies find no net saving from reduced sick leave, so no cost-avoided value is added. ORIGIN 16300 FACTOR 8.8351315515; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 31.5540412555; STAGE EFFECT 0 1 0.6 ATTRIBUTION 1 1 0.61; PRICE BASE: 2024-equivalent."
+   },
+   "Housing / homelessness": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 21996.44,
+    "convC": 79933.48,
+    "convH": 86021.77,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Public cost of homelessness avoided",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 79933.48
+     }
+    ],
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "A year of homelessness costs the public CZK 196,397 per person (the UK tool's GBP 26,988 (Crisis 2015, uprated) scaled by the cost of the same year of homelessness in Czechia relative to the UK, 0.245, from Pleace et al. (2013), The Costs of Homelessness in Europe, Table 5.2, compared on the 5 cost items both countries priced (shelter, daycentre, hospital, psychiatric, prison), at 2024 market exchange rates). Share avoided by a year of housing support: central 0.407 (Spain, Hábitat randomised trial: EUR 470.97 of EUR 1,157.84 a month), high 0.438 (France, Un chez-soi d'abord randomised trial, on a consistent cost basis), both impacts, so attribution 1.0; low 0.112, the UK tool's central (0.20 x 0.562), whose effect share is an assumption. ORIGIN 196396.7465372379 FACTOR 1; BAND ORIGIN 196396.7465372379 AND 196396.7465372379; BAND FACTOR 1 AND 1; STAGE EFFECT 0.112 0.407 0.438 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "Children's social care": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 0.0,
+    "convC": 25145.79,
+    "convH": 53434.79,
+    "sensC": 218732.7,
+    "rows": [
+     {
+      "outcome": "Out-of-home placement avoided",
+      "method": "CONVENTIONAL",
+      "conf": "WEAK",
+      "valC": 25145.79
+     },
+     {
+      "outcome": "Lifetime cost of maltreatment averted (not added)",
+      "method": "SENSITIVITY",
+      "conf": "WEAK",
+      "valC": 218732.7
+     }
+    ],
+    "provenance": "national_source",
+    "provenance_note": "A year of out-of-home care costs CZK 449,032 per child (Macela, M. (2014), Rozbor nakladu jednotlivych typu sluzeb pece o ohrozene deti, CZK 293,760 at 2013 prices, uprated on the GDP deflator. A state-budget contribution, not the full cost, so a lower bound.). Reduction in the chance of a residential placement: central 0.056 (Italy, P.I.P.P.I. against a comparison group, residential placements only: 6.4% against 0.8%), high 0.119 (the same, counting day foster care too), low zero (Al et al. 2012 meta-analysis: intensive family preservation generally does not prevent placement). One year of placement avoided is counted, which is conservative. The sensitivity row is the UK tool's route: the lifetime cost of a maltreatment case (Bocconi 2013, Italy) x 0.086. ORIGIN 449031.8774759038 FACTOR 1; BAND ORIGIN 449031.8774759038 AND 449031.8774759038; BAND FACTOR 1 AND 1; STAGE EFFECT 0 0.056 0.119 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "Domestic abuse / GBV": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 7392.23,
+    "convC": 7392.23,
+    "convH": 7392.23,
+    "sensC": 37592.58,
+    "rows": [
+     {
+      "outcome": "Abuse reduced (tangible costs avoided)",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 7392.23
+     },
+     {
+      "outcome": "Including pain and suffering (not added)",
+      "method": "SENSITIVITY",
+      "conf": "WEAK",
+      "valC": 37592.58
+     }
+    ],
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "Tangible cost of intimate-partner violence per victim a year: CZK 56,863 (the mean of the Spanish and Italian national figures (tangible costs per victim of partner violence, from victim surveys), each uprated to 2024 and converted at household-consumption PPP; the EIGE per-country table is not used because it scales the UK cost by population). Effect and attribution as in the UK tool (0.24 x 0.5417: advocacy reduces physical abuse, odds ratio 0.43, Ramsay et al. 2009). Pain and suffering are shown as a sensitivity, not added, as settled decision 8 does for Spain. ORIGIN 56863.3389627803 FACTOR 1; BAND ORIGIN 56863.3389627803 AND 56863.3389627803; BAND FACTOR 1 AND 1; STAGE EFFECT 0.24 0.24 0.24 ATTRIBUTION 0.5416667 0.5416667 0.5416667; PRICE BASE: 2024-equivalent."
+   },
+   "Drug & alcohol treatment": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 82330.91,
+    "convC": 326030.41,
+    "convH": 439773.74,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Deaths averted (opioid clients)",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 326030.41
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Value of a statistical life for Czechia: CZK 108,568,236 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 0.140 (UNODC (2025), World Drug Report 2025, Statistical Annex 5.1: Treatment by primary drug of use: 2744 / 19591 = 0.14). Non-opioid clients carry no averted-death value in these figures. ORIGIN 108568236.2447141856 FACTOR 0.003003; BAND ORIGIN 90473530.2039285004 AND 126662942.2854998708; BAND FACTOR 0.00091 AND 0.003472; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "GP consultation": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "GP consultation",
+      "method": "COST-INPUT",
+      "conf": "COST-INPUT",
+      "valC": 0
+     }
+    ],
+    "provenance": "assumption",
+    "provenance_note": "Valued only at its cost: no defensible value per additional consultation was found (searched, none found)."
+   },
+   "Opioid substitution treatment (OST)": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 588077.95,
+    "convC": 2328788.67,
+    "convH": 3141240.97,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Deaths averted (opioid clients)",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 2328788.67
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Value of a statistical life for Czechia: CZK 108,568,236 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 1.000 (every OST patient is an opioid client). Non-opioid clients carry no averted-death value in these figures. ORIGIN 108568236.2447141856 FACTOR 0.02145; BAND ORIGIN 90473530.2039285004 AND 126662942.2854998708; BAND FACTOR 0.0065 AND 0.0248; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   }
+  },
+  "deciles": {
+   "mi_10": [
+    [
+     266.9488,
+     77.6286,
+     29.9171,
+     21.9304,
+     16.6797,
+     3.1573,
+     0.9105,
+     0.7645,
+     0.0631,
+     0.0
+    ],
+    [
+     344.6002,
+     95.1258,
+     34.0244,
+     23.6258,
+     17.1032,
+     3.0825,
+     0.846,
+     0.6704,
+     0.0511,
+     0.0
+    ],
+    [
+     444.8394,
+     116.6446,
+     38.7074,
+     25.457,
+     17.5412,
+     3.0099,
+     0.7863,
+     0.5881,
+     0.0414,
+     0.0
+    ],
+    [
+     574.2369,
+     143.1269,
+     44.0486,
+     27.4354,
+     17.9942,
+     2.9397,
+     0.7309,
+     0.5161,
+     0.0336,
+     0.0
+    ],
+    [
+     741.2747,
+     175.7387,
+     50.1423,
+     29.5733,
+     18.463,
+     2.8716,
+     0.6796,
+     0.453,
+     0.0273,
+     0.0
+    ]
+   ],
+   "mi_25": [
+    [
+     671.3704,
+     191.8871,
+     74.1017,
+     54.0987,
+     41.5591,
+     7.8542,
+     2.1569,
+     1.9085,
+     0.0635,
+     0.0
+    ],
+    [
+     866.662,
+     235.1377,
+     84.275,
+     58.2807,
+     42.6142,
+     7.668,
+     2.0042,
+     1.6736,
+     0.0515,
+     0.0
+    ],
+    [
+     1118.7615,
+     288.3292,
+     95.8744,
+     62.7981,
+     43.7055,
+     7.4875,
+     1.8627,
+     1.4681,
+     0.0417,
+     0.0
+    ],
+    [
+     1444.1935,
+     353.7896,
+     109.1041,
+     67.6785,
+     44.8344,
+     7.3127,
+     1.7315,
+     1.2883,
+     0.0338,
+     0.0
+    ],
+    [
+     1864.2898,
+     434.4015,
+     124.1975,
+     72.9522,
+     46.0023,
+     7.1433,
+     1.61,
+     1.1309,
+     0.0275,
+     0.0
+    ]
+   ],
+   "mi_50": [
+    [
+     1355.5751,
+     374.3193,
+     147.3221,
+     106.6261,
+     82.342,
+     16.1023,
+     3.828,
+     3.8169,
+     0.0681,
+     0.0
+    ],
+    [
+     1749.8917,
+     458.6895,
+     167.5477,
+     114.8687,
+     84.4325,
+     15.7205,
+     3.557,
+     3.3472,
+     0.0552,
+     0.0
+    ],
+    [
+     2258.9099,
+     562.4516,
+     190.6087,
+     123.7723,
+     86.5947,
+     15.3506,
+     3.3058,
+     2.9362,
+     0.0447,
+     0.0
+    ],
+    [
+     2915.9951,
+     690.147,
+     216.9106,
+     133.3914,
+     88.8314,
+     14.9921,
+     3.0731,
+     2.5766,
+     0.0363,
+     0.0
+    ],
+    [
+     3764.2185,
+     847.3988,
+     246.9179,
+     143.7857,
+     91.1455,
+     14.6449,
+     2.8574,
+     2.2619,
+     0.0294,
+     0.0
+    ]
+   ]
+  },
+  "sc15": [
+   "mi_10",
+   "mi_25",
+   "mi_50"
+  ],
+  "epsGrid": [
+   0,
+   0.5,
+   1,
+   1.5,
+   2
+  ],
+  "bu": 4.5501000000000005,
+  "shockInterp": {
+   "du3": 3,
+   "du5": 5,
+   "aff3": 66.1,
+   "aff5": 110.7,
+   "provenance": {
+    "du3": "borrowed_adjusted",
+    "du5": "borrowed_adjusted",
+    "aff3": "borrowed_adjusted",
+    "aff5": "borrowed_adjusted"
+   },
+   "provenance_note": {
+    "du3": "The shock sizes are the UK model's computed points (3 and 5 percentage points); there is no model for Czechia.",
+    "du5": "The shock sizes are the UK model's computed points (3 and 5 percentage points); there is no model for Czechia.",
+    "aff3": "The UK's modelled share of working-age units whose employment income falls at 3pp (2.176418%), applied to Czechia's working-age households: 4550 thousand households x 0.6670 working-age share (EU-SILC ilc_lvps02, 2024: households other than one adult aged 65+ or two adults with one aged 65+, a lower bound) = 66.1 thousand.",
+    "aff5": "The same at 5pp (3.649125%): 110.7 thousand."
+   }
+  },
+  "scenarios": []
+ },
+ "grid": {
+  "meta": {
+   "eps_grid": [
+    0,
+    0.5,
+    1,
+    1.5,
+    2
+   ],
+   "population_basis": {
+    "scope": "all_households",
+    "includes": "Every private household (Eurostat).",
+    "excludes": "Nothing.",
+    "units_k": 4550.1,
+    "population_k": 10900.555,
+    "summary": "All private households (Eurostat labour force survey household count) and the resident population on 1 January (Eurostat demo_pjan), the population the estimated extra income is spread over."
+   }
+  },
+  "dials": {}
+ }
+}

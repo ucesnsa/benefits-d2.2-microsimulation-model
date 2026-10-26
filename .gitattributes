@@ -27,3 +27,6 @@
 
 # Shell scripts: always LF, so they run on macOS and Linux
 *.sh text eol=lf
+
+# eu27: preserve exact bytes; extra_income_results.json records input sha256s
+eu27/** -text

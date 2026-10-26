@@ -104,13 +104,14 @@ CASES = [
      'var ceFmt=fmtRatio;',
      'var ceFmt=function(v){return fmtBn(v);};',
      "the ratio goes back through the deflating money formatter"),
-    # A ratio rendered in the country locale. es-ES and it-IT write one point zero
-    # zero zero as "1,000", which an English-reading reviewer reads as one thousand. The
-    # tools are in English; money takes the locale and a dimensionless figure does not.
+    # A ratio rendered in a national locale. es-ES and it-IT write one point zero
+    # zero zero as "1,000", which an English-reading reviewer reads as one thousand. Since
+    # 2026-09-30 every tool writes money in en-GB, so LOC no longer exposes the defect; the
+    # mutation names the Spanish locale the Spain tool used until then.
     ("cost_effectiveness_is_one_at_eps_zero_for_a_pure_transfer", ES,
      'const fmtRatio=v=>(v<0?"-":"")+Math.abs(v).toFixed(3);',
-     'const fmtRatio=v=>v.toLocaleString(LOC,{minimumFractionDigits:3,maximumFractionDigits:3});',
-     "a ratio goes back into the country locale, printing 1.000 as 1,000"),
+     'const fmtRatio=v=>v.toLocaleString("es-ES",{minimumFractionDigits:3,maximumFractionDigits:3});',
+     "a ratio goes back into a national locale, printing 1.000 as 1,000"),
     # Put one price-base sentence into the state that produces a truncated
     # export line. The old assertion passed on "price base." because a fragment of the
     # note is still in the note; this requires the line to open a sentence and name a year.
@@ -175,6 +176,25 @@ CASES = [
      'var COST_OVERRIDE={};',
      'var COST_OVERRIDE={"Debt advice (Citizens Advice, StepChange)":9};',
      "an override is present before the user has entered anything"),
+    # ---- The running cost follows the service until the user enters one (2026-09-30) ----
+    ("running_cost_follows_the_service_until_entered", ES,
+     "function autoCost(){if(COST_TOUCHED)return;",
+     "function autoCost(){return;",
+     "the running cost is left at whatever it opened on, so a service's ratio is computed "
+     "against another service's cost"),
+    ("running_cost_follows_the_service_until_entered", UK,
+     "el.value=String(Math.round((+$(\"#p-people\").value||0)*unitCostOf(s)));}",
+     "el.value=String(Math.round((+$(\"#p-people\").value||0)*s.unitCost*2));}",
+     "the running cost is filled from the wrong figure"),
+    # ---- The cash floor is at the panel's price base (2026-09-30) ----
+    ("cash_floor_at_the_panel_price_base", ES,
+     "const pbW=bandWt*10/(k*UNITS_M*HH_SIZE)*PROV_UPRATE,",
+     "const pbW=bandWt*10/(k*UNITS_M*HH_SIZE),",
+     "the cash floor is left in the surface's income year under a panel priced at 2024"),
+    ("cash_floor_at_the_panel_price_base", UK,
+     "const PROV_UPRATE=(COUNTRY.provider_income_uprate||DEF);",
+     "const PROV_UPRATE=1;",
+     "the UK floor is left at 2023-24 prices"),
     # ---- An entered value must reach the figures ----
     ("user_unit_cost_changes_the_downstream_figure", ES,
      'const addBudget=unmetC*uCost;',

@@ -1,0 +1,112 @@
+{
+ "frame": {
+  "code": "EL",
+  "name": "Greece",
+  "currency": {
+   "code": "EUR",
+   "symbol": "€"
+  },
+  "locale": "en-GB",
+  "ppp_e011_2024": 0.859557,
+  "ppp_factor_per_gbp": 0.8140823594037089,
+  "spine": {
+   "L": 10208.592786922509,
+   "C": 13269.542458280455,
+   "H": 16333.748459076014
+  },
+  "vsl": {
+   "L": 2605306.887424176,
+   "C": 3126368.2649090113,
+   "H": 3647429.6423938465
+  },
+  "vsl_inputs": {
+   "gdp_pps_head_ratio_2022": 0.663993345253657,
+   "nac_per_usd_ppp_2022": 0.5110567882662655,
+   "deflator_2022_2024": 1.0968013074947467
+  },
+  "labour_cost_naceQ": {
+   "year": "2023",
+   "eur_per_hour": 11.2,
+   "note": "Eurostat lc_lci_lev, NACE Q, D1_D4_MD5, 2023"
+  },
+  "households_k": {
+   "year": "2024",
+   "value": 4073.4
+  },
+  "population": {
+   "year": "2024",
+   "value": 10375764
+  },
+  "hh_size": 2.547199882162321,
+  "working_age_households_k": {
+   "year": "2024",
+   "value": 2631.168804,
+   "share": 0.6459392163794373,
+   "pensioner_pop_pct": {
+    "A1_GE65": 6.8,
+    "A2_GE1_GE65": 14.2
+   }
+  },
+  "shock_aff_k": {
+   "3": 57.26523146064072,
+   "5": 96.01463861896501
+  },
+  "deflator_2015eq100": {
+   "1995": 60.792,
+   "1996": 65.775,
+   "1997": 70.128,
+   "1998": 73.83,
+   "1999": 76.421,
+   "2000": 77.658,
+   "2001": 80.353,
+   "2002": 82.727,
+   "2003": 85.67,
+   "2004": 88.214,
+   "2005": 89.89,
+   "2006": 92.915,
+   "2007": 96.043,
+   "2008": 99.945,
+   "2009": 102.312,
+   "2010": 103.521,
+   "2011": 104.532,
+   "2012": 104.182,
+   "2013": 102.14,
+   "2014": 100.175,
+   "2015": 100.0,
+   "2016": 99.51,
+   "2017": 99.713,
+   "2018": 99.479,
+   "2019": 99.722,
+   "2020": 99.359,
+   "2021": 100.743,
+   "2022": 107.075,
+   "2023": 113.789,
+   "2024": 117.44,
+   "2025": 120.702
+  },
+  "fx_nac_per_eur": {
+   "2024": 1.0,
+   "2022": 1.0
+  }
+ },
+ "meta": {
+  "pulled": "2026-09-30",
+  "urls": {
+   "defl": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nama_10_gdp?na_item=B1GQ&unit=PD15_NAC&geo=AT&geo=BE&geo=BG&geo=HR&geo=CY&geo=CZ&geo=DK&geo=EE&geo=FI&geo=FR&geo=DE&geo=EL&geo=HU&geo=IE&geo=IT&geo=LV&geo=LT&geo=LU&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SK&geo=SI&geo=ES&geo=SE&geo=UK&geo=US&geo=EU27_2020&format=JSON&lang=EN",
+   "ppp_e011": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_ppp_ind?na_item=PPP_EU27_2020&ppp_cat=E011&geo=AT&geo=BE&geo=BG&geo=HR&geo=CY&geo=CZ&geo=DK&geo=EE&geo=FI&geo=FR&geo=DE&geo=EL&geo=HU&geo=IE&geo=IT&geo=LV&geo=LT&geo=LU&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SK&geo=SI&geo=ES&geo=SE&geo=UK&geo=US&geo=EU27_2020&format=JSON&lang=EN",
+   "ppp_gdp": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_ppp_ind?na_item=PPP_EU27_2020&ppp_cat=GDP&geo=AT&geo=BE&geo=BG&geo=HR&geo=CY&geo=CZ&geo=DK&geo=EE&geo=FI&geo=FR&geo=DE&geo=EL&geo=HU&geo=IE&geo=IT&geo=LV&geo=LT&geo=LU&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SK&geo=SI&geo=ES&geo=SE&geo=UK&geo=US&geo=EU27_2020&format=JSON&lang=EN",
+   "gdp_pps_hd": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nama_10_pc?na_item=B1GQ&unit=CP_PPS_EU27_2020_HAB&geo=AT&geo=BE&geo=BG&geo=HR&geo=CY&geo=CZ&geo=DK&geo=EE&geo=FI&geo=FR&geo=DE&geo=EL&geo=HU&geo=IE&geo=IT&geo=LV&geo=LT&geo=LU&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SK&geo=SI&geo=ES&geo=SE&geo=UK&geo=US&geo=EU27_2020&format=JSON&lang=EN",
+   "labour_q": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lc_lci_lev?nace_r2=Q&lcstruct=D1_D4_MD5&unit=EUR&geo=AT&geo=BE&geo=BG&geo=HR&geo=CY&geo=CZ&geo=DK&geo=EE&geo=FI&geo=FR&geo=DE&geo=EL&geo=HU&geo=IE&geo=IT&geo=LV&geo=LT&geo=LU&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SK&geo=SI&geo=ES&geo=SE&geo=UK&geo=US&geo=EU27_2020&format=JSON&lang=EN",
+   "hh": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfst_hhnhtych?agechild=TOTAL&n_child=TOTAL&phhcomp=TOTAL&unit=THS_HH&geo=AT&geo=BE&geo=BG&geo=HR&geo=CY&geo=CZ&geo=DK&geo=EE&geo=FI&geo=FR&geo=DE&geo=EL&geo=HU&geo=IE&geo=IT&geo=LV&geo=LT&geo=LU&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SK&geo=SI&geo=ES&geo=SE&geo=UK&geo=US&geo=EU27_2020&format=JSON&lang=EN",
+   "pop": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_pjan?age=TOTAL&sex=T&unit=NR&geo=AT&geo=BE&geo=BG&geo=HR&geo=CY&geo=CZ&geo=DK&geo=EE&geo=FI&geo=FR&geo=DE&geo=EL&geo=HU&geo=IE&geo=IT&geo=LV&geo=LT&geo=LU&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SK&geo=SI&geo=ES&geo=SE&geo=UK&geo=US&geo=EU27_2020&format=JSON&lang=EN",
+   "lci_os_fr": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lc_lci_r2_a?unit=I20&lcstruct=D1_D4_MD5&nace_r2=O-S&geo=FR&format=JSON&lang=EN",
+   "pens_A1_GE65": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvps02?rskpovth=TOTAL&unit=PC&hhcomp=A1_GE65&geo=AT&geo=BE&geo=BG&geo=HR&geo=CY&geo=CZ&geo=DK&geo=EE&geo=FI&geo=FR&geo=DE&geo=EL&geo=HU&geo=IE&geo=IT&geo=LV&geo=LT&geo=LU&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SK&geo=SI&geo=ES&geo=SE&geo=UK&geo=US&geo=EU27_2020&format=JSON&lang=EN",
+   "pens_A2_GE1_GE65": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvps02?rskpovth=TOTAL&unit=PC&hhcomp=A2_GE1_GE65&geo=AT&geo=BE&geo=BG&geo=HR&geo=CY&geo=CZ&geo=DK&geo=EE&geo=FI&geo=FR&geo=DE&geo=EL&geo=HU&geo=IE&geo=IT&geo=LV&geo=LT&geo=LU&geo=MT&geo=NL&geo=PL&geo=PT&geo=RO&geo=SK&geo=SI&geo=ES&geo=SE&geo=UK&geo=US&geo=EU27_2020&format=JSON&lang=EN",
+   "fx": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ert_bil_eur_a?statinfo=AVG&time=2024&time=2022&format=JSON&lang=EN"
+  },
+  "ppp_uk_e011_2024": 1.05586,
+  "ppp_us_gdp_2022": 1.5954,
+  "eu_gdp_pps_head_2022": 36184.7,
+  "gbp_per_eur_2024": 0.84662
+ }
+}

@@ -2,6 +2,8 @@
 
 BENEFITS Horizon Europe D2.2, grant 101179032, Work Package 2. Compiled 30 June 2026.
 
+**Which values the tools use.** The Spain, Italy, and Greece tools read their provider values from their country blocks (`europe/tool_machinery/country_{es,it,el}.json`), which carry the same evidence as the provider tool for all EU member states. Each value's source and grade are in its own note; [`VALUATION_CHAINS.md`](VALUATION_CHAINS.md) prints how every outcome value is built; and `eu27/build/report/EVIDENCE_TABLES.md` tabulates every unit cost and outcome value by country. This document records the native evidence the first three EU countries were first built on. Where a figure here and a country block differ, the country block is the one the tool uses.
+
 **This file is data-free.** It holds valuation parameters and citations only, no microdata.
 
 **Native price years and native currencies only.** Every figure is recorded at its native price year and native currency. Uprating to the common 2024 base and PPP-adjustment of the spine and of every cross-country transfer are the **next task** and are **not performed here**. Where a figure carries two years (a source year and the price year of a displayed value), both are kept distinct.

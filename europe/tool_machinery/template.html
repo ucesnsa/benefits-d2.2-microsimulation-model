@@ -195,10 +195,10 @@ footer.brandfoot{padding:18px 10%;border-top:2px solid var(--line);background:va
       <div><label for="p-serv">Service type</label><select id="p-serv"></select></div>
       <div><label for="p-people">People served / year<span class="rowgloss">individual people, not households. Every figure in this panel is per person</span></label><input id="p-people" type="number" min="0" value="500"></div>
       <div><label for="p-prof">Targeting profile</label><select id="p-prof"><option>Lowest incomes (deciles 1-3)</option><option>Low-to-middle (deciles 4-6)</option><option>Broad mix (all deciles)</option></select></div>
-      <div><label for="p-cost">Annual running cost (<span class="cursym"></span>, optional)<span class="rowgloss">the denominator of the benefit-cost ratio below</span></label><input id="p-cost" type="number" min="0" value="200000"></div>
+      <div><label for="p-cost">Annual running cost (<span class="cursym"></span>, optional)<span class="rowgloss">the denominator of the benefit-cost ratio below. Filled in as people served &times; the unit cost below until you enter your own</span></label><input id="p-cost" type="number" min="0" value=""></div>
       <div><label for="p-eps">&epsilon;</label><select id="p-eps"><option>0</option><option>0.5</option><option selected>1</option><option>1.5</option><option>2</option></select></div>
       <div><label for="p-shock">Unemployment shock (pp, 0&ndash;10)</label><input id="p-shock" type="number" min="0" max="10" step="0.1" value="4"></div>
-      <div><label for="p-staff">Caseworkers (number of staff)</label><input id="p-staff" type="number" min="0" value="10"></div>
+      <div><label for="p-staff">Caseworkers (number of staff)</label><input id="p-staff" type="number" min="0" value="12"></div>
       <div><label for="p-casesper">Cases each caseworker handles / year</label><input id="p-casesper" type="number" min="0" value="50"></div>
       <div><label for="p-unitcost">Unit cost (<span class="cursym"></span> per person / year)<span class="rowgloss">what this service costs you for one person helped. Ours is filled in; replace it with yours if you have one</span></label><input id="p-unitcost" type="number" min="0" step="any">
         <div style="display:flex;gap:6px;margin-top:5px"><button type="button" id="p-costreset" class="copybtn">Reset this</button><button type="button" id="p-costresetall" class="copybtn">Reset all</button></div></div>
@@ -293,6 +293,12 @@ footer.brandfoot{padding:18px 10%;border-top:2px solid var(--line);background:va
 const COUNTRY=__COUNTRY_JSON__;
 const GRID=COUNTRY.grid, DATA=COUNTRY.data, DIAL_TEXT=COUNTRY.dial_text, LABELS=COUNTRY.labels, PROFILES=COUNTRY.profiles;
 const CUR=COUNTRY.currency.symbol, LOC=COUNTRY.locale, DEF=(COUNTRY.deflator||1), SPINE=(COUNTRY.wellby_spine||{label:COUNTRY.currency.symbol});
+/* The provider panel is priced at 2024 prices, and the decile surface is in its own income
+   year (2023 in the EU blocks, 2023-24 in the UK). The cash floor and engine income read the
+   surface, so they are brought to the panel's year by this factor: the block's own
+   provider_income_uprate where it states one (the UK, on ONS L8GG), otherwise the analyst
+   deflator. kappa is their ratio, so it does not move. */
+const PROV_UPRATE=(COUNTRY.provider_income_uprate||DEF);
 const lbl=k=>LABELS[k]||k;
 const EPS=DATA.epsGrid, BU=DATA.bu;
 /* The decile array is a partition of this country's own modelled units: ten equal
@@ -478,6 +484,16 @@ function svc(){return DATA.services.find(s=>s.name===$("#p-serv").value);}
    applies to it. Other inputs keep their own marks: the extra-budget row still carries
    ** from the borrowed elasticities, and should. ================================== */
 var COST_OVERRIDE={};
+/* ==== THE RUNNING COST FOLLOWS THE SERVICE UNTIL THE USER ENTERS ONE ====
+   A single default running cost for every service made the benefit-cost ratio meaningless
+   for any service whose cost per person is far from it: 200,000 for 500 people is 400 a
+   head, so a service costing thousands a head read as returning hundreds for each unit
+   spent. Until the user types a running cost of their own, the field is filled as people
+   served x the unit cost in force (ours, or theirs if they entered one), and it follows the
+   service, the catchment and the unit cost. The first keystroke in the field hands it over. */
+var COST_TOUCHED=false;
+function autoCost(){if(COST_TOUCHED)return;var s=svc(),el=$("#p-cost");if(!s||!el)return;
+  el.value=String(Math.round((+$("#p-people").value||0)*unitCostOf(s)));}
 function unitCostOf(s){var v=s?COST_OVERRIDE[s.name]:null;
   return (v!=null&&isFinite(v))?v:(s?s.unitCost:0);}
 function costOverridden(s){var v=s?COST_OVERRIDE[s.name]:null;return v!=null&&isFinite(v);}
@@ -506,6 +522,7 @@ function costLedger(){var out=[];
     out.push(x.name+" "+fmtGBP(unitCostOf(x))+(costOverridden(x)?" [entered]":" [default]"));});
   return out.join("; ");}
 function renderProvider(){
+  autoCost();
   const s=svc(),people=+$("#p-people").value||0,prof=$("#p-prof").value,cost=$("#p-cost").value,pe=parseFloat($("#p-eps").value),ref=$("#p-ref").value;
   const band=PROFILES[prof],k=band.length,ei=epsIdx(pe);
   const decW=DATA.deciles[ref][ei],dec0=DATA.deciles[ref][0];
@@ -514,7 +531,7 @@ function renderProvider(){
      dividing by UNITS_M alone gives a per-unit rate, which `people` then multiplies.
      HH_SIZE converts it. See the block where HH_SIZE is defined. kappa is their ratio
      and is invariant. */
-  const pbW=bandWt*10/(k*UNITS_M*HH_SIZE),pbU=bandUnwt*10/(k*UNITS_M*HH_SIZE),kappa=pbU!==0?pbW/pbU:1;
+  const pbW=bandWt*10/(k*UNITS_M*HH_SIZE)*PROV_UPRATE,pbU=bandUnwt*10/(k*UNITS_M*HH_SIZE)*PROV_UPRATE,kappa=pbU!==0?pbW/pbU:1;
   const o=DATA.outcomes[s.name]||{convL:0,convC:0,convH:0,wbL:0,wbC:0,wbH:0,sensC:0,rows:[]};
   const cashfloor=people*pbW,engineInc=people*pbU;
   const conv=[people*o.convL,people*o.convC,people*o.convH],wbo=[people*o.wbL,people*o.wbC,people*o.wbH];
@@ -1096,7 +1113,9 @@ function priceBaseOf(s){
   var pn=s&&s.provenance_note,u=(pn&&typeof pn==="object")?pn.unitCost:pn;
   u=String(u||"");
   var m=u.match(/PRICE BASE[^.]*\./i)||u.match(/at 20\d\d[-\/]\d\d prices[^.]*\./i);
-  return m?m[0].trim():"the service note on the Provider tab states no price base";}
+  /* The note's own marker reads "PRICE BASE: ..."; the callers print their own "Price base:"
+     label, so the marker is dropped here rather than printed twice. */
+  return m?m[0].trim().replace(/^PRICE BASE:\s*/i,""):"the service note on the Provider tab states no price base";}
 
 /* Per-dial caveats, keyed by dial id in the country block. The unemployment caveat
    above predates this and keeps its own field; everything else goes through here, so a
@@ -1321,7 +1340,7 @@ function spineCosts(ex){return {a:exchDelta(ex.imv), b:exchDelta(ex.irpf)};}
 function renderScenExtra(){var ex=COUNTRY.scenario_extra;var card=document.getElementById("s-extra-card"),title=document.getElementById("s-extra-title"),body=document.getElementById("s-extra");
   if(!ex||!card){return;}
   if(ex.kind==="crossover"){title.textContent="Crossover";body.innerHTML='<p>'+ex.html+'</p>';card.className="card";}
-  else if(ex.kind==="spine"){title.textContent="Spine — the two reforms per unit of cost";
+  else if(ex.kind==="spine"){title.textContent="Spine: the two reforms per unit of cost";
     var c=spineCosts(ex),ca=c.a,cb=c.b;
     var iw=EPS.map(function(e,i){return (DATA.wevm[ex.imv]||[])[i]||0;}),tw=EPS.map(function(e,i){return (DATA.wevm[ex.irpf]||[])[i]||0;});
     var A=ex.imv_short||"A",B=ex.irpf_short||"B";
@@ -1363,6 +1382,9 @@ function init(){
   buildDials();setupExtras();
   var _cb=document.getElementById("p-copy");if(_cb)_cb.addEventListener("click",copyExport);
   const ps=$("#p-serv");DATA.services.forEach(s=>{const o=document.createElement("option");o.value=o.textContent=s.name;ps.appendChild(o);});ps.value=COUNTRY.provider_default||DATA.services[0].name;
+  /* Registered before the render listeners below, so the user's first keystroke marks the
+     running cost as theirs before the render that follows it could overwrite it. */
+  $("#p-cost").addEventListener("input",function(){COST_TOUCHED=true;});
   const pr=$("#p-ref");DATA.sc15.forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=lbl(s);pr.appendChild(o);});pr.value=COUNTRY.reference_default||DATA.sc15[0];
   ["#p-serv","#p-people","#p-prof","#p-cost","#p-eps","#p-shock","#p-staff","#p-casesper","#p-ref"].forEach(id=>{$(id).addEventListener("input",renderProvider);$(id).addEventListener("change",renderProvider);});
   /* The cost field shows the SELECTED service's cost, so changing service refills it
@@ -1414,6 +1436,11 @@ function applyState(st){
         DATA.services.forEach(function(x){var v=st.p.uc[x.name];
           if(v!=null&&isFinite(+v)&&+v>=0)COST_OVERRIDE[x.name]=+v;});}
       setCostField();
+      /* A shared link carries the running cost. It stays the sharer's own only if it differs
+         from what the tool would have filled in; otherwise it keeps following the service. */
+      var _sv=svc();
+      COST_TOUCHED=(st.p.co!=null&&st.p.co!==""&&_sv!=null
+        &&Math.round(+st.p.co)!==Math.round((+st.p.pe||0)*unitCostOf(_sv)));
       renderProvider();}
     /* renderScenarios, plural. It was renderScenario, which does not exist, so this
        threw into the catch below and took the tab restore on the next line with it:

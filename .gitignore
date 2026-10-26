@@ -55,3 +55,11 @@ Thumbs.db
 
 # ── Generated audit table (audit_provider_params.py output) ──────────────
 PROVIDER_PARAM_AUDIT.md
+
+# ── eu27: intermediate files the build writes and re-reads ──────────────────
+# The two view templates are regenerated from europe/tool_machinery/template.html and
+# plain_language_source.html on every build, so a committed copy could only go stale.
+# (The checks keep Chrome's profile and their probe pages in the system temp folder.)
+eu27/build/full_template.html
+eu27/build/lite_template.html
+eu27/build/out/

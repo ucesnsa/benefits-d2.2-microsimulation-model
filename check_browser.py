@@ -578,7 +578,13 @@ window.addEventListener("load",function(){setTimeout(function(){
        case-insensitive "PRICE BASE ... ." and where the note carried no such sentence it
        landed inside one, so the export told a reader the price base was "price base." and
        this assertion passed, because a fragment of the note is still in the note. */
-    var pbStartsSentence=pbInNote&&(pbAt===0||/[.!?]\\s$/.test(sNote.slice(Math.max(0,pbAt-2),pbAt)));
+    /* 2026-09-30: the export no longer repeats the note's own "PRICE BASE:" marker after its
+       "Price base:" label, so the quotation now begins just after that marker. It still has
+       to begin where the marker's sentence begins: the marker counts only if it itself opens
+       a sentence, so a truncation inside a sentence still fails. */
+    var pbMarkAt=(pbAt>=12&&sNote.slice(pbAt-12,pbAt).toUpperCase()==="PRICE BASE: ")?pbAt-12:-1;
+    var pbStartsSentence=pbInNote&&(pbAt===0||/[.!?]\\s$/.test(sNote.slice(Math.max(0,pbAt-2),pbAt))
+      ||(pbMarkAt>=0&&(pbMarkAt===0||/[.!?]\\s$/.test(sNote.slice(Math.max(0,pbMarkAt-2),pbMarkAt)))));
     var pbNamesAYear=/20[0-9][0-9]/.test(pbClaim);
     A("export_price_base_quotes_the_service_note",
       pbClaim.length>0 && pbInNote && pbStartsSentence && pbNamesAYear,
@@ -739,6 +745,40 @@ window.addEventListener("load",function(){setTimeout(function(){
       +(pageHH==null?"missing":pageHH.toFixed(6))+"; applied: re-derived central extra demand "
       +(expAddC==null?"?":expAddC.toFixed(4))+" vs page "+(pageAddC==null?"missing":pageAddC.toFixed(4)));
 
+    /* ---- The running cost follows the service until the user enters one (2026-09-30) ----
+       A single default of 200,000 made the ratio meaningless for any service whose cost per
+       person is far from 400. Until the user types a running cost it is people served x the
+       unit cost in force, it follows a change of service, and once typed it stays put. */
+    var rcFld=document.getElementById("p-cost"), rcSvc=document.getElementById("p-serv");
+    var rcPeople=function(){return +document.getElementById("p-people").value||0;};
+    var rcExpect=function(){return String(Math.round(rcPeople()*unitCostOf(svc())));};
+    var rcStart=(rcFld.value===rcExpect());
+    var rcOrig=rcSvc.value, rcOther=DATA.services.filter(function(x){return x.name!==rcOrig;})[0].name;
+    rcSvc.value=rcOther; rcSvc.dispatchEvent(new Event("change",{bubbles:true}));
+    var rcFollows=(rcFld.value===rcExpect());
+    rcSvc.value=rcOrig; rcSvc.dispatchEvent(new Event("change",{bubbles:true}));
+    A("running_cost_follows_the_service_until_entered",
+      rcStart && rcFollows && rcFld.value===rcExpect(),
+      "opens at people x unit cost: "+rcStart+"; follows a change of service: "+rcFollows
+      +"; field "+rcFld.value+" vs "+rcExpect());
+
+    /* ---- The cash floor is at the panel's price base (2026-09-30) ----
+       Re-derived from the decile surface and the block's own uprate, and compared with the
+       figure on the page: a page that dropped the uprate would print a floor in the
+       surface's income year under a panel labelled 2024. */
+    var cfProf=document.getElementById("p-prof").value, cfRef=document.getElementById("p-ref").value;
+    var cfEps=parseFloat(document.getElementById("p-eps").value);
+    var cfBand=PROFILES[cfProf], cfDec=DATA.deciles[cfRef][EPS.indexOf(cfEps)];
+    var cfUp=(COUNTRY.provider_income_uprate||DEF);
+    var cfExpect=Math.round(rcPeople()*cfBand.reduce(function(a,d){return a+cfDec[d];},0)*10/(cfBand.length*UNITS_M*HH_SIZE)*cfUp);
+    var cfCell="";
+    document.querySelectorAll("#p-value .row").forEach(function(r){
+      if(/Cash-equivalent floor/.test(r.textContent)){var v=r.querySelector(".v");if(v)cfCell=v.textContent;}});
+    var cfGot=parseInt(cfCell.replace(/[^0-9]/g,""),10);
+    A("cash_floor_at_the_panel_price_base",
+      cfUp>1 && Math.abs(cfGot-cfExpect)<=1,
+      "page "+cfGot+" vs surface x uprate "+cfExpect+" (uprate "+cfUp+")");
+
     // ---- The shipped default is in force before anything is entered ----
     var ucEl=document.getElementById("p-unitcost");
     var costRow=function(){return document.querySelector("#p-shockout .row[data-unitcost]");};
@@ -748,6 +788,11 @@ window.addEventListener("load",function(){setTimeout(function(){
     var budget=function(){var r=costRow();return r?parseFloat(r.getAttribute("data-budget")):null;};
     var svcNow=DATA.services.filter(function(x){return x.name===document.getElementById("p-serv").value;})[0];
     var dflt=svcNow?svcNow.unitCost:null;
+    /* 2026-09-30: the default team (12 caseworkers x 50) now covers the default catchment, so
+       there is no gap to price and the budget is zero before and after any entry. Shrink the
+       team to one caseworker so the gap, and the budget that prices it, are not zero. */
+    var stEl=document.getElementById("p-staff");
+    if(stEl){stEl.value="1";stEl.dispatchEvent(new Event("input",{bubbles:true}));}
     var budDefault=budget(), rowSrcDefault=costRow()?costRow().getAttribute("data-unitcost-source"):null;
     var dagDefault=costRow()?costRow().querySelectorAll(".v .usermark").length:0;
     var starDefault=costRow()?costRow().querySelectorAll(".v .mark:not(.usermark)").length:0;

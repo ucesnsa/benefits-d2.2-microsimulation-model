@@ -1,0 +1,236 @@
+{
+ "source": {
+  "authors": "Pleace, N., Baptista, I., Benjaminsen, L. and Busch-Geertsema, V.",
+  "year": 2013,
+  "title": "The Costs of Homelessness in Europe: An Assessment of the Current Evidence Base",
+  "publisher": "European Observatory on Homelessness (FEANTSA), EOH Comparative Studies on Homelessness No. 3, Brussels",
+  "locator": "Table 5.2 'Vignette 1', p.63; vignette defined in Box 5.1, p.61",
+  "note": "Situation 1 = one year of a single man in his 40s with a history of rough sleeping and high needs (mental health, drug and alcohol use), priced by national experts on a fixed basket: 200 emergency-shelter nights, 150 day-centre days, 3 emergency-department visits, 4 hospital nights, 2 months psychiatric ward, 1 month low-security prison, 1 night police custody. Euros as printed; the report does not state the conversion method or price year. '-' = item not costed. Rows transcribed from the table and checked against it a second time; the FI printed total (49,850) exceeds its rows by the 8,200 shelter row, the NL printed total (62,291) is 999 below its rows, the PL printed total omits custody."
+ },
+ "items": [
+  "shelter",
+  "daycentre",
+  "emergency_department",
+  "hospital",
+  "psychiatric",
+  "prison",
+  "custody"
+ ],
+ "rows": {
+  "UK": [
+   3483,
+   12016,
+   391,
+   2368,
+   20898,
+   3170,
+   4064
+  ],
+  "CZ": [
+   2208,
+   2703,
+   null,
+   833,
+   3481,
+   1060,
+   null
+  ],
+  "DK": [
+   30602,
+   6300,
+   297,
+   1015,
+   27147,
+   5619,
+   null
+  ],
+  "FI": [
+   8200,
+   6750,
+   945,
+   1300,
+   21060,
+   3250,
+   145
+  ],
+  "FR": [
+   9000,
+   null,
+   null,
+   4000,
+   21000,
+   1800,
+   null
+  ],
+  "HU": [
+   1240,
+   392,
+   null,
+   null,
+   1122,
+   801,
+   27
+  ],
+  "NL": [
+   15616,
+   5342,
+   453,
+   1740,
+   32900,
+   6870,
+   369
+  ],
+  "PL": [
+   392,
+   null,
+   189,
+   562,
+   2181,
+   578,
+   35.47
+  ],
+  "PT": [
+   2468,
+   null,
+   null,
+   1380,
+   4422,
+   1200,
+   null
+  ],
+  "SE": [
+   13274,
+   12206,
+   1728,
+   2300,
+   27639,
+   6214,
+   805
+  ]
+ },
+ "common_item_ratio_to_UK": {
+  "CZ": {
+   "common_items": [
+    "shelter",
+    "daycentre",
+    "hospital",
+    "psychiatric",
+    "prison"
+   ],
+   "country_sum": 10285,
+   "uk_sum_same_items": 41935,
+   "ratio": 0.24526052223679504,
+   "printed_total_ratio": null
+  },
+  "DK": {
+   "common_items": [
+    "shelter",
+    "daycentre",
+    "emergency_department",
+    "hospital",
+    "psychiatric",
+    "prison"
+   ],
+   "country_sum": 70980,
+   "uk_sum_same_items": 42326,
+   "ratio": 1.6769834144497473,
+   "printed_total_ratio": null
+  },
+  "FI": {
+   "common_items": [
+    "shelter",
+    "daycentre",
+    "emergency_department",
+    "hospital",
+    "psychiatric",
+    "prison",
+    "custody"
+   ],
+   "country_sum": 41650,
+   "uk_sum_same_items": 46390,
+   "ratio": 0.897822806639362,
+   "printed_total_ratio": null
+  },
+  "FR": {
+   "common_items": [
+    "shelter",
+    "hospital",
+    "psychiatric",
+    "prison"
+   ],
+   "country_sum": 35800,
+   "uk_sum_same_items": 29919,
+   "ratio": 1.1965640562853037,
+   "printed_total_ratio": null
+  },
+  "HU": {
+   "common_items": [
+    "shelter",
+    "daycentre",
+    "psychiatric",
+    "prison",
+    "custody"
+   ],
+   "country_sum": 3582,
+   "uk_sum_same_items": 43631,
+   "ratio": 0.08209759116224703,
+   "printed_total_ratio": null
+  },
+  "NL": {
+   "common_items": [
+    "shelter",
+    "daycentre",
+    "emergency_department",
+    "hospital",
+    "psychiatric",
+    "prison",
+    "custody"
+   ],
+   "country_sum": 63290,
+   "uk_sum_same_items": 46390,
+   "ratio": 1.3643026514334986,
+   "printed_total_ratio": null
+  },
+  "PL": {
+   "common_items": [
+    "shelter",
+    "emergency_department",
+    "hospital",
+    "psychiatric",
+    "prison",
+    "custody"
+   ],
+   "country_sum": 3937.47,
+   "uk_sum_same_items": 34374,
+   "ratio": 0.11454791412113806,
+   "printed_total_ratio": null
+  },
+  "PT": {
+   "common_items": [
+    "shelter",
+    "hospital",
+    "psychiatric",
+    "prison"
+   ],
+   "country_sum": 9470,
+   "uk_sum_same_items": 29919,
+   "ratio": 0.3165212741067549,
+   "printed_total_ratio": null
+  },
+  "SE": {
+   "common_items": [
+    "shelter",
+    "daycentre",
+    "emergency_department",
+    "hospital",
+    "psychiatric",
+    "prison",
+    "custody"
+   ],
+   "country_sum": 64166,
+   "uk_sum_same_items": 46390,
+   "ratio": 1.3831860314723001,
+   "printed_total_ratio": null
+  }
+ }
+}

@@ -195,10 +195,10 @@ footer.brandfoot{padding:18px 10%;border-top:2px solid var(--line);background:va
       <div><label for="p-serv">Service type</label><select id="p-serv"></select></div>
       <div><label for="p-people">People served / year<span class="rowgloss">individual people, not households. Every figure in this panel is per person</span></label><input id="p-people" type="number" min="0" value="500"></div>
       <div><label for="p-prof">Targeting profile</label><select id="p-prof"><option>Lowest incomes (deciles 1-3)</option><option>Low-to-middle (deciles 4-6)</option><option>Broad mix (all deciles)</option></select></div>
-      <div><label for="p-cost">Annual running cost (<span class="cursym"></span>, optional)<span class="rowgloss">the denominator of the benefit-cost ratio below</span></label><input id="p-cost" type="number" min="0" value="200000"></div>
+      <div><label for="p-cost">Annual running cost (<span class="cursym"></span>, optional)<span class="rowgloss">the denominator of the benefit-cost ratio below. Filled in as people served &times; the unit cost below until you enter your own</span></label><input id="p-cost" type="number" min="0" value=""></div>
       <div><label for="p-eps">&epsilon;</label><select id="p-eps"><option>0</option><option>0.5</option><option selected>1</option><option>1.5</option><option>2</option></select></div>
       <div><label for="p-shock">Unemployment shock (pp, 0&ndash;10)</label><input id="p-shock" type="number" min="0" max="10" step="0.1" value="4"></div>
-      <div><label for="p-staff">Caseworkers (number of staff)</label><input id="p-staff" type="number" min="0" value="10"></div>
+      <div><label for="p-staff">Caseworkers (number of staff)</label><input id="p-staff" type="number" min="0" value="12"></div>
       <div><label for="p-casesper">Cases each caseworker handles / year</label><input id="p-casesper" type="number" min="0" value="50"></div>
       <div><label for="p-unitcost">Unit cost (<span class="cursym"></span> per person / year)<span class="rowgloss">what this service costs you for one person helped. Ours is filled in; replace it with yours if you have one</span></label><input id="p-unitcost" type="number" min="0" step="any">
         <div style="display:flex;gap:6px;margin-top:5px"><button type="button" id="p-costreset" class="copybtn">Reset this</button><button type="button" id="p-costresetall" class="copybtn">Reset all</button></div></div>
@@ -293,7 +293,7 @@ footer.brandfoot{padding:18px 10%;border-top:2px solid var(--line);background:va
 const COUNTRY={
  "code": "EL",
  "name": "Greece",
- "locale": "el-GR",
+ "locale": "en-GB",
  "lang": "en",
  "title": "BENEFITS D2.2: Greece - Microsimulation Tool (Level 2)",
  "currency": {
@@ -1677,11 +1677,10 @@ const COUNTRY={
    {
     "name": "Employment support",
     "elastLow": 0.8,
-    "elastCentral": 1,
+    "elastCentral": 1.0,
     "elastHigh": 1.2,
     "unitCost": 445,
     "staffRatio": 120,
-    "flag": "Closest available estimate: 0.46 WELLBY at the &euro;13,317 spine (HM Treasury Wellbeing Guidance 2021: &pound;13,000 at 2019 prices, uprated and PPP-adjusted to Greece); transferred from the UK Britain fixed-effects unemployment-to-employment coefficient as no Greek figure exists. That gives &euro;6,126 for one person moving into work, within a &euro;4,713 to &euro;7,540 band. THAT IS NOT THE VALUE THIS TOOL APPLIES: it is the wellbeing figure before the two valuation stages. The tool applies &euro;404 per person re-employed, within a &euro;104 to &euro;937 band, being that figure times an effect share of 0.30 (0.11 low, 0.46 high) and an attribution of 0.22 (0.20 low, 0.27 high). Both quantities are per person re-employed, which is why the smaller one is named here: quoting &euro;6,126 as the value overstates it about fifteenfold. The stages, their sources and every denominator are on the value's own note.",
     "provenance": {
      "elastLow": "borrowed_unadjusted",
      "elastCentral": "borrowed_unadjusted",
@@ -1690,58 +1689,59 @@ const COUNTRY={
      "unitCost": "borrowed_adjusted"
     },
     "provenance_note": {
-     "elastLow": "UK value transferred unadjusted from 'Jobcentre Plus / DWP work coaches' (elastLow = 0.8). UK basis: the registry's own stated range for demand_elasticity, [0.8, 1.2], source: DWP; direct proportional relationship with unemployment.",
-     "elastCentral": "UK value transferred unadjusted from 'Jobcentre Plus / DWP work coaches' (elastCentral = 1). UK basis: Registry demand_elasticity = 1.0, taken directly. Source: DWP; direct proportional relationship with unemployment",
-     "elastHigh": "UK value transferred unadjusted from 'Jobcentre Plus / DWP work coaches' (elastHigh = 1.2). UK basis: the registry's own stated range for demand_elasticity, [0.8, 1.2], source: DWP; direct proportional relationship with unemployment.",
-     "staffRatio": "UK value transferred unadjusted from 'Jobcentre Plus / DWP work coaches' (staffRatio = 120). The UK figure is itself an assumption. UNIT UNESTABLISHED. The registry states no unit for this field: every service_demand entry carries unit 'service params' and nothing per field, its `range` covers only demand_elasticity, and not one of the ten source strings mentions staff, caseworkers or caseloads. The values read as concurrent caseloads (15 for children's social care, 25 for domestic abuse, 120 for a work coach) rather than the annual throughput that a gap measured in cases per year would need, but nothing on file establishes either reading, so the value is left exactly as it is. No formula in the tool reads this parameter: the extra-caseworker figure is computed from the provider's own stated cases per caseworker per year. It is carried here as a documented benchmark, not as an input.",
-     "unitCost": "EUR 445, converted from the UK value of GBP 1200. Converted on average hourly labour cost, the departure from the PPP default that applies to staff-time-denominated service delivery aggregates. Country figure: Eurostat lc_lci_lev, NACE Rev. 2 section Q, lcstruct D1_D4_MD5, 2023, EUR 11.20 per hour. UK denominator, GBP 30.2165 per hour, derived as the Eurostat lc_lci_lev UK figure for section Q at 2016 (EUR 27.90, its last published observation) converted at the 2016 annual average reference rate 0.81948 (Eurostat ert_bil_eur_a) to GBP 22.8635, then uprated on ASHE Table 16.5a section Q median gross hourly pay, 12.22 to 16.15, a growth factor of 1.321604. The ONS Index of Labour Costs per Hour was not usable: it was discontinued after Q3 2020 and does not publish at section level. Ratio applied: 0.370659. The UK figure is itself an assumption, so the converted value inherits that. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base; the UK figure it converts from is stated at that base and the labour-cost ratio is a 2023 observation applied at it."
-    }
+     "elastLow": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "elastCentral": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "elastHigh": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 445, converted from the UK tool's unit cost for Jobcentre Plus work coaching, GBP 1,200 per participant, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Greece EUR 11.20 an hour; UK GBP 30.2165), ratio 0.370658. No verified Greece figure for this unit was found. CONVERSION: GBP 1200 x 0.37065842. PRICE BASE: 2024-equivalent. Unit: one participant in an employment-support episode."
+    },
+    "flag": "Unit: one participant in an employment-support episode. Outcome value: borrowed from another country without adjustment. +0.46 WELLBY for a move from unemployment into work (Clark et al. 2018, the Britain fixed-effects coefficient HM Treasury's guidance uses), valued at the WELLBY value for Greece, then staged as in the UK tool: effect 0.11 / 0.30 / 0.46 x attribution 0.20 / 0.22 / 0.27. European trial evidence (Card, Kluve and Weber 2018) puts job-search assistance impacts at 1 to 2 percentage points, which suggests the staged central may be high. ORIGIN 16300 FACTOR 0.37581816; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0.37581816 AND 0.37581816; STAGE EFFECT 0.11 0.3 0.46 ATTRIBUTION 0.2 0.22 0.27; PRICE BASE: 2024-equivalent."
    },
    {
     "name": "Minimum income (KEA) casework",
-    "elastLow": 0.8,
-    "elastCentral": 1,
-    "elastHigh": 1.2,
+    "elastLow": 0.3,
+    "elastCentral": 0.55,
+    "elastHigh": 1.0,
     "unitCost": 148,
     "staffRatio": 200,
-    "flag": "National (engine income effect from the Greek microsimulation). The processing/hardship value-added limb is EXCLUDED as unevidenced. Valued by the modelled income effect only.",
     "provenance": {
-     "elastLow": "borrowed_unadjusted",
-     "elastCentral": "borrowed_unadjusted",
-     "elastHigh": "borrowed_unadjusted",
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
      "staffRatio": "borrowed_unadjusted",
      "unitCost": "borrowed_adjusted"
     },
     "provenance_note": {
-     "elastLow": "UK value transferred unadjusted from 'UC claim processing (DWP)' (elastLow = 0.8). UK basis: the registry's own stated range for demand_elasticity, [0.8, 1.2], source: DWP admin data.",
-     "elastCentral": "UK value transferred unadjusted from 'UC claim processing (DWP)' (elastCentral = 1). UK basis: Registry demand_elasticity = 1.0, taken directly. Source: DWP admin data",
-     "elastHigh": "UK value transferred unadjusted from 'UC claim processing (DWP)' (elastHigh = 1.2). UK basis: the registry's own stated range for demand_elasticity, [0.8, 1.2], source: DWP admin data.",
-     "staffRatio": "UK value transferred unadjusted from 'UC claim processing (DWP)' (staffRatio = 200). The UK figure is itself an assumption. UNIT UNESTABLISHED. The registry states no unit for this field: every service_demand entry carries unit 'service params' and nothing per field, its `range` covers only demand_elasticity, and not one of the ten source strings mentions staff, caseworkers or caseloads. The values read as concurrent caseloads (15 for children's social care, 25 for domestic abuse, 120 for a work coach) rather than the annual throughput that a gap measured in cases per year would need, but nothing on file establishes either reading, so the value is left exactly as it is. No formula in the tool reads this parameter: the extra-caseworker figure is computed from the provider's own stated cases per caseworker per year. It is carried here as a documented benchmark, not as an input.",
-     "unitCost": "EUR 148, converted from the UK value of GBP 400. Converted on average hourly labour cost, the departure from the PPP default that applies to staff-time-denominated service delivery aggregates. Country figure: Eurostat lc_lci_lev, NACE Rev. 2 section Q, lcstruct D1_D4_MD5, 2023, EUR 11.20 per hour. UK denominator, GBP 30.2165 per hour, derived as the Eurostat lc_lci_lev UK figure for section Q at 2016 (EUR 27.90, its last published observation) converted at the 2016 annual average reference rate 0.81948 (Eurostat ert_bil_eur_a) to GBP 22.8635, then uprated on ASHE Table 16.5a section Q median gross hourly pay, 12.22 to 16.15, a growth factor of 1.321604. The ONS Index of Labour Costs per Hour was not usable: it was discontinued after Q3 2020 and does not publish at section level. Ratio applied: 0.370659. The UK figure is itself an assumption, so the converted value inherits that. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base; the UK figure it converts from is stated at that base and the labour-cost ratio is a 2023 observation applied at it."
-    }
+     "elastLow": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "elastCentral": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "elastHigh": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 148, converted from the UK tool's unit cost for benefit claim support, GBP 400 per claim, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Greece EUR 11.20 an hour; UK GBP 30.2165), ratio 0.370658. No verified Greece figure for this unit was found. CONVERSION: GBP 400 x 0.37065842. PRICE BASE: 2024-equivalent. Unit: one claim supported."
+    },
+    "flag": "Unit: one claim supported. Outcome value: borrowed from another country with a stated adjustment. Income effect: the extra-income figure. Health-service use avoided: Liverpool Citizens Advice on Prescription (SSM Population Health 2025), an instrumental-variable study on linked NHS records: GBP 91 per person a year (95% CI 44 to 107) at 2023 prices, an impact, so attribution 1.0. The saving is per household member; the central counts the client only, the high counts every member (20,773 members of 8,205 client households). Uprated to 2024-25 on ONS L8GG and converted at household-consumption PPP (OECD, 2024, the factor of 0.816996 per GBP the Greece tool uses for every transfer from the UK). The advice covered benefits, debt and housing together. ORIGIN 91 FACTOR 0.8490648301; BAND ORIGIN 44 AND 230.3891529555; BAND FACTOR 0.8490648301 AND 0.8490648301; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
    },
    {
     "name": "Food aid / food banks",
-    "elastLow": 1.0,
-    "elastCentral": 1.5,
-    "elastHigh": 2.0,
+    "elastLow": 0.1,
+    "elastCentral": 0.25,
+    "elastHigh": 0.5,
     "unitCost": 56,
     "staffRatio": 250,
-    "flag": "Excluded - no robust effect size (unevidenced), for all countries including the UK; valued at zero and left out of the total.",
     "provenance": {
-     "elastLow": "borrowed_unadjusted",
-     "elastCentral": "borrowed_unadjusted",
-     "elastHigh": "borrowed_unadjusted",
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
      "staffRatio": "borrowed_unadjusted",
      "unitCost": "borrowed_adjusted"
     },
     "provenance_note": {
-     "elastLow": "UK value transferred unadjusted from 'Food banks (Trussell Trust + independent)' (elastLow = 1.0). UK basis: the registry's own stated range for demand_elasticity, [1.0, 2.0], source: Trussell Trust data 2023-24; over-indexed due to 5-week UC wait.",
-     "elastCentral": "UK value transferred unadjusted from 'Food banks (Trussell Trust + independent)' (elastCentral = 1.5). UK basis: Registry demand_elasticity = 1.5, taken directly. Source: Trussell Trust data 2023-24; over-indexed due to 5-week UC wait",
-     "elastHigh": "UK value transferred unadjusted from 'Food banks (Trussell Trust + independent)' (elastHigh = 2.0). UK basis: the registry's own stated range for demand_elasticity, [1.0, 2.0], source: Trussell Trust data 2023-24; over-indexed due to 5-week UC wait.",
-     "staffRatio": "UK value transferred unadjusted from 'Food banks (Trussell Trust + independent)' (staffRatio = 250). The UK figure is itself an assumption. UNIT UNESTABLISHED. The registry states no unit for this field: every service_demand entry carries unit 'service params' and nothing per field, its `range` covers only demand_elasticity, and not one of the ten source strings mentions staff, caseworkers or caseloads. The values read as concurrent caseloads (15 for children's social care, 25 for domestic abuse, 120 for a work coach) rather than the annual throughput that a gap measured in cases per year would need, but nothing on file establishes either reading, so the value is left exactly as it is. No formula in the tool reads this parameter: the extra-caseworker figure is computed from the provider's own stated cases per caseworker per year. It is carried here as a documented benchmark, not as an input.",
-     "unitCost": "EUR 56, converted from the UK value of GBP 150. Converted on average hourly labour cost, the departure from the PPP default that applies to staff-time-denominated service delivery aggregates. Country figure: Eurostat lc_lci_lev, NACE Rev. 2 section Q, lcstruct D1_D4_MD5, 2023, EUR 11.20 per hour. UK denominator, GBP 30.2165 per hour, derived as the Eurostat lc_lci_lev UK figure for section Q at 2016 (EUR 27.90, its last published observation) converted at the 2016 annual average reference rate 0.81948 (Eurostat ert_bil_eur_a) to GBP 22.8635, then uprated on ASHE Table 16.5a section Q median gross hourly pay, 12.22 to 16.15, a growth factor of 1.321604. The ONS Index of Labour Costs per Hour was not usable: it was discontinued after Q3 2020 and does not publish at section level. Ratio applied: 0.370659. The UK figure is itself an assumption, so the converted value inherits that. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base; the UK figure it converts from is stated at that base and the labour-cost ratio is a 2023 observation applied at it."
-    }
+     "elastLow": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "elastCentral": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "elastHigh": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 56, converted from the UK tool's unit cost for food banks, GBP 150 per recipient, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Greece EUR 11.20 an hour; UK GBP 30.2165), ratio 0.370658. No verified Greece figure for this unit was found. CONVERSION: GBP 150 x 0.37065842. PRICE BASE: 2024-equivalent. Unit: one recipient for a year."
+    },
+    "flag": "Unit: one recipient for a year. Outcome value: an assumption. Excluded for every country: no robust per-person effect exists. Randomised evidence shows small effects on food insecurity (for example Briefel et al., -2.8 points) and none on wellbeing; the Greek DIATROFI school-meal trial is a different service. The tool shows the income effect only, as a floor."
    },
    {
     "name": "Debt advice",
@@ -1750,7 +1750,6 @@ const COUNTRY={
     "elastHigh": 1.2,
     "unitCost": 185,
     "staffRatio": 100,
-    "flag": "Closest available estimate: the UK debt-advice wellbeing structure, transferred as no Greek figure exists; the central effect is near zero, carried within a low-to-high band (the uncertainty is in the band, not a verdict).",
     "provenance": {
      "elastLow": "borrowed_unadjusted",
      "elastCentral": "borrowed_unadjusted",
@@ -1759,12 +1758,13 @@ const COUNTRY={
      "unitCost": "borrowed_adjusted"
     },
     "provenance_note": {
-     "elastLow": "UK value transferred unadjusted from 'Debt advice services (Citizens Advice, StepChange, etc.)' (elastLow = 0.5). UK basis: the registry's own stated range for demand_elasticity, [0.5, 1.2], source: Citizens Advice annual stats; StepChange data.",
-     "elastCentral": "UK value transferred unadjusted from 'Debt advice (Citizens Advice, StepChange)' (elastCentral = 0.8). UK basis: Registry demand_elasticity = 0.8, taken directly. Source: Citizens Advice annual stats; StepChange data",
-     "elastHigh": "UK value transferred unadjusted from 'Debt advice services (Citizens Advice, StepChange, etc.)' (elastHigh = 1.2). UK basis: the registry's own stated range for demand_elasticity, [0.5, 1.2], source: Citizens Advice annual stats; StepChange data.",
-     "staffRatio": "UK value transferred unadjusted from 'Debt advice services (Citizens Advice, StepChange, etc.)' (staffRatio = 100). The UK figure is itself an assumption. UNIT UNESTABLISHED. The registry states no unit for this field: every service_demand entry carries unit 'service params' and nothing per field, its `range` covers only demand_elasticity, and not one of the ten source strings mentions staff, caseworkers or caseloads. The values read as concurrent caseloads (15 for children's social care, 25 for domestic abuse, 120 for a work coach) rather than the annual throughput that a gap measured in cases per year would need, but nothing on file establishes either reading, so the value is left exactly as it is. No formula in the tool reads this parameter: the extra-caseworker figure is computed from the provider's own stated cases per caseworker per year. It is carried here as a documented benchmark, not as an input.",
-     "unitCost": "EUR 185, converted from the UK value of GBP 500. Converted on average hourly labour cost, the departure from the PPP default that applies to staff-time-denominated service delivery aggregates. Country figure: Eurostat lc_lci_lev, NACE Rev. 2 section Q, lcstruct D1_D4_MD5, 2023, EUR 11.20 per hour. UK denominator, GBP 30.2165 per hour, derived as the Eurostat lc_lci_lev UK figure for section Q at 2016 (EUR 27.90, its last published observation) converted at the 2016 annual average reference rate 0.81948 (Eurostat ert_bil_eur_a) to GBP 22.8635, then uprated on ASHE Table 16.5a section Q median gross hourly pay, 12.22 to 16.15, a growth factor of 1.321604. The ONS Index of Labour Costs per Hour was not usable: it was discontinued after Q3 2020 and does not publish at section level. Ratio applied: 0.370659. The UK figure is itself an assumption, so the converted value inherits that. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base; the UK figure it converts from is stated at that base and the labour-cost ratio is a 2023 observation applied at it."
-    }
+     "elastLow": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "elastCentral": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "elastHigh": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 185, converted from the UK tool's unit cost for debt advice, GBP 500 per case, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Greece EUR 11.20 an hour; UK GBP 30.2165), ratio 0.370658. No verified Greece figure for this unit was found. CONVERSION: GBP 500 x 0.37065842. PRICE BASE: 2024-equivalent. Unit: one advice case."
+    },
+    "flag": "Unit: one advice case. Outcome value: borrowed from another country without adjustment. Being in arrears lowers life satisfaction by 0.355 points (FCA / Simetrica-Jacobs 2020, individual fixed effects). Central: advice moves 10 percentage points more clients out of unmanageable debt than no advice (Money Advice Service / YouGov 2012: 25% against 15%), an impact, so attribution 1.0: 0.355 x 0.10 WELLBY. Low: zero, because the only randomised trial (Pleasence and Balmer 2007) cannot rule it out. High: the UK tool's high. ORIGIN 16300 FACTOR 0.29003358; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 0.408498; STAGE EFFECT 0 0.1 0.63 ATTRIBUTION 1 1 0.5; PRICE BASE: 2024-equivalent."
    },
    {
     "name": "Talking therapies",
@@ -1773,7 +1773,6 @@ const COUNTRY={
     "elastHigh": 0.9,
     "unitCost": 445,
     "staffRatio": 50,
-    "flag": "Excluded for the EU - the UK IAPT 0.71 WELLBY effect is not transferred (unevidenced for Greece); valued at zero and left out of the total.",
     "provenance": {
      "elastLow": "borrowed_unadjusted",
      "elastCentral": "borrowed_unadjusted",
@@ -1782,21 +1781,21 @@ const COUNTRY={
      "unitCost": "borrowed_adjusted"
     },
     "provenance_note": {
-     "elastLow": "UK value transferred unadjusted from 'NHS Talking Therapies (IAPT) for anxiety/depression' (elastLow = 0.3). UK basis: the registry's own stated range for demand_elasticity, [0.3, 0.9], source: Barr et al. 2015; NHS England Talking Therapies data.",
-     "elastCentral": "UK value transferred unadjusted from 'NHS Talking Therapies (IAPT)' (elastCentral = 0.6). UK basis: Registry demand_elasticity = 0.6, taken directly. Source: Barr et al. 2015; NHS England Talking Therapies data",
-     "elastHigh": "UK value transferred unadjusted from 'NHS Talking Therapies (IAPT) for anxiety/depression' (elastHigh = 0.9). UK basis: the registry's own stated range for demand_elasticity, [0.3, 0.9], source: Barr et al. 2015; NHS England Talking Therapies data.",
-     "staffRatio": "UK value transferred unadjusted from 'NHS Talking Therapies (IAPT) for anxiety/depression' (staffRatio = 50). The UK figure is itself an assumption. UNIT UNESTABLISHED. The registry states no unit for this field: every service_demand entry carries unit 'service params' and nothing per field, its `range` covers only demand_elasticity, and not one of the ten source strings mentions staff, caseworkers or caseloads. The values read as concurrent caseloads (15 for children's social care, 25 for domestic abuse, 120 for a work coach) rather than the annual throughput that a gap measured in cases per year would need, but nothing on file establishes either reading, so the value is left exactly as it is. No formula in the tool reads this parameter: the extra-caseworker figure is computed from the provider's own stated cases per caseworker per year. It is carried here as a documented benchmark, not as an input.",
-     "unitCost": "EUR 445, converted from the UK value of GBP 1200. Converted on average hourly labour cost, the departure from the PPP default that applies to staff-time-denominated service delivery aggregates. Country figure: Eurostat lc_lci_lev, NACE Rev. 2 section Q, lcstruct D1_D4_MD5, 2023, EUR 11.20 per hour. UK denominator, GBP 30.2165 per hour, derived as the Eurostat lc_lci_lev UK figure for section Q at 2016 (EUR 27.90, its last published observation) converted at the 2016 annual average reference rate 0.81948 (Eurostat ert_bil_eur_a) to GBP 22.8635, then uprated on ASHE Table 16.5a section Q median gross hourly pay, 12.22 to 16.15, a growth factor of 1.321604. The ONS Index of Labour Costs per Hour was not usable: it was discontinued after Q3 2020 and does not publish at section level. Ratio applied: 0.370659. The UK figure is itself an assumption, so the converted value inherits that. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base; the UK figure it converts from is stated at that base and the labour-cost ratio is a 2023 observation applied at it."
-    }
+     "elastLow": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "elastCentral": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "elastHigh": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 445, converted from the UK tool's unit cost for NHS Talking Therapies, GBP 1,200 per course, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Greece EUR 11.20 an hour; UK GBP 30.2165), ratio 0.370658. No verified Greece figure for this unit was found. CONVERSION: GBP 1200 x 0.37065842. PRICE BASE: 2024-equivalent. Unit: one course of treatment."
+    },
+    "flag": "Unit: one course of treatment. Outcome value: borrowed from another country without adjustment. Central: 0.06 QALY per patient from adding transdiagnostic group CBT to usual primary care in Spain (the PsicAP randomised trial; abstract), converted at HM Treasury's 7 WELLBYs per QALY = 0.42 WELLBY, an impact, so attribution 1.0. Low: zero (German and Swedish trials found no QALY difference). High: the UK tool's high for NHS Talking Therapies (1.5 x 0.6 x 0.61 WELLBY). Nordic studies find no net saving from reduced sick leave, so no cost-avoided value is added. ORIGIN 16300 FACTOR 0.34313832; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 1.225494; STAGE EFFECT 0 1 0.6 ATTRIBUTION 1 1 0.61; PRICE BASE: 2024-equivalent."
    },
    {
     "name": "Housing / homelessness",
     "elastLow": 0.3,
     "elastCentral": 0.5,
     "elastHigh": 0.8,
-    "unitCost": 1297,
+    "unitCost": 3137,
     "staffRatio": 30,
-    "flag": "Closest available estimate: &euro;22,049 per case (the UK homelessness averted-cost, &pound;20,128 at 2015-16, uprated and PPP-adjusted to Greece); transferred from the UK as no Greek figure exists. Central within a low-to-high band.",
     "provenance": {
      "elastLow": "borrowed_unadjusted",
      "elastCentral": "borrowed_unadjusted",
@@ -1805,12 +1804,13 @@ const COUNTRY={
      "unitCost": "borrowed_adjusted"
     },
     "provenance_note": {
-     "elastLow": "UK value transferred unadjusted from 'Local authority housing/homelessness services' (elastLow = 0.3). UK basis: the registry's own stated range for demand_elasticity, [0.3, 0.8], source: DLUHC homelessness statistics; LA housing teams.",
-     "elastCentral": "UK value transferred unadjusted from 'Housing / homelessness services' (elastCentral = 0.5). UK basis: Registry demand_elasticity = 0.5, taken directly. Source: DLUHC homelessness statistics; LA housing teams",
-     "elastHigh": "UK value transferred unadjusted from 'Local authority housing/homelessness services' (elastHigh = 0.8). UK basis: the registry's own stated range for demand_elasticity, [0.3, 0.8], source: DLUHC homelessness statistics; LA housing teams.",
-     "staffRatio": "UK value transferred unadjusted from 'Local authority housing/homelessness services' (staffRatio = 30). The UK figure is itself an assumption. UNIT UNESTABLISHED. The registry states no unit for this field: every service_demand entry carries unit 'service params' and nothing per field, its `range` covers only demand_elasticity, and not one of the ten source strings mentions staff, caseworkers or caseloads. The values read as concurrent caseloads (15 for children's social care, 25 for domestic abuse, 120 for a work coach) rather than the annual throughput that a gap measured in cases per year would need, but nothing on file establishes either reading, so the value is left exactly as it is. No formula in the tool reads this parameter: the extra-caseworker figure is computed from the provider's own stated cases per caseworker per year. It is carried here as a documented benchmark, not as an input.",
-     "unitCost": "EUR 1297, converted from the UK value of GBP 3500. Converted on average hourly labour cost, the departure from the PPP default that applies to staff-time-denominated service delivery aggregates. Country figure: Eurostat lc_lci_lev, NACE Rev. 2 section Q, lcstruct D1_D4_MD5, 2023, EUR 11.20 per hour. UK denominator, GBP 30.2165 per hour, derived as the Eurostat lc_lci_lev UK figure for section Q at 2016 (EUR 27.90, its last published observation) converted at the 2016 annual average reference rate 0.81948 (Eurostat ert_bil_eur_a) to GBP 22.8635, then uprated on ASHE Table 16.5a section Q median gross hourly pay, 12.22 to 16.15, a growth factor of 1.321604. The ONS Index of Labour Costs per Hour was not usable: it was discontinued after Q3 2020 and does not publish at section level. Ratio applied: 0.370659. The UK figure is itself an assumption, so the converted value inherits that. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base; the UK figure it converts from is stated at that base and the labour-cost ratio is a 2023 observation applied at it."
-    }
+     "elastLow": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "elastCentral": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "elastHigh": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 3,137, converted from Greater Manchester Combined Authority (Research Team), citing MHCLG 2024 (2025), Unit Cost Database v3.0 (November 2025), GBP 7,737 at 2022 prices, uprated to GBP 8,463 on ONS L8GG. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Greece EUR 11.20 an hour; UK GBP 30.2165), ratio 0.370658. No verified Greece figure for this unit was found. CONVERSION: GBP 8463.031253 x 0.37065842. PRICE BASE: 2024-equivalent. Unit: one homeless person supported for a year."
+    },
+    "flag": "Unit: one homeless person supported for a year. Outcome value: borrowed from another country with a stated adjustment. A year of homelessness costs the public EUR 22,049 per person (the UK tool's GBP 26,988 (Crisis 2015, a derived 12-month rough-sleeper vignette, uprated) converted at household-consumption PPP (OECD, 2024, the factor of 0.816996 per GBP the Greece tool uses for every transfer from the UK); no Greece cost of homelessness was found). Share avoided by a year of housing support: central 0.407 (Spain, Hábitat randomised trial: EUR 470.97 of EUR 1,157.84 a month), high 0.438 (France, Un chez-soi d'abord randomised trial, on a consistent cost basis), both impacts, so attribution 1.0; low 0.112, the UK tool's central (0.20 x 0.562), whose effect share is an assumption. ORIGIN 22049.3331468 FACTOR 1; BAND ORIGIN 22049.3331468 AND 22049.3331468; BAND FACTOR 1 AND 1; STAGE EFFECT 0.112 0.407 0.438 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
    },
    {
     "name": "Children's social care",
@@ -1819,7 +1819,6 @@ const COUNTRY={
     "elastHigh": 0.5,
     "unitCost": 4064,
     "staffRatio": 15,
-    "flag": "Closest available estimate: &euro;98,428 per averted care entry (the Italian children's social-care cost, PPP-adjusted to Greece); transferred from Italy as no Greek figure exists.",
     "provenance": {
      "elastLow": "borrowed_unadjusted",
      "elastCentral": "borrowed_unadjusted",
@@ -1828,12 +1827,13 @@ const COUNTRY={
      "unitCost": "borrowed_adjusted"
     },
     "provenance_note": {
-     "elastLow": "UK value transferred unadjusted from 'Children's social care (local authority)' (elastLow = 0.15). UK basis: the registry's own stated range for demand_elasticity, [0.15, 0.5], source: DfE Children in Need census; family stress → referral lag.",
-     "elastCentral": "UK value transferred unadjusted from 'Children's social care' (elastCentral = 0.3). UK basis: Registry demand_elasticity = 0.3, taken directly. Source: DfE Children in Need census; family stress → referral lag",
-     "elastHigh": "UK value transferred unadjusted from 'Children's social care (local authority)' (elastHigh = 0.5). UK basis: the registry's own stated range for demand_elasticity, [0.15, 0.5], source: DfE Children in Need census; family stress → referral lag.",
-     "staffRatio": "UK value transferred unadjusted from 'Children's social care (local authority)' (staffRatio = 15). The UK figure is itself an assumption. UNIT UNESTABLISHED. The registry states no unit for this field: every service_demand entry carries unit 'service params' and nothing per field, its `range` covers only demand_elasticity, and not one of the ten source strings mentions staff, caseworkers or caseloads. The values read as concurrent caseloads (15 for children's social care, 25 for domestic abuse, 120 for a work coach) rather than the annual throughput that a gap measured in cases per year would need, but nothing on file establishes either reading, so the value is left exactly as it is. No formula in the tool reads this parameter: the extra-caseworker figure is computed from the provider's own stated cases per caseworker per year. It is carried here as a documented benchmark, not as an input.",
-     "unitCost": "EUR 4064 converted from the UK value of GBP 10965 Converted on average hourly labour cost, the departure from the PPP default that applies to staff-time-denominated service delivery aggregates. Country figure: Eurostat lc_lci_lev, NACE Rev. 2 section Q, lcstruct D1_D4_MD5, 2023, EUR 11.20 per hour. UK denominator, GBP 30.2165 per hour, derived as the Eurostat lc_lci_lev UK figure for section Q at 2016 (EUR 27.90, its last published observation) converted at the 2016 annual average reference rate 0.81948 (Eurostat ert_bil_eur_a) to GBP 22.8635, then uprated on ASHE Table 16.5a section Q median gross hourly pay, 12.22 to 16.15, a growth factor of 1.321604. The ONS Index of Labour Costs per Hour was not usable: it was discontinued after Q3 2020 and does not publish at section level. Ratio applied: 0.370659. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base; the UK figure it converts from is stated at that base and the labour-cost ratio is a 2023 observation applied at it."
-    }
+     "elastLow": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "elastCentral": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "elastHigh": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 4,064, converted from Home Office (2021) GBP 8,640 per child in need per year at 2018/19 prices, uprated to GBP 10,965 (the UK tool's figure). Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Greece EUR 11.20 an hour; UK GBP 30.2165), ratio 0.370658. No verified Greece figure for this unit was found. CONVERSION: GBP 10965 x 0.37065842. PRICE BASE: 2024-equivalent. Unit: one child supported at home for a year."
+    },
+    "flag": "Unit: one child supported at home for a year. Outcome value: borrowed from another country with a stated adjustment. A year of out-of-home care costs EUR 35,319 per child (GMCA (2025), Unit Cost Database v3.0 (November 2025), GBP 91,687 per looked-after child a year at 2023 prices, uprated to GBP 95,286 and converted on labour cost in health and social work (ratio 0.3707); no verified Greece figure was found). Reduction in the chance of a residential placement: central 0.056 (Italy, P.I.P.P.I. against a comparison group, residential placements only: 6.4% against 0.8%), high 0.119 (the same, counting day foster care too), low zero (Al et al. 2012 meta-analysis: intensive family preservation generally does not prevent placement). One year of placement avoided is counted, which is conservative. The sensitivity row is the UK tool's route: the lifetime cost of a maltreatment case (Bocconi 2013, Italy) x 0.086. ORIGIN 35318.5242675526 FACTOR 1; BAND ORIGIN 35318.5242675526 AND 35318.5242675526; BAND FACTOR 1 AND 1; STAGE EFFECT 0 0.056 0.119 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
    },
    {
     "name": "Domestic abuse / GBV",
@@ -1842,7 +1842,6 @@ const COUNTRY={
     "elastHigh": 0.6,
     "unitCost": 927,
     "staffRatio": 25,
-    "flag": "Closest available estimate: &euro;15,651 per victim, a point estimate carrying no interval: the Italian cost it converts from publishes none, so this row has no band of its own. Transferred from Italy and PPP-adjusted (Eurostat household-final-consumption PPP, IT to EL 0.881460, 2024 round). The chain is doubled and the PPP step corrects only its second link: the Italian figure is itself an aggregate over a transferred victim count rather than a measured per-victim cost, and that first step is not corrected by any conversion. No national Greek per-victim figure exists. Carried with the provenance on its face.",
     "provenance": {
      "elastLow": "borrowed_unadjusted",
      "elastCentral": "borrowed_unadjusted",
@@ -1851,12 +1850,13 @@ const COUNTRY={
      "unitCost": "borrowed_adjusted"
     },
     "provenance_note": {
-     "elastLow": "UK value transferred unadjusted from 'Domestic abuse services (refuges, IDVA, helplines)' (elastLow = 0.2). UK basis: the registry's own stated range for demand_elasticity, [0.2, 0.6], source: ONS domestic abuse statistics; SafeLives data.",
-     "elastCentral": "UK value transferred unadjusted from 'Domestic abuse services' (elastCentral = 0.4). UK basis: Registry demand_elasticity = 0.4, taken directly. Source: ONS domestic abuse statistics; SafeLives data",
-     "elastHigh": "UK value transferred unadjusted from 'Domestic abuse services (refuges, IDVA, helplines)' (elastHigh = 0.6). UK basis: the registry's own stated range for demand_elasticity, [0.2, 0.6], source: ONS domestic abuse statistics; SafeLives data.",
-     "staffRatio": "UK value transferred unadjusted from 'Domestic abuse services (refuges, IDVA, helplines)' (staffRatio = 25). The UK figure is itself an assumption. UNIT UNESTABLISHED. The registry states no unit for this field: every service_demand entry carries unit 'service params' and nothing per field, its `range` covers only demand_elasticity, and not one of the ten source strings mentions staff, caseworkers or caseloads. The values read as concurrent caseloads (15 for children's social care, 25 for domestic abuse, 120 for a work coach) rather than the annual throughput that a gap measured in cases per year would need, but nothing on file establishes either reading, so the value is left exactly as it is. No formula in the tool reads this parameter: the extra-caseworker figure is computed from the provider's own stated cases per caseworker per year. It is carried here as a documented benchmark, not as an input.",
-     "unitCost": "EUR 927, converted from the UK value of GBP 2500. Converted on average hourly labour cost, the departure from the PPP default that applies to staff-time-denominated service delivery aggregates. Country figure: Eurostat lc_lci_lev, NACE Rev. 2 section Q, lcstruct D1_D4_MD5, 2023, EUR 11.20 per hour. UK denominator, GBP 30.2165 per hour, derived as the Eurostat lc_lci_lev UK figure for section Q at 2016 (EUR 27.90, its last published observation) converted at the 2016 annual average reference rate 0.81948 (Eurostat ert_bil_eur_a) to GBP 22.8635, then uprated on ASHE Table 16.5a section Q median gross hourly pay, 12.22 to 16.15, a growth factor of 1.321604. The ONS Index of Labour Costs per Hour was not usable: it was discontinued after Q3 2020 and does not publish at section level. Ratio applied: 0.370659. The UK figure is itself an assumption, so the converted value inherits that. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base; the UK figure it converts from is stated at that base and the labour-cost ratio is a 2023 observation applied at it."
-    }
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 927, converted from the UK tool's unit cost for domestic abuse services, GBP 2,500 per case, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Greece EUR 11.20 an hour; UK GBP 30.2165), ratio 0.370658. No verified Greece figure for this unit was found. CONVERSION: GBP 2500 x 0.37065842. PRICE BASE: 2024-equivalent. Unit: one victim supported."
+    },
+    "flag": "Unit: one victim supported. Outcome value: borrowed from another country with a stated adjustment. Tangible cost of intimate-partner violence per victim a year: EUR 2,201 (the mean of the Spanish and Italian national figures (tangible costs per victim of partner violence, from victim surveys), each uprated to 2024 and converted at household-consumption PPP; the EIGE per-country table is not used because it scales the UK cost by population). Effect and attribution as in the UK tool (0.24 x 0.5417: advocacy reduces physical abuse, odds ratio 0.43, Ramsay et al. 2009). Pain and suffering are shown as a sensitivity, not added, as settled decision 8 does for Spain. ORIGIN 2200.5790370054 FACTOR 1; BAND ORIGIN 2200.5790370054 AND 2200.5790370054; BAND FACTOR 1 AND 1; STAGE EFFECT 0.24 0.24 0.24 ATTRIBUTION 0.5416667 0.5416667 0.5416667; PRICE BASE: 2024-equivalent."
    },
    {
     "name": "Drug & alcohol treatment",
@@ -1865,7 +1865,6 @@ const COUNTRY={
     "elastHigh": 0.5,
     "unitCost": 1664,
     "staffRatio": 30,
-    "flag": "Closest available estimate: a DERIVED income-scaled VSL for Greece (&euro;3.19m, OECD 2012 income-elasticity transfer) times an averted-death rate of 24.8 per 1,000 OST patient-years (Sordo et al. 2017, transferred). Values averted MORTALITY ONLY - a strict subset of the UK figure. Central &euro;79,112, band &euro;39,556-&euro;118,668 (OECD VSL range 1.8-5.4m) per patient-year.",
     "provenance": {
      "elastLow": "borrowed_unadjusted",
      "elastCentral": "borrowed_unadjusted",
@@ -1874,35 +1873,36 @@ const COUNTRY={
      "unitCost": "borrowed_adjusted"
     },
     "provenance_note": {
-     "elastLow": "UK value transferred unadjusted from 'Drug and alcohol treatment services' (elastLow = 0.15). UK basis: the registry's own stated range for demand_elasticity, [0.15, 0.5], source: OHID NDTMS data; Stuckler & Basu 2013.",
-     "elastCentral": "UK value transferred unadjusted from 'Drug & alcohol treatment' (elastCentral = 0.3). UK basis: Registry demand_elasticity = 0.3, taken directly. Source: OHID NDTMS data; Stuckler & Basu 2013",
-     "elastHigh": "UK value transferred unadjusted from 'Drug and alcohol treatment services' (elastHigh = 0.5). UK basis: the registry's own stated range for demand_elasticity, [0.15, 0.5], source: OHID NDTMS data; Stuckler & Basu 2013.",
-     "staffRatio": "UK value transferred unadjusted from 'Drug and alcohol treatment services' (staffRatio = 30). The UK figure is itself an assumption. UNIT UNESTABLISHED. The registry states no unit for this field: every service_demand entry carries unit 'service params' and nothing per field, its `range` covers only demand_elasticity, and not one of the ten source strings mentions staff, caseworkers or caseloads. The values read as concurrent caseloads (15 for children's social care, 25 for domestic abuse, 120 for a work coach) rather than the annual throughput that a gap measured in cases per year would need, but nothing on file establishes either reading, so the value is left exactly as it is. No formula in the tool reads this parameter: the extra-caseworker figure is computed from the provider's own stated cases per caseworker per year. It is carried here as a documented benchmark, not as an input.",
-     "unitCost": "EUR 1664, converted from the UK value of GBP 4488. SCOPE, AN EXTRAPOLATION, INHERITED FROM THE UK FIGURE: nothing in the UK source covers alcohol. It is a drug treatment budget divided by adults in effective drug treatment in England, and this row is labelled drug and alcohol treatment, so applying it to a combined population extends it beyond the population it was measured on. No alcohol-treatment source has been substituted for it, here or in the UK edition. Converted on average hourly labour cost, the departure from the PPP default that applies to staff-time-denominated service delivery aggregates. Country figure: Eurostat lc_lci_lev, NACE Rev. 2 section Q, lcstruct D1_D4_MD5, 2023, EUR 11.20 per hour. UK denominator, GBP 30.2165 per hour, derived as the Eurostat lc_lci_lev UK figure for section Q at 2016 (EUR 27.90, its last published observation) converted at the 2016 annual average reference rate 0.81948 (Eurostat ert_bil_eur_a) to GBP 22.8635, then uprated on ASHE Table 16.5a section Q median gross hourly pay, 12.22 to 16.15, a growth factor of 1.321604. The ONS Index of Labour Costs per Hour was not usable: it was discontinued after Q3 2020 and does not publish at section level. Ratio applied: 0.370659. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base; the UK figure it converts from is stated at that base and the labour-cost ratio is a 2023 observation applied at it."
-    }
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 1,664, converted from National Audit Office (2010) GBP 3,000 per person in effective drug treatment at 2008-09 prices, uprated to GBP 4,488 (the UK tool's figure). Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Greece EUR 11.20 an hour; UK GBP 30.2165), ratio 0.370658. No verified Greece figure for this unit was found. CONVERSION: GBP 4488 x 0.37065842. PRICE BASE: 2024-equivalent. Unit: one client for a treatment year."
+    },
+    "flag": "Unit: one client for a treatment year. Outcome value: borrowed from another country without adjustment. Value of a statistical life for Greece: EUR 3,126,368 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 0.817 (UNODC (2025), World Drug Report 2025, Statistical Annex 5.1: Treatment by primary drug of use: 9419 / 11533 = 0.817). Non-opioid clients carry no averted-death value in these figures. ORIGIN 3126368.2649090113 FACTOR 0.01752465; BAND ORIGIN 2605306.8874241761 AND 3647429.6423938465; BAND FACTOR 0.0053105 AND 0.0202616; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
    },
    {
     "name": "GP consultation",
     "elastLow": 0.2,
-    "elastCentral": 0.4,
-    "elastHigh": 0.6,
-    "unitCost": 80,
+    "elastCentral": 0.25,
+    "elastHigh": 0.3,
+    "unitCost": 27,
     "staffRatio": 300,
-    "flag": "Applies &euro;80 per person helped per year, converted from the UK per-case figure of &pound;215 on the section Q labour-cost ratio; that UK figure is &pound;53.67 per consultation times four visits, and the visit count is an assumption with no source. Greece has no national price; the &euro;17.47 per consultation carried for it is Spain's &euro;18.47 PPP-adjusted, and it is held but NOT APPLIED: it is a price per visit and this is a cost per case, so the two are not multiples of each other. Cost-input: valued at delivery cost only, with zero separate value-added.",
     "provenance": {
-     "elastLow": "borrowed_unadjusted",
-     "elastCentral": "borrowed_unadjusted",
-     "elastHigh": "borrowed_unadjusted",
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
      "staffRatio": "borrowed_unadjusted",
      "unitCost": "borrowed_adjusted"
     },
     "provenance_note": {
-     "elastLow": "UK value transferred unadjusted from 'Additional GP consultations (stress, anxiety, physical health)' (elastLow = 0.2). UK basis: the registry's own stated range for demand_elasticity, [0.2, 0.6], source: PHE fingertips; ~4 additional GP visits × £39 each.",
-     "elastCentral": "UK value transferred unadjusted from 'Additional GP consultations' (elastCentral = 0.4). UK basis: Registry demand_elasticity = 0.4, taken directly. Source: PHE fingertips; ~4 additional GP visits × £39 each",
-     "elastHigh": "UK value transferred unadjusted from 'Additional GP consultations (stress, anxiety, physical health)' (elastHigh = 0.6). UK basis: the registry's own stated range for demand_elasticity, [0.2, 0.6], source: PHE fingertips; ~4 additional GP visits × £39 each.",
-     "staffRatio": "UK value transferred unadjusted from 'Additional GP consultations (stress, anxiety, physical health)' (staffRatio = 300). The UK figure is itself an assumption. UNIT UNESTABLISHED. The registry states no unit for this field: every service_demand entry carries unit 'service params' and nothing per field, its `range` covers only demand_elasticity, and not one of the ten source strings mentions staff, caseworkers or caseloads. The values read as concurrent caseloads (15 for children's social care, 25 for domestic abuse, 120 for a work coach) rather than the annual throughput that a gap measured in cases per year would need, but nothing on file establishes either reading, so the value is left exactly as it is. No formula in the tool reads this parameter: the extra-caseworker figure is computed from the provider's own stated cases per caseworker per year. It is carried here as a documented benchmark, not as an input.",
-     "unitCost": "EUR 80 converted from the UK value of GBP 215 Converted on average hourly labour cost, the departure from the PPP default that applies to staff-time-denominated service delivery aggregates. Country figure: Eurostat lc_lci_lev, NACE Rev. 2 section Q, lcstruct D1_D4_MD5, 2023, EUR 11.20 per hour. UK denominator, GBP 30.2165 per hour, derived as the Eurostat lc_lci_lev UK figure for section Q at 2016 (EUR 27.90, its last published observation) converted at the 2016 annual average reference rate 0.81948 (Eurostat ert_bil_eur_a) to GBP 22.8635, then uprated on ASHE Table 16.5a section Q median gross hourly pay, 12.22 to 16.15, a growth factor of 1.321604. The ONS Index of Labour Costs per Hour was not usable: it was discontinued after Q3 2020 and does not publish at section level. Ratio applied: 0.370659. The UK figure is itself an assumption, so the converted value inherits that. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base; the UK figure it converts from is stated at that base and the labour-cost ratio is a 2023 observation applied at it."
-    }
+     "elastLow": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "elastCentral": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "elastHigh": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 27.17 per consultation, the Spanish national price per GP consultation (EUR 65.99, a 2025 public price) scaled by the ratio of labour costs in health and social work, Greece to Spain, 0.411765 (Eurostat lc_lci_lev, NACE Q, 2023), as the D2.2 Greece tool borrows its GP cost from Spain. The EOPYY fee of EUR 10 to 13 a visit is paid to contracted specialists, not GPs. CONVERSION: EUR 65.988669 x 0.41176471. PRICE BASE: 2024-equivalent. Unit: one consultation."
+    },
+    "flag": "Unit: one consultation. Outcome value: an assumption. Valued only at its cost: no defensible value per additional consultation was found (searched, none found)."
    },
    {
     "name": "Opioid substitution treatment (OST)",
@@ -1911,7 +1911,6 @@ const COUNTRY={
     "elastHigh": 0.5,
     "unitCost": 865,
     "staffRatio": 30,
-    "flag": "Applies &euro;865 per patient-year, the Spanish figure converted on the section Q labour-cost ratio. Greece's own national figure, &euro;754, is NOT ADOPTED: it prices medication alone, where this row prices delivery, so this cell is likely understated by about 2.6 times. Cost-input: valued at delivery cost only.",
     "provenance": {
      "elastLow": "borrowed_unadjusted",
      "elastCentral": "borrowed_unadjusted",
@@ -1920,59 +1919,68 @@ const COUNTRY={
      "unitCost": "borrowed_adjusted"
     },
     "provenance_note": {
-     "elastLow": "UK value transferred unadjusted from 'Drug and alcohol treatment services' (elastLow = 0.15). UK basis: the registry's own stated range for demand_elasticity, [0.15, 0.5], source: OHID NDTMS data; Stuckler & Basu 2013.",
-     "elastCentral": "UK value transferred unadjusted from 'Drug & alcohol treatment' (elastCentral = 0.3). UK basis: Registry demand_elasticity = 0.3, taken directly. Source: OHID NDTMS data; Stuckler & Basu 2013",
-     "elastHigh": "UK value transferred unadjusted from 'Drug and alcohol treatment services' (elastHigh = 0.5). UK basis: the registry's own stated range for demand_elasticity, [0.15, 0.5], source: OHID NDTMS data; Stuckler & Basu 2013.",
-     "staffRatio": "UK value transferred unadjusted from 'Drug and alcohol treatment services' (staffRatio = 30). The UK figure is itself an assumption. UNIT UNESTABLISHED. The registry states no unit for this field: every service_demand entry carries unit 'service params' and nothing per field, its `range` covers only demand_elasticity, and not one of the ten source strings mentions staff, caseworkers or caseloads. The values read as concurrent caseloads (15 for children's social care, 25 for domestic abuse, 120 for a work coach) rather than the annual throughput that a gap measured in cases per year would need, but nothing on file establishes either reading, so the value is left exactly as it is. No formula in the tool reads this parameter: the extra-caseworker figure is computed from the provider's own stated cases per caseworker per year. It is carried here as a documented benchmark, not as an input.",
-     "unitCost": "EUR 865 per patient-year, the Spanish 2024-equivalent figure of EUR 2,100 scaled by the labour cost ratio 11.2/27.2 = 0.411765, both readings Eurostat lc_lci_lev section Q at 2023: 2,100 x 0.411765 = 864.71, recorded as 865. The Spanish figure is itself EUR 4 per day at 2004 uprated by 1.438347, so no 2004 value survives in this number and none is carried across. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base; the Spanish figure it converts from is stated at that base and the labour-cost ratio is a 2023 observation applied at it. NOT ADOPTED. Greece holds a national figure of its own, methadone at EUR 1.8 per day medication-only at about 2009-10, EUR 657 a year native and EUR 2.07 per day or EUR 754 a year once uprated by 1.147861. It is not adopted because it is a different quantity from the one this row holds. This row is a per-case cost of DELIVERING opioid substitution, and the Spanish figure it converts from is explicitly EXCLUDING MEDICATION. The Greek figure is the medication alone, which the evidence record flags at roughly a third of full delivery cost. The two are complements and not alternatives, so adopting the Greek one would put a drug price in a delivery-cost row and would leave the Greek cell measuring something neither the Spanish nor the Italian cell measures, which is the comparability the three-country set exists to hold. THE NON-ADOPTION IS NOT NEUTRAL, and the direction is worth stating: EUR 754 for the medication alone against EUR 865 shipped for the whole delivery is not credible, and this cell is more likely too low than too high, and by a factor rather than a margin. The shipped EUR 865 is a labour-cost conversion of a Spanish delivery cost that EXCLUDES MEDICATION; the only Greek national datum is medication ALONE, EUR 754 once uprated, which is 87 per cent of it. A component the evidence record flags at roughly a third of full delivery cannot credibly be 87 per cent of that delivery, and grossing the national figure to full scope on that same one-third flag gives about EUR 2,262, some 2.6 times the shipped value. IT IS DECLARED RATHER THAN CORRECTED because the one-third is a qualitative note in the evidence record and not a measured ratio, so raising the cell on it would put an invented number on the face; and because this row is COST-INPUT with a value-added of zero, so the understatement reaches the extra-running-cost line and no value. Correcting it needs a Greek delivery-cost source that includes staff time, which three stages of searching did not find."
-    }
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 865 per patient-year, the Spanish national figure of EUR 2,100 (a Spanish national figure: methadone at EUR 4 a day excluding medication, a 2004 observation, annualised on 365 days and uprated by 1.438347 to EUR 5.75 a day, EUR 2,098.75 a year, recorded as EUR 2,100 (the D2.2 Spain tool's figure; PROVIDER_TOOLREADY_2024.md, drug and alcohol table)) scaled by the ratio of labour costs in health and social work, Greece to Spain, 0.411765 (Eurostat lc_lci_lev, NACE Q, 2023), as the D2.2 Italy and Greece tools do. CONVERSION: EUR 2100.0 x 0.41176471. PRICE BASE: 2024-equivalent. Unit: one patient for a year."
+    },
+    "flag": "Unit: one patient for a year. Outcome value: borrowed from another country without adjustment. Value of a statistical life for Greece: EUR 3,126,368 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 1.000 (every OST patient is an opioid client). Non-opioid clients carry no averted-death value in these figures. ORIGIN 3126368.2649090113 FACTOR 0.02145; BAND ORIGIN 2605306.8874241761 AND 3647429.6423938465; BAND FACTOR 0.0065 AND 0.0248; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
    }
   ],
   "outcomes": {
    "Employment support": {
-    "wbL": 104,
-    "convH": 0,
+    "wbL": 103.68,
+    "wbC": 404.31,
+    "wbH": 936.52,
+    "convL": 0,
     "convC": 0,
+    "convH": 0,
     "sensC": 0,
-    "wbC": 404,
     "rows": [
      {
       "outcome": "Move into employment (wellbeing)",
       "method": "WELLBY",
       "conf": "MODERATE",
-      "valC": 404
+      "valC": 404.31
      }
     ],
-    "wbH": 937,
-    "convL": 0,
     "provenance": "borrowed_unadjusted",
-    "provenance_note": "0.46 WELLBY transferred from the UK Britain fixed-effects coefficient (Clark et al. 2018), valued on this country's PPP-adjusted spine, then staged. Transfer with a stated adjustment. ORIGIN 16300 FACTOR 0.37581816; BAND ORIGIN 12540 AND 20064; STAGE EFFECT 0.11 0.30 0.46 ATTRIBUTION 0.20 0.22 0.27. The origin is the UK WELLBY spine at 2024 prices and its low and high tiers; the factor is the household-final-consumption PPP to Greece, 0.816996, times the 0.46 coefficient. The stages apply in all four tools. An attribution share is the tool's convention rather than a national fact, so it needs no national warrant; the effect share is an empirical value borrowed between countries and is flagged as such below. EFFECT SHARE, an OUTCOME RATE, and a BORROWED one: 0.30 central from the Work and Health Programme job-outcome rate of 31 per cent and the Restart Scheme rate of 30 per cent, 0.11 low from Additional Work Coach Support, 0.46 high from the Work and Health Programme first-earnings rate. These are BRITISH PROGRAMME RATES APPLIED WITHOUT NATIONAL ADJUSTMENT, on a denominator of programme starts. No equivalent national rate exists for this country, and the national active labour market policy evidence is carried as a qualitative warrant only, with no effect size, by the project's own standing rule. ATTRIBUTION, an IMPACT: 0.22 central within a sourced range of 0.20, the Department for Work and Pensions' own Restart additionality projection of six in a hundred over the thirty in a hundred reaching a job outcome THE SIX IN A HUNDRED IS THE DEPARTMENT'S OWN BUSINESS-CASE PROJECTION AND NOT A STATISTICAL FINDING. It is published in House of Commons Committee of Public Accounts, The Restart Scheme for Long-term Unemployed People, Forty-Second Report of Session 2022-23, HC 733, 22 March 2023, at Conclusions and recommendations paragraph 1, where the committee quotes the Department's expectation of a return of 2.44 pounds for every pound spent and its estimate that an extra six in a hundred participants will find sustained work above what would have happened anyway, and warns in the same sentence that if that estimate is too high the benefits of the scheme will quickly fall away. The committee measured nothing here; it is reporting what the Department expected., and 0.27, the three-percentage-point Additional Work Coach Support impact over its eleven per cent in-work rate. THE PUBLICATION IS Department for Work and Pensions, The impact of additional Jobcentre Plus support on the employment outcomes of disabled people, research and analysis, 18 March 2025, which states that twelve months after the intervention 11 per cent of participants were in work compared to 8 per cent of the comparison group, a 3 percentage point employment impact, and that the impact is statistically significant. It is NOT the qualitative report The experience of Additional Work Coach Support of 2 May 2025, which carries no percentage at all and refers the reader to this impact analysis. A LATER PUBLICATION RESTATES THE SAME TWELVE-MONTH COMPARISON AND THIS VALUE DOES NOT FOLLOW IT: the extended impact assessment at 24 months, Official Statistics, 25 March 2026, gives 11 per cent against 8.2 per cent, an impact of 2.8 percentage points, which on the same arithmetic would put this bound at 2.8 over 11 = 0.2545 rather than 0.2727. The shipped 0.27 is the March 2025 figure and is unchanged; the restatement is recorded here so the difference is accounted for rather than left for a reader to find. The effect share's low bound of 0.11 is unaffected, because both publications put the participant rate at 11 per cent. The full derivation and every denominator are on the United Kingdom cell. The workbook that carried this decomposition, uk/tools/_superseded/valuation_tool.xlsx, is gitignored and does not travel. Every chain is transcribed into europe/docs/VALUATION_CHAINS.md, which does. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base."
+    "provenance_note": "+0.46 WELLBY for a move from unemployment into work (Clark et al. 2018, the Britain fixed-effects coefficient HM Treasury's guidance uses), valued at the WELLBY value for Greece, then staged as in the UK tool: effect 0.11 / 0.30 / 0.46 x attribution 0.20 / 0.22 / 0.27. European trial evidence (Card, Kluve and Weber 2018) puts job-search assistance impacts at 1 to 2 percentage points, which suggests the staged central may be high. ORIGIN 16300 FACTOR 0.37581816; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0.37581816 AND 0.37581816; STAGE EFFECT 0.11 0.3 0.46 ATTRIBUTION 0.2 0.22 0.27; PRICE BASE: 2024-equivalent."
    },
    "Minimum income (KEA) casework": {
     "wbL": 0,
-    "convH": 0,
-    "convC": 0,
-    "sensC": 0,
     "wbC": 0,
+    "wbH": 0,
+    "convL": 37.36,
+    "convC": 77.26,
+    "convH": 195.62,
+    "sensC": 0,
     "rows": [
      {
-      "outcome": "Income effect (microsimulation)",
+      "outcome": "Income effect",
       "method": "ENGINE",
       "conf": "STRONG",
       "valC": 0
+     },
+     {
+      "outcome": "Health-service use avoided",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 77.26
      }
     ],
-    "wbH": 0,
-    "convL": 0,
-    "provenance": "assumption",
-    "provenance_note": "Hardship limb UNEVIDENCED-EXCLUDED, valued at zero."
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "Income effect: the extra-income figure. Health-service use avoided: Liverpool Citizens Advice on Prescription (SSM Population Health 2025), an instrumental-variable study on linked NHS records: GBP 91 per person a year (95% CI 44 to 107) at 2023 prices, an impact, so attribution 1.0. The saving is per household member; the central counts the client only, the high counts every member (20,773 members of 8,205 client households). Uprated to 2024-25 on ONS L8GG and converted at household-consumption PPP (OECD, 2024, the factor of 0.816996 per GBP the Greece tool uses for every transfer from the UK). The advice covered benefits, debt and housing together. ORIGIN 91 FACTOR 0.8490648301; BAND ORIGIN 44 AND 230.3891529555; BAND FACTOR 0.8490648301 AND 0.8490648301; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
    },
    "Food aid / food banks": {
     "wbL": 0,
-    "convH": 0,
-    "convC": 0,
-    "sensC": 0,
     "wbC": 0,
+    "wbH": 0,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
     "rows": [
      {
       "outcome": "Food aid",
@@ -1981,162 +1989,172 @@ const COUNTRY={
       "valC": 0
      }
     ],
-    "wbH": 0,
-    "convL": 0,
     "provenance": "assumption",
-    "provenance_note": "UNEVIDENCED-EXCLUDED for every country including the UK: no robust effect size."
+    "provenance_note": "Excluded for every country: no robust per-person effect exists. Randomised evidence shows small effects on food insecurity (for example Briefel et al., -2.8 points) and none on wellbeing; the Greek DIATROFI school-meal trial is a different service. The tool shows the income effect only, as a floor."
    },
    "Debt advice": {
     "wbL": 0,
-    "convH": 0,
+    "wbC": 472.75,
+    "wbH": 2581.77,
+    "convL": 0,
     "convC": 0,
+    "convH": 0,
     "sensC": 0,
-    "wbC": 0,
     "rows": [
      {
       "outcome": "Debt advice (wellbeing)",
       "method": "WELLBY",
       "conf": "WEAK",
-      "valC": 0
+      "valC": 472.75
      }
     ],
-    "wbH": 2582,
-    "convL": 0,
     "provenance": "borrowed_unadjusted",
-    "provenance_note": "The UK debt-advice wellbeing structure transferred because no national figure exists; central effect near zero, from a UK randomised trial with a null result. ORIGIN 6520 FACTOR 0.816996; BAND ORIGIN 3762 AND 10032; STAGE EFFECT 0 0 0.63 ATTRIBUTION 1.0 1.0 0.5. THE ORIGIN: it is the UK WELLBY raw at each tier, 0.3 / 0.4 / 0.5 WELLBY on the 12,540 / 16,300 / 20,064 spine, converted on the OECD HFCE PPP to Greece. The stages apply in all four tools. An attribution share is the tool's convention rather than a national fact, so it needs no national warrant; the effect share is an empirical value borrowed between countries and is flagged as such below. The chain runs from the raw rather than from the United Kingdom cell's final value, so the effect share and the attribution are applied once. The central and low are zero, because the central rests on a null randomised result, which is an impact and therefore takes an attribution of 1.0, and a null multiplied by anything is still a null. The high rests on a self-reported outcome rate and takes the documented default attribution of 0.5. The workbook that carried this decomposition, uk/tools/_superseded/valuation_tool.xlsx, is gitignored and does not travel. Every chain is transcribed into europe/docs/VALUATION_CHAINS.md, which does. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base."
+    "provenance_note": "Being in arrears lowers life satisfaction by 0.355 points (FCA / Simetrica-Jacobs 2020, individual fixed effects). Central: advice moves 10 percentage points more clients out of unmanageable debt than no advice (Money Advice Service / YouGov 2012: 25% against 15%), an impact, so attribution 1.0: 0.355 x 0.10 WELLBY. Low: zero, because the only randomised trial (Pleasence and Balmer 2007) cannot rule it out. High: the UK tool's high. ORIGIN 16300 FACTOR 0.29003358; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 0.408498; STAGE EFFECT 0 0.1 0.63 ATTRIBUTION 1 1 0.5; PRICE BASE: 2024-equivalent."
    },
    "Talking therapies": {
     "wbL": 0,
-    "convH": 0,
+    "wbC": 5593.15,
+    "wbH": 8999.32,
+    "convL": 0,
     "convC": 0,
+    "convH": 0,
     "sensC": 0,
-    "wbC": 0,
     "rows": [
      {
-      "outcome": "Talking therapies",
-      "method": "UNEVIDENCED-EXCLUDED",
-      "conf": "-",
-      "valC": 0
+      "outcome": "Recovery from depression or anxiety (wellbeing)",
+      "method": "WELLBY",
+      "conf": "MODERATE",
+      "valC": 5593.15
      }
     ],
-    "wbH": 0,
-    "convL": 0,
-    "provenance": "assumption",
-    "provenance_note": "UNEVIDENCED-EXCLUDED for the EU: the UK IAPT 0.71 WELLBY effect is deliberately not transferred, and the outcome is valued at zero."
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Central: 0.06 QALY per patient from adding transdiagnostic group CBT to usual primary care in Spain (the PsicAP randomised trial; abstract), converted at HM Treasury's 7 WELLBYs per QALY = 0.42 WELLBY, an impact, so attribution 1.0. Low: zero (German and Swedish trials found no QALY difference). High: the UK tool's high for NHS Talking Therapies (1.5 x 0.6 x 0.61 WELLBY). Nordic studies find no net saving from reduced sick leave, so no cost-avoided value is added. ORIGIN 16300 FACTOR 0.34313832; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 1.225494; STAGE EFFECT 0 1 0.6 ATTRIBUTION 1 1 0.61; PRICE BASE: 2024-equivalent."
    },
    "Housing / homelessness": {
     "wbL": 0,
-    "convH": 7716,
-    "convC": 2478,
-    "sensC": 0,
     "wbC": 0,
+    "wbH": 0,
+    "convL": 2469.53,
+    "convC": 8974.08,
+    "convH": 9657.61,
+    "sensC": 0,
     "rows": [
      {
-      "outcome": "Homelessness averted",
+      "outcome": "Public cost of homelessness avoided",
       "method": "CONVENTIONAL",
       "conf": "MODERATE",
-      "valC": 2478
+      "valC": 8974.08
      }
     ],
-    "wbH": 0,
-    "convL": 822,
-    "provenance": "assumption",
-    "provenance_note": "UK averted cost (GBP 20,128 at 2015-16, Crisis) uprated and PPP-adjusted to this country, then staged. Transfer with a stated adjustment. ORIGIN 26988.3 FACTOR 0.816996; BAND ORIGIN 20112.525 AND 46929.225; STAGE EFFECT 0.1 0.2 0.35 ATTRIBUTION 0.500 0.562 0.575. The origin is the 2024 GBP figure, 20128 x 1.340835, and the factor is the OECD HFCE PPP UK to Greece. THE BAND ORIGINS ARE the UK cost band, GBP 15,000 and GBP 35,000 at 2015-16, uprated on the same 1.340835 as the central. The stages apply in all four tools. An attribution share is the tool's convention rather than a national fact, so it needs no national warrant; the effect share is an empirical value borrowed between countries and is flagged as such below. EFFECT SHARE 0.20: NOT SOURCED AND DECLARED AN ASSUMPTION, in this country as in the United Kingdom. Every published rate is post-placement tenancy sustainment on a denominator of people already housed, and the referral-to-placement conversion that would connect them to a referred caseload is published nowhere. ATTRIBUTION 0.500 / 0.562 / 0.575 from the Canadian At Home / Chez Soi randomised trial, with the scope mismatch that travels with it: those trials are an intensive Housing First model with assertive community treatment for people with severe mental illness, and this row is generic housing support. Full derivation on the United Kingdom cell. The workbook that carried this decomposition, uk/tools/_superseded/valuation_tool.xlsx, is gitignored and does not travel. Every chain is transcribed into europe/docs/VALUATION_CHAINS.md, which does. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base."
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "A year of homelessness costs the public EUR 22,049 per person (the UK tool's GBP 26,988 (Crisis 2015, a derived 12-month rough-sleeper vignette, uprated) converted at household-consumption PPP (OECD, 2024, the factor of 0.816996 per GBP the Greece tool uses for every transfer from the UK); no Greece cost of homelessness was found). Share avoided by a year of housing support: central 0.407 (Spain, Hábitat randomised trial: EUR 470.97 of EUR 1,157.84 a month), high 0.438 (France, Un chez-soi d'abord randomised trial, on a consistent cost basis), both impacts, so attribution 1.0; low 0.112, the UK tool's central (0.20 x 0.562), whose effect share is an assumption. ORIGIN 22049.3331468 FACTOR 1; BAND ORIGIN 22049.3331468 AND 22049.3331468; BAND FACTOR 1 AND 1; STAGE EFFECT 0.112 0.407 0.438 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
    },
    "Children's social care": {
     "wbL": 0,
-    "convH": 8465,
-    "convC": 8465,
-    "sensC": 0,
     "wbC": 0,
+    "wbH": 0,
+    "convL": 0.0,
+    "convC": 1977.84,
+    "convH": 4202.9,
+    "sensC": 8464.83,
     "rows": [
      {
-      "outcome": "Care entry averted",
+      "outcome": "Out-of-home placement avoided",
       "method": "CONVENTIONAL",
-      "conf": "MODERATE",
-      "valC": 8465
+      "conf": "WEAK",
+      "valC": 1977.84
+     },
+     {
+      "outcome": "Lifetime cost of maltreatment averted (not added)",
+      "method": "SENSITIVITY",
+      "conf": "WEAK",
+      "valC": 8464.83
      }
     ],
-    "wbH": 0,
-    "convL": 0,
-    "provenance": "borrowed_unadjusted",
-    "provenance_note": "Italian national figure (Bocconi 2013) PPP-adjusted to Greece, then staged. Transfer with adjustment. ORIGIN 111665 FACTOR 0.881460; BAND ORIGIN 111665 AND 111665; STAGE EFFECT 0 0.086 0.086 ATTRIBUTION 1.0 1.0 1.0. The stages apply in all four tools. An attribution share is the tool's convention rather than a national fact, so it needs no national warrant; the effect share is an empirical value borrowed between countries and is flagged as such below. THE ATTRIBUTION IS 1.0 FOR THE SAME REASON AS IN THE UNITED KINGDOM: the 8.6 percentage points are the difference between two arms of the Foundations and Coram randomised trial, 44.8 against 36.2 per cent care entry, so the counterfactual is already inside the number. The effect is a BORROWED one, a UK trial applied here without national adjustment, which the evidence record has always flagged as an international transfer. THE BAND'S SHAPE AND THE REASON FOR IT. A high at 1.4 times the central would be an attribution range of 0.7 over 0.5 baked into the raw, and once the attribution is 1.0 that 1.4 has no basis; carrying it would be the double count the rule exists to stop. The raw band is the central at both ends, because the Italian source publishes no interval, so the low is the only end with a source of its own, the Nurmatov et al. 2020 null carried as an effect of zero. The United Kingdom cell builds its high on the Conti et al. 95 per cent interval; THAT INTERVAL IS NOT CARRIED HERE, because it is the dispersion of a British lifetime-cost estimate and the project's own borrowability rule forbids transferring anything that encodes a price level. The workbook that carried this decomposition, uk/tools/_superseded/valuation_tool.xlsx, is gitignored and does not travel. Every chain is transcribed into europe/docs/VALUATION_CHAINS.md, which does. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base."
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "A year of out-of-home care costs EUR 35,319 per child (GMCA (2025), Unit Cost Database v3.0 (November 2025), GBP 91,687 per looked-after child a year at 2023 prices, uprated to GBP 95,286 and converted on labour cost in health and social work (ratio 0.3707); no verified Greece figure was found). Reduction in the chance of a residential placement: central 0.056 (Italy, P.I.P.P.I. against a comparison group, residential placements only: 6.4% against 0.8%), high 0.119 (the same, counting day foster care too), low zero (Al et al. 2012 meta-analysis: intensive family preservation generally does not prevent placement). One year of placement avoided is counted, which is conservative. The sensitivity row is the UK tool's route: the lifetime cost of a maltreatment case (Bocconi 2013, Italy) x 0.086. ORIGIN 35318.5242675526 FACTOR 1; BAND ORIGIN 35318.5242675526 AND 35318.5242675526; BAND FACTOR 1 AND 1; STAGE EFFECT 0 0.056 0.119 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
    },
    "Domestic abuse / GBV": {
     "wbL": 0,
-    "convH": 2034.63,
-    "convC": 2034.63,
-    "sensC": 0,
     "wbC": 0,
+    "wbH": 0,
+    "convL": 286.08,
+    "convC": 286.08,
+    "convH": 286.08,
+    "sensC": 1454.81,
     "rows": [
      {
-      "outcome": "GBV case (PPP-adjusted transfer from Italy)",
+      "outcome": "Abuse reduced (tangible costs avoided)",
       "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 286.08
+     },
+     {
+      "outcome": "Including pain and suffering (not added)",
+      "method": "SENSITIVITY",
       "conf": "WEAK",
-      "valC": 2034.63
+      "valC": 1454.81
      }
     ],
-    "wbH": 0,
-    "convL": 2034.63,
-    "provenance": "borrowed_unadjusted",
-    "provenance_note": "EUR 15,651 per victim transferred from Italy and PPP-adjusted on the Eurostat household-final-consumption factor 0.881460, then staged. ORIGIN 15651 FACTOR 1.0; BAND ORIGIN 15651 AND 15651; STAGE EFFECT 0.24 0.24 0.24 ATTRIBUTION 0.5416667 0.5416667 0.5416667. The stages apply in all four tools. An attribution share is the tool's convention rather than a national fact, so it needs no national warrant; the effect share is an empirical value borrowed between countries and is flagged as such below. THE MULTIPLIERS ARE BUILT ON THE TRIAL'S OWN ARMS, as in the United Kingdom: Sullivan and Bybee 1999, DOI 10.1037/0022-006x.67.1.43, 24 per cent of women receiving advocacy experiencing no physical abuse across two years against 11 per cent of controls. Effect share 0.24, an outcome rate; attribution 13 over 24, which is 0.541667 recurring; and 0.24 x 13/24 is 0.13 exactly. The estimate attaches to intensive advocacy of twelve hours or more, women recruited on exit from refuges, principally United States trials, significant at 24 months and not at 12 or 36. It is a borrowed effect in every country including the United Kingdom. THE BAND COLLAPSES TO THE CENTRAL, AND THAT IS AN HONEST RESULT RATHER THAN A LOSS. The national per-victim cost that is this row's raw carries no published interval of its own, and a single trial's arm rates carry none either, so there is nothing left to make a band from. The row has no band of its own. The workbook that carried this decomposition, uk/tools/_superseded/valuation_tool.xlsx, is gitignored and does not travel. Every chain is transcribed into europe/docs/VALUATION_CHAINS.md, which does. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base."
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "Tangible cost of intimate-partner violence per victim a year: EUR 2,201 (the mean of the Spanish and Italian national figures (tangible costs per victim of partner violence, from victim surveys), each uprated to 2024 and converted at household-consumption PPP; the EIGE per-country table is not used because it scales the UK cost by population). Effect and attribution as in the UK tool (0.24 x 0.5417: advocacy reduces physical abuse, odds ratio 0.43, Ramsay et al. 2009). Pain and suffering are shown as a sensitivity, not added, as settled decision 8 does for Spain. ORIGIN 2200.5790370054 FACTOR 1; BAND ORIGIN 2200.5790370054 AND 2200.5790370054; BAND FACTOR 1 AND 1; STAGE EFFECT 0.24 0.24 0.24 ATTRIBUTION 0.5416667 0.5416667 0.5416667; PRICE BASE: 2024-equivalent."
    },
    "Drug & alcohol treatment": {
     "wbL": 0,
-    "convH": 118668,
-    "convC": 79112,
-    "sensC": 0,
     "wbC": 0,
+    "wbH": 0,
+    "convL": 13835.48,
+    "convC": 54788.51,
+    "convH": 73902.76,
+    "sensC": 0,
     "rows": [
      {
-      "outcome": "Averted mortality (derived VSL x Sordo 2017)",
+      "outcome": "Deaths averted (opioid clients)",
       "method": "CONVENTIONAL",
-      "conf": "WEAK",
-      "valC": 79112
+      "conf": "MODERATE",
+      "valC": 54788.51
      }
     ],
-    "wbH": 0,
-    "convL": 39556,
-    "provenance": "borrowed_adjusted",
-    "provenance_note": "Greek VSL times the transferred Sordo averted-mortality rate. ORIGIN 3190000 FACTOR 0.0248; BAND ORIGIN 1595000 AND 4785000. The origin is the Greek VSL of EUR 3.19m, itself derived and recorded step by step in europe/docs/PROVIDER_TOOLREADY_2024.md section 3 (USD 3.6m at 2005 prices, x 1.537958 on the US GDP deflator, x 0.622881 on the GNI-per-capita income scaling at elasticity 0.8, / 1.0824 USD per EUR at 2024) and carried in europe/docs/FOUNDATION.md as EUR 3.19m. The factor is 24.8 averted deaths per 1,000 OST patient-years (Sordo et al. 2017), transferred to all three EU countries and recorded in FOUNDATION.md. 3,190,000 x 0.0248 = 79,112, the shipped central, exactly. The band origins are the OECD base range that the same section records for the base VSL, USD 1.8m to 5.4m against a USD 3.6m central, which is plus or minus 50 per cent carried through the identical scaling: 1,595,000 x 0.0248 = 39,556 and 4,785,000 x 0.0248 = 118,668, both exact. Values averted MORTALITY ONLY, and the VSL is derived rather than nationally observed, which is why this is a transfer with a stated adjustment rather than a national figure. PRICE BASE: 2024-equivalent (2024-25), the provider tab's own base."
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Value of a statistical life for Greece: EUR 3,126,368 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 0.817 (UNODC (2025), World Drug Report 2025, Statistical Annex 5.1: Treatment by primary drug of use: 9419 / 11533 = 0.817). Non-opioid clients carry no averted-death value in these figures. ORIGIN 3126368.2649090113 FACTOR 0.01752465; BAND ORIGIN 2605306.8874241761 AND 3647429.6423938465; BAND FACTOR 0.0053105 AND 0.0202616; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
    },
    "GP consultation": {
     "wbL": 0,
-    "convH": 0,
-    "convC": 0,
-    "sensC": 0,
     "wbC": 0,
+    "wbH": 0,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
     "rows": [
      {
       "outcome": "GP consultation",
       "method": "COST-INPUT",
-      "conf": "-",
+      "conf": "COST-INPUT",
       "valC": 0
      }
     ],
-    "wbH": 0,
-    "convL": 0,
-    "provenance": "borrowed_adjusted",
-    "provenance_note": "COST-INPUT valued at zero value-added. Underlying price PPP-adjusted from the Spanish figure; the native Greek EUR 10 was retired as wrong-basis. Transfer with adjustment. ORIGIN 0 FACTOR 0; the displayed value-added is zero on all three points by construction, so there is no converted figure to reproduce."
+    "provenance": "assumption",
+    "provenance_note": "Valued only at its cost: no defensible value per additional consultation was found (searched, none found)."
    },
    "Opioid substitution treatment (OST)": {
     "wbL": 0,
-    "convH": 0,
-    "convC": 0,
-    "sensC": 0,
     "wbC": 0,
+    "wbH": 0,
+    "convL": 16934.49,
+    "convC": 67060.6,
+    "convH": 90456.26,
+    "sensC": 0,
     "rows": [
      {
-      "outcome": "OST (delivery cost)",
-      "method": "COST-INPUT",
-      "conf": "-",
-      "valC": 0
+      "outcome": "Deaths averted (opioid clients)",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 67060.6
      }
     ],
-    "wbH": 0,
-    "convL": 0,
-    "provenance": "national_derived",
-    "provenance_note": "COST-INPUT. Greek medication-only cost, EUR 1.8/day at 2009 uprated; medication only, about a third of full delivery cost. National source."
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Value of a statistical life for Greece: EUR 3,126,368 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 1.000 (every OST patient is an opioid client). Non-opioid clients carry no averted-death value in these figures. ORIGIN 3126368.2649090113 FACTOR 0.02145; BAND ORIGIN 2605306.8874241761 AND 3647429.6423938465; BAND FACTOR 0.0065 AND 0.0248; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
    }
   },
   "shockInterp": {
@@ -8501,6 +8519,12 @@ const COUNTRY={
 };
 const GRID=COUNTRY.grid, DATA=COUNTRY.data, DIAL_TEXT=COUNTRY.dial_text, LABELS=COUNTRY.labels, PROFILES=COUNTRY.profiles;
 const CUR=COUNTRY.currency.symbol, LOC=COUNTRY.locale, DEF=(COUNTRY.deflator||1), SPINE=(COUNTRY.wellby_spine||{label:COUNTRY.currency.symbol});
+/* The provider panel is priced at 2024 prices, and the decile surface is in its own income
+   year (2023 in the EU blocks, 2023-24 in the UK). The cash floor and engine income read the
+   surface, so they are brought to the panel's year by this factor: the block's own
+   provider_income_uprate where it states one (the UK, on ONS L8GG), otherwise the analyst
+   deflator. kappa is their ratio, so it does not move. */
+const PROV_UPRATE=(COUNTRY.provider_income_uprate||DEF);
 const lbl=k=>LABELS[k]||k;
 const EPS=DATA.epsGrid, BU=DATA.bu;
 /* The decile array is a partition of this country's own modelled units: ten equal
@@ -8686,6 +8710,16 @@ function svc(){return DATA.services.find(s=>s.name===$("#p-serv").value);}
    applies to it. Other inputs keep their own marks: the extra-budget row still carries
    ** from the borrowed elasticities, and should. ================================== */
 var COST_OVERRIDE={};
+/* ==== THE RUNNING COST FOLLOWS THE SERVICE UNTIL THE USER ENTERS ONE ====
+   A single default running cost for every service made the benefit-cost ratio meaningless
+   for any service whose cost per person is far from it: 200,000 for 500 people is 400 a
+   head, so a service costing thousands a head read as returning hundreds for each unit
+   spent. Until the user types a running cost of their own, the field is filled as people
+   served x the unit cost in force (ours, or theirs if they entered one), and it follows the
+   service, the catchment and the unit cost. The first keystroke in the field hands it over. */
+var COST_TOUCHED=false;
+function autoCost(){if(COST_TOUCHED)return;var s=svc(),el=$("#p-cost");if(!s||!el)return;
+  el.value=String(Math.round((+$("#p-people").value||0)*unitCostOf(s)));}
 function unitCostOf(s){var v=s?COST_OVERRIDE[s.name]:null;
   return (v!=null&&isFinite(v))?v:(s?s.unitCost:0);}
 function costOverridden(s){var v=s?COST_OVERRIDE[s.name]:null;return v!=null&&isFinite(v);}
@@ -8714,6 +8748,7 @@ function costLedger(){var out=[];
     out.push(x.name+" "+fmtGBP(unitCostOf(x))+(costOverridden(x)?" [entered]":" [default]"));});
   return out.join("; ");}
 function renderProvider(){
+  autoCost();
   const s=svc(),people=+$("#p-people").value||0,prof=$("#p-prof").value,cost=$("#p-cost").value,pe=parseFloat($("#p-eps").value),ref=$("#p-ref").value;
   const band=PROFILES[prof],k=band.length,ei=epsIdx(pe);
   const decW=DATA.deciles[ref][ei],dec0=DATA.deciles[ref][0];
@@ -8722,7 +8757,7 @@ function renderProvider(){
      dividing by UNITS_M alone gives a per-unit rate, which `people` then multiplies.
      HH_SIZE converts it. See the block where HH_SIZE is defined. kappa is their ratio
      and is invariant. */
-  const pbW=bandWt*10/(k*UNITS_M*HH_SIZE),pbU=bandUnwt*10/(k*UNITS_M*HH_SIZE),kappa=pbU!==0?pbW/pbU:1;
+  const pbW=bandWt*10/(k*UNITS_M*HH_SIZE)*PROV_UPRATE,pbU=bandUnwt*10/(k*UNITS_M*HH_SIZE)*PROV_UPRATE,kappa=pbU!==0?pbW/pbU:1;
   const o=DATA.outcomes[s.name]||{convL:0,convC:0,convH:0,wbL:0,wbC:0,wbH:0,sensC:0,rows:[]};
   const cashfloor=people*pbW,engineInc=people*pbU;
   const conv=[people*o.convL,people*o.convC,people*o.convH],wbo=[people*o.wbL,people*o.wbC,people*o.wbH];
@@ -9304,7 +9339,9 @@ function priceBaseOf(s){
   var pn=s&&s.provenance_note,u=(pn&&typeof pn==="object")?pn.unitCost:pn;
   u=String(u||"");
   var m=u.match(/PRICE BASE[^.]*\./i)||u.match(/at 20\d\d[-\/]\d\d prices[^.]*\./i);
-  return m?m[0].trim():"the service note on the Provider tab states no price base";}
+  /* The note's own marker reads "PRICE BASE: ..."; the callers print their own "Price base:"
+     label, so the marker is dropped here rather than printed twice. */
+  return m?m[0].trim().replace(/^PRICE BASE:\s*/i,""):"the service note on the Provider tab states no price base";}
 
 /* Per-dial caveats, keyed by dial id in the country block. The unemployment caveat
    above predates this and keeps its own field; everything else goes through here, so a
@@ -9529,7 +9566,7 @@ function spineCosts(ex){return {a:exchDelta(ex.imv), b:exchDelta(ex.irpf)};}
 function renderScenExtra(){var ex=COUNTRY.scenario_extra;var card=document.getElementById("s-extra-card"),title=document.getElementById("s-extra-title"),body=document.getElementById("s-extra");
   if(!ex||!card){return;}
   if(ex.kind==="crossover"){title.textContent="Crossover";body.innerHTML='<p>'+ex.html+'</p>';card.className="card";}
-  else if(ex.kind==="spine"){title.textContent="Spine — the two reforms per unit of cost";
+  else if(ex.kind==="spine"){title.textContent="Spine: the two reforms per unit of cost";
     var c=spineCosts(ex),ca=c.a,cb=c.b;
     var iw=EPS.map(function(e,i){return (DATA.wevm[ex.imv]||[])[i]||0;}),tw=EPS.map(function(e,i){return (DATA.wevm[ex.irpf]||[])[i]||0;});
     var A=ex.imv_short||"A",B=ex.irpf_short||"B";
@@ -9571,6 +9608,9 @@ function init(){
   buildDials();setupExtras();
   var _cb=document.getElementById("p-copy");if(_cb)_cb.addEventListener("click",copyExport);
   const ps=$("#p-serv");DATA.services.forEach(s=>{const o=document.createElement("option");o.value=o.textContent=s.name;ps.appendChild(o);});ps.value=COUNTRY.provider_default||DATA.services[0].name;
+  /* Registered before the render listeners below, so the user's first keystroke marks the
+     running cost as theirs before the render that follows it could overwrite it. */
+  $("#p-cost").addEventListener("input",function(){COST_TOUCHED=true;});
   const pr=$("#p-ref");DATA.sc15.forEach(s=>{const o=document.createElement("option");o.value=s;o.textContent=lbl(s);pr.appendChild(o);});pr.value=COUNTRY.reference_default||DATA.sc15[0];
   ["#p-serv","#p-people","#p-prof","#p-cost","#p-eps","#p-shock","#p-staff","#p-casesper","#p-ref"].forEach(id=>{$(id).addEventListener("input",renderProvider);$(id).addEventListener("change",renderProvider);});
   /* The cost field shows the SELECTED service's cost, so changing service refills it
@@ -9622,6 +9662,11 @@ function applyState(st){
         DATA.services.forEach(function(x){var v=st.p.uc[x.name];
           if(v!=null&&isFinite(+v)&&+v>=0)COST_OVERRIDE[x.name]=+v;});}
       setCostField();
+      /* A shared link carries the running cost. It stays the sharer's own only if it differs
+         from what the tool would have filled in; otherwise it keeps following the service. */
+      var _sv=svc();
+      COST_TOUCHED=(st.p.co!=null&&st.p.co!==""&&_sv!=null
+        &&Math.round(+st.p.co)!==Math.round((+st.p.pe||0)*unitCostOf(_sv)));
       renderProvider();}
     /* renderScenarios, plural. It was renderScenario, which does not exist, so this
        threw into the catch below and took the tab restore on the next line with it:

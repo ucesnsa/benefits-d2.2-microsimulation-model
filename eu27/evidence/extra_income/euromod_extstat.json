@@ -1,0 +1,1531 @@
+{
+ "read_from": "the installed EUROMOD J2.0+ release, XMLParam/Countries",
+ "read_on": "2026-09-30",
+ "countries": {
+  "AT": {
+   "reference": "bsa_s",
+   "description": "Social assistance/Minimum income benefit (Sozialhilfe/Bedarfsorientierte Mindestsicherung)",
+   "source": "www.statistik.at, Mindestsicherung; ESSOSS Sozialleistungen d. Länder, d. Gemeinden",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "889",
+     "count_k": "172"
+    },
+    "2019": {
+     "amount_m": "863",
+     "count_k": "154"
+    },
+    "2020": {
+     "amount_m": "906",
+     "count_k": "157"
+    },
+    "2021": {
+     "amount_m": "911",
+     "count_k": "152"
+    },
+    "2022": {
+     "amount_m": "917",
+     "count_k": "147"
+    },
+    "2023": {
+     "amount_m": "1041",
+     "count_k": "153"
+    },
+    "2024": {
+     "amount_m": "1247",
+     "count_k": "158"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\AT\\AT.xml",
+   "xml_sha256": "0c4ba48f3159bfca847a0f93a0b625226b6b090de754496446c120bf1f14260a",
+   "xml_modified": "2026-02-23T14:32:32"
+  },
+  "BE": {
+   "reference": "bsa_s",
+   "description": "Income support",
+   "source": "NBB (amounts)/POD MI (recipients)",
+   "comment": "<2018 = 2018; >2022 = 2022",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "1400.00",
+     "count_k": "206.25"
+    },
+    "2019": {
+     "amount_m": "1427.00",
+     "count_k": "208.49"
+    },
+    "2020": {
+     "amount_m": "1549.00",
+     "count_k": "212.71"
+    },
+    "2021": {
+     "amount_m": "1656.30",
+     "count_k": "215.21"
+    },
+    "2022": {
+     "amount_m": "1809.6",
+     "count_k": "214.258"
+    },
+    "2023": {
+     "amount_m": "2049.4",
+     "count_k": "223.45"
+    },
+    "2024": {
+     "amount_m": "2166",
+     "count_k": "234.055"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\BE\\BE.xml",
+   "xml_sha256": "71b63c3662d35a5a633003e69a0bb7a7dfed27532d8c38b4de9f12327136afaf",
+   "xml_modified": "2026-02-23T14:33:18"
+  },
+  "BG": {
+   "reference": "bsa00_s",
+   "description": "Monthly social assistance allowance (guaranteed minimum income) (месечна социална помощ поради ниски доходи)",
+   "source": "Ministry of Labour and Social Policy, MLSP programme budgets and reports (Министерство на труда и социалната политика, Програмен бюджет на МТСП и отчети, https://www.mlsp.government.bg/public/index.php/programen-byudzhet-na-mtsp-i-otcheti)",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "32.4",
+     "count_k": "27.40"
+    },
+    "2019": {
+     "amount_m": "28.2",
+     "count_k": "23.70"
+    },
+    "2020": {
+     "amount_m": "28.4",
+     "count_k": "23.70"
+    },
+    "2021": {
+     "amount_m": "27.9",
+     "count_k": "22.90"
+    },
+    "2022": {
+     "amount_m": "29.2",
+     "count_k": "19.60"
+    },
+    "2023": {
+     "amount_m": "52.4",
+     "count_k": "20.60"
+    },
+    "2024": {
+     "amount_m": "121.5",
+     "count_k": "55.00"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\BG\\BG.xml",
+   "xml_sha256": "cb52fa7feade8a944c49180f868f9dfb2a8a69b4f8031f726f7187ee19872667",
+   "xml_modified": "2026-02-23T14:33:28"
+  },
+  "CY": {
+   "reference": "bsamm_s",
+   "description": "guaranteed minimum income benefit (ελάχιστο εγγυημένο εισόδημα)",
+   "source": "MLSWI (YDEP)",
+   "comment": "",
+   "years": {
+    "2009": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2011": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2012": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2013": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2014": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2015": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2016": {
+     "amount_m": "191.0",
+     "count_k": null
+    },
+    "2017": {
+     "amount_m": "220.9",
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "220.3",
+     "count_k": null
+    },
+    "2019": {
+     "amount_m": "198.5",
+     "count_k": "23.746"
+    },
+    "2020": {
+     "amount_m": "209.7",
+     "count_k": "22.738"
+    },
+    "2021": {
+     "amount_m": "207.6",
+     "count_k": "21.346"
+    },
+    "2022": {
+     "amount_m": "190.6",
+     "count_k": "21.723"
+    },
+    "2023": {
+     "amount_m": "194.3",
+     "count_k": "19.504"
+    },
+    "2024": {
+     "amount_m": "191.1",
+     "count_k": "20.342"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\CY\\CY.xml",
+   "xml_sha256": "f6fa8759f722224c24b67928935889b1093726909d49e228e9e5e5f07f8cd5ae",
+   "xml_modified": "2026-02-23T14:33:38"
+  },
+  "CZ": {
+   "reference": "bsa_s",
+   "description": "\"Social assistance benefits (Pravidelne davky socialni potrebnosti \"\"dav_sp\"\")\"",
+   "source": "MPSV Statistická ročenka z oblasti práce a sociálních věcí, Tab 10.4 https://www.mpsv.cz/statisticka-rocenka-z-oblasti-prace-a-socialnich-věci",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "5426.1",
+     "count_k": "122.1"
+    },
+    "2019": {
+     "amount_m": "4438.4",
+     "count_k": "98.9"
+    },
+    "2020": {
+     "amount_m": "4799.8",
+     "count_k": "96.4"
+    },
+    "2021": {
+     "amount_m": "5333",
+     "count_k": "103.9"
+    },
+    "2022": {
+     "amount_m": "5719.54430278",
+     "count_k": "104.484"
+    },
+    "2023": {
+     "amount_m": "5937.47221695",
+     "count_k": "93"
+    },
+    "2024": {
+     "amount_m": "6520",
+     "count_k": "92.1"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\CZ\\CZ.xml",
+   "xml_sha256": "4e761946c3e09bd0d23f115f337f1cb32549c5c6c3826bb947636139222cbe64",
+   "xml_modified": "2026-02-23T14:33:46"
+  },
+  "DE": {
+   "reference": "bunnc_s",
+   "description": "Unemployment benefits II and social benefits (ALG II und Sozialgeld)",
+   "source": "Federal Employment Agency",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "28001",
+     "count_k": "2748"
+    },
+    "2019": {
+     "amount_m": "26831",
+     "count_k": "2577"
+    },
+    "2020": {
+     "amount_m": "27654",
+     "count_k": "2566"
+    },
+    "2021": {
+     "amount_m": "28015",
+     "count_k": "2528"
+    },
+    "2022": {
+     "amount_m": "28423",
+     "count_k": "2501"
+    },
+    "2023": {
+     "amount_m": "33395",
+     "count_k": "2668"
+    },
+    "2024": {
+     "amount_m": "36881",
+     "count_k": "2736"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\DE\\DE.xml",
+   "xml_sha256": "202d172428f5c00cbaaa28ae4125eba0722e8d06317d279f8e17fe29363cd484",
+   "xml_modified": "2026-02-23T14:33:56"
+  },
+  "DK": {
+   "reference": "bsa_s",
+   "description": "social assistance benefit (Kontanthjælp; Aktivering af kontanthjælpsmodtagere og flygtninge; Integrationsydelse til flygtninge)",
+   "source": "",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "13249",
+     "count_k": "216"
+    },
+    "2019": {
+     "amount_m": "12383",
+     "count_k": "205"
+    },
+    "2020": {
+     "amount_m": "13082",
+     "count_k": "199"
+    },
+    "2021": {
+     "amount_m": "11792",
+     "count_k": "177"
+    },
+    "2022": {
+     "amount_m": "10241",
+     "count_k": "164"
+    },
+    "2023": {
+     "amount_m": "10139",
+     "count_k": "164"
+    },
+    "2024": {
+     "amount_m": "9850",
+     "count_k": "159"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\DK\\DK.xml",
+   "xml_sha256": "e866d489273bfbe1e2d8c8862d43e533c764c07c4efa5b77c429aeed82043237",
+   "xml_modified": "2026-02-23T14:34:04"
+  },
+  "EE": {
+   "reference": "bsa00_s",
+   "description": "subsistence benefit (toimetulekutoetus)",
+   "source": "Statistics Estonia (SK410, SK430)",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_m": "16",
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "16",
+     "count_k": null
+    },
+    "2019": {
+     "amount_m": "16",
+     "count_k": "11"
+    },
+    "2020": {
+     "amount_m": "16",
+     "count_k": "11"
+    },
+    "2021": {
+     "amount_m": "16",
+     "count_k": "10"
+    },
+    "2022": {
+     "amount_m": "40",
+     "count_k": "25"
+    },
+    "2023": {
+     "amount_m": "45",
+     "count_k": "20"
+    },
+    "2024": {
+     "amount_m": "39",
+     "count_k": "16"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\EE\\EE.xml",
+   "xml_sha256": "416949cfff51424b4296cc92c1e43ac272730fe12ecbfc103c772eefdd9faa7e",
+   "xml_modified": "2026-02-23T14:34:14"
+  },
+  "EL": {
+   "reference": "bsa00_s",
+   "description": "GMI",
+   "source": "GAO",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2017": {
+     "amount_m": "595",
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "590",
+     "count_k": null
+    },
+    "2019": {
+     "amount_m": "665",
+     "count_k": "266"
+    },
+    "2020": {
+     "amount_m": "674",
+     "count_k": "221"
+    },
+    "2021": {
+     "amount_m": "654",
+     "count_k": "276"
+    },
+    "2022": {
+     "amount_m": "575",
+     "count_k": "241"
+    },
+    "2023": {
+     "amount_m": "520",
+     "count_k": "218"
+    },
+    "2024": {
+     "amount_m": "510",
+     "count_k": null
+    },
+    "2025": {
+     "amount_m": "500",
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\EL\\EL.xml",
+   "xml_sha256": "895d666236bb4cfe552505ad49f7d07e824227552ca6472a66256abd432a0242",
+   "xml_modified": "2026-02-23T14:34:30"
+  },
+  "ES": {
+   "reference": "bsa00_s",
+   "description": "National minimum income (Ingreso Minimo Vital)",
+   "source": "Ministry of Inclusion, Social Security and Migration",
+   "comment": "Social Security Budget (Liquidaciones) .The amount includes benefits for family protection",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2011": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2012": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2013": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2014": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2015": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2016": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2017": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2019": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2020": {
+     "amount_m": "518.0",
+     "count_k": "160.0"
+    },
+    "2021": {
+     "amount_m": "1600",
+     "count_k": "284"
+    },
+    "2022": {
+     "amount_m": "1919",
+     "count_k": "343"
+    },
+    "2023": {
+     "amount_m": "2504",
+     "count_k": "392"
+    },
+    "2024": {
+     "amount_m": "2840",
+     "count_k": null
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\ES\\ES.xml",
+   "xml_sha256": "e46fae6f5b2251ec219dde07d770b9dc71b196223d3c9f1cd41c598440654a68",
+   "xml_modified": "2026-02-23T14:34:54"
+  },
+  "FI": {
+   "reference": "bsa00_s",
+   "description": "local authority income support",
+   "source": "NIHW/THL",
+   "comment": "Primary social assistance=basic sa+supplementary sa",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "780.14",
+     "count_k": "290.73"
+    },
+    "2019": {
+     "amount_m": "752.79",
+     "count_k": "283.63"
+    },
+    "2020": {
+     "amount_m": "791.50",
+     "count_k": "298.65"
+    },
+    "2021": {
+     "amount_m": "741.03",
+     "count_k": "276.31"
+    },
+    "2022": {
+     "amount_m": "732.26",
+     "count_k": "261.24"
+    },
+    "2023": {
+     "amount_m": "755.36",
+     "count_k": "255.32"
+    },
+    "2024": {
+     "amount_m": "782.81",
+     "count_k": "248.21"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\FI\\FI.xml",
+   "xml_sha256": "89dba6d82782d608c0bdce1d88a35c80ab49b6626da7c8407c22cab43320be2f",
+   "xml_modified": "2026-02-23T14:35:02"
+  },
+  "FR": {
+   "reference": "bsa00_s",
+   "description": "Means-tested guaranteed minimum income (RMI/RSA)",
+   "source": "beneficiaries: http://data.caf.fr/dataset/les-beneficiaires-tous-regimes-de-prestations-familiales-et-sociales/resource/b36b9c95-db88-4252-93a0-c9cc71683bea    Amounts: http://data.caf.fr/dataset/les-depenses-tous-regimes-de-prestations-familiales-et-sociales/resource/9d65fa40-4cce-498f-8810-b763c3efea2c",
+   "comment": "Figures Metropole",
+   "years": {
+    "2006": {
+     "amount_m": null,
+     "count_k": "1101.372"
+    },
+    "2007": {
+     "amount_m": "6071.08",
+     "count_k": "1007.117"
+    },
+    "2008": {
+     "amount_m": "6000.92",
+     "count_k": "1120.527"
+    },
+    "2009": {
+     "amount_m": "7005.024",
+     "count_k": "1697.357"
+    },
+    "2010": {
+     "amount_m": "8118.021",
+     "count_k": "1797.714"
+    },
+    "2011": {
+     "amount_m": "8420.796",
+     "count_k": "1875.309"
+    },
+    "2012": {
+     "amount_m": "8843.699",
+     "count_k": "1973.657"
+    },
+    "2013": {
+     "amount_m": "9754.421469",
+     "count_k": "2113.27"
+    },
+    "2014": {
+     "amount_m": "10684.37453",
+     "count_k": "2235.884"
+    },
+    "2015": {
+     "amount_m": "11518.34711",
+     "count_k": "2335.519"
+    },
+    "2016": {
+     "amount_m": "9833.164960",
+     "count_k": "1678.242"
+    },
+    "2017": {
+     "amount_m": "9794.345823",
+     "count_k": "1626.199"
+    },
+    "2018": {
+     "amount_m": "10078.9132",
+     "count_k": "1660.406"
+    },
+    "2019": {
+     "amount_m": "10200.33019",
+     "count_k": "1667.539"
+    },
+    "2020": {
+     "amount_m": "11122.00041",
+     "count_k": "1779.888"
+    },
+    "2021": {
+     "amount_m": "10790.69385",
+     "count_k": "1707.262"
+    },
+    "2022": {
+     "amount_m": "10495.17684",
+     "count_k": "1661.204"
+    },
+    "2023": {
+     "amount_m": "10700.82516",
+     "count_k": "1633.449"
+    },
+    "2024": {
+     "amount_m": null,
+     "count_k": "1612.337"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": "1630.913"
+    }
+   },
+   "xml": "Countries\\FR\\FR.xml",
+   "xml_sha256": "666aea711f0daa477a546eb8a56ea98daadc800456fdeb85db8a2307445d8990",
+   "xml_modified": "2026-02-23T14:35:16"
+  },
+  "HR": {
+   "reference": "bsa_s",
+   "description": "subsistence benefit (zajamčena minimalna naknada)",
+   "source": "MROSP",
+   "comment": "",
+   "years": {
+    "2011": {
+     "amount_m": "73",
+     "count_k": "46"
+    },
+    "2012": {
+     "amount_m": "78",
+     "count_k": "49"
+    },
+    "2013": {
+     "amount_m": "81",
+     "count_k": "50"
+    },
+    "2014": {
+     "amount_m": "85",
+     "count_k": "49"
+    },
+    "2015": {
+     "amount_m": "80",
+     "count_k": "51"
+    },
+    "2016": {
+     "amount_m": "81",
+     "count_k": "49"
+    },
+    "2017": {
+     "amount_m": "75",
+     "count_k": "45"
+    },
+    "2018": {
+     "amount_m": "65",
+     "count_k": "40"
+    },
+    "2019": {
+     "amount_m": "57",
+     "count_k": "35"
+    },
+    "2020": {
+     "amount_m": "52",
+     "count_k": "34"
+    },
+    "2021": {
+     "amount_m": "49",
+     "count_k": "31"
+    },
+    "2022": {
+     "amount_m": "55",
+     "count_k": "29"
+    },
+    "2023": {
+     "amount_m": "65",
+     "count_k": "26"
+    },
+    "2024": {
+     "amount_m": "63",
+     "count_k": "25"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\HR\\HR.xml",
+   "xml_sha256": "5c3dbfb840062fa7473e1d09e322ef817dbeab2eea6c3855e94220256bf98a0f",
+   "xml_modified": "2026-02-23T14:35:24"
+  },
+  "HU": {
+   "reference": "bsa_s",
+   "description": "social assistance (szociális segélyek)",
+   "source": "https://www.ksh.hu/stadat_files/szo/hu/szo0021.html",
+   "comment": "stand by allowance",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "23805.98",
+     "count_k": "86"
+    },
+    "2019": {
+     "amount_m": "21945.48",
+     "count_k": "79"
+    },
+    "2020": {
+     "amount_m": "21874.12",
+     "count_k": "79"
+    },
+    "2021": {
+     "amount_m": "22099.48",
+     "count_k": "80"
+    },
+    "2022": {
+     "amount_m": "19487.50",
+     "count_k": "71"
+    },
+    "2023": {
+     "amount_m": "15638.99",
+     "count_k": "57"
+    },
+    "2024": {
+     "amount_m": "14069",
+     "count_k": "53"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\HU\\HU.xml",
+   "xml_sha256": "cce58fc71fb65e4222a980dcabfa3026e571d9bfda1ac38d6a5b89d1e78bb0f2",
+   "xml_modified": "2026-02-23T14:35:32"
+  },
+  "IE": {
+   "reference": "bunnc_s",
+   "description": "jobseekers allowance",
+   "source": "Statistical Information On Social Welfare Service - Annual Report 2021 (https://www.gov.ie/en/publication/9262a-2021-annual-statistics-report/)",
+   "comment": "The 'Aggregate amounts'  figures include Jobsseker's Allowance and Jobseeker's Transition payment. However, recipient numbers for Jobseeker's Allowance and Jobseeker's Transitional payment are reported separately",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "1840.75",
+     "count_k": "140.337"
+    },
+    "2019": {
+     "amount_m": "1628.17",
+     "count_k": "123.633"
+    },
+    "2020": {
+     "amount_m": "1656.77",
+     "count_k": "125.703"
+    },
+    "2021": {
+     "amount_m": "1567.34",
+     "count_k": "108.414"
+    },
+    "2022": {
+     "amount_m": "1641.49",
+     "count_k": "126.616"
+    },
+    "2023": {
+     "amount_m": "1822.63",
+     "count_k": "119.356"
+    },
+    "2024": {
+     "amount_m": "1852.51",
+     "count_k": null
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\IE\\IE.xml",
+   "xml_sha256": "7e5e702e46b9e6ea582cb296833158dd92688dd8afe7d090a924c750fc50fc18",
+   "xml_modified": "2026-02-23T14:35:44"
+  },
+  "IT": {
+   "reference": "bsamm_s",
+   "description": "REI",
+   "source": "",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2019": {
+     "amount_m": "3901",
+     "count_k": null
+    },
+    "2020": {
+     "amount_m": "7143",
+     "count_k": null
+    },
+    "2021": {
+     "amount_m": "8827",
+     "count_k": null
+    },
+    "2022": {
+     "amount_m": "8030",
+     "count_k": null
+    },
+    "2023": {
+     "amount_m": "6653",
+     "count_k": null
+    },
+    "2024": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\IT\\IT.xml",
+   "xml_sha256": "ab928fb666aa4bda61f63161951e43a5794811cfc75bbad90298cc53752d49c9",
+   "xml_modified": "2026-02-23T14:36:02"
+  },
+  "LT": {
+   "reference": "bsa00_s",
+   "description": "social benefit (socialine pasalpa)",
+   "source": "Statistics Lithuania.  Social protection (administrative data). Social assistance. Expenditure on reimbursement for heating and water supply costs.",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "69.1",
+     "count_k": "71.2"
+    },
+    "2019": {
+     "amount_m": "63.4",
+     "count_k": "64.6"
+    },
+    "2020": {
+     "amount_m": "58.6",
+     "count_k": "56.0"
+    },
+    "2021": {
+     "amount_m": "86.1",
+     "count_k": "66.6"
+    },
+    "2022": {
+     "amount_m": "89.9",
+     "count_k": "64.6"
+    },
+    "2023": {
+     "amount_m": "111.1",
+     "count_k": "68.7"
+    },
+    "2024": {
+     "amount_m": "114.0",
+     "count_k": "68.7"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\LT\\LT.xml",
+   "xml_sha256": "676897dc5e49cffd59cbb2513327e99b05f75eb1c6fa0543b8cb7199152fc122",
+   "xml_modified": "2026-02-23T14:36:16"
+  },
+  "LU": {
+   "reference": "bsacm_s",
+   "description": "Social assistance (Revenu minimum garanti)",
+   "source": "IGSS",
+   "comment": "No data available",
+   "years": {
+    "2009": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2010": {
+     "amount_m": "104.68",
+     "count_k": null
+    },
+    "2011": {
+     "amount_m": "114.40",
+     "count_k": null
+    },
+    "2012": {
+     "amount_m": "119.52",
+     "count_k": "9.16"
+    },
+    "2013": {
+     "amount_m": "117.48",
+     "count_k": "9.24"
+    },
+    "2014": {
+     "amount_m": "121.53",
+     "count_k": "9.21"
+    },
+    "2015": {
+     "amount_m": "123.32",
+     "count_k": "9.20"
+    },
+    "2016": {
+     "amount_m": "123.03",
+     "count_k": "9.14"
+    },
+    "2017": {
+     "amount_m": "130.03",
+     "count_k": "9.30"
+    },
+    "2018": {
+     "amount_m": "136.19",
+     "count_k": "9.50"
+    },
+    "2019": {
+     "amount_m": "151.02",
+     "count_k": "9.69"
+    },
+    "2020": {
+     "amount_m": "155.58",
+     "count_k": "10.14"
+    },
+    "2021": {
+     "amount_m": "165.28",
+     "count_k": "10.17"
+    },
+    "2022": {
+     "amount_m": "168.65",
+     "count_k": "9.88"
+    },
+    "2023": {
+     "amount_m": "193.21",
+     "count_k": "10.11"
+    },
+    "2024": {
+     "amount_m": "193.21",
+     "count_k": null
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\LU\\LU.xml",
+   "xml_sha256": "99c9aa3cb8a4f5644501608af7973ebcff68d0f719a5257afb889ade21d453f0",
+   "xml_modified": "2026-02-23T14:36:26"
+  },
+  "LV": {
+   "reference": "bsamm_s",
+   "description": "Guaranteed minimum income benefit (Garantētā minimālā ienākuma pabalsts)",
+   "source": "local governments, both cash and in-kind",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "5.49760195",
+     "count_k": "20.878"
+    },
+    "2019": {
+     "amount_m": "4.72105342",
+     "count_k": "17.249"
+    },
+    "2020": {
+     "amount_m": "5.18782806",
+     "count_k": "16.511"
+    },
+    "2021": {
+     "amount_m": "9.46998825",
+     "count_k": "25.123"
+    },
+    "2022": {
+     "amount_m": "21.2279688",
+     "count_k": "58.228"
+    },
+    "2023": {
+     "amount_m": "13.7716202",
+     "count_k": "33.313"
+    },
+    "2024": {
+     "amount_m": "11.86504696",
+     "count_k": "23.427"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\LV\\LV.xml",
+   "xml_sha256": "d8d3c7086f7a557422488cf5bf2069b746642b3d2811fa1c8b163580f517d4fe",
+   "xml_modified": "2026-02-23T14:36:34"
+  },
+  "MT": {
+   "reference": "bsa_s",
+   "description": "Social assistance",
+   "source": "NSO- Social Security Benefits - Non- Contributory benefits (social assistance)",
+   "comment": "",
+   "years": {
+    "2007": {
+     "amount_m": "36.37396",
+     "count_k": "10.203"
+    },
+    "2008": {
+     "amount_m": "38.73087",
+     "count_k": "10.613"
+    },
+    "2009": {
+     "amount_m": "40.90743",
+     "count_k": "10.914"
+    },
+    "2010": {
+     "amount_m": "46.84411",
+     "count_k": "11.2"
+    },
+    "2011": {
+     "amount_m": "44.94025",
+     "count_k": "11.313"
+    },
+    "2012": {
+     "amount_m": "47.10511",
+     "count_k": "11.533"
+    },
+    "2013": {
+     "amount_m": "51.23993",
+     "count_k": "12.708"
+    },
+    "2014": {
+     "amount_m": "54.19768",
+     "count_k": "13.59"
+    },
+    "2015": {
+     "amount_m": "44.56143",
+     "count_k": "10.978"
+    },
+    "2016": {
+     "amount_m": "42.71335719",
+     "count_k": "9.796"
+    },
+    "2017": {
+     "amount_m": "40.76013138",
+     "count_k": "9.257"
+    },
+    "2018": {
+     "amount_m": "37.41879",
+     "count_k": "8.477"
+    },
+    "2019": {
+     "amount_m": "34.49691165",
+     "count_k": "7.725"
+    },
+    "2020": {
+     "amount_m": "33.576092",
+     "count_k": "7.214"
+    },
+    "2021": {
+     "amount_m": "33.21102546",
+     "count_k": "7.038"
+    },
+    "2022": {
+     "amount_m": "31.78133938",
+     "count_k": "6.613"
+    },
+    "2023": {
+     "amount_m": "33.36210279",
+     "count_k": "6.255"
+    },
+    "2024": {
+     "amount_m": "34.97525375",
+     "count_k": "5.958"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\MT\\MT.xml",
+   "xml_sha256": "7900011feeb75779f2dae02fa77a80762a06874f7901cf7bab4e6e08b99ff995",
+   "xml_modified": "2026-02-23T14:36:48"
+  },
+  "NL": {
+   "reference": "bsa00_s",
+   "description": "benefit : social assistance : main/basic : simulated",
+   "source": "jaarverslag szw",
+   "comment": "numbers: statline",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "5807",
+     "count_k": "426"
+    },
+    "2019": {
+     "amount_m": "5659",
+     "count_k": "408"
+    },
+    "2020": {
+     "amount_m": "5969",
+     "count_k": "416"
+    },
+    "2021": {
+     "amount_m": "5931",
+     "count_k": "412"
+    },
+    "2022": {
+     "amount_m": "5349",
+     "count_k": "392"
+    },
+    "2023": {
+     "amount_m": "5921",
+     "count_k": "425"
+    },
+    "2024": {
+     "amount_m": "6551",
+     "count_k": "420"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\NL\\NL.xml",
+   "xml_sha256": "e366898dece38b38d5b245efc2c70f8f16b302c8f4e77f2ee2ca6a47365ee386",
+   "xml_modified": "2026-02-23T14:37:00"
+  },
+  "PL": {
+   "reference": "bsatm_s",
+   "description": "Temporary social assistance benefit (Zasiłek okresowy)",
+   "source": "Sprawozdanie MRiPS-03",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "588.40",
+     "count_k": "318.000"
+    },
+    "2019": {
+     "amount_m": "552.50",
+     "count_k": "285.000"
+    },
+    "2020": {
+     "amount_m": "564.00",
+     "count_k": "269.600"
+    },
+    "2021": {
+     "amount_m": "531.10",
+     "count_k": "251.300"
+    },
+    "2022": {
+     "amount_m": "527.00",
+     "count_k": "227.742"
+    },
+    "2023": {
+     "amount_m": "487.10",
+     "count_k": "213.920"
+    },
+    "2024": {
+     "amount_m": "422.60",
+     "count_k": "180.940"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\PL\\PL.xml",
+   "xml_sha256": "8087f4fc4ec8de4737b806162e994867adf9824266627d28a7ac38c96199e33a",
+   "xml_modified": "2026-02-23T14:37:10"
+  },
+  "PT": {
+   "reference": "bsa00_s",
+   "description": "social insertion income",
+   "source": "https://www.seg-social.pt/estatisticas-detalhe/-/asset_publisher/GzVIhCL9jqf9/content/rendimento-social-de-inserc-8",
+   "comment": "INE: Processed Ammounts of Social Security Social Integration Income (€); Annual",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2016": {
+     "amount_m": "305.37",
+     "count_k": "132.70"
+    },
+    "2017": {
+     "amount_m": "315.76",
+     "count_k": "134.92"
+    },
+    "2018": {
+     "amount_m": "329.89",
+     "count_k": "134.20"
+    },
+    "2019": {
+     "amount_m": "318.99",
+     "count_k": "127.70"
+    },
+    "2020": {
+     "amount_m": "340",
+     "count_k": "258"
+    },
+    "2021": {
+     "amount_m": "356",
+     "count_k": "262"
+    },
+    "2022": {
+     "amount_m": "313",
+     "count_k": "263"
+    },
+    "2023": {
+     "amount_m": "322",
+     "count_k": "241"
+    },
+    "2024": {
+     "amount_m": "352",
+     "count_k": "226"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\PT\\PT.xml",
+   "xml_sha256": "960add4ab236e1d78b07009001d33cedc8fc4ceeaac8e2d32c3c518331359cd2",
+   "xml_modified": "2026-02-23T14:37:22"
+  },
+  "RO": {
+   "reference": "bsa00_s",
+   "description": "Minimum inclusion income",
+   "source": "Ministry of Labour and Social Protection,  http://www.mmuncii.ro/j33/images/buletin_statistic/,",
+   "comment": "2025-average based on the 1st semester",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2019": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2020": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2021": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2022": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2023": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2024": {
+     "amount_m": "1697.29",
+     "count_k": "329.79"
+    },
+    "2025": {
+     "amount_m": "2095.71",
+     "count_k": "353.10"
+    }
+   },
+   "xml": "Countries\\RO\\RO.xml",
+   "xml_sha256": "3382a11cf6b405f168de16885d3fd1d06c23d594789ae499f9085dae140180c7",
+   "xml_modified": "2026-02-23T14:37:30"
+  },
+  "SE": {
+   "reference": "bsamt_s",
+   "description": "Social Assistance (means-tested)",
+   "source": "",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "11182",
+     "count_k": "394"
+    },
+    "2019": {
+     "amount_m": "11633",
+     "count_k": "382"
+    },
+    "2020": {
+     "amount_m": "11959",
+     "count_k": "374"
+    },
+    "2021": {
+     "amount_m": "11644",
+     "count_k": "341"
+    },
+    "2022": {
+     "amount_m": "10762",
+     "count_k": "300"
+    },
+    "2023": {
+     "amount_m": "10387",
+     "count_k": "262"
+    },
+    "2024": {
+     "amount_m": "10916",
+     "count_k": "251"
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\SE\\SE.xml",
+   "xml_sha256": "7d41482ea644ca8974b26e7c472d22940eeb47af6c901fceae10c41dd2d50953",
+   "xml_modified": "2026-02-23T14:37:36"
+  },
+  "SI": {
+   "reference": "bsa_s",
+   "description": "social assistance (socialna pomos)",
+   "source": "Ministry of Labour, Family, Social Affairs and Equal Opportunities: https://www.gov.si/podrocja/socialna-varnost/pravice-iz-javnih-sredstev-in-socialnovarstveni-programi/",
+   "comment": "",
+   "years": {
+    "2010": {
+     "amount_m": null,
+     "count_k": null
+    },
+    "2018": {
+     "amount_m": "227.05",
+     "count_k": "92.26"
+    },
+    "2019": {
+     "amount_m": "268.65",
+     "count_k": "100.64"
+    },
+    "2020": {
+     "amount_m": "292.27",
+     "count_k": "110.18"
+    },
+    "2021": {
+     "amount_m": "293.96",
+     "count_k": "109.66"
+    },
+    "2022": {
+     "amount_m": "258.19",
+     "count_k": "90.71"
+    },
+    "2023": {
+     "amount_m": "317.15",
+     "count_k": "86.12"
+    },
+    "2024": {
+     "amount_m": "274.75",
+     "count_k": "81.22"
+    },
+    "2025": {
+     "amount_m": "269.29",
+     "count_k": "79.59"
+    }
+   },
+   "xml": "Countries\\SI\\SI.xml",
+   "xml_sha256": "55fec1238dac4579f9cbc90761306728804bdc275a719966cff48fd2cf799ac2",
+   "xml_modified": "2026-02-23T14:37:48"
+  },
+  "SK": {
+   "reference": "bsa_s",
+   "description": "Material needs benefit",
+   "source": "",
+   "comment": "",
+   "years": {
+    "2006": {
+     "amount_m": "214.77",
+     "count_k": null
+    },
+    "2007": {
+     "amount_m": "230.68",
+     "count_k": null
+    },
+    "2008": {
+     "amount_m": "207.48",
+     "count_k": null
+    },
+    "2009": {
+     "amount_m": "231.35",
+     "count_k": "164.70675"
+    },
+    "2010": {
+     "amount_m": "281.4",
+     "count_k": "189.6526667"
+    },
+    "2011": {
+     "amount_m": "272",
+     "count_k": "187.189"
+    },
+    "2012": {
+     "amount_m": "268.44",
+     "count_k": "183.091"
+    },
+    "2013": {
+     "amount_m": "270.08",
+     "count_k": "184.886"
+    },
+    "2014": {
+     "amount_m": "244.35",
+     "count_k": "162.904"
+    },
+    "2015": {
+     "amount_m": "201.06",
+     "count_k": "128.04"
+    },
+    "2016": {
+     "amount_m": "169.38",
+     "count_k": "105.5903333"
+    },
+    "2017": {
+     "amount_m": "144.45",
+     "count_k": "87.72683333"
+    },
+    "2018": {
+     "amount_m": "118.26",
+     "count_k": "72.02441667"
+    },
+    "2019": {
+     "amount_m": "106.11",
+     "count_k": "63.24375"
+    },
+    "2020": {
+     "amount_m": "109.07",
+     "count_k": "61.94591667"
+    },
+    "2021": {
+     "amount_m": "107.27",
+     "count_k": "58.80825"
+    },
+    "2022": {
+     "amount_m": "118.53",
+     "count_k": "63.44116667"
+    },
+    "2023": {
+     "amount_m": "126.69",
+     "count_k": "65.01991667"
+    },
+    "2024": {
+     "amount_m": "143.83",
+     "count_k": null
+    },
+    "2025": {
+     "amount_m": null,
+     "count_k": null
+    }
+   },
+   "xml": "Countries\\SK\\SK.xml",
+   "xml_sha256": "9bb8b9c2bd0c0e11bc489342e3c5f180f3347cc552f2cadcdc822f9d94a873a4",
+   "xml_modified": "2026-02-23T14:37:58"
+  }
+ }
+}

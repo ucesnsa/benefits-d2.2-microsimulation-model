@@ -2,6 +2,8 @@
 
 BENEFITS Horizon Europe D2.2, grant 101179032, Work Package 2. Compiled 30 June 2026.
 
+**Which values the tools use.** The Spain, Italy, and Greece tools read their provider values from their country blocks (`europe/tool_machinery/country_{es,it,el}.json`), which carry the same evidence as the provider tool for all EU member states. Each value's source and grade are in its own note; [`VALUATION_CHAINS.md`](VALUATION_CHAINS.md) prints how every outcome value is built; and `eu27/build/report/EVIDENCE_TABLES.md` tabulates every unit cost and outcome value by country. This document records the decisions the first three EU countries were first built on. Where a figure here and a country block differ, the country block is the one the tool uses.
+
 **This file is data-free.** It records the settled decisions on the EU provider valuation. Any item not yet settled is listed under Open items. The structured evidence itself is in [PROVIDER_EVIDENCE_EU.md](PROVIDER_EVIDENCE_EU.md).
 
 ---

@@ -9,6 +9,11 @@ economic shocks, and the **social value-added of social services**. Each reads a
 pre-computed response surface, so the tools run entirely in a browser with no server, no
 installation, and no network access.
 
+A fifth page, **the provider tool for all EU member states** (`eu27/`, version 2), carries the
+Provider tab to all 27 member states, built from public data only, with a switch between the
+full Provider tab and a plain-language view. It is the Provider tab only, and it does not
+include the United Kingdom, whose provider valuation is the UK tool's Provider tab.
+
 **This repository ships code, documentation, tools, and aggregate results only. It contains
 no microdata.**
 
@@ -30,9 +35,12 @@ uk/tools/dial_tool_uk.html
 europe/Spain/tools/dial_tool_spain.html
 europe/Italy/tools/dial_tool_italy.html
 europe/Greece/tools/dial_tool_greece.html
+eu27/BENEFITS_Provider_Tool_EU27_v2.html
 ```
 
-Each has four tabs: **Home** (method and provenance), **Analyst** (reform dials),
+The fifth line is the provider tool for all EU member states: pick a country, and switch
+between the plain-language view and the full Provider tab. The four country tools each have
+four tabs: **Home** (method and provenance), **Analyst** (reform dials),
 **Provider** (service value-added and capacity), **Scenarios** (a fixed menu with a
 cross-scenario comparison). Every figure carries a provenance mark, and every panel that can
 be screenshotted on its own carries the legend that explains the marks.
@@ -49,7 +57,7 @@ To go from a mark to the evidence:
 
 1. **On the Provider tab**, each service carries its own note: the origin figure, the
    factor applied to it, the price base, and the source each came from.
-2. **`europe/docs/VALUATION_CHAINS.md`** prints every provider outcome value whose note carries an ORIGIN clause as
+2. **`europe/docs/VALUATION_CHAINS.md`** prints every provider outcome value in the tree as
    `raw x effect share x attribution`, with all three factors beside the value they produce,
    recomputed from each parameter's own note rather than transcribed.
 3. **Analyst figures** are read from that country's `dial_grid.json`, the response surface.
@@ -74,6 +82,12 @@ To go from a mark to the evidence:
   policyengine-core 3.23.6 over the **Family Resources Survey 2023/24**.
 * **Spain, Italy, Greece** — 5 dials each, built on **EUROMOD v3.8.6** over **EU-SILC**
   (2024 wave; 2023 income reference year and 2023 policy systems).
+* **All 27 EU member states, provider valuation only** (`eu27/`). Spain, Italy, and Greece
+  carry exactly the provider values of their country tools. For the other 24 there is no
+  microsimulation: the income a service brings is estimated from national minimum-income data,
+  and each value is the best available evidence for that country, borrowed from elsewhere
+  with a stated adjustment only where none was found. [`eu27/README.md`](eu27/README.md) sets
+  out how.
 
 Reforms are modelled **one at a time**. Reforms interact, so combined effects are not
 additive and the tools never display them as such.
@@ -101,25 +115,28 @@ nothing. They work offline.
 ### 2. To verify the repository — Python 3.9 and Chrome
 
 Every check below runs from a clean copy with nothing installed but **Python 3.9** and
-**Chrome or Chromium**. Two of the ten need two ordinary packages and say so.
+**Chrome or Chromium**. Two of the fifteen need two ordinary packages and say so.
 
 **`py -3` is the Windows Python launcher.** On macOS and Linux run the same commands with
 `python3` in its place.
 
 | command | what it proves |
 |---|---|
-| `py -3 check_parses.py` | every Python file in the tree compiles. 92 files |
+| `py -3 check_parses.py` | every Python file in the tree compiles. 106 files |
 | `py -3 check_drift.py` | each page's embedded grid matches its canonical surface, its embedded block matches its authoring file, the page with its data block masked out is byte-identical to `template.html`, the scenario figures match the surface, and every relational claim in each scenario statement is re-derived from the surface at every ε. 20 checks, 5 per tool |
-| `py -3 check_browser.py` | loads all four tools in headless Chrome and asserts the contract, including Horizon Europe Article 17 visibility. 61 assertions per country, 244 in total |
+| `py -3 check_browser.py` | loads all four tools in headless Chrome and asserts the contract, including Horizon Europe Article 17 visibility. 63 assertions per country, 252 in total |
 | `py -3 tests_negative_drift.py` | breaks 10 things on purpose and requires each to be caught |
-| `py -3 tests_negative_browser.py` | breaks 43 things on purpose and requires each to be caught, so the assertions above are load-bearing |
-| `py -3 tests_negative_provider.py` | breaks 11 things on purpose in the valuation layer, driving the 7.10d check in `audit_provider_params.py` that recomputes every converted outcome value from the origin and factor its own note states |
+| `py -3 tests_negative_browser.py` | breaks 47 things on purpose and requires each to be caught, so the assertions above are load-bearing |
+| `py -3 tests_negative_provider.py` | breaks 13 things on purpose in the unit costs and the valuation layer, driving the 7.10c and 7.10d checks in `audit_provider_params.py` that recompute every European unit cost and every converted outcome value from the origin and factor its own note states |
 | `py -3 europe/tool_machinery/refresh_blocks.py` | re-embeds each canonical surface into its country block. The only sanctioned way to update a block's `grid` key; `--check` reports staleness without changing anything |
 | `py -3 europe/tool_machinery/refresh_scenarios.py` | rebuilds the scenario menu in a country block from that country's surface |
 | `py -3 europe/tool_machinery/classify_provenance.py` | derives each figure's provenance grade, so the `*` and `**` marks are computed and never applied by hand |
 | `py -3 europe/common/validate_grid.py <surface>` | structure, monotonicity and identities on any one of the four `dial_grid.json` |
 | `py -3 europe/common/re_emit.py verify` | folder-only provenance proof for the three EU surfaces. **Needs `numpy`** |
 | `py -3 uk/model/demo/check_fixture.py` | loads the committed **synthetic** fixture through the welfare layer and asserts it is schema-valid. **Needs `pandas`, `numpy`, `pyarrow`** |
+| `py -3 eu27/build/check_full_vs_shipped.py` | the provider tool for all EU member states, filled with the Spain, Italy, and Greece country blocks, renders exactly what each country tool's Provider tab renders. **Run `py -3 eu27/build/make_full_template.py` first**: it writes `eu27/build/full_template.html`, which this check reads and which is not committed |
+| `py -3 eu27/build/check_views.py` | in all 27 countries, the plain-language view and the full view, two separate code paths, give the same results |
+| `py -3 eu27/build/mutate_views.py` | plants defects in one view at a time and requires `check_views.py` to catch each |
 
 ### 3. To rebuild a response surface — not possible from this repository, by design and by licence
 
@@ -142,6 +159,8 @@ requires none of the above.
 uk/            the UK tool, its surface, its model code and its own documentation
 europe/        Spain, Italy and Greece: tools, surfaces, model code, and the shared tool
                machinery (template.html + one country_<cc>.json per country)
+eu27/          the provider tool for all EU member states: the page, its build, its checks,
+               and the research records its values rest on
 Documents/     the technical report and the four country user guides, as Word documents
 assets/        the EU emblem and project logos, with their usage rules
 *.py           the verification suite, run from the repository root
@@ -159,6 +178,7 @@ template by comparing a masked-block hash across them.
 | document | covers | where it goes | status |
 |---|---|---|---|
 | **D2.2 technical report** | all four tools | `Documents/BENEFITS_D2.2_Microsimulation_Tech_Report.docx` | present |
+| The provider tool for all EU member states | its method, files, and checks | `eu27/README.md` | present |
 | **D2.2 user guide, United Kingdom** | the UK tool | `Documents/USER_GUIDE_UK_D2_2.docx` | present |
 | **D2.2 user guide, Spain** | the Spain tool | `Documents/USER_GUIDE_SPAIN_D2_2.docx` | present |
 | **D2.2 user guide, Italy** | the Italy tool | `Documents/USER_GUIDE_ITALY_D2_2.docx` | present |
@@ -177,31 +197,39 @@ Verified from a clean export with nothing installed but Python 3.9 and Chrome.
 
 | check | result |
 |---|---|
-| `check_parses.py` | **PASS**, 92 of 92 Python files compile |
+| `check_parses.py` | **PASS**, 106 of 106 Python files compile |
 | `check_drift.py` | **PASS**, 20 of 20 (5 per country) |
-| `check_browser.py` | **PASS**, 244 of 244 (61 per country) |
+| `check_browser.py` | **PASS**, 252 of 252 (63 per country) |
 | `validate_grid.py`, all four surfaces | **PASS**: UK 6/0/0; ES, IT, EL 5 pass 1 warn 0 fail each |
 | `re_emit.py verify`, ES / IT / EL | **ALL COUNTRIES PASS** |
 | `check_fixture.py` | **SCHEMA GUARD: ALL PASS** |
 | `tests_negative_drift.py` | **10 of 10** mutations caught |
-| `tests_negative_browser.py` | **43 of 43** mutations caught |
-| `tests_negative_provider.py` | **11 of 11** mutations caught |
+| `tests_negative_browser.py` | **47 of 47** mutations caught |
+| `tests_negative_provider.py` | **13 of 13** mutations caught |
+| `check_full_vs_shipped.py` | **PASS**, 397 configurations per country, 0 differences |
+| `check_views.py` | **PASS**, 2,079 of 2,079 |
+| `mutate_views.py` | **5 of 5** mutations caught |
 
 The three mutation suites exist because a passing check proves nothing unless it can fail. Each
 mutation breaks exactly one thing an assertion claims to protect, and the suite passes only
 when that assertion fails on the mutated page.
 
 Masked-block sha256, the proof all four pages are one template:
-`ebe868f47ec59f61d676487a5c9ba5a8987f19cd717cc748a5678a2f4417cd19`
+`f60bf3c2c05fa4d7e57346eecffdfffd07ebee6d1df278d2132850ff4655afe7`
 
-The four tools:
+The five tools:
 
 ```
-e3da96c2a005f6ea572e77417df72c15b9ac5c04c157f4d8d26d9cec58944ed5  uk/tools/dial_tool_uk.html
-0b54742675bfbf991bcb23871c205ae322e38421776e9955e1c40db609a0b821  europe/Spain/tools/dial_tool_spain.html
-f6885a30b7b05dd53b616e1ebdd4bcf1cf96e78885cfc02f72e88a030a8780c9  europe/Italy/tools/dial_tool_italy.html
-a5efc6549dcd0b30fa2660c326ebac7579ec60163e279b4b2a00035d7822e9d9  europe/Greece/tools/dial_tool_greece.html
+198b7056ea606796e477b5334b0483495b07f5a397f8159a75fb534e0767b1a6  uk/tools/dial_tool_uk.html
+6eadc39fc22388d99cc6afed4793d5792f35073e4a4a123bbce917fbd1741fdf  europe/Spain/tools/dial_tool_spain.html
+a65c62ed15f0b6781e2fb776c8106988d0063054fef306716468223ae77979b4  europe/Italy/tools/dial_tool_italy.html
+9b908442a201dbda37352a5427dbc6265904cf82b20b802d2a56b92de12f4e49  europe/Greece/tools/dial_tool_greece.html
+a675aeac3a242b019303a7dbf57b9b53d56aae72cc879146511df024ee404fdf  eu27/BENEFITS_Provider_Tool_EU27_v2.html
 ```
+
+The three `eu27` rows run the provider tool for all EU member states; their counts are read
+from the check outputs committed in `eu27/build/checks/`, which the checks rewrite on every
+run.
 
 The four surfaces:
 
@@ -296,6 +324,13 @@ attached rather than being a general caution.
    nowhere on the tool face, so unlike the items above this one is disclosed in the
    `DATA_ISSUES_FOR_TECHNICAL_REPORT.md` ledger (EL-10, IT-12) and in `CONVERSION_RECORD.md`
    rather than on the tool itself.
+10. **The provider tool for all EU member states rests more on transfers than the country
+    tools do.** For 24 of its 27 countries the income a service brings is an estimate, not a
+    model result: tested on the three modelled countries, its mean absolute error is 3.6%
+    against each model's own outlay and 18.6% against actual outlays. 244 of its 297 unit costs
+    are borrowed from another country with a stated adjustment, and the share of households
+    losing an earner in its shock view is the UK model's share for every country without a
+    model. Every such value is marked on the page.
 
 ---
 
@@ -316,6 +351,7 @@ Four licences apply, and which one applies to a file depends on what that file i
 |---|---|---|
 | The code this project wrote | **MIT** | [`LICENSE`](LICENSE) |
 | The documents, the four HTML tools, and the response surfaces, as distributed | **CC BY 4.0** | [`LICENSE-CC-BY-4.0`](LICENSE-CC-BY-4.0) |
+| The provider tool for all EU member states (`eu27/BENEFITS_Provider_Tool_EU27_v2.html`) and the data in `eu27/`: its country blocks, frames, series, evidence, and research records | **CC BY 4.0** | [`LICENSE-CC-BY-4.0`](LICENSE-CC-BY-4.0) |
 | Any file that reaches PolicyEngine, directly or through another module in the tree | **AGPL-3.0** | [`uk/model/Code_FRS_23_24/LICENSE`](uk/model/Code_FRS_23_24/LICENSE) |
 | Any file that reaches the `euromod` connector, directly or through another module in the tree | **EUPL-1.2** | the `LICENSE` file in each directory where such files are concentrated |
 

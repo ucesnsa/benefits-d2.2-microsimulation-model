@@ -1,0 +1,2441 @@
+{
+ "code": "IT",
+ "name": "Italy",
+ "lang": "en",
+ "locale": "en-GB",
+ "currency": {
+  "symbol": "€",
+  "code": "EUR"
+ },
+ "title": "BENEFITS provider tool: Italy",
+ "deflator": 1.0197,
+ "income_basis": "model",
+ "income_year": "2024",
+ "wave_label": "EU-SILC 2024 wave",
+ "wellby_spine": {
+  "value": 14925,
+  "label": "€14,925 (HM Treasury's £13,000 per WELLBY at 2019 prices, uprated to £16,300 at 2024 prices, then PPP-adjusted)",
+  "provenance": "borrowed_adjusted",
+  "provenance_note": "The HM Treasury GBP 13,000 (2019) spine, uprated and PPP-adjusted to Italy (0.915660). Transfer with a stated adjustment; an explicit modelling assumption flagged transfer-from-UK. The `value` field is documentation, not an input: no formula in the tool reads it. The WELLBY bands in `data.outcomes` were multiplied through at build time, so editing this number changes nothing on the page until those bands are rebuilt. check_drift.py asserts that the label still quotes it, so an edit here cannot silently leave the two disagreeing."
+ },
+ "labels": {
+  "unemp_3": "Unemployment +3pp",
+  "unemp_5": "Unemployment +5pp",
+  "earn_1": "Earnings downturn -1%",
+  "earn_3": "Earnings downturn -3%",
+  "earn_5": "Earnings downturn -5%",
+  "adi_10": "Assegno di Inclusione +10%",
+  "adi_25": "Assegno di Inclusione +25%",
+  "adi_50": "Assegno di Inclusione +50%",
+  "irpef_1": "IRPEF first-bracket -1pp",
+  "irpef_2": "IRPEF first-bracket -2pp",
+  "irpef_5": "IRPEF first-bracket -5pp",
+  "auu_10": "Assegno Unico Universale +10%"
+ },
+ "profiles": {
+  "Lowest incomes (deciles 1-3)": [
+   0,
+   1,
+   2
+  ],
+  "Low-to-middle (deciles 4-6)": [
+   3,
+   4,
+   5
+  ],
+  "Broad mix (all deciles)": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ]
+ },
+ "provider_default": "Employment support",
+ "reference_default": "adi_25",
+ "unit_noun": "households",
+ "unit_noun_singular": "household",
+ "capacity_caveat": "The capacity and shock model is INDICATIVE: demand elasticities and staff ratios are mostly UK register values, and the share of households losing an earner is the UK model's own share applied to Italy's working-age households. It is not calibrated to Italy.",
+ "analyst_price_base": "2024 prices",
+ "provenance": "Income effect from EUROMOD v3.8.6 run on EU-SILC data (2024 wave, income reference year 2023, policy system IT_2023), as in the D2.2 Italy tool. Provider values are per person served, in EUR at 2024 prices. Every value carries its source and a grade in its own note; a value borrowed from another country is marked.",
+ "data": {
+  "services": [
+   {
+    "name": "Employment support",
+    "elastLow": 0.8,
+    "elastCentral": 1.0,
+    "elastHigh": 1.2,
+    "unitCost": 1176,
+    "staffRatio": 120,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "elastCentral": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "elastHigh": "UK register value for Jobcentre Plus work coaches (demand moves one-for-one with unemployment, range 0.8 to 1.2), transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 1,176, converted from the UK tool's unit cost for Jobcentre Plus work coaching, GBP 1,200 per participant, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Italy EUR 29.60 an hour; UK GBP 30.2165), ratio 0.979597. No verified Italy figure for this unit was found. CONVERSION: GBP 1200 x 0.97959724. PRICE BASE: 2024-equivalent. Unit: one participant in an employment-support episode."
+    },
+    "flag": "Unit: one participant in an employment-support episode. Outcome value: borrowed from another country without adjustment. +0.46 WELLBY for a move from unemployment into work (Clark et al. 2018, the Britain fixed-effects coefficient HM Treasury's guidance uses), valued at the WELLBY value for Italy, then staged as in the UK tool: effect 0.11 / 0.30 / 0.46 x attribution 0.20 / 0.22 / 0.27. European trial evidence (Card, Kluve and Weber 2018) puts job-search assistance impacts at 1 to 2 percentage points, which suggests the staged central may be high. ORIGIN 16300 FACTOR 0.4212036; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0.4212036 AND 0.4212036; STAGE EFFECT 0.11 0.3 0.46 ATTRIBUTION 0.2 0.22 0.27; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Minimum income (AdI) casework",
+    "elastLow": 0.3,
+    "elastCentral": 0.55,
+    "elastHigh": 1.0,
+    "unitCost": 392,
+    "staffRatio": 200,
+    "provenance": {
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "elastCentral": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "elastHigh": "US SNAP evidence: enrolment rises about 6% in the year per percentage point of unemployment and 11 to 20% over three years, which at an unemployment rate near 5% is 0.3 in the first year and 0.55 to 1.0 cumulatively (svc_income-085); Spanish regional minimum-income exits slow by 0.6 points per point of unemployment (svc_income-086)",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 392, converted from the UK tool's unit cost for benefit claim support, GBP 400 per claim, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Italy EUR 29.60 an hour; UK GBP 30.2165), ratio 0.979597. No verified Italy figure for this unit was found. CONVERSION: GBP 400 x 0.97959724. PRICE BASE: 2024-equivalent. Unit: one claim supported."
+    },
+    "flag": "Unit: one claim supported. Outcome value: borrowed from another country with a stated adjustment. Income effect: the extra-income figure. Health-service use avoided: Liverpool Citizens Advice on Prescription (SSM Population Health 2025), an instrumental-variable study on linked NHS records: GBP 91 per person a year (95% CI 44 to 107) at 2023 prices, an impact, so attribution 1.0. The saving is per household member; the central counts the client only, the high counts every member (20,773 members of 8,205 client households). Uprated to 2024-25 on ONS L8GG and converted at household-consumption PPP (OECD, 2024, the factor of 0.915660 per GBP the Italy tool uses for every transfer from the UK). The advice covered benefits, debt and housing together. ORIGIN 91 FACTOR 0.9516016018; BAND ORIGIN 44 AND 230.3891529555; BAND FACTOR 0.9516016018 AND 0.9516016018; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Food aid / food banks",
+    "elastLow": 0.1,
+    "elastCentral": 0.25,
+    "elastHigh": 0.5,
+    "unitCost": 96,
+    "staffRatio": 250,
+    "provenance": {
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "national_source"
+    },
+    "provenance_note": {
+     "elastLow": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "elastCentral": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "elastHigh": "Sosenko et al. (2022), 325 English local authorities: one point of unemployment adds about 2% to food-parcel use; Loopstra et al. (2016), 21 EU countries: one point adds 0.29 points to food insecurity (svc_income-150, -139). Crises cause separate surges of 30 to 100%",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 96: EUR 93.60 (municipal distribution per user-year), ISTAT (2025), Interventi e servizi sociali dei comuni singoli o associati: utenti e spesa (47_940_DF_DCIS_SPESESERSOC1_3); brought from 2023 to 2024 on Italy's GDP deflator (Eurostat nama_10_gdp). CONVERSION: EUR 93.6 x 1.02126199. PRICE BASE: 2024-equivalent. Unit: one recipient for a year."
+    },
+    "flag": "Unit: one recipient for a year. Outcome value: an assumption. Excluded for every country: no robust per-person effect exists. Randomised evidence shows small effects on food insecurity (for example Briefel et al., -2.8 points) and none on wellbeing; the Greek DIATROFI school-meal trial is a different service. The tool shows the income effect only, as a floor."
+   },
+   {
+    "name": "Debt advice",
+    "elastLow": 0.5,
+    "elastCentral": 0.8,
+    "elastHigh": 1.2,
+    "unitCost": 490,
+    "staffRatio": 100,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "elastCentral": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "elastHigh": "UK register value for debt advice, transferred unadjusted; no European elasticity was found",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 490, converted from the UK tool's unit cost for debt advice, GBP 500 per case, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Italy EUR 29.60 an hour; UK GBP 30.2165), ratio 0.979597. No verified Italy figure for this unit was found. CONVERSION: GBP 500 x 0.97959724. PRICE BASE: 2024-equivalent. Unit: one advice case."
+    },
+    "flag": "Unit: one advice case. Outcome value: borrowed from another country without adjustment. Being in arrears lowers life satisfaction by 0.355 points (FCA / Simetrica-Jacobs 2020, individual fixed effects). Central: advice moves 10 percentage points more clients out of unmanageable debt than no advice (Money Advice Service / YouGov 2012: 25% against 15%), an impact, so attribution 1.0: 0.355 x 0.10 WELLBY. Low: zero, because the only randomised trial (Pleasence and Balmer 2007) cannot rule it out. High: the UK tool's high. ORIGIN 16300 FACTOR 0.3250593; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 0.45783; STAGE EFFECT 0 0.1 0.63 ATTRIBUTION 1 1 0.5; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Talking therapies",
+    "elastLow": 0.3,
+    "elastCentral": 0.6,
+    "elastHigh": 0.9,
+    "unitCost": 133,
+    "staffRatio": 50,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "national_source"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "elastCentral": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "elastHigh": "UK register value for NHS Talking Therapies, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 133: EUR 19.30 (SSN session tariff x 7), Giunta Regionale della Campania (2024), Delibera n. 660 del 26/11/2024 - Approvazione delle tariffe del nomenclatore regionale e del relativo catalogo dell'assistenza specialistica ambulatoriale ai sensi del DPCM 12.01.2017 (Allegato 2 Nomenclatore tariffario e catalogo regionale); brought from 2025 to 2024 on Italy's GDP deflator (Eurostat nama_10_gdp). CONVERSION: EUR 135.1 x 0.98200667. PRICE BASE: 2024-equivalent. Unit: one course of treatment."
+    },
+    "flag": "Unit: one course of treatment. Outcome value: borrowed from another country without adjustment. Central: 0.06 QALY per patient from adding transdiagnostic group CBT to usual primary care in Spain (the PsicAP randomised trial; abstract), converted at HM Treasury's 7 WELLBYs per QALY = 0.42 WELLBY, an impact, so attribution 1.0. Low: zero (German and Swedish trials found no QALY difference). High: the UK tool's high for NHS Talking Therapies (1.5 x 0.6 x 0.61 WELLBY). Nordic studies find no net saving from reduced sick leave, so no cost-avoided value is added. ORIGIN 16300 FACTOR 0.3845772; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 1.37349; STAGE EFFECT 0 1 0.6 ATTRIBUTION 1 1 0.61; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Housing / homelessness",
+    "elastLow": 0.3,
+    "elastCentral": 0.5,
+    "elastHigh": 0.8,
+    "unitCost": 10916,
+    "staffRatio": 30,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "national_source"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "elastCentral": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "elastHigh": "UK register value, transferred unadjusted; Dutch and Danish series do not support a stable relationship with unemployment",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 10,916: EUR 26.00 (daily Housing First cost x 365), fio.PSD (Cortese C., Pascucci R., Osservatorio fio.PSD) (2020), Housing First si conferma il miglior approccio (presentation of Report finale Monitoraggio fio.PSD Housing First 2019); brought from 2019 to 2024 on Italy's GDP deflator (Eurostat nama_10_gdp). CONVERSION: EUR 9490.0 x 1.15024895. PRICE BASE: 2024-equivalent. Unit: one homeless person supported for a year."
+    },
+    "flag": "Unit: one homeless person supported for a year. Outcome value: borrowed from another country with a stated adjustment. A year of homelessness costs the public EUR 24,712 per person (the UK tool's GBP 26,988 (Crisis 2015, a derived 12-month rough-sleeper vignette, uprated) converted at household-consumption PPP (OECD, 2024, the factor of 0.915660 per GBP the Italy tool uses for every transfer from the UK); no Italy cost of homelessness was found). Share avoided by a year of housing support: central 0.407 (Spain, Hábitat randomised trial: EUR 470.97 of EUR 1,157.84 a month), high 0.438 (France, Un chez-soi d'abord randomised trial, on a consistent cost basis), both impacts, so attribution 1.0; low 0.112, the UK tool's central (0.20 x 0.562), whose effect share is an assumption. ORIGIN 24712.106778 FACTOR 1; BAND ORIGIN 24712.106778 AND 24712.106778; BAND FACTOR 1 AND 1; STAGE EFFECT 0.112 0.407 0.438 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Children's social care",
+    "elastLow": 0.15,
+    "elastCentral": 0.3,
+    "elastHigh": 0.5,
+    "unitCost": 10741,
+    "staffRatio": 15,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "elastCentral": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "elastHigh": "UK register value, transferred unadjusted; a systematic review (Hiilamo et al. 2021) found no European population-level recession effect",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 10,741, converted from Home Office (2021) GBP 8,640 per child in need per year at 2018/19 prices, uprated to GBP 10,965 (the UK tool's figure). Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Italy EUR 29.60 an hour; UK GBP 30.2165), ratio 0.979597. No verified Italy figure for this unit was found. CONVERSION: GBP 10965 x 0.97959724. PRICE BASE: 2024-equivalent. Unit: one child supported at home for a year."
+    },
+    "flag": "Unit: one child supported at home for a year. Outcome value: a national source. A year of out-of-home care costs EUR 19,037 per child (ISTAT (2025), Interventi e servizi sociali dei comuni singoli o associati: utenti e spesa (47_940_DF_DCIS_SPESESERSOC1_3), EUR 18,641 at 2023 prices, uprated on the GDP deflator. Per child served in the year, not per full child-year, so a lower bound.). Reduction in the chance of a residential placement: central 0.056 (Italy, P.I.P.P.I. against a comparison group, residential placements only: 6.4% against 0.8%), high 0.119 (the same, counting day foster care too), low zero (Al et al. 2012 meta-analysis: intensive family preservation generally does not prevent placement). One year of placement avoided is counted, which is conservative. The sensitivity row is the UK tool's route: the lifetime cost of a maltreatment case (Bocconi 2013, Italy) x 0.086. ORIGIN 19037.3446639027 FACTOR 1; BAND ORIGIN 19037.3446639027 AND 19037.3446639027; BAND FACTOR 1 AND 1; STAGE EFFECT 0 0.056 0.119 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Domestic abuse / GBV",
+    "elastLow": 0.2,
+    "elastCentral": 0.4,
+    "elastHigh": 0.6,
+    "unitCost": 2449,
+    "staffRatio": 25,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 2,449, converted from the UK tool's unit cost for domestic abuse services, GBP 2,500 per case, itself an assumption declared at the 2024 base. Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Italy EUR 29.60 an hour; UK GBP 30.2165), ratio 0.979597. No verified Italy figure for this unit was found. CONVERSION: GBP 2500 x 0.97959724. PRICE BASE: 2024-equivalent. Unit: one victim supported."
+    },
+    "flag": "Unit: one victim supported. Outcome value: a national source. Tangible cost of intimate-partner violence per victim a year: EUR 2,520 (Italy, Intervita (2013), Quanto costa il silenzio?: EUR 2,067 per victim a year, tangible costs, at 2012 prices, uprated). Effect and attribution as in the UK tool (0.24 x 0.5417: advocacy reduces physical abuse, odds ratio 0.43, Ramsay et al. 2009). Pain and suffering are shown as a sensitivity, not added, as settled decision 8 does for Spain. ORIGIN 2519.5412312798 FACTOR 1; BAND ORIGIN 2519.5412312798 AND 2519.5412312798; BAND FACTOR 1 AND 1; STAGE EFFECT 0.24 0.24 0.24 ATTRIBUTION 0.5416667 0.5416667 0.5416667; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "Drug & alcohol treatment",
+    "elastLow": 0.15,
+    "elastCentral": 0.3,
+    "elastHigh": 0.5,
+    "unitCost": 4396,
+    "staffRatio": 30,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 4,396, converted from National Audit Office (2010) GBP 3,000 per person in effective drug treatment at 2008-09 prices, uprated to GBP 4,488 (the UK tool's figure). Converted on average hourly labour cost in health and social work (Eurostat lc_lci_lev, NACE Q, 2023: Italy EUR 29.60 an hour; UK GBP 30.2165), ratio 0.979597. No verified Italy figure for this unit was found. CONVERSION: GBP 4488 x 0.97959724. PRICE BASE: 2024-equivalent. Unit: one client for a treatment year."
+    },
+    "flag": "Unit: one client for a treatment year. Outcome value: borrowed from another country without adjustment. Value of a statistical life for Italy: EUR 5,353,646 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 0.602 (UNODC (2025), World Drug Report 2025, Statistical Annex 5.1: Treatment by primary drug of use: 79627 / 132195 = 0.602). Non-opioid clients carry no averted-death value in these figures. ORIGIN 5353645.6873865621 FACTOR 0.0129129; BAND ORIGIN 4461371.406155468 AND 6245919.9686176553; BAND FACTOR 0.003913 AND 0.0149296; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   {
+    "name": "GP consultation",
+    "elastLow": 0.2,
+    "elastCentral": 0.25,
+    "elastHigh": 0.3,
+    "unitCost": 18,
+    "staffRatio": 300,
+    "provenance": {
+     "elastLow": "borrowed_adjusted",
+     "elastCentral": "borrowed_adjusted",
+     "elastHigh": "borrowed_adjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "national_source"
+    },
+    "provenance_note": {
+     "elastLow": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "elastCentral": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "elastHigh": "Buffel et al. (2015), 27 EU countries: the odds of consulting a GP for a mental-health problem rise 2 to 3% per point of unemployment (svc_health2-037); a contact measure, not a consultation count",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 17.64 per consultation, an Italian national figure: about EUR 12 per ambulatory GP visit at 2003 prices (Garattini et al. 2003, DYSCO, Farmeconomia 4(2):109-114), uprated by 1.470047 on Italy's GDP deflator to EUR 17.64 (PROVIDER_TOOLREADY_2024.md, GP table). CONVERSION: EUR 12 x 1.47004700. PRICE BASE: 2024-equivalent. Unit: one consultation."
+    },
+    "flag": "Unit: one consultation. Outcome value: an assumption. Valued only at its cost: no defensible value per additional consultation was found (searched, none found)."
+   },
+   {
+    "name": "Opioid substitution treatment (OST)",
+    "elastLow": 0.15,
+    "elastCentral": 0.3,
+    "elastHigh": 0.5,
+    "unitCost": 2285,
+    "staffRatio": 30,
+    "provenance": {
+     "elastLow": "borrowed_unadjusted",
+     "elastCentral": "borrowed_unadjusted",
+     "elastHigh": "borrowed_unadjusted",
+     "staffRatio": "borrowed_unadjusted",
+     "unitCost": "borrowed_adjusted"
+    },
+    "provenance_note": {
+     "elastLow": "UK register value, transferred unadjusted",
+     "elastCentral": "UK register value, transferred unadjusted",
+     "elastHigh": "UK register value, transferred unadjusted",
+     "staffRatio": "UK register benchmark, shown for reference only: no formula in the tool reads it; the extra-caseworker figure uses the provider's own cases per caseworker.",
+     "unitCost": "EUR 2,285 per patient-year, the Spanish national figure of EUR 2,100 (a Spanish national figure: methadone at EUR 4 a day excluding medication, a 2004 observation, annualised on 365 days and uprated by 1.438347 to EUR 5.75 a day, EUR 2,098.75 a year, recorded as EUR 2,100 (the D2.2 Spain tool's figure; PROVIDER_TOOLREADY_2024.md, drug and alcohol table)) scaled by the ratio of labour costs in health and social work, Italy to Spain, 1.088235 (Eurostat lc_lci_lev, NACE Q, 2023), as the D2.2 Italy and Greece tools do. CONVERSION: EUR 2100.0 x 1.08823529. PRICE BASE: 2024-equivalent. Unit: one patient for a year."
+    },
+    "flag": "Unit: one patient for a year. Outcome value: borrowed from another country without adjustment. Value of a statistical life for Italy: EUR 5,353,646 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 1.000 (every OST patient is an opioid client). Non-opioid clients carry no averted-death value in these figures. ORIGIN 5353645.6873865621 FACTOR 0.02145; BAND ORIGIN 4461371.406155468 AND 6245919.9686176553; BAND FACTOR 0.0065 AND 0.0248; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   }
+  ],
+  "outcomes": {
+   "Employment support": {
+    "wbL": 116.2,
+    "wbC": 453.13,
+    "wbH": 1049.62,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Move into employment (wellbeing)",
+      "method": "WELLBY",
+      "conf": "MODERATE",
+      "valC": 453.13
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "+0.46 WELLBY for a move from unemployment into work (Clark et al. 2018, the Britain fixed-effects coefficient HM Treasury's guidance uses), valued at the WELLBY value for Italy, then staged as in the UK tool: effect 0.11 / 0.30 / 0.46 x attribution 0.20 / 0.22 / 0.27. European trial evidence (Card, Kluve and Weber 2018) puts job-search assistance impacts at 1 to 2 percentage points, which suggests the staged central may be high. ORIGIN 16300 FACTOR 0.4212036; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0.4212036 AND 0.4212036; STAGE EFFECT 0.11 0.3 0.46 ATTRIBUTION 0.2 0.22 0.27; PRICE BASE: 2024-equivalent."
+   },
+   "Minimum income (AdI) casework": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 41.87,
+    "convC": 86.6,
+    "convH": 219.24,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Income effect",
+      "method": "ENGINE",
+      "conf": "STRONG",
+      "valC": 0
+     },
+     {
+      "outcome": "Health-service use avoided",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 86.6
+     }
+    ],
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "Income effect: the extra-income figure. Health-service use avoided: Liverpool Citizens Advice on Prescription (SSM Population Health 2025), an instrumental-variable study on linked NHS records: GBP 91 per person a year (95% CI 44 to 107) at 2023 prices, an impact, so attribution 1.0. The saving is per household member; the central counts the client only, the high counts every member (20,773 members of 8,205 client households). Uprated to 2024-25 on ONS L8GG and converted at household-consumption PPP (OECD, 2024, the factor of 0.915660 per GBP the Italy tool uses for every transfer from the UK). The advice covered benefits, debt and housing together. ORIGIN 91 FACTOR 0.9516016018; BAND ORIGIN 44 AND 230.3891529555; BAND FACTOR 0.9516016018 AND 0.9516016018; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "Food aid / food banks": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Food aid",
+      "method": "UNEVIDENCED-EXCLUDED",
+      "conf": "-",
+      "valC": 0
+     }
+    ],
+    "provenance": "assumption",
+    "provenance_note": "Excluded for every country: no robust per-person effect exists. Randomised evidence shows small effects on food insecurity (for example Briefel et al., -2.8 points) and none on wellbeing; the Greek DIATROFI school-meal trial is a different service. The tool shows the income effect only, as a floor."
+   },
+   "Debt advice": {
+    "wbL": 0,
+    "wbC": 529.85,
+    "wbH": 2893.56,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Debt advice (wellbeing)",
+      "method": "WELLBY",
+      "conf": "WEAK",
+      "valC": 529.85
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Being in arrears lowers life satisfaction by 0.355 points (FCA / Simetrica-Jacobs 2020, individual fixed effects). Central: advice moves 10 percentage points more clients out of unmanageable debt than no advice (Money Advice Service / YouGov 2012: 25% against 15%), an impact, so attribution 1.0: 0.355 x 0.10 WELLBY. Low: zero, because the only randomised trial (Pleasence and Balmer 2007) cannot rule it out. High: the UK tool's high. ORIGIN 16300 FACTOR 0.3250593; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 0.45783; STAGE EFFECT 0 0.1 0.63 ATTRIBUTION 1 1 0.5; PRICE BASE: 2024-equivalent."
+   },
+   "Talking therapies": {
+    "wbL": 0,
+    "wbC": 6268.61,
+    "wbH": 10086.12,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Recovery from depression or anxiety (wellbeing)",
+      "method": "WELLBY",
+      "conf": "MODERATE",
+      "valC": 6268.61
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Central: 0.06 QALY per patient from adding transdiagnostic group CBT to usual primary care in Spain (the PsicAP randomised trial; abstract), converted at HM Treasury's 7 WELLBYs per QALY = 0.42 WELLBY, an impact, so attribution 1.0. Low: zero (German and Swedish trials found no QALY difference). High: the UK tool's high for NHS Talking Therapies (1.5 x 0.6 x 0.61 WELLBY). Nordic studies find no net saving from reduced sick leave, so no cost-avoided value is added. ORIGIN 16300 FACTOR 0.3845772; BAND ORIGIN 12540 AND 20064; BAND FACTOR 0 AND 1.37349; STAGE EFFECT 0 1 0.6 ATTRIBUTION 1 1 0.61; PRICE BASE: 2024-equivalent."
+   },
+   "Housing / homelessness": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 2767.76,
+    "convC": 10057.83,
+    "convH": 10823.9,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Public cost of homelessness avoided",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 10057.83
+     }
+    ],
+    "provenance": "borrowed_adjusted",
+    "provenance_note": "A year of homelessness costs the public EUR 24,712 per person (the UK tool's GBP 26,988 (Crisis 2015, a derived 12-month rough-sleeper vignette, uprated) converted at household-consumption PPP (OECD, 2024, the factor of 0.915660 per GBP the Italy tool uses for every transfer from the UK); no Italy cost of homelessness was found). Share avoided by a year of housing support: central 0.407 (Spain, Hábitat randomised trial: EUR 470.97 of EUR 1,157.84 a month), high 0.438 (France, Un chez-soi d'abord randomised trial, on a consistent cost basis), both impacts, so attribution 1.0; low 0.112, the UK tool's central (0.20 x 0.562), whose effect share is an assumption. ORIGIN 24712.106778 FACTOR 1; BAND ORIGIN 24712.106778 AND 24712.106778; BAND FACTOR 1 AND 1; STAGE EFFECT 0.112 0.407 0.438 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "Children's social care": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 0.0,
+    "convC": 1066.09,
+    "convH": 2265.44,
+    "sensC": 9603.19,
+    "rows": [
+     {
+      "outcome": "Out-of-home placement avoided",
+      "method": "CONVENTIONAL",
+      "conf": "WEAK",
+      "valC": 1066.09
+     },
+     {
+      "outcome": "Lifetime cost of maltreatment averted (not added)",
+      "method": "SENSITIVITY",
+      "conf": "WEAK",
+      "valC": 9603.19
+     }
+    ],
+    "provenance": "national_source",
+    "provenance_note": "A year of out-of-home care costs EUR 19,037 per child (ISTAT (2025), Interventi e servizi sociali dei comuni singoli o associati: utenti e spesa (47_940_DF_DCIS_SPESESERSOC1_3), EUR 18,641 at 2023 prices, uprated on the GDP deflator. Per child served in the year, not per full child-year, so a lower bound.). Reduction in the chance of a residential placement: central 0.056 (Italy, P.I.P.P.I. against a comparison group, residential placements only: 6.4% against 0.8%), high 0.119 (the same, counting day foster care too), low zero (Al et al. 2012 meta-analysis: intensive family preservation generally does not prevent placement). One year of placement avoided is counted, which is conservative. The sensitivity row is the UK tool's route: the lifetime cost of a maltreatment case (Bocconi 2013, Italy) x 0.086. ORIGIN 19037.3446639027 FACTOR 1; BAND ORIGIN 19037.3446639027 AND 19037.3446639027; BAND FACTOR 1 AND 1; STAGE EFFECT 0 0.056 0.119 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "Domestic abuse / GBV": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 327.54,
+    "convC": 327.54,
+    "convH": 327.54,
+    "sensC": 1650.46,
+    "rows": [
+     {
+      "outcome": "Abuse reduced (tangible costs avoided)",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 327.54
+     },
+     {
+      "outcome": "Including pain and suffering (not added)",
+      "method": "SENSITIVITY",
+      "conf": "WEAK",
+      "valC": 1650.46
+     }
+    ],
+    "provenance": "national_source",
+    "provenance_note": "Tangible cost of intimate-partner violence per victim a year: EUR 2,520 (Italy, Intervita (2013), Quanto costa il silenzio?: EUR 2,067 per victim a year, tangible costs, at 2012 prices, uprated). Effect and attribution as in the UK tool (0.24 x 0.5417: advocacy reduces physical abuse, odds ratio 0.43, Ramsay et al. 2009). Pain and suffering are shown as a sensitivity, not added, as settled decision 8 does for Spain. ORIGIN 2519.5412312798 FACTOR 1; BAND ORIGIN 2519.5412312798 AND 2519.5412312798; BAND FACTOR 1 AND 1; STAGE EFFECT 0.24 0.24 0.24 ATTRIBUTION 0.5416667 0.5416667 0.5416667; PRICE BASE: 2024-equivalent."
+   },
+   "Drug & alcohol treatment": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 17457.35,
+    "convC": 69131.09,
+    "convH": 93249.09,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Deaths averted (opioid clients)",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 69131.09
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Value of a statistical life for Italy: EUR 5,353,646 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 0.602 (UNODC (2025), World Drug Report 2025, Statistical Annex 5.1: Treatment by primary drug of use: 79627 / 132195 = 0.602). Non-opioid clients carry no averted-death value in these figures. ORIGIN 5353645.6873865621 FACTOR 0.0129129; BAND ORIGIN 4461371.406155468 AND 6245919.9686176553; BAND FACTOR 0.003913 AND 0.0149296; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   },
+   "GP consultation": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 0,
+    "convC": 0,
+    "convH": 0,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "GP consultation",
+      "method": "COST-INPUT",
+      "conf": "COST-INPUT",
+      "valC": 0
+     }
+    ],
+    "provenance": "assumption",
+    "provenance_note": "Valued only at its cost: no defensible value per additional consultation was found (searched, none found)."
+   },
+   "Opioid substitution treatment (OST)": {
+    "wbL": 0,
+    "wbC": 0,
+    "wbH": 0,
+    "convL": 28998.91,
+    "convC": 114835.7,
+    "convH": 154898.82,
+    "sensC": 0,
+    "rows": [
+     {
+      "outcome": "Deaths averted (opioid clients)",
+      "method": "CONVENTIONAL",
+      "conf": "MODERATE",
+      "valC": 114835.7
+     }
+    ],
+    "provenance": "borrowed_unadjusted",
+    "provenance_note": "Value of a statistical life for Italy: EUR 5,353,646 (OECD 2025 base VSL for the EU, USD 8.4m at 2022 PPP, transferred by GDP per head in PPS with income elasticity 1.0, as the OECD recommends). Deaths averted per 1,000 opioid-client-years: central 21.45 (France, 175,000 patients, 2026), low 6.5 (Czechia), high 24.8 (Sordo et al. 2017, methadone). Share of clients who are opioid clients: 1.000 (every OST patient is an opioid client). Non-opioid clients carry no averted-death value in these figures. ORIGIN 5353645.6873865621 FACTOR 0.02145; BAND ORIGIN 4461371.406155468 AND 6245919.9686176553; BAND FACTOR 0.0065 AND 0.0248; STAGE EFFECT 1 1 1 ATTRIBUTION 1 1 1; PRICE BASE: 2024-equivalent."
+   }
+  },
+  "deciles": {
+   "unemp_3": [
+    [
+     -110.589,
+     -350.576,
+     -618.19,
+     -924.74,
+     -1223.982,
+     -940.125,
+     -1570.709,
+     -2031.908,
+     -3762.231,
+     -5320.836
+    ],
+    [
+     -142.77,
+     -452.571,
+     -750.946,
+     -1029.538,
+     -1261.4,
+     -906.983,
+     -1416.484,
+     -1716.694,
+     -2956.107,
+     -3086.352
+    ],
+    [
+     -184.315,
+     -584.241,
+     -912.692,
+     -1146.684,
+     -1300.31,
+     -875.263,
+     -1277.767,
+     -1450.876,
+     -2324.648,
+     -1860.371
+    ],
+    [
+     -237.95,
+     -754.219,
+     -1109.867,
+     -1277.689,
+     -1340.779,
+     -844.899,
+     -1152.965,
+     -1226.638,
+     -1829.579,
+     -1159.065
+    ],
+    [
+     -307.192,
+     -973.649,
+     -1350.363,
+     -1424.258,
+     -1382.879,
+     -815.827,
+     -1040.652,
+     -1037.414,
+     -1441.106,
+     -742.038
+    ]
+   ],
+   "unemp_5": [
+    [
+     -135.885,
+     -454.863,
+     -1019.432,
+     -1466.286,
+     -1946.963,
+     -1719.923,
+     -2696.04,
+     -3414.092,
+     -5379.729,
+     -7985.225
+    ],
+    [
+     -175.426,
+     -587.206,
+     -1230.984,
+     -1637.798,
+     -2008.593,
+     -1655.86,
+     -2434.699,
+     -2891.752,
+     -4215.802,
+     -4830.475
+    ],
+    [
+     -226.474,
+     -758.054,
+     -1487.232,
+     -1830.183,
+     -2072.826,
+     -1594.63,
+     -2199.355,
+     -2450.194,
+     -3306.499,
+     -3011.855
+    ],
+    [
+     -292.377,
+     -978.61,
+     -1797.796,
+     -2046.08,
+     -2139.788,
+     -1536.098,
+     -1987.363,
+     -2076.793,
+     -2595.499,
+     -1925.171
+    ],
+    [
+     -377.457,
+     -1263.337,
+     -2174.404,
+     -2288.473,
+     -2209.614,
+     -1480.138,
+     -1796.351,
+     -1760.917,
+     -2039.075,
+     -1255.315
+    ]
+   ],
+   "earn_1": [
+    [
+     -55.561,
+     -121.87,
+     -201.622,
+     -278.262,
+     -312.147,
+     -388.657,
+     -444.66,
+     -544.929,
+     -700.667,
+     -1246.997
+    ],
+    [
+     -71.729,
+     -157.319,
+     -245.728,
+     -310.942,
+     -323.15,
+     -374.756,
+     -402.864,
+     -462.587,
+     -546.796,
+     -746.721
+    ],
+    [
+     -92.601,
+     -203.079,
+     -299.745,
+     -347.637,
+     -334.681,
+     -361.484,
+     -365.121,
+     -392.833,
+     -427.101,
+     -462.096
+    ],
+    [
+     -119.548,
+     -262.15,
+     -365.96,
+     -388.86,
+     -346.767,
+     -348.811,
+     -331.025,
+     -333.723,
+     -333.905,
+     -293.017
+    ],
+    [
+     -154.335,
+     -338.404,
+     -447.198,
+     -435.193,
+     -359.439,
+     -336.707,
+     -300.215,
+     -283.612,
+     -261.278,
+     -189.291
+    ]
+   ],
+   "earn_3": [
+    [
+     -169.988,
+     -380.888,
+     -605.269,
+     -804.149,
+     -952.05,
+     -1180.588,
+     -1363.502,
+     -1624.561,
+     -2093.133,
+     -3737.55
+    ],
+    [
+     -219.453,
+     -491.682,
+     -737.485,
+     -898.825,
+     -985.441,
+     -1139.832,
+     -1234.003,
+     -1379.072,
+     -1633.28,
+     -2238.342
+    ],
+    [
+     -283.313,
+     -634.705,
+     -899.372,
+     -1005.168,
+     -1020.429,
+     -1100.888,
+     -1117.17,
+     -1171.114,
+     -1275.596,
+     -1385.346
+    ],
+    [
+     -365.756,
+     -819.331,
+     -1097.766,
+     -1124.674,
+     -1057.102,
+     -1063.666,
+     -1011.731,
+     -994.883,
+     -997.132,
+     -878.574
+    ],
+    [
+     -472.189,
+     -1057.662,
+     -1341.111,
+     -1259.037,
+     -1095.552,
+     -1028.082,
+     -916.543,
+     -845.484,
+     -780.148,
+     -567.641
+    ]
+   ],
+   "earn_5": [
+    [
+     -281.189,
+     -614.635,
+     -1012.184,
+     -1339.883,
+     -1588.483,
+     -1982.343,
+     -2295.84,
+     -2718.579,
+     -3508.926,
+     -6216.983
+    ],
+    [
+     -363.013,
+     -793.415,
+     -1232.823,
+     -1497.323,
+     -1643.974,
+     -1914.072,
+     -2078.046,
+     -2308.218,
+     -2738.207,
+     -3724.04
+    ],
+    [
+     -468.648,
+     -1024.198,
+     -1502.877,
+     -1674.133,
+     -1702.116,
+     -1848.83,
+     -1881.526,
+     -1960.526,
+     -2138.68,
+     -2305.429
+    ],
+    [
+     -605.022,
+     -1322.108,
+     -1833.706,
+     -1872.796,
+     -1763.05,
+     -1786.468,
+     -1704.148,
+     -1665.823,
+     -1671.903,
+     -1462.44
+    ],
+    [
+     -781.08,
+     -1706.673,
+     -2239.344,
+     -2096.124,
+     -1826.93,
+     -1726.842,
+     -1543.996,
+     -1415.942,
+     -1308.157,
+     -945.092
+    ]
+   ],
+   "adi_10": [
+    [
+     605.919,
+     207.718,
+     64.066,
+     39.092,
+     13.583,
+     8.811,
+     1.727,
+     0.0,
+     0.426,
+     0.0
+    ],
+    [
+     782.239,
+     268.149,
+     78.675,
+     43.585,
+     14.172,
+     8.569,
+     1.551,
+     0.0,
+     0.346,
+     0.0
+    ],
+    [
+     1009.866,
+     346.161,
+     96.703,
+     48.614,
+     14.791,
+     8.334,
+     1.392,
+     0.0,
+     0.28,
+     0.0
+    ],
+    [
+     1303.731,
+     446.869,
+     118.968,
+     54.248,
+     15.44,
+     8.106,
+     1.25,
+     0.0,
+     0.227,
+     0.0
+    ],
+    [
+     1683.109,
+     576.876,
+     146.49,
+     60.56,
+     16.12,
+     7.885,
+     1.122,
+     0.0,
+     0.184,
+     0.0
+    ]
+   ],
+   "adi_25": [
+    [
+     1530.391,
+     500.779,
+     154.355,
+     92.149,
+     32.751,
+     21.604,
+     3.491,
+     0.0,
+     0.426,
+     0.0
+    ],
+    [
+     1975.727,
+     646.473,
+     189.512,
+     102.832,
+     34.194,
+     21.007,
+     3.132,
+     0.0,
+     0.346,
+     0.0
+    ],
+    [
+     2550.652,
+     834.555,
+     232.884,
+     114.8,
+     35.708,
+     20.428,
+     2.81,
+     0.0,
+     0.28,
+     0.0
+    ],
+    [
+     3292.878,
+     1077.357,
+     286.435,
+     128.216,
+     37.296,
+     19.864,
+     2.521,
+     0.0,
+     0.227,
+     0.0
+    ],
+    [
+     4251.087,
+     1390.799,
+     352.61,
+     143.259,
+     38.963,
+     19.317,
+     2.262,
+     0.0,
+     0.184,
+     0.0
+    ]
+   ],
+   "adi_50": [
+    [
+     2934.693,
+     874.914,
+     282.409,
+     162.03,
+     56.232,
+     42.755,
+     3.491,
+     0.0,
+     0.426,
+     0.0
+    ],
+    [
+     3788.672,
+     1129.473,
+     346.916,
+     181.13,
+     58.758,
+     41.572,
+     3.132,
+     0.0,
+     0.346,
+     0.0
+    ],
+    [
+     4891.154,
+     1458.096,
+     426.525,
+     202.565,
+     61.41,
+     40.422,
+     2.81,
+     0.0,
+     0.28,
+     0.0
+    ],
+    [
+     6314.453,
+     1882.334,
+     524.85,
+     226.632,
+     64.195,
+     39.305,
+     2.521,
+     0.0,
+     0.227,
+     0.0
+    ],
+    [
+     8151.924,
+     2430.006,
+     646.392,
+     253.664,
+     67.12,
+     38.22,
+     2.262,
+     0.0,
+     0.184,
+     0.0
+    ]
+   ],
+   "irpef_1": [
+    [
+     87.07,
+     251.476,
+     374.988,
+     425.897,
+     498.586,
+     568.81,
+     612.611,
+     664.605,
+     743.176,
+     725.389
+    ],
+    [
+     112.406,
+     324.625,
+     457.096,
+     476.188,
+     516.357,
+     549.561,
+     554.535,
+     564.471,
+     580.756,
+     464.191
+    ],
+    [
+     145.116,
+     419.051,
+     557.644,
+     532.699,
+     534.988,
+     531.161,
+     502.131,
+     479.601,
+     454.242,
+     301.772
+    ],
+    [
+     187.344,
+     540.943,
+     680.877,
+     596.234,
+     554.527,
+     513.569,
+     454.828,
+     407.64,
+     355.606,
+     198.696
+    ],
+    [
+     241.86,
+     698.292,
+     832.038,
+     667.7,
+     575.021,
+     496.745,
+     412.118,
+     346.604,
+     278.635,
+     132.203
+    ]
+   ],
+   "irpef_2": [
+    [
+     177.444,
+     494.48,
+     750.83,
+     876.2,
+     994.859,
+     1138.023,
+     1229.436,
+     1328.926,
+     1482.407,
+     1448.513
+    ],
+    [
+     229.079,
+     638.31,
+     915.462,
+     979.345,
+     1030.414,
+     1099.54,
+     1113.014,
+     1128.703,
+     1158.438,
+     926.834
+    ],
+    [
+     295.739,
+     823.978,
+     1117.114,
+     1095.199,
+     1067.692,
+     1062.753,
+     1007.95,
+     959.0,
+     906.087,
+     602.482
+    ],
+    [
+     381.798,
+     1063.652,
+     1364.315,
+     1225.393,
+     1106.786,
+     1027.58,
+     913.106,
+     815.111,
+     709.343,
+     396.662
+    ],
+    [
+     492.899,
+     1373.041,
+     1667.603,
+     1371.773,
+     1147.798,
+     993.941,
+     827.46,
+     693.065,
+     555.812,
+     263.903
+    ]
+   ],
+   "irpef_5": [
+    [
+     432.046,
+     1185.364,
+     1869.588,
+     2239.072,
+     2476.195,
+     2849.155,
+     3087.264,
+     3325.954,
+     3702.078,
+     3616.883
+    ],
+    [
+     557.768,
+     1530.167,
+     2279.851,
+     2502.174,
+     2564.678,
+     2752.807,
+     2795.143,
+     2824.838,
+     2893.026,
+     2314.25
+    ],
+    [
+     720.076,
+     1975.267,
+     2782.435,
+     2797.612,
+     2657.444,
+     2660.706,
+     2531.503,
+     2400.106,
+     2262.826,
+     1504.374
+    ],
+    [
+     929.614,
+     2549.839,
+     3398.624,
+     3129.517,
+     2754.729,
+     2572.644,
+     2293.491,
+     2039.984,
+     1771.492,
+     990.47
+    ],
+    [
+     1200.127,
+     3291.546,
+     4154.716,
+     3502.573,
+     2856.781,
+     2488.422,
+     2078.547,
+     1734.53,
+     1388.076,
+     658.988
+    ]
+   ],
+   "auu_10": [
+    [
+     143.47,
+     244.033,
+     264.002,
+     242.327,
+     164.222,
+     108.926,
+     44.667,
+     3.025,
+     1.554,
+     0.812
+    ],
+    [
+     185.219,
+     315.024,
+     323.539,
+     271.102,
+     170.593,
+     105.611,
+     40.823,
+     2.582,
+     1.246,
+     0.558
+    ],
+    [
+     239.117,
+     406.665,
+     396.873,
+     303.457,
+     177.288,
+     102.432,
+     37.32,
+     2.205,
+     0.999,
+     0.383
+    ],
+    [
+     308.699,
+     524.966,
+     487.281,
+     339.857,
+     184.323,
+     99.384,
+     34.126,
+     1.883,
+     0.802,
+     0.264
+    ],
+    [
+     398.529,
+     677.681,
+     598.838,
+     380.826,
+     191.719,
+     96.459,
+     31.215,
+     1.608,
+     0.643,
+     0.181
+    ]
+   ]
+  },
+  "sc15": [
+   "unemp_3",
+   "unemp_5",
+   "earn_1",
+   "earn_3",
+   "earn_5",
+   "adi_10",
+   "adi_25",
+   "adi_50",
+   "irpef_1",
+   "irpef_2",
+   "irpef_5",
+   "auu_10"
+  ],
+  "epsGrid": [
+   0,
+   0.5,
+   1,
+   1.5,
+   2
+  ],
+  "bu": 37.5,
+  "shockInterp": {
+   "du3": 3,
+   "aff3": 375.7,
+   "du5": 5,
+   "aff5": 629.9,
+   "provenance": {
+    "du3": "national_derived",
+    "du5": "national_derived",
+    "aff3": "borrowed_adjusted",
+    "aff5": "borrowed_adjusted"
+   },
+   "provenance_note": {
+    "du3": "The modelled shock magnitude, 3pp, a computed point on this country's surface.",
+    "du5": "The modelled shock magnitude, 5pp, a computed point on this country's surface.",
+    "aff3": "The UK's modelled share of working-age units whose employment income falls at 3pp (2.176418 per cent of working-age benefit units), applied to this country's own WORKING-AGE unit count. Chain: 26,206.558 thousand units x 0.6587291601 x 0.02176418 = 375.7 thousand. The middle factor is the working-age share of units this surface reports, n_units_working_age_sample 20,941 over n_units 31,790 (europe/Italy/outputs/dial_grid.json meta, and surface_provenance.json lines 18 to 19). The base is matched rather than the rate restated because this tree carries no all-household unit count for the UK at all: the UK frame is filtered to working age before the engine output is read (uk/model/Code_FRS_23_24/09_build_dial_grid.py line 239), so restating the UK share over all households would need a figure no committed file holds. LIMITATION: the working-age share is the ratio of two UNWEIGHTED sample counts applied to a WEIGHTED unit count, because this surface carries no weighted working-age unit total; it is the closest base the committed data supports, not an exact one. The two working-age definitions match, at least one adult aged 18 to 64 in both (europe/common/adapter.py line 30; uk/model/Code_FRS_23_24/03_build_policyengine_dataset.py line 492). The UK figure counts units, not people: its shock zeroes one earner per selected unit. It is not a count of everyone in an affected unit, which would be about 2.4 times larger. Borrowed from the UK with a stated adjustment, not nationally derived: this country's own surface carries no affected-unit count.",
+    "aff5": "The UK's modelled share of working-age units whose employment income falls at 5pp (3.649125 per cent of working-age benefit units), applied to this country's own WORKING-AGE unit count. Chain: 26,206.558 thousand units x 0.6587291601 x 0.03649125 = 629.9 thousand. The middle factor is the working-age share of units this surface reports, n_units_working_age_sample 20,941 over n_units 31,790 (europe/Italy/outputs/dial_grid.json meta, and surface_provenance.json lines 18 to 19). The same limitation applies as at 3pp: the working-age share is a ratio of two UNWEIGHTED sample counts applied to a WEIGHTED unit count, this surface carrying no weighted working-age unit total. The two working-age definitions match, at least one adult aged 18 to 64 in both. The UK figure counts units, not people: its shock zeroes one earner per selected unit. It is not a count of everyone in an affected unit, which would be about 2.4 times larger. Borrowed from the UK with a stated adjustment, not nationally derived: this country's own surface carries no affected-unit count."
+   }
+  },
+  "scenarios": []
+ },
+ "grid": {
+  "meta": {
+   "country": "IT",
+   "year": 2023,
+   "eps_grid": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    2.0
+   ],
+   "baseline_net_income_bn": 865.7434,
+   "n_units_working_age_sample": 20941,
+   "n_units": 31790,
+   "population_basis": {
+    "scope": "all_households",
+    "includes": "Every household in the EU-SILC sample. No age filter is applied.",
+    "excludes": "Nothing.",
+    "units_k": 26206.558,
+    "population_k": 58664.506,
+    "summary": "All households, with no age filter."
+   },
+   "min_income_lever": "base-amount scaling",
+   "note": "IT Analyst response surface. Single-reform magnitude grids; one lever per point; baseline is the zero point of each dial. WEVM and decile contributions in EUR MILLIONS, equivalised, median-anchored, AROP-floored. Native 2023 income reference year (EU-SILC 2024 wave); nominal EUR, no uprating, no PPP (downstream). Real-build logic per country (ES yem/yse; IT +yseev; EL +yemre/ysere); unemployment flips nested for monotonicity.",
+   "units": {
+    "wevm": "EUR millions, welfare-weighted, versus baseline",
+    "fiscal": "EUR millions versus baseline; net_exchequer_cost_m = benefit - tax - sic - sic_employer, positive is a cost to the exchequer",
+    "poverty": "levels, not deltas: headcounts of people in thousands, poverty gaps in EUR millions, anchored_bhc_threshold_cur in EUR of equivalised annual income, with population_k and units_k as the denominators a rate needs",
+    "winlose": "the weighted count of households with a gain, and with a loss, each over the weighted count of all households, times 100. Shares of households, not of people, unlike every poverty headcount in the same object, which counts people. Both rows are labelled with this base on the tool face."
+   },
+   "poverty_basis": "Two thresholds, both emitted at every point. RELATIVE (relative_*): 60% of that point's own weighted median equivalised (OECD-modified) household disposable income, the published AROP convention and the same line the social weight uses as its floor; it moves with the reform, so a reform that lowers the median lowers the line and can cut the measured count without raising anyone's income. ANCHORED (anchored_*): the same 60%-of-median line computed once at the zero-magnitude baseline point and held fixed across every point of every dial, emitted as anchored_bhc_threshold_cur so it is auditable; internally defined, needing no external source, and the right comparison of a reform against its own baseline. ANCHORED IS NOT ABSOLUTE: the absolute_* fields mean a fixed EXTERNAL base year and stay null because no sourced one exists for ES, IT or EL. The AHC fields are null throughout because the EUROMOD per-unit layer carries no housing-cost concept. All other field names follow the UK surface exactly.",
+   "rebuild": "Built on EUROMOD v3.8.6, on a COMPLETED input conversion. Every input variable a live 2023 policy reads, for which the EUROMOD input data codebook publishes a recipe and whose sources the public EU-SILC user database carries, is populated from that recipe: Spain carries 68 populated input columns, Greece 55, Italy 44. The consequential ones are Spain's pension and unemployment decompositions and its rent, mortgage and private-pension deductions; Greece's property tax, which is the ENFIA the model reads and passes through; and Italy's contract class, without which no employer contribution fires at all. A surface is a function of its inputs, so reproducing a stored surface is not the test; the test is agreement with each country's own published EUROMOD baseline, recorded in europe/docs/BASELINE_VALIDATION.md. Conventions this surface holds: the stable sort in build_grid.point_from_pu and in wevm._weighted_median / wevm.wevm_by_decile, the two-sided pit_give grid, and the fiscal and poverty objects emitted in the same pass, fiscal by the method of re_emit.py. Poverty carries both a relative (moving) and an anchored (held at baseline) threshold; see poverty_basis."
+  },
+  "dials": {
+   "unemployment_shock": {
+    "label": "Unemployment shock",
+    "lever": "unemployment: input transform",
+    "unit": "pp",
+    "baseline_magnitude": 0,
+    "magnitudes": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "points": [
+     {
+      "wevm": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "deciles": [
+       [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ]
+      ],
+      "winners_pct": 0.0,
+      "losers_pct": 0.0,
+      "magnitude": 0,
+      "fiscal": {
+       "income_tax_delta_m": 0.0,
+       "benefit_delta_m": 0.0,
+       "sic_delta_m": 0.0,
+       "sic_employer_delta_m": 0.0,
+       "net_income_delta_m": 0.0,
+       "net_exchequer_cost_m": 0.0
+      },
+      "poverty": {
+       "relative_bhc_headcount_k": 10200.944,
+       "relative_ahc_headcount_k": null,
+       "absolute_bhc_headcount_k": null,
+       "absolute_ahc_headcount_k": null,
+       "anchored_bhc_headcount_k": 10200.944,
+       "anchored_ahc_headcount_k": null,
+       "anchored_bhc_threshold_cur": 11250.751,
+       "poverty_gap_bhc_m": 25273.485,
+       "poverty_gap_ahc_m": null,
+       "population_k": 58664.506,
+       "units_k": 26206.558
+      }
+     },
+     {
+      "wevm": [
+       -7038.477,
+       -5440.586,
+       -4576.97,
+       -4127.41,
+       -3941.172
+      ],
+      "deciles": [
+       [
+        -12.493,
+        -189.391,
+        -246.353,
+        -326.728,
+        -325.133,
+        -202.05,
+        -782.79,
+        -716.641,
+        -1597.419,
+        -2639.478
+       ],
+       [
+        -16.128,
+        -244.503,
+        -301.917,
+        -360.387,
+        -336.004,
+        -195.297,
+        -705.359,
+        -610.481,
+        -1254.204,
+        -1416.306
+       ],
+       [
+        -20.821,
+        -315.652,
+        -370.183,
+        -397.663,
+        -347.37,
+        -188.846,
+        -635.726,
+        -520.21,
+        -985.477,
+        -795.022
+       ],
+       [
+        -26.88,
+        -407.505,
+        -454.092,
+        -438.962,
+        -359.256,
+        -182.683,
+        -573.094,
+        -443.426,
+        -774.901,
+        -466.611
+       ],
+       [
+        -34.702,
+        -526.086,
+        -557.274,
+        -484.745,
+        -371.69,
+        -176.794,
+        -516.747,
+        -378.091,
+        -609.761,
+        -285.282
+       ]
+      ],
+      "winners_pct": 0.0,
+      "losers_pct": 1.1,
+      "magnitude": 1,
+      "fiscal": {
+       "income_tax_delta_m": -3013.532,
+       "benefit_delta_m": 441.136,
+       "sic_delta_m": -939.242,
+       "sic_employer_delta_m": -2342.583,
+       "net_income_delta_m": -7038.477,
+       "net_exchequer_cost_m": 6736.493
+      },
+      "poverty": {
+       "relative_bhc_headcount_k": 9913.21,
+       "relative_ahc_headcount_k": null,
+       "absolute_bhc_headcount_k": null,
+       "absolute_ahc_headcount_k": null,
+       "anchored_bhc_headcount_k": 10409.641,
+       "anchored_ahc_headcount_k": null,
+       "anchored_bhc_threshold_cur": 11250.751,
+       "poverty_gap_bhc_m": 25508.65,
+       "poverty_gap_ahc_m": null,
+       "population_k": 58664.506,
+       "units_k": 26206.558
+      }
+     },
+     {
+      "wevm": [
+       -11942.578,
+       -9633.151,
+       -8349.033,
+       -7674.604,
+       -7409.959
+      ],
+      "deciles": [
+       [
+        -77.524,
+        -246.44,
+        -459.773,
+        -746.193,
+        -676.959,
+        -675.527,
+        -1144.402,
+        -1210.534,
+        -2943.656,
+        -3761.57
+       ],
+       [
+        -100.083,
+        -318.153,
+        -559.678,
+        -831.604,
+        -698.203,
+        -651.43,
+        -1031.749,
+        -1028.369,
+        -2318.165,
+        -2095.718
+       ],
+       [
+        -129.206,
+        -410.734,
+        -681.6,
+        -927.182,
+        -720.305,
+        -628.383,
+        -930.427,
+        -873.852,
+        -1826.961,
+        -1220.383
+       ],
+       [
+        -166.804,
+        -530.255,
+        -830.457,
+        -1034.184,
+        -743.305,
+        -606.339,
+        -839.274,
+        -742.752,
+        -1440.912,
+        -740.323
+       ],
+       [
+        -215.343,
+        -684.557,
+        -1012.283,
+        -1154.028,
+        -767.246,
+        -585.249,
+        -757.249,
+        -631.49,
+        -1137.269,
+        -465.245
+       ]
+      ],
+      "winners_pct": 0.0,
+      "losers_pct": 2.0,
+      "magnitude": 2,
+      "fiscal": {
+       "income_tax_delta_m": -4849.241,
+       "benefit_delta_m": 1047.887,
+       "sic_delta_m": -1688.756,
+       "sic_employer_delta_m": -4192.222,
+       "net_income_delta_m": -11942.578,
+       "net_exchequer_cost_m": 11778.106
+      },
+      "poverty": {
+       "relative_bhc_headcount_k": 10094.769,
+       "relative_ahc_headcount_k": null,
+       "absolute_bhc_headcount_k": null,
+       "absolute_ahc_headcount_k": null,
+       "anchored_bhc_headcount_k": 10716.507,
+       "anchored_ahc_headcount_k": null,
+       "anchored_bhc_threshold_cur": 11250.751,
+       "poverty_gap_bhc_m": 26136.635,
+       "poverty_gap_ahc_m": null,
+       "population_k": 58664.506,
+       "units_k": 26206.558
+      }
+     },
+     {
+      "wevm": [
+       -16853.886,
+       -13719.845,
+       -11917.166,
+       -10933.649,
+       -10515.38
+      ],
+      "deciles": [
+       [
+        -110.589,
+        -350.576,
+        -618.19,
+        -924.74,
+        -1223.982,
+        -940.125,
+        -1570.709,
+        -2031.908,
+        -3762.231,
+        -5320.836
+       ],
+       [
+        -142.77,
+        -452.571,
+        -750.946,
+        -1029.538,
+        -1261.4,
+        -906.983,
+        -1416.484,
+        -1716.694,
+        -2956.107,
+        -3086.352
+       ],
+       [
+        -184.315,
+        -584.241,
+        -912.692,
+        -1146.684,
+        -1300.31,
+        -875.263,
+        -1277.767,
+        -1450.876,
+        -2324.648,
+        -1860.371
+       ],
+       [
+        -237.95,
+        -754.219,
+        -1109.867,
+        -1277.689,
+        -1340.779,
+        -844.899,
+        -1152.965,
+        -1226.638,
+        -1829.579,
+        -1159.065
+       ],
+       [
+        -307.192,
+        -973.649,
+        -1350.363,
+        -1424.258,
+        -1382.879,
+        -815.827,
+        -1040.652,
+        -1037.414,
+        -1441.106,
+        -742.038
+       ]
+      ],
+      "winners_pct": 0.0,
+      "losers_pct": 2.8,
+      "magnitude": 3,
+      "fiscal": {
+       "income_tax_delta_m": -6595.412,
+       "benefit_delta_m": 1365.298,
+       "sic_delta_m": -2545.793,
+       "sic_employer_delta_m": -5685.828,
+       "net_income_delta_m": -16853.886,
+       "net_exchequer_cost_m": 16192.331
+      },
+      "poverty": {
+       "relative_bhc_headcount_k": 10222.458,
+       "relative_ahc_headcount_k": null,
+       "absolute_bhc_headcount_k": null,
+       "absolute_ahc_headcount_k": null,
+       "anchored_bhc_headcount_k": 10943.728,
+       "anchored_ahc_headcount_k": null,
+       "anchored_bhc_threshold_cur": 11250.751,
+       "poverty_gap_bhc_m": 26484.344,
+       "poverty_gap_ahc_m": null,
+       "population_k": 58664.506,
+       "units_k": 26206.558
+      }
+     },
+     {
+      "wevm": [
+       -21402.325,
+       -17745.682,
+       -15600.462,
+       -14414.99,
+       -13911.27
+      ],
+      "deciles": [
+       [
+        -127.84,
+        -413.853,
+        -929.958,
+        -1197.895,
+        -1545.648,
+        -1500.306,
+        -2030.678,
+        -2951.745,
+        -4632.901,
+        -6071.501
+       ],
+       [
+        -165.041,
+        -534.262,
+        -1123.192,
+        -1336.916,
+        -1592.818,
+        -1443.405,
+        -1832.438,
+        -2497.903,
+        -3634.79,
+        -3584.918
+       ],
+       [
+        -213.067,
+        -689.704,
+        -1357.285,
+        -1492.777,
+        -1641.92,
+        -1389.052,
+        -1654.021,
+        -2114.577,
+        -2854.134,
+        -2193.926
+       ],
+       [
+        -275.069,
+        -890.371,
+        -1641.032,
+        -1667.606,
+        -1693.05,
+        -1337.126,
+        -1493.401,
+        -1790.697,
+        -2243.024,
+        -1383.615
+       ],
+       [
+        -355.112,
+        -1149.421,
+        -1985.157,
+        -1863.808,
+        -1746.304,
+        -1287.511,
+        -1348.764,
+        -1516.951,
+        -1764.223,
+        -894.018
+       ]
+      ],
+      "winners_pct": 0.0,
+      "losers_pct": 3.7,
+      "magnitude": 4,
+      "fiscal": {
+       "income_tax_delta_m": -8014.532,
+       "benefit_delta_m": 1777.507,
+       "sic_delta_m": -3307.966,
+       "sic_employer_delta_m": -7108.076,
+       "net_income_delta_m": -21402.325,
+       "net_exchequer_cost_m": 20208.081
+      },
+      "poverty": {
+       "relative_bhc_headcount_k": 10307.36,
+       "relative_ahc_headcount_k": null,
+       "absolute_bhc_headcount_k": null,
+       "absolute_ahc_headcount_k": null,
+       "anchored_bhc_headcount_k": 11168.815,
+       "anchored_ahc_headcount_k": null,
+       "anchored_bhc_threshold_cur": 11250.751,
+       "poverty_gap_bhc_m": 26774.284,
+       "poverty_gap_ahc_m": null,
+       "population_k": 58664.506,
+       "units_k": 26206.558
+      }
+     },
+     {
+      "wevm": [
+       -26218.438,
+       -21668.594,
+       -18937.302,
+       -17375.576,
+       -16645.081
+      ],
+      "deciles": [
+       [
+        -135.885,
+        -454.863,
+        -1019.432,
+        -1466.286,
+        -1946.963,
+        -1719.923,
+        -2696.04,
+        -3414.092,
+        -5379.729,
+        -7985.225
+       ],
+       [
+        -175.426,
+        -587.206,
+        -1230.984,
+        -1637.798,
+        -2008.593,
+        -1655.86,
+        -2434.699,
+        -2891.752,
+        -4215.802,
+        -4830.475
+       ],
+       [
+        -226.474,
+        -758.054,
+        -1487.232,
+        -1830.183,
+        -2072.826,
+        -1594.63,
+        -2199.355,
+        -2450.194,
+        -3306.499,
+        -3011.855
+       ],
+       [
+        -292.377,
+        -978.61,
+        -1797.796,
+        -2046.08,
+        -2139.788,
+        -1536.098,
+        -1987.363,
+        -2076.793,
+        -2595.499,
+        -1925.171
+       ],
+       [
+        -377.457,
+        -1263.337,
+        -2174.404,
+        -2288.473,
+        -2209.614,
+        -1480.138,
+        -1796.351,
+        -1760.917,
+        -2039.075,
+        -1255.315
+       ]
+      ],
+      "winners_pct": 0.0,
+      "losers_pct": 4.5,
+      "magnitude": 5,
+      "fiscal": {
+       "income_tax_delta_m": -9771.361,
+       "benefit_delta_m": 2066.943,
+       "sic_delta_m": -4074.45,
+       "sic_employer_delta_m": -8745.892,
+       "net_income_delta_m": -26218.438,
+       "net_exchequer_cost_m": 24658.646
+      },
+      "poverty": {
+       "relative_bhc_headcount_k": 10311.833,
+       "relative_ahc_headcount_k": null,
+       "absolute_bhc_headcount_k": null,
+       "absolute_ahc_headcount_k": null,
+       "anchored_bhc_headcount_k": 11400.013,
+       "anchored_ahc_headcount_k": null,
+       "anchored_bhc_threshold_cur": 11250.751,
+       "poverty_gap_bhc_m": 27028.976,
+       "poverty_gap_ahc_m": null,
+       "population_k": 58664.506,
+       "units_k": 26206.558
+      }
+     },
+     {
+      "wevm": [
+       -30659.871,
+       -25442.644,
+       -22277.605,
+       -20442.558,
+       -19557.659
+      ],
+      "deciles": [
+       [
+        -162.42,
+        -539.565,
+        -1079.656,
+        -1644.045,
+        -2336.22,
+        -2323.556,
+        -3394.871,
+        -4055.883,
+        -6223.77,
+        -8899.885
+       ],
+       [
+        -209.683,
+        -696.52,
+        -1305.19,
+        -1836.807,
+        -2411.07,
+        -2236.787,
+        -3063.321,
+        -3434.073,
+        -4867.707,
+        -5381.485
+       ],
+       [
+        -270.699,
+        -899.132,
+        -1578.738,
+        -2053.061,
+        -2489.102,
+        -2153.94,
+        -2765.014,
+        -2908.593,
+        -3810.452,
+        -3348.875
+       ],
+       [
+        -349.471,
+        -1160.681,
+        -1910.72,
+        -2295.776,
+        -2570.469,
+        -2074.823,
+        -2496.538,
+        -2464.366,
+        -2985.425,
+        -2134.288
+       ],
+       [
+        -451.166,
+        -1498.313,
+        -2313.866,
+        -2568.312,
+        -2655.337,
+        -1999.251,
+        -2254.839,
+        -2088.7,
+        -2341.045,
+        -1386.831
+       ]
+      ],
+      "winners_pct": 0.0,
+      "losers_pct": 5.4,
+      "magnitude": 6,
+      "fiscal": {
+       "income_tax_delta_m": -11220.251,
+       "benefit_delta_m": 2470.649,
+       "sic_delta_m": -4687.315,
+       "sic_employer_delta_m": -10442.62,
+       "net_income_delta_m": -30659.871,
+       "net_exchequer_cost_m": 28820.835
+      },
+      "poverty": {
+       "relative_bhc_headcount_k": 10418.382,
+       "relative_ahc_headcount_k": null,
+       "absolute_bhc_headcount_k": null,
+       "absolute_ahc_headcount_k": null,
+       "anchored_bhc_headcount_k": 11647.441,
+       "anchored_ahc_headcount_k": null,
+       "anchored_bhc_threshold_cur": 11250.751,
+       "poverty_gap_bhc_m": 27412.978,
+       "poverty_gap_ahc_m": null,
+       "population_k": 58664.506,
+       "units_k": 26206.558
+      }
+     },
+     {
+      "wevm": [
+       -36749.429,
+       -30211.554,
+       -26241.248,
+       -23936.514,
+       -22813.117
+      ],
+      "deciles": [
+       [
+        -184.128,
+        -656.568,
+        -1184.58,
+        -2011.207,
+        -2696.918,
+        -2653.093,
+        -3776.222,
+        -4401.802,
+        -7507.73,
+        -11677.18
+       ],
+       [
+        -237.708,
+        -847.57,
+        -1435.519,
+        -2243.001,
+        -2785.025,
+        -2554.552,
+        -3409.121,
+        -3728.895,
+        -5880.023,
+        -7090.14
+       ],
+       [
+        -306.879,
+        -1094.137,
+        -1740.769,
+        -2502.642,
+        -2877.042,
+        -2460.495,
+        -3078.666,
+        -3159.94,
+        -4609.037,
+        -4411.642
+       ],
+       [
+        -396.18,
+        -1412.432,
+        -2112.346,
+        -2793.611,
+        -2973.168,
+        -2370.7,
+        -2781.109,
+        -2678.714,
+        -3615.751,
+        -2802.504
+       ],
+       [
+        -511.466,
+        -1823.322,
+        -2564.984,
+        -3119.844,
+        -3073.616,
+        -2284.958,
+        -2513.096,
+        -2271.549,
+        -2838.832,
+        -1811.451
+       ]
+      ],
+      "winners_pct": 0.0,
+      "losers_pct": 6.2,
+      "magnitude": 7,
+      "fiscal": {
+       "income_tax_delta_m": -13655.115,
+       "benefit_delta_m": 2892.973,
+       "sic_delta_m": -5635.411,
+       "sic_employer_delta_m": -12957.391,
+       "net_income_delta_m": -36749.429,
+       "net_exchequer_cost_m": 35140.89
+      },
+      "poverty": {
+       "relative_bhc_headcount_k": 10553.136,
+       "relative_ahc_headcount_k": null,
+       "absolute_bhc_headcount_k": null,
+       "absolute_ahc_headcount_k": null,
+       "anchored_bhc_headcount_k": 11918.96,
+       "anchored_ahc_headcount_k": null,
+       "anchored_bhc_threshold_cur": 11250.751,
+       "poverty_gap_bhc_m": 27739.015,
+       "poverty_gap_ahc_m": null,
+       "population_k": 58664.506,
+       "units_k": 26206.558
+      }
+     },
+     {
+      "wevm": [
+       -41824.337,
+       -34532.195,
+       -30091.296,
+       -27518.361,
+       -26283.459
+      ],
+      "deciles": [
+       [
+        -198.566,
+        -856.063,
+        -1312.404,
+        -2196.767,
+        -2995.221,
+        -3239.803,
+        -4501.527,
+        -5380.322,
+        -8110.345,
+        -13033.321
+       ],
+       [
+        -256.348,
+        -1105.104,
+        -1594.348,
+        -2446.46,
+        -3093.255,
+        -3118.126,
+        -4068.981,
+        -4566.684,
+        -6350.655,
+        -7932.235
+       ],
+       [
+        -330.943,
+        -1426.595,
+        -1938.204,
+        -2725.815,
+        -3195.664,
+        -3001.988,
+        -3679.188,
+        -3877.415,
+        -4977.058,
+        -4938.427
+       ],
+       [
+        -427.246,
+        -1841.613,
+        -2357.87,
+        -3038.507,
+        -3302.672,
+        -2891.115,
+        -3327.812,
+        -3293.299,
+        -3903.891,
+        -3134.334
+       ],
+       [
+        -551.572,
+        -2377.367,
+        -2870.429,
+        -3388.69,
+        -3414.514,
+        -2785.25,
+        -3010.97,
+        -2798.122,
+        -3064.708,
+        -2021.837
+       ]
+      ],
+      "winners_pct": 0.0,
+      "losers_pct": 7.2,
+      "magnitude": 8,
+      "fiscal": {
+       "income_tax_delta_m": -15199.202,
+       "benefit_delta_m": 3302.585,
+       "sic_delta_m": -6420.124,
+       "sic_employer_delta_m": -14613.48,
+       "net_income_delta_m": -41824.337,
+       "net_exchequer_cost_m": 39535.391
+      },
+      "poverty": {
+       "relative_bhc_headcount_k": 10607.664,
+       "relative_ahc_headcount_k": null,
+       "absolute_bhc_headcount_k": null,
+       "absolute_ahc_headcount_k": null,
+       "anchored_bhc_headcount_k": 12138.931,
+       "anchored_ahc_headcount_k": null,
+       "anchored_bhc_threshold_cur": 11250.751,
+       "poverty_gap_bhc_m": 27699.487,
+       "poverty_gap_ahc_m": null,
+       "population_k": 58664.506,
+       "units_k": 26206.558
+      }
+     },
+     {
+      "wevm": [
+       -46919.189,
+       -38803.569,
+       -33959.676,
+       -31235.585,
+       -30027.594
+      ],
+      "deciles": [
+       [
+        -210.638,
+        -1065.766,
+        -1580.579,
+        -2565.835,
+        -3368.389,
+        -3668.831,
+        -5140.282,
+        -5939.832,
+        -8711.51,
+        -14667.526
+       ],
+       [
+        -271.933,
+        -1375.83,
+        -1921.466,
+        -2858.503,
+        -3477.351,
+        -3533.127,
+        -4650.55,
+        -5038.838,
+        -6817.054,
+        -8858.918
+       ],
+       [
+        -351.064,
+        -1776.101,
+        -2337.64,
+        -3185.916,
+        -3591.194,
+        -3403.598,
+        -4208.821,
+        -4275.979,
+        -5339.096,
+        -5490.267
+       ],
+       [
+        -453.221,
+        -2292.823,
+        -2846.124,
+        -3552.362,
+        -3710.169,
+        -3279.939,
+        -3810.265,
+        -3629.853,
+        -4185.07,
+        -3475.757
+       ],
+       [
+        -585.106,
+        -2959.876,
+        -3467.88,
+        -3962.677,
+        -3834.543,
+        -3161.862,
+        -3450.552,
+        -3082.406,
+        -3283.205,
+        -2239.488
+       ]
+      ],
+      "winners_pct": 0.0,
+      "losers_pct": 8.1,
+      "magnitude": 9,
+      "fiscal": {
+       "income_tax_delta_m": -17072.755,
+       "benefit_delta_m": 3793.493,
+       "sic_delta_m": -7186.475,
+       "sic_employer_delta_m": -16483.546,
+       "net_income_delta_m": -46919.189,
+       "net_exchequer_cost_m": 44536.269
+      },
+      "poverty": {
+       "relative_bhc_headcount_k": 10796.953,
+       "relative_ahc_headcount_k": null,
+       "absolute_bhc_headcount_k": null,
+       "absolute_ahc_headcount_k": null,
+       "anchored_bhc_headcount_k": 12477.891,
+       "anchored_ahc_headcount_k": null,
+       "anchored_bhc_threshold_cur": 11250.751,
+       "poverty_gap_bhc_m": 28260.197,
+       "poverty_gap_ahc_m": null,
+       "population_k": 58664.506,
+       "units_k": 26206.558
+      }
+     },
+     {
+      "wevm": [
+       -51930.619,
+       -43148.452,
+       -37884.25,
+       -34918.592,
+       -33610.82
+      ],
+      "deciles": [
+       [
+        -225.617,
+        -1218.157,
+        -1799.62,
+        -2736.355,
+        -3727.256,
+        -4127.818,
+        -5929.03,
+        -6990.441,
+        -9449.222,
+        -15727.105
+       ],
+       [
+        -291.27,
+        -1572.503,
+        -2188.298,
+        -3049.742,
+        -3848.392,
+        -3974.283,
+        -5358.881,
+        -5943.707,
+        -7399.883,
+        -9521.493
+       ],
+       [
+        -376.028,
+        -2029.923,
+        -2662.929,
+        -3400.423,
+        -3974.997,
+        -3827.729,
+        -4845.187,
+        -5055.585,
+        -5799.934,
+        -5911.517
+       ],
+       [
+        -485.45,
+        -2620.401,
+        -3242.971,
+        -3793.001,
+        -4107.352,
+        -3687.812,
+        -4382.205,
+        -4301.755,
+        -4549.744,
+        -3747.902
+       ],
+       [
+        -626.713,
+        -3382.642,
+        -3952.388,
+        -4232.668,
+        -4245.759,
+        -3554.207,
+        -3964.794,
+        -3661.669,
+        -3572.008,
+        -2417.972
+       ]
+      ],
+      "winners_pct": 0.0,
+      "losers_pct": 8.9,
+      "magnitude": 10,
+      "fiscal": {
+       "income_tax_delta_m": -18755.477,
+       "benefit_delta_m": 4192.823,
+       "sic_delta_m": -7916.11,
+       "sic_employer_delta_m": -18357.255,
+       "net_income_delta_m": -51930.619,
+       "net_exchequer_cost_m": 49221.665
+      },
+      "poverty": {
+       "relative_bhc_headcount_k": 11018.639,
+       "relative_ahc_headcount_k": null,
+       "absolute_bhc_headcount_k": null,
+       "absolute_ahc_headcount_k": null,
+       "anchored_bhc_headcount_k": 12840.471,
+       "anchored_ahc_headcount_k": null,
+       "anchored_bhc_threshold_cur": 11250.751,
+       "poverty_gap_bhc_m": 28616.63,
+       "poverty_gap_ahc_m": null,
+       "population_k": 58664.506,
+       "units_k": 26206.558
+      }
+     }
+    ]
+   }
+  }
+ }
+}
